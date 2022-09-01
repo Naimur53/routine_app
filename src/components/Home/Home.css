@@ -1,0 +1,12 @@
+.from-container{
+   display: flex;
+    padding: 20px;
+    justify-content: center; 
+    align-items: center;
+}
+.from input{
+    margin: 10px;
+ 
+  
+   
+}

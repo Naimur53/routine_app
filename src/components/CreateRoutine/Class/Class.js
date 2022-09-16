@@ -8,7 +8,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import MuiDateTimePicker from "./MuiDateTimePicker";
 const Class = ({ mainData, register, errors, watch, setValue }) => {
-
+  console.log("class data", mainData);
   // const [selectedTime, setSelectedTime] = useState(null)
 
   // console.log({

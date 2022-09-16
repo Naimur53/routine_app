@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import ClassRoutines from "./components/ClassRoutines/ClassRoutines";
 import CreateRoutine from "./components/CreateRoutine/CreateRoutine";
 import TopBar from "./components/ShareComponents/TopBar/TopBar";
+import SearchRoutine from "./components/SearchRoutine/SearchRoutine";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="home" element={<Home />}></Route>
 
         <Route path="classRoutines" element={<ClassRoutines />}></Route>
+        <Route path="/searchRoutine" element={<SearchRoutine />}></Route>
 
         <Route path="stepper" element={<CreateRoutine />}></Route>
       </Routes>

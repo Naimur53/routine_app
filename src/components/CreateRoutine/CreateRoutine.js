@@ -1,93 +1,125 @@
 import React from "react";
 import Box from "@mui/material/Box";
- 
- 
- 
- 
-import Button from '@mui/material/Button';
- 
+
+import Button from "@mui/material/Button";
+
 import MobileStepper from "@mui/material/MobileStepper";
- 
- 
+
 import { useForm } from "react-hook-form";
 import Class from "./Class/Class";
 
 import Info from "./info/Info";
 import { Container, Step, StepLabel, Stepper } from "@mui/material";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import PreviewRoutine from "./PreviewRoutine/PreviewRoutine";
 const CreateRoutine = () => {
-  const { register, handleSubmit, watch, setValue, reset, formState: { errors }, } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [mainData, setMainData] = useState({ classes: [] })
+  const [mainData, setMainData] = useState({ classes: [] });
 
-  const onSubmit = ({ subjectName, subjectCode, teacherName, day, startTime, endTime }) => {
+  const onSubmit = ({
+    subjectName,
+    subjectCode,
+    teacherName,
+    day,
+    startTime,
+    endTime,
+  }) => {
     if (activeStep) {
-      console.log(typeof new Date(startTime).toString(),);
+      console.log(typeof new Date(startTime).toString());
       const data = {
-        subjectName, subjectCode, teacherName, day, startTime: new Date(startTime).toString(), endTime: new Date(endTime).toString()
-      }
-      setMainData(before => {
-
+        subjectName,
+        subjectCode,
+        teacherName,
+        day,
+        startTime: new Date(startTime).toString(),
+        endTime: new Date(endTime).toString(),
+      };
+      setMainData((before) => {
         return {
-          ...before, classes: [...before.classes, data,]
-        }
-      }
-      )
+          ...before,
+          classes: [...before.classes, data],
+        };
+      });
       reset();
-
     }
     console.log({ mainData });
   };
 
-  const steps = [
-    {
-      label: 'Add basic information of your institute',
-      element: <Info errors={errors} watch={watch} register={register}></Info>,
-    },
-    {
-      label: "Add classes",
-      element: <Class errors={errors} watch={watch} setValue={setValue} register={register} mainData={mainData}></Class>,
-    },
-    {
-      label: "Preview Routine",
-      element: <div errors={errors} watch={watch} setValue={setValue} register={register}>Tor main khai </div>,
-    },
-  ];
-
-  const maxSteps = steps.length;
-//------------
- 
   //----------------
   const handleNext = () => {
     if (activeStep === 0) {
       console.log(watch());
       if (
-        watch('institute')?.length &&
-        watch('department')?.length &&
-        watch('semester')?.length &&
-        watch('shift')?.length &&
-        watch('section')?.length
+        watch("institute")?.length &&
+        watch("department")?.length &&
+        watch("semester")?.length &&
+        watch("shift")?.length &&
+        watch("section")?.length
       ) {
-        setMainData(before => {
+        setMainData((before) => {
           return {
             ...before,
-            institute: watch('institute'),
-            department: watch('department'),
-            semester: watch('semester'),
-            shift: watch('shift'),
-            section: watch('section'),
+            institute: watch("institute"),
+            department: watch("department"),
+            semester: watch("semester"),
+            shift: watch("shift"),
+            section: watch("section"),
+          };
+        });
 
-          }
-        })
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       } else {
         onSubmit(<div className=""></div>);
       }
       return;
     }
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
+  const steps = [
+    {
+      label: "Add basic information of your institute",
+      element: <Info errors={errors} watch={watch} register={register}></Info>,
+    },
+    {
+      label: "Add classes",
+      element: (
+        <Class
+          errors={errors}
+          watch={watch}
+          setValue={setValue}
+          register={register}
+          mainData={mainData}
+        ></Class>
+      ),
+    },
+    {
+      label: "Preview Routine",
+      element: (
+        <PreviewRoutine
+          errors={errors}
+          watch={watch}
+          setValue={setValue}
+          register={register}
+          mainData={mainData}
+        >
+          Tor main khai
+        </PreviewRoutine>
+      ),
+    },
+  ];
+
+  const maxSteps = steps.length;
+  //------------
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -96,9 +128,7 @@ const CreateRoutine = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
-
         <Box className="h-screen flex flex-col justify-between ">
-
           <Box className="pt-1 md:pt-10">
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((ele) => (
@@ -107,9 +137,7 @@ const CreateRoutine = () => {
                 </Step>
               ))}
             </Stepper>
-            <Box className="pt-10">
-              {steps[activeStep].element}
-            </Box>
+            <Box className="pt-10">{steps[activeStep].element}</Box>
           </Box>
           <MobileStepper
             variant="text"

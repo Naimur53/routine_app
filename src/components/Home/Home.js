@@ -1,10 +1,13 @@
+import { Container } from "@mui/material";
 import React from "react";
+import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
 
 const Home = () => {
   return (
-    <div>
-      <h1>this is home</h1>
-    </div>
+    <Container>
+      <h1>You have 5 class today</h1>
+      <HomeClassShow></HomeClassShow>
+    </Container>
   );
 };
 

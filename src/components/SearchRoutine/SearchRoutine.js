@@ -1,6 +1,21 @@
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
 const SearchRoutine = () => {
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+  // F6F4FF
   return (
     <div>
       <form className="ml-5 mr-5 mt-5">
@@ -43,6 +58,286 @@ const SearchRoutine = () => {
           </button>
         </div>
       </form>
+      <Container sx={{ mt: 5 }}>
+        <Grid container spacing={3}>
+        <Grid item md={3} xs={12}>
+            <Card sx={{ maxWidth: 370, backgroundColor: "#F6F4FF" }}>
+              <CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Institute: </span>
+
+                    <span style={{ color: "#1A55AF" }}>
+                      National University
+                    </span>
+                  </Typography>
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Semester:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6th</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Dept:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> CSE</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Total Class:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Date:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> {date}</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Routine uses:
+                    </span>
+                    <span style={{ color: "#1A55AF" }}> 120 users</span>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions disableSpacing>
+                <Button
+                  size="small"
+                  color="secondary"
+                  sx={{ marginLeft: "auto" }}
+                >
+                  Checkout
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <Card sx={{ maxWidth: 370, backgroundColor: "#EDF6FF" }}>
+              <CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Institute: </span>
+
+                    <span style={{ color: "#1A55AF" }}>
+                      National University
+                    </span>
+                  </Typography>
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Semester:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6th</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Dept:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> CSE</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Total Class:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Date:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> {date}</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Routine uses:
+                    </span>
+                    <span style={{ color: "#1A55AF" }}> 120 users</span>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions disableSpacing>
+                <Button
+                  size="small"
+                  color="secondary"
+                  sx={{ marginLeft: "auto" }}
+                >
+                  Checkout
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <Card sx={{ maxWidth: 370, backgroundColor: "#FFECE7" }}>
+              <CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Institute: </span>
+
+                    <span style={{ color: "#1A55AF" }}>
+                      National University
+                    </span>
+                  </Typography>
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Semester:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6th</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Dept:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> CSE</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Total Class:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Date:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> {date}</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Routine uses:
+                    </span>
+                    <span style={{ color: "#1A55AF" }}> 120 users</span>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions disableSpacing>
+                <Button
+                  size="small"
+                  color="secondary"
+                  sx={{ marginLeft: "auto" }}
+                >
+                  Checkout
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+       
+          <Grid item md={3} xs={12}>
+            <Card sx={{ maxWidth: 370, backgroundColor: "#FFFBEF" }}>
+              <CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Institute: </span>
+
+                    <span style={{ color: "#1A55AF" }}>
+                      National University
+                    </span>
+                  </Typography>
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Semester:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6th</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Dept:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> CSE</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Total Class:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> 6</span>
+                      </Typography>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      <Typography gutterBottom variant="body1" component="div">
+                        <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                          Date:
+                        </span>
+                        <span style={{ color: "#1A55AF" }}> {date}</span>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Typography gutterBottom variant="body1" component="div">
+                    <span style={{ color: "#1E1388", fontWeight: "bold" }}>
+                      Routine uses:
+                    </span>
+                    <span style={{ color: "#1A55AF" }}> 120 users</span>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions disableSpacing>
+                <Button
+                  size="small"
+                  color="secondary"
+                  sx={{ marginLeft: "auto" }}
+                >
+                  Checkout
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+         
+      
+         
+        </Grid>
+      </Container>
     </div>
   );
 };

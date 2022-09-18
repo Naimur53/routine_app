@@ -2,6 +2,7 @@ import React from 'react';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Tooltip } from '@mui/material';
 import textConversion from '../../../utilities/textConversion';
+import convertToHourMinute from '../../../utilities/ConvertTime';
 
 function chooseTheme(i) {
     const theme = [
@@ -17,10 +18,7 @@ function chooseTheme(i) {
         return chooseTheme(i - 4);
     }
 }
-const convertToHourMinute = (date) => {
-    const full = new Date(date).toLocaleTimeString().split(':').slice(0, 2);
-    return full.join(":")
-}
+
 
 const RoutineClassCard = ({ startTime, endTime, teacherName, subjectCode, subjectName, day, i }) => {
     const { img, bgStyle, contentStyle, headingStyle, } = chooseTheme(i);

@@ -12,6 +12,138 @@ import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 const week = [
     "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 ];
+const data = [
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        "subjectName": "Biology",
+        "subjectCode": "6645dfd4",
+        "teacherName": "Akash Hossain",
+        "day": "Tuesday",
+        "startTime": "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        "endTime": "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        subjectName: "Biology",
+        subjectCode: "6645dfd4",
+        teacherName: "Akash Hossain",
+        day: "Tuesday",
+        startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        "subjectName": "Biology",
+        "subjectCode": "6645dfd4",
+        "teacherName": "Akash Hossain",
+        "day": "Tuesday",
+        "startTime": "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        "endTime": "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        subjectName: "Biology tor mai dfd dfd dfd dfdfd dfd ",
+        subjectCode: "6645dfd4",
+        teacherName: "Akash Hossain",
+        day: "Tuesday",
+        startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+
+]
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -87,7 +219,7 @@ const HomeClassShow = () => {
 
                 <Grid item xs={12} lg={6} >
                     <TabPanel value={value} index={0}>
-                        <RoutineClassCards></RoutineClassCards>
+                        <RoutineClassCards data={data}></RoutineClassCards>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         Item Two

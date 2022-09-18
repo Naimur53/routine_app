@@ -12,11 +12,8 @@ const Home = () => {
           <HomeClassShow></HomeClassShow>
         </Grid>
         <Grid item xs={12} md={4}>
-          <div className="text-xl hidden md:block h-[cal()]" >My notes</div>
+          <div className="text-xl hidden md:block custom_height" >My notes</div>
         </Grid>
-
-
-
       </Grid>
 
     </MainLayout>

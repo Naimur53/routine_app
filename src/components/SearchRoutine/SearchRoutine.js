@@ -1,9 +1,10 @@
 import React from "react";
+import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 
 const SearchRoutine = () => {
   return (
-    <div>
-      <form className="ml-5 mr-5 mt-5">
+    <MainLayout>
+      <form className=" ">
         <label
           for="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
@@ -43,7 +44,7 @@ const SearchRoutine = () => {
           </button>
         </div>
       </form>
-    </div>
+    </MainLayout>
   );
 };
 

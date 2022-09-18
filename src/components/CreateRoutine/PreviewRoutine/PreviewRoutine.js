@@ -17,6 +17,7 @@ const PreviewRoutine = ({ mainData }) => {
     fontSize: "0.875rem",
     fontWeight: "700",
   };
+  console.log(mainData.classes);
 
   return (
     <>

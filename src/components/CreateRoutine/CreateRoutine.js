@@ -13,6 +13,7 @@ import { Container, Step, StepLabel, Stepper } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import PreviewRoutine from "./PreviewRoutine/PreviewRoutine";
+import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 const CreateRoutine = () => {
   const {
     register,
@@ -126,10 +127,10 @@ const CreateRoutine = () => {
   };
 
   return (
-    <Container>
+    <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box className="h-screen flex flex-col justify-between ">
-          <Box className="pt-1 md:pt-10">
+        <Box className="md:custom_height flex flex-col justify-between ">
+          <Box className="pt-1 ">
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((ele) => (
                 <Step key={ele.label}>
@@ -139,35 +140,37 @@ const CreateRoutine = () => {
             </Stepper>
             <Box className="pt-10">{steps[activeStep].element}</Box>
           </Box>
-          <MobileStepper
-            variant="text"
-            steps={maxSteps}
-            position="static"
-            activeStep={activeStep}
-            sx={{ mt: 2 }}
-            nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-                type={activeStep === 0 ? "submit" : "button"}
-              >
-                Next
-              </Button>
-            }
-            backButton={
-              <Button
-                size="small"
-                onClick={handleBack}
-                disabled={activeStep === 0}
-              >
-                Back
-              </Button>
-            }
-          />
+          <div className="fixed bottom-0 w-full md:w-[calc(100vw-380px)]  ">
+            <MobileStepper
+              variant="text"
+              steps={maxSteps}
+              position="static"
+              activeStep={activeStep}
+              sx={{ mt: 2 }}
+
+              nextButton={
+                <Button
+                  size="small"
+                  onClick={handleNext}
+                  disabled={activeStep === maxSteps - 1}
+                  type={activeStep === 0 ? "submit" : "button"}
+                >
+                  Next
+                </Button>
+              }
+              backButton={
+                <Button
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                >
+                  Back
+                </Button>
+              } ></MobileStepper>
+          </div>
         </Box>
       </form>
-    </Container>
+    </MainLayout>
   );
 };
 

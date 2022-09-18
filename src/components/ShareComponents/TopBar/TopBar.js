@@ -14,8 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from 'react-router-dom';
 import { Drawer } from '@mui/material';
-const pages = ["My Notes", 'Find Routine',];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import Logo from '../Logo/Logo';
+import DashboardTab from '../DashboardTab/DashboardTab';
+const pages = ["login",];
 const TopBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(false);
 
@@ -26,37 +27,15 @@ const TopBar = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(false);
     };
-    const Logo = () => {
-        return (
-            <NavLink to='/' className='flex items-center'>
-                <AdbIcon sx={{ mr: 1 }} />
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                        mr: 2,
-                        // display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        textDecoration: 'none',
-                    }}
-                >
-                    LOGO
-                </Typography>
-            </NavLink>
-        )
-    }
+
 
     return (
-        <div className='mb-32'>
-            <AppBar position="fixed" sx={{ background: 'white', color: 'black' }}>
+        <div className='mb-20'>
+            <AppBar position="fixed" sx={{ background: 'white', color: 'black', boxShadow: 'none' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Logo></Logo>
-                        <Box className='justify-center' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Box className='justify-end' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <div className='flex'>
                                 {pages.map((page) => (
                                     <Button
@@ -90,20 +69,10 @@ const TopBar = () => {
                             onClose={handleCloseNavMenu}
                             sx={{ width: '50%' }}
                         >
-                            <div className='w-[50vw] px-4 py-3'>
+                            <div className="flex justify-center mt-5 mb-3">
                                 <Logo></Logo>
-                                {pages.map((page) => (
-                                    <Button
-                                        key={page}
-                                        onClick={handleCloseNavMenu}
-                                        component={NavLink}
-                                        to={'/' + page}
-                                        sx={{ my: 2, color: 'Black', display: 'block' }}
-                                    >
-                                        {page}
-                                    </Button>
-                                ))}
                             </div>
+                            <DashboardTab></DashboardTab>
                         </Drawer>
                     </Toolbar>
                 </Container>

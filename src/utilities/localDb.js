@@ -1,6 +1,6 @@
 //default function
 const parseData = (data) => {
-    if (data.length) {
+    if (data?.length) {
         return JSON.parse(data);
     };
     return null;
@@ -12,7 +12,7 @@ const stringifyData = (data) => {
 // new const  localBb={key:'value'};
 
 // get data. myNotes;
-const getData = (key) => {
+const getDataFromLocalDb = (key) => {
     const value = parseData(localStorage.getItem(key))
     if (!value) {
         localStorage.setItem(key, stringifyData([]))
@@ -22,8 +22,8 @@ const getData = (key) => {
     return value;
 }
 // put data 
-const putData = (key, data) => {
-    const beforeData = getData(key)
+const putDataInLocalDb = (key, data) => {
+    const beforeData = getDataFromLocalDb(key)
     if (data) {
         const newData = [...beforeData, data];
         localStorage.setItem(key, stringifyData(newData));
@@ -32,4 +32,4 @@ const putData = (key, data) => {
     console.error('I cannot keep data on local db');
 
 }
-export { putData, getData };
+export { putDataInLocalDb, getDataFromLocalDb };

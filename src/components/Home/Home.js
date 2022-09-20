@@ -1,10 +1,14 @@
-import { Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
 import React from "react";
 import DashboardTab from "../ShareComponents/DashboardTab/DashboardTab";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
+import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
 
 const Home = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <MainLayout>
       <Grid container>
@@ -12,10 +16,22 @@ const Home = () => {
           <HomeClassShow></HomeClassShow>
         </Grid>
         <Grid item xs={12} md={4}>
-          <div className="text-xl hidden md:block custom_height" >My notes</div>
+          <Grid container>
+            <Grid item md={7}>
+              <div className="text-xl hidden md:block ">My notes</div>
+            </Grid>
+            <Grid item md={5}>
+              <div>
+                <Button onClick={handleOpen}>Add Note</Button>
+                <ModalProvider
+                  open={open}
+                  onClose={handleClose}
+                ></ModalProvider>
+              </div>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
-
     </MainLayout>
   );
 };

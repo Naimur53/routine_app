@@ -1,6 +1,6 @@
 
 import { Stack, TextField } from '@mui/material'
-import { MobileTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { MobileTimePicker, } from '@mui/x-date-pickers';
 const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register }) => {
 
 
@@ -15,7 +15,7 @@ const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register }) =
                     console.log(newValue.toString());
                     setValue(name, newValue.toString())
                 }}
-                renderInput={params => <TextField color="success"  {...register(name, {
+                renderInput={params => <TextField color="primary"  {...register(name, {
                     required: true,
                 })} {...params} />}
 

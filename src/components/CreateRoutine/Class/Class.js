@@ -2,15 +2,19 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } fr
 import React from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 
- 
+
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import MuiDateTimePicker from "./MuiDateTimePicker";
+import { useState } from "react";
 const Class = ({ mainData, register, errors, watch, setValue }) => {
-  console.log("class data", mainData);
   // const [selectedTime, setSelectedTime] = useState(null)
-
+  const [defaultValue, setDefaultValue] = useState({
+    subjectCode: '',
+    subjectName: '',
+    teacherName: '',
+  });
   // console.log({
   //   selectedTime: selectedTime && selectedTime.toLocaleTimeString(),
   // })
@@ -36,7 +40,20 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
   //   } = event; 
   // };
 
+  const addSameClass = () => {
+    setTimeout(() => {
+      setDefaultValue(pre => {
+        const create = {
+          subjectCode: mainData.classes[mainData.classes.length - 1].subjectCode,
+          subjectName: mainData.classes[mainData.classes.length - 1].subjectName,
+          teacherName: mainData.classes[mainData.classes.length - 1].teacherName,
+        }
+        return create;
+      })
+    }, 1000)
 
+  }
+  console.log({ defaultValue });
   return (
     <div>
       {/* register your input into the hook by invoking the "register" function */}
@@ -50,9 +67,10 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             id="standard-search"
             label="Subject Name"
             type="name"
+            defaultValue={defaultValue.subjectName}
             variant="standard"
             sx={{ width: "100%" }}
-            color="success"
+            color="primary"
           />
           <div>
             <span className="text-red-700">
@@ -67,7 +85,8 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             label="Subject Code"
             type="text"
             variant="standard"
-            color="success"
+            defaultValue={defaultValue.subjectCode}
+            color="primary"
             sx={{ width: "100%" }}
           />
 
@@ -83,9 +102,10 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             {...register("teacherName", { required: true })}
 
             label="Teacher Name"
+            defaultValue={defaultValue.teacherName}
             type="name"
             variant="standard"
-            color="success"
+            color="primary"
             sx={{ width: "100%" }}
           />
 
@@ -104,6 +124,7 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
               id="demo-multiple-name"
               sx={{ p: 0 }}
               label="Select Day"
+              color="primary"
               {...register("day", {
                 required: true,
               })}
@@ -134,7 +155,17 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <h2 className="  mb-3"> Total added class {mainData.classes?.length}</h2>
-          <Button type="submit" variant="outlined" >Add another class</Button>
+          <div className="flex gap-4 md:flex-row flex-col">
+
+            <Button type="submit" onClick={() => {
+              setDefaultValue({
+                subjectCode: '',
+                subjectName: '',
+                teacherName: '',
+              })
+            }} variant="outlined" >Add another class</Button>
+            <Button type="submit" onClick={addSameClass} variant="outlined" >Add another day on same class</Button>
+          </div>
         </Grid>
 
       </Grid>

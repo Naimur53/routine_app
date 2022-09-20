@@ -25,7 +25,7 @@ const AddNote = () => {
       // localStorage.setItem("formValue", JSON.stringify(formValue));
       localStorage.setItem(
         "formValue",
-        JSON.stringify([{ ...oldData }, formValue])
+        JSON.stringify([...oldData , formValue])
       );
     }
   };

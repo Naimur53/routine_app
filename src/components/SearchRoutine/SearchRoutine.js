@@ -13,8 +13,9 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 
 const SearchRoutine = () => {
   const current = new Date();
-  const date = `${current.getDate()}/${current.getMonth() + 1
-    }/${current.getFullYear()}`;
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
   // F6F4FF
   return (
     <MainLayout>
@@ -66,7 +67,8 @@ const SearchRoutine = () => {
                 <CardContent>
                   <Typography gutterBottom variant="body1" component="div">
                     <span style={{ color: "#1E1388", fontWeight: "bold" }}>
-                      Institute: </span>
+                      Institute:{" "}
+                    </span>
 
                     <span style={{ color: "#1A55AF" }}>
                       National University
@@ -134,7 +136,8 @@ const SearchRoutine = () => {
                 <CardContent>
                   <Typography gutterBottom variant="body1" component="div">
                     <span style={{ color: "#1E1388", fontWeight: "bold" }}>
-                      Institute: </span>
+                      Institute:{" "}
+                    </span>
 
                     <span style={{ color: "#1A55AF" }}>
                       National University
@@ -202,7 +205,8 @@ const SearchRoutine = () => {
                 <CardContent>
                   <Typography gutterBottom variant="body1" component="div">
                     <span style={{ color: "#1E1388", fontWeight: "bold" }}>
-                      Institute: </span>
+                      Institute:{" "}
+                    </span>
 
                     <span style={{ color: "#1A55AF" }}>
                       National University
@@ -271,7 +275,8 @@ const SearchRoutine = () => {
                 <CardContent>
                   <Typography gutterBottom variant="body1" component="div">
                     <span style={{ color: "#1E1388", fontWeight: "bold" }}>
-                      Institute: </span>
+                      Institute:{" "}
+                    </span>
 
                     <span style={{ color: "#1A55AF" }}>
                       National University
@@ -333,13 +338,9 @@ const SearchRoutine = () => {
               </CardActions>
             </Card>
           </Grid>
-
-
-
         </Grid>
       </Container>
-    </MainLayout >
-
+    </MainLayout>
   );
 };
 

@@ -14,7 +14,7 @@ const AddNote = () => {
     e.preventDefault();
     if (title && note) {
       console.log("title,note", title, note);
-      putDataInLocalDb('notes', { title, note });
+      putDataInLocalDb("notes", { title, note });
     }
   };
 
@@ -23,16 +23,16 @@ const AddNote = () => {
     setFormValue({ ...formValue, [name]: value });
   };
 
-  const [cacheItem, setCacheItems] = useState([]);
+  // const [cacheItem, setCacheItems] = useState([]);
 
-  useEffect(() => {
-    const cacheItems = JSON.parse(localStorage.getItem("formValue"));
-    if (cacheItems) {
-      setCacheItems(cacheItems);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const cacheItems = JSON.parse(localStorage.getItem("formValue"));
+  //   if (cacheItems) {
+  //     setCacheItems(cacheItems);
+  //   }
+  // }, []);
 
-  console.log("cacheItems", cacheItem);
+  // console.log("cacheItems", cacheItem);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -49,7 +49,7 @@ const AddNote = () => {
           type="name"
           variant="standard"
           sx={{ width: "100%", mb: 3 }}
-          color="success"
+          color="primary"
         />
 
         <textarea
@@ -58,7 +58,7 @@ const AddNote = () => {
           value={note}
           onChange={onInputChange}
           rows="4"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
           placeholder="Your message..."
         ></textarea>
       </Typography>

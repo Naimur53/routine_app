@@ -13,7 +13,14 @@ const AddNote = () => {
     e.preventDefault();
     if (title && note) {
       console.log("title,note", title, note);
-      localStorage.setItem("formValue", JSON.stringify(formValue));
+
+      let oldData = JSON.parse(localStorage.getItem("formValue"));
+      // localStorage.setItem("items", JSON.stringify([...oldData, ...obj]));
+
+      localStorage.setItem(
+        "formValue",
+        JSON.stringify([...oldData, formValue])
+      );
     }
   };
 
@@ -38,7 +45,7 @@ const AddNote = () => {
       <Typography id="modal-modal-title" variant="body1">
         ADD YOUR NOTE
       </Typography>
-      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      <Typography id="modal-modal-description" sx={{ mt: 1 }}>
         <TextField
           id="standard-search"
           name="title"
@@ -47,7 +54,7 @@ const AddNote = () => {
           label="Add Title"
           type="name"
           variant="standard"
-          sx={{ width: "100%", mb: 5 }}
+          sx={{ width: "100%", mb: 3 }}
           color="success"
         />
 

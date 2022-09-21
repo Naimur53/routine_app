@@ -42,7 +42,7 @@ const Info = ({ errors, register, watch }) => {
             type="name"
             variant="standard"
             sx={{ width: "100%" }}
-            color="success"
+            color="primary"
           />
           <div>
             <span className="text-red-700">
@@ -58,7 +58,7 @@ const Info = ({ errors, register, watch }) => {
             label="Department"
             type="name"
             variant="standard"
-            color="success"
+            color="primary"
             sx={{ width: "100%" }}
           />
 

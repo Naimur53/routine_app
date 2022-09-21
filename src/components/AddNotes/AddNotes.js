@@ -1,5 +1,6 @@
 import { TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { putDataInLocalDb } from "../../utilities/localDb";
 
 const initialState = {
   title: "",
@@ -13,14 +14,7 @@ const AddNote = () => {
     e.preventDefault();
     if (title && note) {
       console.log("title,note", title, note);
-
-      let oldData = JSON.parse(localStorage.getItem("formValue"));
-      // localStorage.setItem("items", JSON.stringify([...oldData, ...obj]));
-
-      localStorage.setItem(
-        "formValue",
-        JSON.stringify([...oldData, formValue])
-      );
+      putDataInLocalDb('notes', { title, note });
     }
   };
 

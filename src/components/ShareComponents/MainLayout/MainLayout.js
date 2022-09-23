@@ -17,7 +17,7 @@ const MainLayout = ({ children }) => {
 
                         <Grid container>
                             <Grid item xs={12} md={12}>
-                                <div className=' '>
+                                <div  >
                                     {children}
                                 </div>
                             </Grid>

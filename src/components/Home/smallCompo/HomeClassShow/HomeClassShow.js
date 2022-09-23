@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
 import RoutineClassCards from '../../../ShareComponents/RoutineClassCards/RoutineClassCards';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 
 const week = [
     "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
@@ -50,7 +48,7 @@ const data = [
         endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
         startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
         subjectCode: "6645dfd4",
-        subjectName: "Fundamental",
+        subjectName: "Fundamental tor main khai mehedi df ddf dfdf d",
         teacherName: "Naimur Rahman"
     },
     {
@@ -222,13 +220,13 @@ const HomeClassShow = () => {
                         <RoutineClassCards data={data}></RoutineClassCards>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        Item Two
+                        <RoutineClassCards data={data}></RoutineClassCards>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Item Three
+                        <RoutineClassCards data={data}></RoutineClassCards>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        Item Four
+                        <RoutineClassCards data={data}></RoutineClassCards>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
                         Item Five

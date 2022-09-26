@@ -1,5 +1,8 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, Button } from "@mui/material";
 import React from "react";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import RoutineClassCard from "./../../ShareComponents/RoutineClassCards/RoutineClassCard";
 
 const PreviewRoutine = ({ mainData }) => {
   const { institute, department, semester, section, shift } = mainData;
@@ -17,10 +20,16 @@ const PreviewRoutine = ({ mainData }) => {
     fontSize: "0.875rem",
     fontWeight: "700",
   };
-  console.log(mainData.classes);
-
+  console.log(mainData.classNamees);
+  const handleEdite = () => {
+    console.log("clicked edit button");
+  };
   return (
     <>
+      {" "}
+      <Typography style={{ textAlign: "center" }} variant="h5" sx={{ ml: 1 }}>
+        className
+      </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={5}>
           <Box component="span" sx={boxStyle}>
@@ -41,31 +50,27 @@ const PreviewRoutine = ({ mainData }) => {
         </Grid>
 
         <Grid item xs={12} md={7}>
-          {mainData.classes.map((eachClass, index) => (
+          {mainData.classNamees.map((eachClass, index) => (
             <>
-              <Typography variant="h5" sx={{ ml: 1 }}>
-                Class: {index + 1}
-              </Typography>
               <Box component="span" sx={boxStyle}>
-                Subject Name: {eachClass.subjectName}
-              </Box>
-              <Box component="span" sx={boxStyle}>
-                Subject Code: {eachClass.subjectCode}
-              </Box>
-              <Box component="span" sx={boxStyle}>
-                Start Time: {eachClass.startTime}
-              </Box>
-              <Box component="span" sx={boxStyle}>
-                End Time: {eachClass.endTime}
-              </Box>
-              <Box component="span" sx={boxStyle}>
-                Day: {eachClass.day}
-              </Box>
-              <Box component="span" sx={boxStyle}>
-                Teacher Name: {eachClass.teacherName}
+                <RoutineClassCard
+                  classNameCard
+                  {...eachClass}
+                  i={index}
+                ></RoutineClassCard>
               </Box>
             </>
           ))}
+          <Button
+            key="edit"
+            onClick={handleEdite}
+            component={NavLink}
+            to={"/edite"}
+            sx={{ my: 2, color: "Black" }}
+          >
+            Edite
+          </Button>
+          <Button>deket</Button>
         </Grid>
       </Grid>
     </>

@@ -84,8 +84,7 @@ const CreateRoutine = () => {
       return;
     }
     if (activeStep === 1 && !mainData.classes.length) {
-      return alert('please add class to go another step')
-
+      return alert("please add class to go another step");
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -138,7 +137,7 @@ const CreateRoutine = () => {
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((ele, i) => (
                 <Step key={ele.label}>
-                  <StepLabel StepIconProps={{ sx: {} }} >{ele.label}</StepLabel>
+                  <StepLabel StepIconProps={{ sx: {} }}>{ele.label}</StepLabel>
                 </Step>
               ))}
             </Stepper>
@@ -151,7 +150,6 @@ const CreateRoutine = () => {
               position="static"
               activeStep={activeStep}
               sx={{ mt: 2 }}
-
               nextButton={
                 <Button
                   size="small"
@@ -170,7 +168,8 @@ const CreateRoutine = () => {
                 >
                   Back
                 </Button>
-              } ></MobileStepper>
+              }
+            ></MobileStepper>
           </div>
         </Box>
       </form>

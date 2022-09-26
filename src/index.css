@@ -4,13 +4,11 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-
-
+  font-family: "Roboto", sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -22,22 +20,19 @@ code {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: hsla(156, 17%, 94%, 0.662);
   border-radius: 40px;
-
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb:hover {
   background: #888;
   border-radius: 40px;
-
 }
 
 *:hover::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0);
   border-radius: 40px;
-
 }
 
 /* Handle on hover */
@@ -52,20 +47,20 @@ code {
 
 @layer utilities {
   .active_dashboard_link {
-    @apply bg-dark-purple text-white
+    @apply bg-dark-purple text-white;
   }
 
-  .active_class_tab {
-    @apply text-dark-purple bg-gray-50
+  .active_ className_tab {
+    @apply text-dark-purple bg-gray-50;
   }
 }
 
 @layer base {
   .dashboard_link {
-    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2
+    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2;
   }
 
   .custom_height {
-    @apply h-[calc(100vh-80px)]
+    @apply h-[calc(100vh-80px)];
   }
 }

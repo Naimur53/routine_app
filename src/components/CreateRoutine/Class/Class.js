@@ -1,8 +1,14 @@
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import React from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-
-
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
@@ -11,14 +17,14 @@ import { useState } from "react";
 const Class = ({ mainData, register, errors, watch, setValue }) => {
   // const [selectedTime, setSelectedTime] = useState(null)
   const [defaultValue, setDefaultValue] = useState({
-    subjectCode: '',
-    subjectName: '',
-    teacherName: '',
+    subjectCode: "",
+    subjectName: "",
+    teacherName: "",
   });
   // console.log({
   //   selectedTime: selectedTime && selectedTime.toLocaleTimeString(),
   // })
-  // 
+  //
   // handle Day input
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -32,27 +38,38 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
   };
 
   const names = [
-    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
   ];
   // const handleChange = (event) => {
   //   const {
   //     target: { value },
-  //   } = event; 
+  //   } = event;
   // };
 
-  const addSameClass = () => {
+  const addSameclass = () => {
     setTimeout(() => {
-      setDefaultValue(pre => {
+      setDefaultValue((pre) => {
         const create = {
-          subjectCode: mainData.classes[mainData.classes.length - 1].subjectCode,
-          subjectName: mainData.classes[mainData.classes.length - 1].subjectName,
-          teacherName: mainData.classes[mainData.classes.length - 1].teacherName,
-        }
+          subjectCode:
+            mainData.classNameNamees[mainData.classNameNamees.length - 1]
+              .subjectCode,
+          subjectName:
+            mainData.classNameNamees[mainData.classNameNamees.length - 1]
+              .subjectName,
+          teacherName:
+            mainData.classNameNamees[mainData.classNameNamees.length - 1]
+              .teacherName,
+        };
         return create;
-      })
-    }, 1000)
-
-  }
+      });
+    }, 1000);
+  };
   console.log({ defaultValue });
   return (
     <div>
@@ -73,7 +90,7 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             color="primary"
           />
           <div>
-            <span className="text-red-700">
+            <span classNameNameName="text-red-700">
               {errors.subjectName?.type === "required" &&
                 "*institute name is required"}{" "}
             </span>
@@ -91,7 +108,7 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
           />
 
           <div>
-            <span className="text-red-700">
+            <span classNameNameName="text-red-700">
               {errors.department?.type === "required" &&
                 "*department name is required"}{" "}
             </span>
@@ -100,7 +117,6 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
         <Grid item xs={12} md={6}>
           <TextField
             {...register("teacherName", { required: true })}
-
             label="Teacher Name"
             defaultValue={defaultValue.teacherName}
             type="name"
@@ -110,15 +126,17 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
           />
 
           <div>
-            <span className="text-red-700">
+            <span classNameName="text-red-700">
               {errors.semester && <p>*Semester name is required</p>}{" "}
             </span>
           </div>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <FormControl variant="standard" sx={{ width: '100%' }}>
-            <InputLabel id="demo-simple-select-filled-label">Select day</InputLabel>
+          <FormControl variant="standard" sx={{ width: "100%" }}>
+            <InputLabel id="demo-simple-select-filled-label">
+              Select day
+            </InputLabel>
             <Select
               labelId="demo-multiple-name-labels"
               id="demo-multiple-name"
@@ -128,49 +146,66 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
               {...register("day", {
                 required: true,
               })}
-              value={watch('day') ? watch('day') : ''}
+              value={watch("day") ? watch("day") : ""}
               MenuProps={MenuProps}
             >
               {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                >
+                <MenuItem key={name} value={name}>
                   {name}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-
         </Grid>
         <Grid item xs={6} md={6}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MuiDateTimePicker register={register} errors={errors} label="Start Time" watch={watch} setValue={setValue} name='startTime' />
+            <MuiDateTimePicker
+              register={register}
+              errors={errors}
+              label="Start Time"
+              watch={watch}
+              setValue={setValue}
+              name="startTime"
+            />
           </LocalizationProvider>
         </Grid>
         <Grid item xs={6} md={6}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MuiDateTimePicker label='End Time' register={register} errors={errors} watch={watch} setValue={setValue} name='endTime' />
+            <MuiDateTimePicker
+              label="End Time"
+              register={register}
+              errors={errors}
+              watch={watch}
+              setValue={setValue}
+              name="endTime"
+            />
           </LocalizationProvider>
         </Grid>
         <Grid item xs={12} md={6}>
-          <h2 className="  mb-3"> Total added class {mainData.classes?.length}</h2>
-          <div className="flex gap-4 md:flex-row flex-col">
-
-            <Button type="submit" onClick={() => {
-              setDefaultValue({
-                subjectCode: '',
-                subjectName: '',
-                teacherName: '',
-              })
-            }} variant="outlined" >Add another class</Button>
-            <Button type="submit" onClick={addSameClass} variant="outlined" >Add another day on same class</Button>
+          <h2 classNameNameName="  mb-3">
+            {" "}
+            Total added className {mainData.classNameName?.length}
+          </h2>
+          <div classNameNameName="flex gap-4 md:flex-row flex-col">
+            <Button
+              type="submit"
+              onClick={() => {
+                setDefaultValue({
+                  subjectCode: "",
+                  subjectName: "",
+                  teacherName: "",
+                });
+              }}
+              variant="outlined"
+            >
+              Add another class
+            </Button>
+            <Button type="submit" onClick={addSameclass} variant="outlined">
+              Add another day on same classNameName
+            </Button>
           </div>
         </Grid>
-
       </Grid>
-
-
     </div>
   );
 };

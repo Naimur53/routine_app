@@ -14,7 +14,7 @@ const AddNote = () => {
     e.preventDefault();
     if (title && note) {
       console.log("title,note", title, note);
-      putDataInLocalDb('notes', { title, note });
+      putDataInLocalDb("notes", { title, note });
     }
   };
 
@@ -58,14 +58,14 @@ const AddNote = () => {
           value={note}
           onChange={onInputChange}
           rows="4"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
+          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
           placeholder="Your message..."
         ></textarea>
       </Typography>
 
       <button
         type="submit"
-        class="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+        className="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
       >
         Publish Note
       </button>

@@ -83,6 +83,10 @@ const CreateRoutine = () => {
       }
       return;
     }
+    if (activeStep === 1 && !mainData.classes.length) {
+      return alert('please add class to go another step')
+
+    }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -132,9 +136,9 @@ const CreateRoutine = () => {
         <Box className="md:custom_height flex flex-col justify-between ">
           <Box className="pt-1 ">
             <Stepper activeStep={activeStep} alternativeLabel>
-              {steps.map((ele) => (
+              {steps.map((ele, i) => (
                 <Step key={ele.label}>
-                  <StepLabel>{ele.label}</StepLabel>
+                  <StepLabel StepIconProps={{ sx: {} }} >{ele.label}</StepLabel>
                 </Step>
               ))}
             </Stepper>

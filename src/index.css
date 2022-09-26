@@ -45,6 +45,11 @@ code {
   background: #555;
 }
 
+.Mui-active,
+.Mui-completed {
+  color: #5946ad !important;
+}
+
 @layer utilities {
   .active_dashboard_link {
     @apply bg-dark-purple text-white

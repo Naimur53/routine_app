@@ -9,6 +9,7 @@ const Home = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <MainLayout>
       <Grid container>
@@ -23,10 +24,7 @@ const Home = () => {
             <Grid item md={5}>
               <div>
                 <Button onClick={handleOpen}>Add Note</Button>
-                <ModalProvider
-                  open={open}
-                  onClose={handleClose}
-                ></ModalProvider>
+                <ModalProvider open={open} onClose={handleClose} />
               </div>
             </Grid>
           </Grid>

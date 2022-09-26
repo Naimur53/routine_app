@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Modal,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Modal } from "@mui/material";
 import React, { useState } from "react";
 import AddNote from "../../AddNotes/AddNotes";
 
@@ -18,7 +10,7 @@ const style = {
   width: {
     lg: 550,
     md: 450,
-    xs: 350
+    xs: 350,
   },
   bgcolor: "background.paper",
   borderRadius: "10px",

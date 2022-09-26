@@ -43,7 +43,6 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, subjectCode, subjec
                     <Tooltip title={teacherName}>
                         <p className={contentStyle + " font-semibold text-sm"}>
                             {textConversion(teacherName, 15)}
-
                         </p>
                     </Tooltip>
                 </div>

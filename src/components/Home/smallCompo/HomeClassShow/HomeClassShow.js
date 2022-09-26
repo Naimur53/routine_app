@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -8,6 +9,16 @@ import { Grid } from "@mui/material";
 import RoutineClassCards from "../../../ShareComponents/RoutineClassCards/RoutineClassCards";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
+=======
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
+import RoutineClassCards from '../../../ShareComponents/RoutineClassCards/RoutineClassCards';
+>>>>>>> main
 
 const week = [
   "Saturday",
@@ -19,6 +30,7 @@ const week = [
   "Friday",
 ];
 const data = [
+<<<<<<< HEAD
   {
     day: "Sunday",
     endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
@@ -148,6 +160,138 @@ const data = [
     endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
   },
 ];
+=======
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        "subjectName": "Biology",
+        "subjectCode": "6645dfd4",
+        "teacherName": "Akash Hossain",
+        "day": "Tuesday",
+        "startTime": "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        "endTime": "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental tor main khai mehedi df ddf dfdf d",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        subjectName: "Biology",
+        subjectCode: "6645dfd4",
+        teacherName: "Akash Hossain",
+        day: "Tuesday",
+        startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        "subjectName": "Biology",
+        "subjectCode": "6645dfd4",
+        "teacherName": "Akash Hossain",
+        "day": "Tuesday",
+        "startTime": "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        "endTime": "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        day: "Sunday",
+        endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "Fundamental",
+        teacherName: "Naimur Rahman"
+    },
+    {
+        day: "Monday",
+        endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
+        startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
+        subjectCode: "6645dfd4",
+        subjectName: "physics",
+        teacherName: "Sheikh Sadi"
+    },
+    {
+        subjectName: "Chemistry",
+        subjectCode: "6645dfd4",
+        teacherName: "Ovi Sheikh",
+        day: "Monday",
+        startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+    {
+        subjectName: "Biology tor mai dfd dfd dfd dfdfd dfd ",
+        subjectCode: "6645dfd4",
+        teacherName: "Akash Hossain",
+        day: "Tuesday",
+        startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
+        endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)"
+    },
+
+]
+>>>>>>> main
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -196,6 +340,7 @@ const HomeClassShow = () => {
     value,
   }) => {
     return (
+<<<<<<< HEAD
       <button className="cursor-pointer" onClick={() => handleChange(i)}>
         <div
           className={`flex flex-col lg:flex-row justify-center lg:justify-start items-center py-3 px-2 gap-4 rounded-2xl text-main-dark ${
@@ -216,6 +361,50 @@ const HomeClassShow = () => {
               <span className="inline-block lg:hidden"> Hours</span>
             </p>
           </div>
+=======
+        <div className=''>
+            <Grid container spacing={2}
+
+            >
+                <Grid item xs={12} lg={6} >
+                    <Box
+                        className='flex lg:flex-col lg:custom_height overflow-y-auto'
+                    >
+                        {
+                            week.map((single, i) => <SingleTab value={value} key={single} i={i} onClick={handleChange} component={SingleTab} info={{ day: single, totalClass: 10, totalHours: 5.4 }} {...a11yProps(i)} />)
+                        }
+                    </Box>
+                </Grid>
+
+                <Grid item xs={12} lg={6} >
+                    <TabPanel value={value} index={0}>
+                        <RoutineClassCards data={data}></RoutineClassCards>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        <RoutineClassCards data={data}></RoutineClassCards>
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
+                        <RoutineClassCards data={data}></RoutineClassCards>
+                    </TabPanel>
+                    <TabPanel value={value} index={3}>
+                        <RoutineClassCards data={data}></RoutineClassCards>
+                    </TabPanel>
+                    <TabPanel value={value} index={4}>
+                        Item Five
+                    </TabPanel>
+                    <TabPanel value={value} index={5}>
+                        Item Six
+                    </TabPanel>
+                    <TabPanel value={value} index={6}>
+                        Item Seven
+                    </TabPanel>
+
+                </Grid>
+
+
+
+            </Grid>
+>>>>>>> main
         </div>
       </button>
     );

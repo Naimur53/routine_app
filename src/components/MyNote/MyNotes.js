@@ -4,6 +4,7 @@ import { getDataFromLocalDb } from "../../utilities/localDb";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import UpdateIcon from "@mui/icons-material/Update";
+import AddNote from "../AddNotes/AddNotes";
 
 function chooseTheme(i) {
   const theme = [
@@ -49,34 +50,34 @@ const MyNotes = ({ items, editItem, removeItem }) => {
   return (
     <>
       {/* <MainLayout> */}
-      {cacheItems?.map((singleCacheItem) => (
-        <>
-          <div className={bgStyle + " p-4 rounded-xl mb-2"}>
-            <Grid container spacing={3}>
-              <Grid item md={10}>
-                <div>
-                  <p>{singleCacheItem.title}</p>
-                  <p>{singleCacheItem.note}</p>
-                </div>
-              </Grid>
-              <Grid item md={2}>
-                <Button
-                  onClick={() => {
-                    // setOpen(true);
-                    editItem(singleCacheItem.id);
-                  }}
-                >
-                  <UpdateIcon />
-                </Button>
-                {/* <ModalProvider open={open} onClose={handleClose} /> */}
-                <Button onClick={() => removeItem(singleCacheItem.id)}>
-                  Remove
-                </Button>
-              </Grid>
+      {cacheItems?.map((singleCacheItem, i) => (
+        <div className={bgStyle + " p-4 rounded-xl mb-2"}>
+          <Grid container spacing={3}>
+            <Grid item md={10}>
+              <div>
+                <p>{singleCacheItem.title}</p>
+                <p>{singleCacheItem.note}</p>
+              </div>
             </Grid>
-          </div>
-        </>
+
+            <Grid item md={2}>
+              <Button
+                onClick={() => {
+                  // setOpen(true);
+                  editItem(singleCacheItem.id);
+                }}
+              >
+                <UpdateIcon />
+              </Button>
+              {/* <ModalProvider open={open} onClose={handleClose} /> */}
+              <Button onClick={() => removeItem(singleCacheItem.id)}>
+                Remove
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
       ))}
+
       {/* </MainLayout> */}
     </>
   );

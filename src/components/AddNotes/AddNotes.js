@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { getDataFromLocalDb, updateLocalDb } from "../../utilities/localDb";
@@ -11,13 +11,13 @@ const AddNote = () => {
   const [isEdit, setEdit] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  //   console.log("listttttttt: ", list);
   useEffect(() => {
     updateLocalDb("lists", list);
   }, [list]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (name && isEdit) {
       setList(
         list?.map((item) => {
@@ -42,7 +42,6 @@ const AddNote = () => {
       setDescription("");
     }
   };
-
   const removeItem = (id) => {
     setList(list.filter((item) => item.id !== id));
   };
@@ -53,28 +52,27 @@ const AddNote = () => {
     setName(editItem.title);
     setDescription(editItem.note);
   };
-
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {editId ? "UPDATE YOUR NOTE" : " ADD YOUR NOTE"}
-
+        <Typography id="modal-modal-title" variant="body1">
+          {editId ? "UPDATE YOUR NOTE" : " ADD YOUR NOTE"}
+        </Typography>
         <TextField
           onChange={(e) => setName(e.target.value)}
           value={name}
           label="Add Title"
           type="name"
           variant="standard"
-          sx={{ width: "100%", mb: 5 }}
-          color="success"
+          sx={{ width: "100%", mb: 3 }}
+          color="primary"
         />
 
         <textarea
           onChange={(e) => setDescription(e.target.value)}
           value={description}
           rows="4"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
           placeholder="Your message..."
         />
 

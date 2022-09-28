@@ -8,8 +8,6 @@ const AddNote = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [list, setList] = useState(getDataFromLocalDb("lists"));
-  const [isEdit, setEdit] = useState(false);
-  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     updateLocalDb("lists", list);
@@ -17,46 +15,21 @@ const AddNote = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newItem = {
+      id: new Date().getTime().toString(),
+      title: name,
+      note: description,
+    };
+    setList([...list, newItem]);
+    setName("");
+    setDescription("");
+  };
 
-    if (name && isEdit) {
-      setList(
-        list?.map((item) => {
-          if (item.id === editId) {
-            return { ...item, title: name, note: description };
-          }
-          return item;
-        })
-      );
-      setName("");
-      setDescription("");
-      setEditId(null);
-      setEdit(false);
-    } else {
-      const newItem = {
-        id: new Date().getTime().toString(),
-        title: name,
-        note: description,
-      };
-      setList([...list, newItem]);
-      setName("");
-      setDescription("");
-    }
-  };
-  const removeItem = (id) => {
-    setList(list.filter((item) => item.id !== id));
-  };
-  const editItem = (id) => {
-    const editItem = list.find((item) => item.id === id);
-    setEditId(id);
-    setEdit(true);
-    setName(editItem.title);
-    setDescription(editItem.note);
-  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Typography id="modal-modal-title" variant="body1">
-          {editId ? "UPDATE YOUR NOTE" : " ADD YOUR NOTE"}
+          ADD YOUR NOTE
         </Typography>
         <TextField
           onChange={(e) => setName(e.target.value)}
@@ -80,17 +53,9 @@ const AddNote = () => {
           type="submit"
           className="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
         >
-          {editId ? "Edit Note" : " Submit Note"}
+          Submit Note
         </button>
       </form>
-      <div>
-        {list?.length > 0 && (
-          <div sx={{ mt: 2 }}>
-            <MyNotes items={list} removeItem={removeItem} editItem={editItem} />
-            ;
-          </div>
-        )}
-      </div>
     </div>
   );
 };

@@ -124,7 +124,7 @@ const MyNotes = () => {
             <div className={"bg-light-purple p-4 rounded-xl mb-2"}>
               <div className="flex flex-wrap">
                 <div className="flex-1 w-64 text-justify">
-                  <p>{singleCacheItem.title}</p>
+                  <p className="font-bold">{singleCacheItem.title}</p>
                   <p>{singleCacheItem.note}</p>
                 </div>
                 <div className="w-16">

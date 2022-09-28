@@ -9,7 +9,7 @@ const HomeNoteShow = () => {
         <>
           <div className={"bg-light-purple p-3 mx-3 rounded-xl mb-2 text-justify"}>
             <div>
-              <p>{singleCacheItem.title}</p>
+              <p className="font-bold">{singleCacheItem.title}</p>
               <p>{singleCacheItem.note}</p>
             </div>
           </div>

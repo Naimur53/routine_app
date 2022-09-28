@@ -7,8 +7,8 @@ import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
+import HomeNoteShow from "../MyNote/HomeNoteShow";
 const Home = () => {
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,7 +23,7 @@ const Home = () => {
           <Grid container>
             <Grid item md={6}>
               <h6 className="text-s hidden md:block dashboard_link active_dashboard_link p-2 ">
-                <NoteIcon sx={{ mr: 1,ml:1 }} /> My Notes
+                <NoteIcon sx={{ mr: 1, ml: 1 }} /> My Notes
               </h6>
             </Grid>
             <Grid item md={5}>
@@ -34,6 +34,11 @@ const Home = () => {
                 </Button>
                 <ModalProvider open={open} onClose={handleClose} />
               </div>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid md={6} xs={12}>
+              <HomeNoteShow />
             </Grid>
           </Grid>
         </Grid>

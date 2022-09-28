@@ -1,48 +1,12 @@
-import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import EditIcon from "@mui/icons-material/Edit";
-import AddNote from "../AddNotes/AddNotes";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import { getDataFromLocalDb, updateLocalDb } from "../../utilities/localDb";
-import Home from "../Home/Home";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import NoteIcon from "@mui/icons-material/Note";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ArticleIcon from "@mui/icons-material/Article";
-function chooseTheme(i) {
-  const theme = [
-    {
-      img: "./images/blue_bol.png",
-      headingStyle: "text-dark-blue",
-      contentStyle: "text-medium-blue",
-      bgStyle: "bg-light-blue",
-    },
-    {
-      img: "./images/purple_bol.png",
-      headingStyle: "text-dark-purple",
-      contentStyle: "text-medium-purple",
-      bgStyle: "bg-light-purple",
-    },
-    {
-      img: "./images/orange_bol.png",
-      headingStyle: "text-dark-orange",
-      contentStyle: "text-medium-orange",
-      bgStyle: "bg-light-orange",
-    },
-    {
-      img: "./images/green_bol.png",
-      headingStyle: "text-dark-green",
-      contentStyle: "text-medium-green",
-      bgStyle: "bg-light-green",
-    },
-  ];
-  if (i < 4) {
-    return theme[i];
-  } else {
-    return chooseTheme(i - 4);
-  }
-}
 
 const style = {
   position: "absolute",
@@ -61,9 +25,8 @@ const style = {
 };
 
 const MyNotes = () => {
-  const { bgStyle, contentStyle, headingStyle } = chooseTheme(4);
-  const [open, setOpen] = React.useState(false);
-  const [openAdd, setOpenAdd] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleOpenAdd = () => setOpenAdd(true);
   const handleClose = () => setOpen(false);
@@ -156,15 +119,15 @@ const MyNotes = () => {
             <ModalProvider open={openAdd} onClose={handleCloseAdd} />
           </div>
         </div>
-        {list?.map((singleCacheItem, i) => (
+        {list?.reverse().map((singleCacheItem, i) => (
           <>
-            <div className={bgStyle + " p-4 rounded-xl mb-2"}>
+            <div className={"bg-light-purple p-4 rounded-xl mb-2"}>
               <div className="flex flex-wrap">
-                <div className="flex-1 w-64">
+                <div className="flex-1 w-64 text-justify">
                   <p>{singleCacheItem.title}</p>
                   <p>{singleCacheItem.note}</p>
                 </div>
-                <div className="">
+                <div className="w-16">
                   <Button
                     onClick={() => {
                       setOpen(true);

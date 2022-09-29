@@ -236,32 +236,34 @@ const Home = () => {
 
   return (
     <MainLayout>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <HomeClassShow data={data}></HomeClassShow>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Grid container>
-            <Grid item md={6}>
-              <h6 className="text-s hidden md:block dashboard_link active_dashboard_link p-2 ">
-                <NoteIcon sx={{ mr: 1, ml: 1 }} /> My Notes
-              </h6>
+          <div className="custom_height">
+            <Grid container>
+              <Grid item md={6}>
+                <h6 className="text-s hidden md:block dashboard_link active_dashboard_link p-2 ">
+                  <NoteIcon sx={{ mr: 1, ml: 1 }} /> My Notes
+                </h6>
+              </Grid>
+              <Grid item md={5}>
+                <div>
+                  <Button onClick={handleOpen}>
+                    Add Note
+                    <NoteAddIcon sx={{ ml: 1 }} />
+                  </Button>
+                  <ModalProvider open={open} onClose={handleClose} />
+                </div>
+              </Grid>
             </Grid>
-            <Grid item md={5}>
-              <div>
-                <Button onClick={handleOpen}>
-                  Add Note
-                  <NoteAddIcon sx={{ ml: 1 }} />
-                </Button>
-                <ModalProvider open={open} onClose={handleClose} />
-              </div>
+            <Grid container>
+              <Grid md={12} xs={12}>
+                <HomeNoteShow />
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container>
-            <Grid md={6} xs={12}>
-              <HomeNoteShow />
-            </Grid>
-          </Grid>
+          </div>
         </Grid>
       </Grid>
     </MainLayout>

@@ -20,17 +20,26 @@ function chooseTheme(i) {
 }
 
 
-const RoutineClassCard = ({ startTime, endTime, teacherName, subjectCode, subjectName, day, i }) => {
+const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subjectCode, subjectName, day, i }) => {
     const { img, bgStyle, contentStyle, headingStyle, } = chooseTheme(i);
     return (
         <div className={bgStyle + ' p-4 rounded-xl mb-2'}>
-            <div className='flex gap-4'>
-                <img src={img} className='w-[50px]' alt="logo" />
+            <div className="flex justify-between">
+                <div className='flex gap-4'>
+                    <img src={img} className='w-[50px]' alt="logo" />
+                    <div>
+                        <Tooltip title={subjectName}>
+                            <h1 className={headingStyle + ' font-medium  capitalize'}>{textConversion(subjectName, 20)}</h1>
+                        </Tooltip>
+                        <p className={contentStyle + " text-sm"}>{subjectCode}</p>
+                    </div>
+                </div>
                 <div>
-                    <Tooltip title={subjectName}>
-                        <h1 className={headingStyle + ' font-medium capitalize'}>{textConversion(subjectName, 20)}</h1>
+                    <Tooltip title={teacherName}>
+                        <p className={contentStyle + " font-semibold text-right text-sm"}>
+                            {textConversion(teacherName, 15)}
+                        </p>
                     </Tooltip>
-                    <p className={contentStyle + " text-sm"}>{subjectCode}</p>
                 </div>
             </div>
             <div className='mt-4'>
@@ -39,9 +48,9 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, subjectCode, subjec
                         <AccessTimeIcon className={headingStyle}></AccessTimeIcon>
                         <p>{convertToHourMinute(startTime)} - {convertToHourMinute(endTime)}</p>
                     </div>
-                    <Tooltip title={teacherName}>
+                    <Tooltip title={roomNumber}>
                         <p className={contentStyle + " font-semibold text-sm"}>
-                            {textConversion(teacherName, 15)}
+                            {textConversion(roomNumber, 15)}
                         </p>
                     </Tooltip>
                 </div>

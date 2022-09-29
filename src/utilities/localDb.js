@@ -32,4 +32,28 @@ const putDataInLocalDb = (key, data) => {
     console.error('I cannot keep data on local db');
 
 }
+const a = {
+    classes: [
+        {
+            subjectName: "Fundamental",
+            subjectCode: "6645dfd4",
+            teacherName: "Naimur Rahman",
+            day: "Sunday",
+            roomNumber: "116",
+            startTime: "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+            endTime: "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)"
+        }
+    ],
+    institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+    department: "dfdsf",
+    semester: "1st",
+    shift: "None",
+    section: "B"
+}
+// Data validation utilities
+const routineValidation = (data) => {
+
+
+}
+
 export { putDataInLocalDb, getDataFromLocalDb };

@@ -8,17 +8,11 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import MuiDateTimePicker from "./MuiDateTimePicker";
 import { useState } from "react";
-const Class = ({ mainData, register, errors, watch, setValue }) => {
+import { useEffect } from "react";
+
+const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, setMainData }) => {
   // const [selectedTime, setSelectedTime] = useState(null)
-  const [defaultValue, setDefaultValue] = useState({
-    subjectCode: '',
-    subjectName: '',
-    teacherName: '',
-  });
-  // console.log({
-  //   selectedTime: selectedTime && selectedTime.toLocaleTimeString(),
-  // })
-  // 
+
   // handle Day input
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -34,26 +28,41 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
   const names = [
     "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
   ];
-  // const handleChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event; 
-  // };
-
-  const addSameClass = () => {
-    setTimeout(() => {
-      setDefaultValue(pre => {
-        const create = {
-          subjectCode: mainData.classes[mainData.classes.length - 1].subjectCode,
-          subjectName: mainData.classes[mainData.classes.length - 1].subjectName,
-          teacherName: mainData.classes[mainData.classes.length - 1].teacherName,
-        }
-        return create;
-      })
-    }, 1000)
+  const addSameClass = async () => {
+    const check = await trigger(undefined, { shouldFocus: true })
+    if (check) {
+      const {
+        subjectName,
+        subjectCode,
+        teacherName,
+        day,
+        startTime,
+        endTime,
+        roomNumber,
+      } = watch()
+      const data = {
+        subjectName,
+        subjectCode,
+        teacherName,
+        day,
+        roomNumber,
+        startTime: new Date(startTime).toString(),
+        endTime: new Date(endTime).toString(),
+      };
+      setMainData((before) => {
+        return {
+          ...before,
+          classes: [...before.classes, data],
+        };
+      });
+      setValue('day', '')
+      setValue('startTime', null)
+      setValue('endTime', null)
+    }
 
   }
-  console.log({ defaultValue });
+
+
   return (
     <div>
       {/* register your input into the hook by invoking the "register" function */}
@@ -67,7 +76,6 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             id="standard-search"
             label="Subject Name"
             type="name"
-            defaultValue={defaultValue.subjectName}
             variant="standard"
             sx={{ width: "100%" }}
             color="primary"
@@ -75,7 +83,7 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
           <div>
             <span className="text-red-700">
               {errors.subjectName?.type === "required" &&
-                "*institute name is required"}{" "}
+                "*subjectName name is required"}{" "}
             </span>
           </div>
         </Grid>
@@ -85,15 +93,14 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             label="Subject Code"
             type="text"
             variant="standard"
-            defaultValue={defaultValue.subjectCode}
             color="primary"
             sx={{ width: "100%" }}
           />
 
           <div>
             <span className="text-red-700">
-              {errors.department?.type === "required" &&
-                "*department name is required"}{" "}
+              {errors.subjectCode?.type === "required" &&
+                "*subjectCode name is required"}{" "}
             </span>
           </div>
         </Grid>
@@ -102,7 +109,6 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             {...register("teacherName", { required: true })}
 
             label="Teacher Name"
-            defaultValue={defaultValue.teacherName}
             type="name"
             variant="standard"
             color="primary"
@@ -111,7 +117,24 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
 
           <div>
             <span className="text-red-700">
-              {errors.semester && <p>*Semester name is required</p>}{" "}
+              {errors.teacherName && <p>*Teacher name is required</p>}{" "}
+            </span>
+          </div>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            {...register("roomNumber", { required: true })}
+
+            label="Room Number"
+            type="name"
+            variant="standard"
+            color="primary"
+            sx={{ width: "100%" }}
+          />
+
+          <div>
+            <span className="text-red-700">
+              {errors.roomNumber && <p>*Room Number is required</p>}{" "}
             </span>
           </div>
         </Grid>
@@ -141,6 +164,11 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
               ))}
             </Select>
           </FormControl>
+          <div>
+            <span className="text-red-700">
+              {errors.day && <p>*day is required</p>}{" "}
+            </span>
+          </div>
 
         </Grid>
         <Grid item xs={6} md={6}>
@@ -153,18 +181,12 @@ const Class = ({ mainData, register, errors, watch, setValue }) => {
             <MuiDateTimePicker label='End Time' register={register} errors={errors} watch={watch} setValue={setValue} name='endTime' />
           </LocalizationProvider>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <h2 className="  mb-3"> Total added class {mainData.classes?.length}</h2>
           <div className="flex gap-4 md:flex-row flex-col">
 
-            <Button type="submit" onClick={() => {
-              setDefaultValue({
-                subjectCode: '',
-                subjectName: '',
-                teacherName: '',
-              })
-            }} variant="outlined" >Add another class</Button>
-            <Button type="submit" onClick={addSameClass} variant="outlined" >Add another day on same class</Button>
+            <Button type="submit" variant="outlined"   >Add another class</Button>
+            <Button type="button" onClick={addSameClass} variant="outlined" >Add another day on same class</Button>
           </div>
         </Grid>
 

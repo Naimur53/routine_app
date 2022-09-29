@@ -1,9 +1,14 @@
 
 import { Stack, TextField } from '@mui/material'
 import { MobileTimePicker, } from '@mui/x-date-pickers';
-const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register }) => {
-
-
+import { useEffect } from 'react';
+const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register, defaultValue }) => {
+    console.log(defaultValue)
+    useEffect(() => {
+        if (defaultValue) {
+            setValue(name, defaultValue)
+        }
+    }, [defaultValue])
     return (
         <Stack spacing={0} sx={{ width: '100%' }}>
 
@@ -11,8 +16,8 @@ const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register }) =
                 label={label}
                 value={watch(name) ? watch(name) : null}
                 variant='standard'
+
                 onChange={newValue => {
-                    console.log(newValue.toString());
                     setValue(name, newValue.toString())
                 }}
                 renderInput={params => <TextField color="primary"  {...register(name, {

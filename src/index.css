@@ -68,4 +68,8 @@ code {
   .custom_height {
     @apply h-[calc(100vh-80px)]
   }
+
+  .custom_height_preview {
+    @apply h-[calc(100vh-300px)]
+  }
 }

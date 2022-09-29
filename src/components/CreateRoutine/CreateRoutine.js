@@ -21,6 +21,7 @@ const CreateRoutine = () => {
     watch,
     setValue,
     reset,
+    trigger,
     formState: { errors },
   } = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -33,14 +34,15 @@ const CreateRoutine = () => {
     day,
     startTime,
     endTime,
+    roomNumber,
   }) => {
     if (activeStep) {
-      console.log(typeof new Date(startTime).toString());
       const data = {
         subjectName,
         subjectCode,
         teacherName,
         day,
+        roomNumber,
         startTime: new Date(startTime).toString(),
         endTime: new Date(endTime).toString(),
       };
@@ -50,7 +52,7 @@ const CreateRoutine = () => {
           classes: [...before.classes, data],
         };
       });
-      reset();
+      reset()
     }
     console.log({ mainData });
   };
@@ -101,9 +103,12 @@ const CreateRoutine = () => {
         <Class
           errors={errors}
           watch={watch}
+          reset={reset}
           setValue={setValue}
           register={register}
+          trigger={trigger}
           mainData={mainData}
+          setMainData={setMainData}
         ></Class>
       ),
     },
@@ -114,10 +119,12 @@ const CreateRoutine = () => {
           errors={errors}
           watch={watch}
           setValue={setValue}
+          setMainData={setMainData}
           register={register}
           mainData={mainData}
+          setActiveStep={setActiveStep}
+          trigger={trigger}
         >
-          Tor main khai
         </PreviewRoutine>
       ),
     },
@@ -129,7 +136,7 @@ const CreateRoutine = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
+  console.log({ errors });
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -155,6 +162,7 @@ const CreateRoutine = () => {
               nextButton={
                 <Button
                   size="small"
+                  variant="contained"
                   onClick={handleNext}
                   disabled={activeStep === maxSteps - 1}
                   type={activeStep === 0 ? "submit" : "button"}
@@ -165,6 +173,7 @@ const CreateRoutine = () => {
               backButton={
                 <Button
                   size="small"
+                  variant="contained"
                   onClick={handleBack}
                   disabled={activeStep === 0}
                 >

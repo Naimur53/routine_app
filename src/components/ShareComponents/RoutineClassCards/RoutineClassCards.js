@@ -1,13 +1,13 @@
 import React from 'react';
 import RoutineClassCard from './RoutineClassCard';
 
-const RoutineClassCards = ({ data }) => {
+const RoutineClassCards = ({ data, day }) => {
 
 
     return (
         <div>
             {
-                data.map((single, i) => <RoutineClassCard {...single} i={i}></RoutineClassCard>)
+                data.filter(single => single.day === day).map((single, i) => <RoutineClassCard {...single} i={i}></RoutineClassCard>)
             }
         </div>
     );

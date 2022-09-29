@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Modal,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Modal } from "@mui/material";
 import React, { useState } from "react";
 import AddNote from "../../AddNotes/AddNotes";
 
@@ -15,7 +7,11 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
+  width: {
+    lg: 550,
+    md: 450,
+    xs: 350,
+  },
   bgcolor: "background.paper",
   borderRadius: "10px",
   boxShadow: 24,

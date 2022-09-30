@@ -46,7 +46,7 @@ const SearchRoutine = () => {
   };
   const informations = [
     {
-      institute: "BBPI",
+      institute: "Brahmnbariaya polytechnic Institute",
       semester: "5th",
       department: "CMT",
       totalClass: 45,
@@ -98,21 +98,14 @@ const SearchRoutine = () => {
     <MainLayout>
       <form className="ml-3 flex justify-center">
         <Grid container spacing={2}>
-          <Grid
-            style={{ position: "relative", display: "inline-block" }}
-            item
-            sm={6}
-            lg={3}
-            md={6}
-            sx={12}
-          >
+          <Grid item xs={12} lg={3} md={6}>
             {" "}
-            <div className="flex justify-center">
-              <div className="relative inline-block ">
+            <div className="flex w-full justify-center">
+              <div className="relative w-full ">
                 <input
                   type="search"
                   id="default-search"
-                  className="block p-4  w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      "
+                  className="block p-4  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      "
                   placeholder="Search Your Routine..."
                   required
                 />
@@ -141,15 +134,15 @@ const SearchRoutine = () => {
               </div>
             </div>
           </Grid>
-          <Grid item sm={6} lg={3} md={6} sx={12}>
+          <Grid item xs={12} md={6} lg={3}>
             <TextField
               {...register("department", { required: true })}
               id="standard-search"
               label="Department"
               type="name"
+              sx={{ width: "100%" }}
               variant="standard"
               color="primary"
-              sx={{ width: "315px" }}
             />
 
             <div>
@@ -159,8 +152,8 @@ const SearchRoutine = () => {
               </span>
             </div>
           </Grid>
-          <Grid item sm={6} lg={3} md={6} sx={12}>
-            <FormControl variant="standard" sx={{ width: "315px" }}>
+          <Grid item xs={12} md={6} lg={3}>
+            <FormControl variant="standard" sx={{ width: "100%" }}>
               <InputLabel id="demo-multiple-name-label">Semester</InputLabel>
               <Select
                 labelId="demo-multiple-name-label"
@@ -183,8 +176,8 @@ const SearchRoutine = () => {
               </span>
             </div>
           </Grid>
-          <Grid item sm={6} lg={3} md={6} sx={12}>
-            <FormControl variant="standard" sx={{ width: "315px" }}>
+          <Grid item xs={12} md={6} lg={3}>
+            <FormControl variant="standard" sx={{ width: "100%" }}>
               <InputLabel id="demo-multiple-name-label">section</InputLabel>
               <Select
                 labelId="demo-multiple-name-label"
@@ -211,11 +204,13 @@ const SearchRoutine = () => {
       </form>
       <Grid
         container
-        gap={2}
+        spacing={4}
         sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
       >
         {informations.map((e) => (
-          <DemoCard item={e}></DemoCard>
+          <Grid item lg={3} md={4} xs={12} sm={12}>
+            <DemoCard item={e}></DemoCard>
+          </Grid>
         ))}
       </Grid>
     </MainLayout>

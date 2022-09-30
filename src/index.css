@@ -63,4 +63,7 @@ code {
   .custom_height {
     @apply h-[calc(100vh-80px)];
   }
+  .details_card_wrap{
+    @apply h-full
+  }
 }

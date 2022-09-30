@@ -3,19 +3,19 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     screens: {
-      'sm': '600px',
+      sm: "600px",
       // => @media (min-width: 640px) { ... }
 
-      'md': '900px',
+      md: "900px",
       // => @media (min-width: 768px) { ... }
 
-      'lg': '1200px',
+      lg: "1200px",
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1536px',
+      xl: "1536px",
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1736px',
+      "2xl": "1736px",
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
@@ -34,9 +34,9 @@ module.exports = {
         "medium-green": "#c3cead",
         "light-gray": "#f5f7f9",
         "main-dark": "#030303",
-        "content": "#b9b8bd"
-      }
+        content: "#b9b8bd",
+      },
     },
   },
   plugins: [],
-}
+};

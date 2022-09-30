@@ -46,52 +46,124 @@ const SearchRoutine = () => {
   };
   const informations = [
     {
-      institute: "Brahmnbariaya polytechnic Institute",
-      semester: "5th",
-      department: "CMT",
-      totalClass: 45,
-      i: 51,
-      routineUses: "120 users",
+      classes: [
+        {
+          subjectName: "Fundamental",
+          subjectCode: "6645dfd4",
+          teacherName: "Naimur Rahman",
+          day: "Sunday",
+          roomNumber: "116",
+          startTime:
+            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+          endTime:
+            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
+        },
+      ],
+      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+      department: "dfdsf",
+      semester: "1st",
+      shift: "None",
+      section: "B",
     },
     {
-      institute: "BBPI",
-      semester: "5th",
-      department: "CMT",
-      totalClass: 45,
-      i: 4551,
-      routineUses: "120 users",
+      classes: [
+        {
+          subjectName: "Fundamental",
+          subjectCode: "6645dfd4",
+          teacherName: "Naimur Rahman",
+          day: "Sunday",
+          roomNumber: "116",
+          startTime:
+            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+          endTime:
+            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
+        },
+      ],
+      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+      department: "dfdsf",
+      semester: "1st",
+      shift: "None",
+      section: "B",
     },
     {
-      institute: "BBPI",
-      semester: "5th",
-      department: "CMT",
-      totalClass: 45,
-      i: 12,
-      routineUses: "120 users",
+      classes: [
+        {
+          subjectName: "Fundamental",
+          subjectCode: "6645dfd4",
+          teacherName: "Naimur Rahman",
+          day: "Sunday",
+          roomNumber: "116",
+          startTime:
+            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+          endTime:
+            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
+        },
+      ],
+      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+      department: "dfdsf",
+      semester: "1st",
+      shift: "None",
+      section: "B",
     },
     {
-      institute: "BBPI",
-      semester: "5th",
-      department: "CMT",
-      totalClass: 45,
-      i: 21,
-      routineUses: "120 users",
+      classes: [
+        {
+          subjectName: "Fundamental",
+          subjectCode: "6645dfd4",
+          teacherName: "Naimur Rahman",
+          day: "Sunday",
+          roomNumber: "116",
+          startTime:
+            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+          endTime:
+            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
+        },
+      ],
+      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+      department: "dfdsf",
+      semester: "1st",
+      shift: "None",
+      section: "B",
     },
     {
-      institute: "BBPI",
-      semester: "5th",
-      department: "CMT",
-      totalClass: 45,
-      i: 1,
-      routineUses: "120 users",
+      classes: [
+        {
+          subjectName: "Fundamental",
+          subjectCode: "6645dfd4",
+          teacherName: "Naimur Rahman",
+          day: "Sunday",
+          roomNumber: "116",
+          startTime:
+            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+          endTime:
+            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
+        },
+      ],
+      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+      department: "dfdsf",
+      semester: "1st",
+      shift: "None",
+      section: "B",
     },
     {
-      institute: "BBPI",
-      semester: "5th",
-      department: "CMT",
-      totalClass: 45,
-      i: 1,
-      routineUses: "120 users",
+      classes: [
+        {
+          subjectName: "Fundamental",
+          subjectCode: "6645dfd4",
+          teacherName: "Naimur Rahman",
+          day: "Sunday",
+          roomNumber: "116",
+          startTime:
+            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
+          endTime:
+            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
+        },
+      ],
+      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
+      department: "dfdsf",
+      semester: "1st",
+      shift: "None",
+      section: "B",
     },
   ]; // F6F4FF
   return (
@@ -209,7 +281,7 @@ const SearchRoutine = () => {
       >
         {informations.map((e) => (
           <Grid item lg={3} md={4} xs={12} sm={12}>
-            <DemoCard item={e}></DemoCard>
+            <DemoCard item={e} classes={e.classes}></DemoCard>
           </Grid>
         ))}
       </Grid>

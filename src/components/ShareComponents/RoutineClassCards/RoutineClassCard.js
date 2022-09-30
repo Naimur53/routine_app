@@ -1,8 +1,8 @@
-import React from 'react';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { Tooltip } from '@mui/material';
-import textConversion from '../../../utilities/textConversion';
-import convertToHourMinute from '../../../utilities/ConvertTime';
+import React from "react";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Tooltip } from "@mui/material";
+import textConversion from "../../../utilities/textConversion";
+import convertToHourMinute from "../../../utilities/ConvertTime";
 
 function chooseTheme(i) {
     const theme = [
@@ -10,7 +10,7 @@ function chooseTheme(i) {
         { img: './images/purple_bol.png', headingStyle: 'text-dark-purple', contentStyle: 'text-medium-purple', bgStyle: "bg-light-purple" },
         { img: './images/orange_bol.png', headingStyle: 'text-dark-orange', contentStyle: 'text-medium-orange', bgStyle: "bg-light-orange" },
         { img: './images/green_bol.png', headingStyle: 'text-dark-green', contentStyle: 'text-medium-green', bgStyle: "bg-light-green" },
-        
+
     ]
     if (i < 4) {
         return theme[i];

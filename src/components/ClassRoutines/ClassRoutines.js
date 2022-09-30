@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ClassRoutines = () => {
+const classNameRoutines = () => {
   const navigate = useNavigate();
   const handleCreateRoutine = () => {
     navigate("/stepper");
@@ -9,9 +9,9 @@ const ClassRoutines = () => {
   return (
     <div>
       <button onClick={handleCreateRoutine}>Create a routine</button>
-      <h1 className="text-green-400">ALl Class Routine is here </h1>
+      <h1 className="text-green-400">ALl className Routine is here </h1>
     </div>
   );
 };
 
-export default ClassRoutines;
+export default classNameRoutines;

@@ -24,7 +24,7 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
   // console.log({
   //   selectedTime: selectedTime && selectedTime.toLocaleTimeString(),
   // })
-  // 
+  //
   // handle Day input
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -86,7 +86,6 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
   //   } = event;
   // };
 
-
   console.log({ defaultValue });
   return (
     <div>
@@ -106,7 +105,7 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
             color="primary"
           />
           <div>
-            <span className="text-red-700">
+            <span classNameNameName="text-red-700">
               {errors.subjectName?.type === "required" &&
                 "*subjectName name is required"}{" "}
             </span>

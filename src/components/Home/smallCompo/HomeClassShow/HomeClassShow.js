@@ -51,6 +51,7 @@ const HomeClassShow = ({ data }) => {
             </Grid>
         </div>
     );
-}
+};
+
 
 export default HomeClassShow;

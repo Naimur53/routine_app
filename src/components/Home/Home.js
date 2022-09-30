@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardTab from "../ShareComponents/DashboardTab/DashboardTab";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
@@ -9,6 +9,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
 import HomeNoteShow from "../MyNote/HomeNoteShow";
+import { getRoutineDataFromLocalDb } from "../../utilities/dataValidation";
 const data = [
   {
     day: "Sunday",
@@ -233,7 +234,13 @@ const Home = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  useEffect(() => {
 
+    getRoutineDataFromLocalDb().then(res => {
+      console.log({ res })
+
+    })
+  }, [])
   return (
     <MainLayout>
       <Grid container spacing={2}>

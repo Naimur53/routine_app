@@ -19,7 +19,7 @@ const Login = () => {
     console.log(data);
   };
   return (
-    <div className="h-screen flex items-center justify-center flex-col ">
+    <div className="custom_height flex items-center justify-center flex-col ">
       <div className="w-11/12	shadow-md md:w-1/3  px-3 py-8 rounded-lg">
         <img className="img-fluid" src={loginimg} alt="" />
         <h2 className="font-bold text-xl mb-2">Login</h2>

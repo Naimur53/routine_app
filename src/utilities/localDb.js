@@ -50,12 +50,6 @@ const a = {
     shift: "None",
     section: "B"
 }
-// Data validation utilities
-const routineValidation = (data) => {
-
-
-}
-
 //update data
 const updateLocalDb = (key, updatedData) => {
     localStorage.setItem(key, JSON.stringify(updatedData));

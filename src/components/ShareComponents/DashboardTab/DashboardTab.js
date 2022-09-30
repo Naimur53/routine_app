@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Logo from "../Logo/Logo";
 import HomeIcon from "@mui/icons-material/Home";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
@@ -24,7 +25,7 @@ const DashboardTab = ({ handleCloseNavMenu }) => {
           {pages.map(({ name, path, Icon }, i) => (
             <NavLink
               key={i}
-              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
+              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
               to={path}
               className={({ isActive }) =>
                 isActive

@@ -1,5 +1,5 @@
-import React from 'react';
-import RoutineClassCard from './RoutineClassCard';
+import React from "react";
+import RoutineClassCard from "./RoutineClassCard";
 
 const RoutineClassCards = ({ data, day }) => {
 

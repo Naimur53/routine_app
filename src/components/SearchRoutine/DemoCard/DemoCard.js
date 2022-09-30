@@ -59,21 +59,23 @@ const DemoCard = (item) => {
         </div>
 
         <div
-          className={`details_card_wrap  transition-all absolute  left-0 right-0 bg-[] w-full ${
-            open ? "top-0" : "top-[150px]"
+          className={`details_card_wrap  transition-all absolute  left-0 right-0 bg-[ ] w-full ${
+            open ? "top-0" : "top-[158px]"
           }`}
         >
-          <div className="h-full f lex flex-col justify-between  border border-green-100 bg-white drop-shadow-kg text-black ">
-            <div className="h-[50px] bg-white shadow-md flex justify-center items-center border-2 border-gray-200">
+          <div className="h-full flex flex-col justify-between border      drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
+            <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">
               <hr className="w-[30px] rounded-md h-[4px] bg-blue-500"></hr>
             </div>
-            <div className="p-2">
-              <div className="text-center">
-                <div className="">
-                  <img className=" rounded-full h-10  " src={profile} alt="" />
-                </div>
-                <div className=" flex justify-between">
-                  {" "}
+            <div className="p-2 shadow-sm ">
+              <div className=" flex justify-between m-2 ">
+                <img
+                  className=" rounded-full h-10 mr-2 "
+                  src={profile}
+                  alt=""
+                />
+
+                <div className="flex-1 mt-1">
                   <h3 className="text-xs">Mehedi Hasan</h3>
                   <p className="text-xs">Mehedi@gmail.com</p>
                 </div>

@@ -63,31 +63,40 @@ const DemoCard = (item) => {
             open ? "top-0" : "top-[150px]"
           }`}
         >
-          <div className="h-full f lex flex-col justify-between  border border-green-100 bg-light-purple drop-shadow-kg text-dark-purple ">
-            <div className="h-[50px] bg-gray-200 shadow-md flex justify-center items-center">
+          <div className="h-full f lex flex-col justify-between  border border-green-100 bg-white drop-shadow-kg text-black ">
+            <div className="h-[50px] bg-white shadow-md flex justify-center items-center border-2 border-gray-200">
               <hr className="w-[30px] rounded-md h-[4px] bg-blue-500"></hr>
             </div>
-            <div className="content p-2 flex justify-between">
+            <div className="p-2">
+              <div className="text-center">
+                <div className="">
+                  <img className=" rounded-full h-10  " src={profile} alt="" />
+                </div>
+                <div className=" flex justify-between">
+                  {" "}
+                  <h3 className="text-xs">Mehedi Hasan</h3>
+                  <p className="text-xs">Mehedi@gmail.com</p>
+                </div>
+              </div>
               <div className="">
+                {" "}
                 <p className="text-sm">Published Date {date}</p>
+              </div>
+              <div className="flex justify-between">
                 <p className="text-sm"> Total Class </p>
                 <p className="text-sm"> Total User </p>
               </div>
-              <div className="text-center">
-                <img
-                  className=" rounded-r-full h-10 ml-12"
-                  src={profile}
-                  alt=""
-                />
-                <h3 className="text-xs">Mehedi Hasan</h3>
-                <p className="text-xs">Mehedi@gmail.com</p>
-              </div>
-            </div>
 
-            <div className="text-center text-sm">
-              <Button onClick={handleCheckout} variant="outlined" size="small">
-                <NavLink to="/checkout">Checkout</NavLink>
-              </Button>
+              <div className="text-center text-sm">
+                <Button
+                  onClick={handleCheckout}
+                  color="secondary"
+                  variant="outlined"
+                  size="small"
+                >
+                  <NavLink to="/checkout">Checkout</NavLink>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

@@ -280,7 +280,7 @@ const SearchRoutine = () => {
         sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
       >
         {informations.map((e) => (
-          <Grid item lg={3} md={4} xs={12} sm={12}>
+          <Grid item lg={3} md={6} xs={12}>
             <DemoCard item={e} classes={e.classes}></DemoCard>
           </Grid>
         ))}

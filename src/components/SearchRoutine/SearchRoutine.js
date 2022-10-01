@@ -17,6 +17,7 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import DemoCard from "./DemoCard/DemoCard";
+import { useLocation } from "react-router-dom";
 const SearchRoutine = () => {
   const {
     register,
@@ -31,6 +32,7 @@ const SearchRoutine = () => {
     console.log(value);
     console.log(watch("searchName"));
   };
+
   const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
   const shifts = ["None", "1st", "2nd"];
   const sections = ["None", "A", "B", "C", "D"];
@@ -281,7 +283,7 @@ const SearchRoutine = () => {
       >
         {informations.map((e) => (
           <Grid item lg={3} md={6} xs={12}>
-            <DemoCard item={e} classes={e.classes}></DemoCard>
+            <DemoCard item={e}></DemoCard>
           </Grid>
         ))}
       </Grid>

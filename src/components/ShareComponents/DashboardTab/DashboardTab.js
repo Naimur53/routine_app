@@ -6,12 +6,14 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import SearchIcon from "@mui/icons-material/Search";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import FolderSharedIcon from "@mui/icons-material/FolderShared";
 const DashboardTab = ({ handleCloseNavMenu }) => {
   const pages = [
     { name: "Home", path: "/", Icon: HomeIcon },
     { name: "Saved Routine", path: "/saveRoutine", Icon: AddTaskIcon },
     { name: "My Notes", path: "/myNotes", Icon: TextSnippetIcon },
     { name: "Search Routine", path: "/searchRoutine", Icon: SearchIcon },
+    { name: "My Routine", path: "/myRoutine", Icon: FolderSharedIcon },
     {
       name: "Create Routine",
       path: "/createRoutine",
@@ -25,7 +27,7 @@ const DashboardTab = ({ handleCloseNavMenu }) => {
           {pages.map(({ name, path, Icon }, i) => (
             <NavLink
               key={i}
-              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
               to={path}
               className={({ isActive }) =>
                 isActive

@@ -13,6 +13,7 @@ import MyNotes from "./components/MyNotes/MyNotes";
 import SaveRoutine from "./components/SaveRoutine/SaveRoutine";
 import Edite from "./components/CreateRoutine/PreviewRoutine/Edite/Edite";
 import Checkout from "./components/SearchRoutine/Checkout/Checkout";
+import MyRoutine from "./components/MyRoutine/MyRoutine";
 
 const theme = createTheme({
   palette: {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/myNotes" element={<MyNotes />}></Route>
           <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/myRoutine" element={<MyRoutine />}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

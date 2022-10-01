@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import "./DemoCard.css";
 import profile from "../../../images/profile.png";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import {
   Button,
   Card,
@@ -9,25 +10,24 @@ import {
   CardContent,
   Container,
   Grid,
+  IconButton,
   Select,
   TextField,
   Typography,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import convertToHourMinute from "../../../utilities/ConvertTime";
 import textConversion from "./../../../utilities/textConversion";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 const DemoCard = (item) => {
+  const location = useLocation();
+  console.log(location.pathname);
+
   const { institute, department, semester, section, shift } = item.item;
-  const {
-    subjectName,
-    subjectCode,
-    teacherName,
-    day,
-    roomNumber,
-    startTime,
-    endTime,
-  } = item.classes[0];
-  console.log(item.classes.length, "feom leaklsjd");
+  const handleDelete = () => {
+    console.log("clicked");
+    window.confirm("You want to deleted?");
+  };
   const handleCheckout = () => {
     console.log("click in checkout");
   };
@@ -89,15 +89,40 @@ const DemoCard = (item) => {
                 <p className="text-sm"> Total User </p>
               </div>
 
-              <div className="text-center text-sm">
+              <div className="text-center text-sm flex justify-around">
                 <Button
                   onClick={handleCheckout}
                   color="secondary"
                   variant="outlined"
                   size="small"
                 >
-                  <NavLink to="/checkout">Checkout</NavLink>
-                </Button>
+                  <NavLink
+                    institute={institute}
+                    department={department}
+                    semester={semester}
+                    section={section}
+                    shift={shift}
+                    to="/checkout"
+                  >
+                    Checkout
+                  </NavLink>
+                </Button>{" "}
+                {location.pathname == "/searchRoutine" ? (
+                  <></>
+                ) : (
+                  <>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={handleDelete}
+                      className=""
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="update">
+                      <DriveFileRenameOutlineIcon />
+                    </IconButton>
+                  </>
+                )}
               </div>
             </div>
           </div>

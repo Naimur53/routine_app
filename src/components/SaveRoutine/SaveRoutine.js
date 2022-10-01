@@ -139,9 +139,9 @@ const SaveRoutine = () => {
         spacing={4}
         sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
       >
-        {informations.map((e) => (
+        {informations.map((single, i) => (
           <Grid item lg={3} md={6} xs={12}>
-            <DemoCard item={e}></DemoCard>
+            <DemoCard item={single} i={i} updateAble={true}></DemoCard>
           </Grid>
         ))}
       </Grid>

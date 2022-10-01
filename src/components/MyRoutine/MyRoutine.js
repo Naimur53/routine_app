@@ -2,9 +2,8 @@ import { Grid } from "@mui/material";
 import React from "react";
 import DemoCard from "../SearchRoutine/DemoCard/DemoCard";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
-import { useLocation } from "react-router-dom";
 
-const SaveRoutine = () => {
+const MyRoutine = () => {
   const informations = [
     {
       classes: [
@@ -131,7 +130,7 @@ const SaveRoutine = () => {
     <MainLayout>
       <div className="text-center">
         <h1 className="text-xl font-bold text-ellipsis text-slate-600">
-          Save Routins
+          My Created Routins
         </h1>
       </div>
       <Grid
@@ -141,7 +140,7 @@ const SaveRoutine = () => {
       >
         {informations.map((single, i) => (
           <Grid item lg={3} md={6} xs={12}>
-            <DemoCard item={single} i={i} updateAble={true}></DemoCard>
+            <DemoCard item={single} updateAble={true} i={i}></DemoCard>
           </Grid>
         ))}
       </Grid>
@@ -149,4 +148,4 @@ const SaveRoutine = () => {
   );
 };
 
-export default SaveRoutine;
+export default MyRoutine;

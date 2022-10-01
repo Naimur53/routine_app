@@ -25,25 +25,25 @@ function chooseTheme(i) {
   const theme = [
     {
       img: "./images/blue_bol.png",
-      headingStyle: "dark-blue",
+      headingStyle: "bg-dark-blue",
       contentStyle: "text-medium-blue",
       bgStyle: "bg-light-blue",
     },
     {
       img: "./images/purple_bol.png",
-      headingStyle: "dark-purple",
+      headingStyle: "bg-dark-purple",
       contentStyle: "text-medium-purple",
       bgStyle: "bg-light-purple",
     },
     {
       img: "./images/orange_bol.png",
-      headingStyle: "dark-orange",
+      headingStyle: "bg-dark-orange",
       contentStyle: "text-medium-orange",
       bgStyle: "bg-light-orange",
     },
     {
       img: "./images/green_bol.png",
-      headingStyle: "dark-green",
+      headingStyle: "bg-dark-green",
       contentStyle: "text-medium-green",
       bgStyle: "bg-light-green",
     },
@@ -68,9 +68,8 @@ const DemoCard = ({ item, updateAble, i }) => {
     console.log("click in checkout");
   };
   const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
+  const date = `${current.getDate()}/${current.getMonth() + 1
+    }/${current.getFullYear()}`;
   const [open, setOpen] = useState(false);
   return (
     <div className="card-container w-full   ">
@@ -119,14 +118,13 @@ const DemoCard = ({ item, updateAble, i }) => {
         </div>
 
         <div
-          className={`details_card_wrap  transition-all absolute  left-0 right-0 bg-[ ] w-full ${
-            open ? "top-0" : "top-[158px]"
-          }`}
+          className={`details_card_wrap  transition-all absolute  left-0 right-0   w-full ${open ? "top-0" : "top-[158px]"
+            }`}
         >
-          <div className="h-full flex flex-col justify-between border      drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
+          <div className="h-full flex flex-col justify-between border  drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
             <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">
               <hr
-                className={`w-[30px] rounded-md h-[4px]  bg-${headingStyle}`}
+                className={`w-[30px] rounded-md h-[4px] ${headingStyle}`}
               ></hr>
             </div>
             <div className="p-2 shadow-sm ">

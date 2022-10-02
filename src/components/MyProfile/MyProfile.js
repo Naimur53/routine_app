@@ -76,7 +76,7 @@ const MyProfile = () => {
               <p className="flex-none text-gray-500 font-bold md:text-right  md:mb-0 pr-4 w-32">
                 ID
               </p>
-              <p className="grow text-purple-900 text-sm md:text-base">
+              <p className="grow text-purple-900 text-sm md:text-base break-all">
                 16030454879878
               </p>
             </div>

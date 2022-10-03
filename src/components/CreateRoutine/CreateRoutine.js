@@ -181,7 +181,6 @@ const CreateRoutine = () => {
             ></MobileStepper>
           </div>
         </Box>
-        <h2>reqouesnt</h2>
       </form>
     </MainLayout>
   );

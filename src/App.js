@@ -16,6 +16,7 @@ import Checkout from "./components/SearchRoutine/Checkout/Checkout";
 import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyNotes from "./components/MyNote/MyNotes";
 import UpdateRoutine from "./components/UpdateRoutine/UpdateRoutine";
+import RequestForRoutine from "./components/RequestForRoutie/RequestForRoutine";
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,10 @@ function App() {
           <Route path="/createRoutine" element={<CreateRoutine />}></Route>
           <Route path="/myNotes" element={<MyNotes />}></Route>
           <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
+          <Route
+            path="/requestForRoutine"
+            element={<RequestForRoutine />}
+          ></Route>
           <Route path="/checkout/:id" element={<Checkout />}></Route>
           <Route path="/updateRoutine/:id" element={<UpdateRoutine />}></Route>
           <Route path="/myRoutine" element={<MyRoutine />}></Route>

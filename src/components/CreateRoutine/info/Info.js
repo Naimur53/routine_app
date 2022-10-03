@@ -1,9 +1,10 @@
-import { Grid, Select, TextField } from "@mui/material";
+import { Button, Grid, Select, TextField } from "@mui/material";
 import React from "react";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { NavLink } from "react-router-dom";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -142,6 +143,11 @@ const Info = ({ errors, register, watch }) => {
           </div>
         </Grid>
       </Grid>
+      <div className="mt-5">
+        <Button variant="outlined">
+          <NavLink to="/requestForRoutine"> Requeste for a routine</NavLink>
+        </Button>
+      </div>
     </div>
   );
 };

@@ -143,11 +143,6 @@ const Info = ({ errors, register, watch }) => {
           </div>
         </Grid>
       </Grid>
-      <div className="mt-5">
-        <Button variant="outlined">
-          <NavLink to="/requestForRoutine"> Requeste for a routine</NavLink>
-        </Button>
-      </div>
     </div>
   );
 };

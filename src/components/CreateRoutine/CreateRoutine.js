@@ -52,7 +52,7 @@ const CreateRoutine = () => {
           classes: [...before.classes, data],
         };
       });
-      reset()
+      reset();
     }
     console.log({ mainData });
   };
@@ -123,8 +123,7 @@ const CreateRoutine = () => {
           mainData={mainData}
           setActiveStep={setActiveStep}
           trigger={trigger}
-        >
-        </PreviewRoutine>
+        ></PreviewRoutine>
       ),
     },
   ];
@@ -150,6 +149,7 @@ const CreateRoutine = () => {
             </Stepper>
             <Box className="pt-10">{steps[activeStep].element}</Box>
           </Box>
+
           <div className="fixed bottom-0 w-full md:w-[calc(100vw-380px)]  ">
             <MobileStepper
               variant="text"
@@ -181,6 +181,7 @@ const CreateRoutine = () => {
             ></MobileStepper>
           </div>
         </Box>
+        <h2>reqouesnt</h2>
       </form>
     </MainLayout>
   );

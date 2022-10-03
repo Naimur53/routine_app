@@ -9,10 +9,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CreateRoutine from "./components/CreateRoutine/CreateRoutine";
 import TopBar from "./components/ShareComponents/TopBar/TopBar";
 import SearchRoutine from "./components/SearchRoutine/SearchRoutine";
-import MyNotes from "./components/MyNotes/MyNotes";
+import MyNotes from "./components/MyNote/MyNotes";
 import SaveRoutine from "./components/SaveRoutine/SaveRoutine";
 import Edite from "./components/CreateRoutine/PreviewRoutine/Edite/Edite";
 import Checkout from "./components/SearchRoutine/Checkout/Checkout";
+import MyProfile from "./components/MyProfile/MyProfile";
 import MyRoutine from "./components/MyRoutine/MyRoutine";
 
 const theme = createTheme({
@@ -42,10 +43,10 @@ function App() {
           <Route path="/searchRoutine" element={<SearchRoutine />}></Route>
           <Route path="/myNotes" element={<MyNotes />}></Route>
           <Route path="/createRoutine" element={<CreateRoutine />}></Route>
-          <Route path="/myNotes" element={<MyNotes />}></Route>
           <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/myRoutine" element={<MyRoutine />}></Route>
+          <Route path="/myProfile" element={<MyProfile />}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

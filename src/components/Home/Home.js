@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardTab from "../ShareComponents/DashboardTab/DashboardTab";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
@@ -10,6 +10,7 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
 import HomeNoteShow from "../MyNote/HomeNoteShow";
 import { getRoutineDataFromLocalDb } from "../../utilities/dataValidation";
+import { getDataFromLocalDb } from "../../utilities/localDb";
 const data = [
   {
     day: "Sunday",
@@ -231,6 +232,7 @@ const data = [
 
 ]
 const Home = () => {
+  const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -241,6 +243,7 @@ const Home = () => {
 
     })
   }, [])
+  console.log({ main: getDataFromLocalDb("lists") })
   return (
     <MainLayout>
       <Grid container spacing={2}>
@@ -261,13 +264,13 @@ const Home = () => {
                     Add Note
                     <NoteAddIcon sx={{ ml: 1 }} />
                   </Button>
-                  <ModalProvider open={open} onClose={handleClose} />
+                  <ModalProvider open={open} setList={setList} onClose={handleClose} />
                 </div>
               </Grid>
             </Grid>
             <Grid container>
               <Grid md={12} xs={12}>
-                <HomeNoteShow />
+                <HomeNoteShow list={list} />
               </Grid>
             </Grid>
           </div>

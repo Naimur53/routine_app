@@ -25,25 +25,30 @@ function chooseTheme(i) {
   const theme = [
     {
       img: "./images/blue_bol.png",
-      headingStyle: "dark-blue",
+      headingStyle: "text-dark-blue",
+      bgDark: "bg-dark-blue",
+
       contentStyle: "text-medium-blue",
       bgStyle: "bg-light-blue",
     },
     {
       img: "./images/purple_bol.png",
-      headingStyle: "dark-purple",
+      headingStyle: "text-dark-purple",
+      bgDark: "bg-dark-purple",
       contentStyle: "text-medium-purple",
       bgStyle: "bg-light-purple",
     },
     {
       img: "./images/orange_bol.png",
-      headingStyle: "dark-orange",
+      headingStyle: "text-dark-orange",
+      bgDark: "bg-dark-orange",
       contentStyle: "text-medium-orange",
       bgStyle: "bg-light-orange",
     },
     {
       img: "./images/green_bol.png",
-      headingStyle: "dark-green",
+      headingStyle: "text-dark-green",
+      bgDark: "bg-dark-green",
       contentStyle: "text-medium-green",
       bgStyle: "bg-light-green",
     },
@@ -55,11 +60,12 @@ function chooseTheme(i) {
   }
 }
 const DemoCard = ({ item, updateAble, i }) => {
-  const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
+  const { img, bgStyle, contentStyle, headingStyle, bgDark } = chooseTheme(i);
   const location = useLocation();
   console.log(location.pathname);
 
-  const { institute, department, semester, section, shift } = item;
+  const { institute, department, semester, section, shift, id } = item;
+  console.log("hi i am id from seacrch", id);
   const handleDelete = () => {
     console.log("clicked");
     window.confirm("You want to deleted?");
@@ -81,7 +87,7 @@ const DemoCard = ({ item, updateAble, i }) => {
         className="w-full h-[200px]  relative  n overflow-hidden"
       >
         <div
-          className={`details_card_wrap ${bgStyle}   p-2 shadow-md text-${headingStyle}`}
+          className={`details_card_wrap ${bgStyle}   p-2 shadow-md  ${headingStyle}`}
         >
           <div className="content   ">
             <div className="mb-4 flex  gap-3">
@@ -125,9 +131,7 @@ const DemoCard = ({ item, updateAble, i }) => {
         >
           <div className="h-full flex flex-col justify-between border      drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
             <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">
-              <hr
-                className={`w-[30px] rounded-md h-[4px]  bg-${headingStyle}`}
-              ></hr>
+              <hr className={`w-[30px] rounded-md h-[4px]  ${bgDark}`}></hr>
             </div>
             <div className="p-2 shadow-sm ">
               <div className="">
@@ -152,7 +156,7 @@ const DemoCard = ({ item, updateAble, i }) => {
                     semester={semester}
                     section={section}
                     shift={shift}
-                    to="/checkout"
+                    to={`/checkout/${id}`}
                   >
                     Checkout
                   </NavLink>
@@ -167,7 +171,9 @@ const DemoCard = ({ item, updateAble, i }) => {
                       <DeleteIcon />
                     </IconButton>
                     <IconButton aria-label="update">
-                      <DriveFileRenameOutlineIcon />
+                      <NavLink to={`/updateRoutine/:${id}`}>
+                        <DriveFileRenameOutlineIcon />
+                      </NavLink>
                     </IconButton>
                   </>
                 ) : (

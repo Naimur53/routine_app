@@ -66,6 +66,7 @@ const SearchRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "45",
     },
     {
       classes: [
@@ -86,6 +87,7 @@ const SearchRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "78352",
     },
     {
       classes: [
@@ -106,6 +108,7 @@ const SearchRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "445",
     },
     {
       classes: [
@@ -126,6 +129,7 @@ const SearchRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "44512",
     },
     {
       classes: [
@@ -146,6 +150,7 @@ const SearchRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "4843215",
     },
     {
       classes: [
@@ -166,6 +171,7 @@ const SearchRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "41264",
     },
   ]; // F6F4FF
   return (

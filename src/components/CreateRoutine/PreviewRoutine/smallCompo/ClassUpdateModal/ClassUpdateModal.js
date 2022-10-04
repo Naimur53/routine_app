@@ -96,7 +96,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
                             <Grid item md={6} xs={12}>
                                 <TextField
                                     {...register("subjectName", {
-                                        required: true,
+                                        required:  false,
                                     })}
                                     defaultValue={classes[index].subjectName}
                                     id="standard-search"
@@ -115,7 +115,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField
-                                    {...register("subjectCode", { required: true })}
+                                    {...register("subjectCode", { required: false })}
                                     defaultValue={classes[index].subjectCode}
                                     label="Subject Code"
                                     type="text"
@@ -133,7 +133,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField
-                                    {...register("teacherName", { required: true })}
+                                    {...register("teacherName", { required: false })}
                                     defaultValue={classes[index].teacherName}
                                     label="Teacher Name"
                                     type="name"
@@ -150,7 +150,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField
-                                    {...register("roomNumber", { required: true })}
+                                    {...register("roomNumber", { required: false })}
                                     defaultValue={classes[index].roomNumber}
                                     label="Room Number"
                                     type="name"
@@ -176,7 +176,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
                                         label="Select Day"
                                         color="primary"
                                         {...register("day", {
-                                            required: true,
+                                            required: false,
                                         })}
                                         defaultChecked={classes[index].day}
                                         value={watch('day') ? watch('day') : classes[index].day}

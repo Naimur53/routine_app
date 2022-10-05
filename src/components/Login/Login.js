@@ -7,10 +7,10 @@ import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import PasswordTextField from "../ShareComponents/PasswordTextField/PasswordTextField";
-import UseFirebase from "../../Hook/UseFirebase";
+import useFirebase from "../../Hook/useFirebase";
 const Login = () => {
   const location = useLocation();
-  const { handleRegister } = UseFirebase();
+  const { handleRegister } = useFirebase();
 
   const {
     register,

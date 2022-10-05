@@ -8,7 +8,7 @@ import axios from 'axios';
 import { allData, setLoading, setUser } from '../ManageState/DataSlice/dataSlice';
 
 firebaseAuth();
-const UseFirebase = () => {
+const useFirebase = () => {
   // const [user, setUser] = useState({}); 
   const [authError, setAuthError] = useState('');
   const [token, setToken] = useState('');
@@ -17,39 +17,70 @@ const UseFirebase = () => {
   const auth = getAuth();
 
   // utilities 
-  const saveUser = data => {
-    axios.post('https://enigmatic-headland-64217.herokuapp.com/user', data)
+  const saveUser = ({ displayName,
+    email,
+    photoURL,
+    createdAt, uid }) => {
+
+    return axios.put('http://localhost:5001/user', {
+      displayName,
+      email,
+      photoURL,
+      createdAt, uid
+    })
   }
 
 
   // provider 
   const googleProvider = new GoogleAuthProvider();
+
+  // logout
+  const logOut = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      dispatch(setUser({}));
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
   // methods
   const signInWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
   };
   //email and pass register
-  const handleRegister = (email, password, name, history) => {
+  const handleRegister = ({ email, password, name, history }) => {
+    console.log({ email, password, name, history });
     dispatch(setLoading(true))
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setAuthError('');
-        const newUser = { email, displayName: name, photoURL: 'https://cdn.iconscout.com/icon/free/png-256/laptop-user-1-1179329.png' };
-        // saveUser(newUser);
+        // handle saving
+        saveUser({ ...userCredential, displayName: name, photoURL: 'https://i.ibb.co/1drKb3X/user.png' }).then(res => {
+          dispatch(setLoading(false))
+        })
+          .catch(error => {
+            logOut();
+            console.log(error)
+            alert('error while saving user info', error.message)
+          })
+
         // setUser(newUser);
         // send name to firebase after creation
         updateProfile(auth.currentUser, {
           displayName: name,
-          photoURL: 'https://cdn.iconscout.com/icon/free/png-256/laptop-user-1-1179329.png'
+          photoURL: 'https://i.ibb.co/1drKb3X/user.png'
 
-        }).then().catch((error) => {
+        }).then(res => {
+          console.log('update data', res)
+        }).catch((error) => {
+
         });
         history.replace('/');
       })
       .catch((error) => {
         setAuthError(error.message);
       })
-      .finally(() => dispatch(setLoading(false)))
+      .finally()
   }
   // login in user
   const loginUser = (email, password, location, history) => {
@@ -70,14 +101,23 @@ const UseFirebase = () => {
   useEffect(() => {
     const unsubscribed = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(setUser(user))
+        const { displayName,
+          email,
+          photoURL,
+          createdAt, uid } = user
+        dispatch(setUser({
+          displayName,
+          email,
+          photoURL,
+          createdAt, uid
+        }))
         getIdToken(user)
           .then(idToken => setToken(idToken))
       } else {
-        dispatch(setUser(user))
+        dispatch(setUser({}))
       }
 
-      dispatch(setLoading(true))
+
     });
 
   }, [auth, dispatch])
@@ -85,7 +125,8 @@ const UseFirebase = () => {
     signInWithGoogle,
     handleRegister,
     loginUser,
+    logOut,
   };
 };
 
-export default UseFirebase;
+export default useFirebase;

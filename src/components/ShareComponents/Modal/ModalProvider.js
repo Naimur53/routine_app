@@ -18,12 +18,12 @@ const style = {
   p: 4,
 };
 
-const ModalProvider = ({ open, onClose }) => {
+const ModalProvider = ({ open, onClose, setList }) => {
   return (
     <div>
       <Modal open={open} onClose={onClose}>
         <Box sx={style}>
-          <AddNote />
+          <AddNote onClose={onClose} setList={setList} />
         </Box>
       </Modal>
     </div>

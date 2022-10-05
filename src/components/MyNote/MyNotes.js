@@ -52,6 +52,7 @@ const MyNotes = () => {
           return item;
         })
       );
+      setOpen(false);
       setName("");
       setDescription("");
       setEditId(null);
@@ -116,7 +117,11 @@ const MyNotes = () => {
               Add Note
               <NoteAddIcon sx={{ ml: 1 }} />
             </Button>
-            <ModalProvider open={openAdd} onClose={handleCloseAdd} />
+            <ModalProvider
+              open={openAdd}
+              onClose={handleCloseAdd}
+              setList={setList}
+            />
           </div>
         </div>
         {list?.reverse().map((singleCacheItem, i) => (

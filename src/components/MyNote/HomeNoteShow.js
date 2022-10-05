@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { getDataFromLocalDb } from "../../utilities/localDb";
 
-const HomeNoteShow = () => {
-  const [list, setList] = useState(getDataFromLocalDb("lists"));
+const HomeNoteShow = ({ list }) => {
+  console.log({ list });
   return (
     <div className="overflow-y-auto">
       {list?.slice(0, 3).map((singleCacheItem, i) => (

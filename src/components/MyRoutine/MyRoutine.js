@@ -24,6 +24,7 @@ const MyRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "45",
     },
     {
       classes: [
@@ -44,6 +45,7 @@ const MyRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "78352",
     },
     {
       classes: [
@@ -64,6 +66,7 @@ const MyRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "445",
     },
     {
       classes: [
@@ -84,6 +87,7 @@ const MyRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "44512",
     },
     {
       classes: [
@@ -104,6 +108,7 @@ const MyRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "4843215",
     },
     {
       classes: [
@@ -124,6 +129,7 @@ const MyRoutine = () => {
       semester: "1st",
       shift: "None",
       section: "B",
+      id: "41264",
     },
   ];
   return (

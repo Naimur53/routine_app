@@ -2,17 +2,21 @@ import React from "react";
 
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
+import useFirebase from "../../Hook/useFirebase";
 import signImg from "../../images/log.png";
 
 import PasswordTextField from "../ShareComponents/PasswordTextField/PasswordTextField";
 const SignUp = () => {
+  const { handleRegister } = useFirebase()
   const {
     register,
-
+    watch,
+    handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    handleRegister(data)
   };
   return (
     <div>
@@ -21,7 +25,7 @@ const SignUp = () => {
           <img className="img-fluid" src={signImg} alt="" />
           <h2 className="font-bold text-xl mb-2">SignUp </h2>
           <hr className="w-10 border-t-4 rounded-full" />
-          <form className="flex flex-col" onSubmit={onSubmit}>
+          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
             <input
               className="placeholder-gray-500 bg-transparent border border-gray-300 mt-4 px-4 py-2 rounded-full"
               type="text"
@@ -41,10 +45,12 @@ const SignUp = () => {
             <PasswordTextField
               register={register}
               name="password"
+              watch={watch}
             ></PasswordTextField>
             {errors.password && <div>password must be 6 length</div>}
             <PasswordTextField
               register={register}
+              watch={watch}
               name="password2"
             ></PasswordTextField>
             {errors.password2 && <div>{errors.password2.message}</div>}

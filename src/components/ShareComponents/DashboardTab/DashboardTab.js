@@ -5,8 +5,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import SearchIcon from "@mui/icons-material/Search";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import FolderSharedIcon from "@mui/icons-material/FolderShared";
+import SendIcon from "@mui/icons-material/Send";
 const DashboardTab = ({ handleCloseNavMenu }) => {
   const pages = [
     { name: "Home", path: "/", Icon: HomeIcon },
@@ -15,10 +17,16 @@ const DashboardTab = ({ handleCloseNavMenu }) => {
     { name: "Search Routine", path: "/searchRoutine", Icon: SearchIcon },
     { name: "My Routine", path: "/myRoutine", Icon: FolderSharedIcon },
     {
+      name: "Request for routine",
+      path: "/requestForRoutine",
+      Icon: SendIcon,
+    },
+    {
       name: "Create Routine",
       path: "/createRoutine",
       Icon: DriveFileRenameOutlineIcon,
     },
+    { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
   ];
   return (
     <div>

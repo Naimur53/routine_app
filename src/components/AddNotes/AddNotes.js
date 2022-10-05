@@ -1,13 +1,16 @@
 import { TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { getDataFromLocalDb, putDataInLocalDb, updateLocalDb } from "../../utilities/localDb";
+import {
+  getDataFromLocalDb,
+  putDataInLocalDb,
+  updateLocalDb,
+} from "../../utilities/localDb";
 import MyNotes from "../MyNote/MyNotes";
 
 const AddNote = ({ setList, onClose }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,9 +23,8 @@ const AddNote = ({ setList, onClose }) => {
     setName("");
     setDescription("");
     putDataInLocalDb("lists", newItem);
-    setList(pre => [...pre, newItem])
+    setList((pre) => [...pre, newItem]);
     onClose();
-
   };
 
   return (

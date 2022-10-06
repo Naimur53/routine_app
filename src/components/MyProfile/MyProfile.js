@@ -1,6 +1,6 @@
 import { PhotoCamera } from "@mui/icons-material";
-import { Button, Grid, IconButton, Input } from "@mui/material";
-import React, { useState } from "react";
+import { Button, IconButton } from "@mui/material";
+import React from "react";
 
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import profile from "../../images/profile.png";

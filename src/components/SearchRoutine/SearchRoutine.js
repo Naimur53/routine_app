@@ -1,14 +1,7 @@
 import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Container,
   Grid,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
@@ -18,7 +11,14 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import DemoCard from "./DemoCard/DemoCard";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useCallback } from "react";
+import axios from "axios";
+import { useState } from "react";
 const SearchRoutine = () => {
+  const [allRoutine, setAllRoutine] = useState([])
+  const [showRoutine, setShowRoutine] = useState([])
+  const [getLoading, setGetLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -46,154 +46,72 @@ const SearchRoutine = () => {
       },
     },
   };
-  const informations = [
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "45",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "78352",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "445",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "44512",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "4843215",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "41264",
-    },
-  ]; // F6F4FF
+
+  const onSubmit = data => {
+    console.log(data)
+  }
+  const debounce = (cb, delay) => {
+    const timeCall = setTimeout(cb, delay);
+    const clear = () => { clearInterval(timeCall) }
+    return { clear }
+  }
+
+  //use debounce
+  let institute = watch('institute')
+  let department = watch('department') || ''
+  let semester = watch('semester') || ''
+  let section = watch('section') || ''
+
+  // filter
+  console.log({ department, section, semester })
+  useEffect(() => {
+
+    const filters = allRoutine.filter(single => {
+      console.log()
+      return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
+    })
+    setShowRoutine(filters)
+
+  }, [allRoutine, department, section, semester,])
+  const fetchData = useCallback(() => {
+    console.log('ami data ante', institute)
+    setGetLoading(true)
+    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`)
+      .then(res => {
+        setAllRoutine(res.data)
+        setGetLoading(false)
+      })
+  }, [institute,])
+
+  useEffect(() => {
+    const { clear } = debounce(fetchData, 300)
+    return () => {
+      clear()
+    }
+  }, [institute, fetchData,])
+
+
   return (
     <MainLayout>
-      <form className="ml-3 flex justify-center">
+      <form onSubmit={handleSubmit(onSubmit)} className="ml-3 flex justify-center">
         <Grid container spacing={2}>
-          <Grid item xs={12} lg={3} md={6}>
+          <Grid item xs={12} lg={12} md={6}>
             {" "}
             <div className="flex w-full justify-center">
-              <div className="relative w-full ">
+              <div className="flex border  border-gray-300 justify-between pr-4  rounded-full bg-light-purple items-center w-full ">
                 <input
-                  type="search"
-                  id="default-search"
-                  className="block p-4  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      "
-                  placeholder="Search Your Routine..."
-                  required
+                  type="text"
+                  id="defasult-search"
+                  className="block pl-4  rounded-tl-full rounded-bl-full focus:border-0 focus:outline-none bg-transparent   w-full py-3 placeholder:text-medium-purple  text- sm text-black         "
+                  placeholder="Enter Your Institute Name..."
+
+                  {...register('institute', { required: true })}
                 />
 
                 <button
                   onClick={handleSearch}
                   type="submit"
-                  className="text-white absolute  right-2   bottom-2.5 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg- gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                  className="text-dark-purple  font-medium rounded-full text-sm p-1 "
                 >
                   <svg
                     aria-hidden="true"
@@ -237,8 +155,8 @@ const SearchRoutine = () => {
               <InputLabel id="demo-multiple-name-label">Semester</InputLabel>
               <Select
                 labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                value={watch("semester")}
+                id="demo-multiple-named"
+                value={watch("semester") || ''}
                 {...register("semester", { required: true })}
                 MenuProps={MenuProps}
               >
@@ -261,8 +179,8 @@ const SearchRoutine = () => {
               <InputLabel id="demo-multiple-name-label">section</InputLabel>
               <Select
                 labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                value={watch("section")}
+                id="demo-multiple-namesx"
+                value={watch("section") || ''}
                 {...register("section", { required: true })}
                 MenuProps={MenuProps}
               >
@@ -280,14 +198,18 @@ const SearchRoutine = () => {
               </span>
             </div>
           </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <button type="button" onClick={() => reset()}>Reset</button>
+          </Grid>
+
         </Grid>
       </form>
       <Grid
         container
         spacing={4}
-        sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
+        sx={{ marginTop: "20px", }}
       >
-        {informations.map((single, i) => (
+        {showRoutine.map((single, i) => (
           <Grid item lg={3} md={6} xs={12}>
             <DemoCard item={single} i={i} updateAble={false}></DemoCard>
           </Grid>

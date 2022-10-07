@@ -16,6 +16,12 @@ import Checkout from "./components/SearchRoutine/Checkout/Checkout";
 import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyProfile from "./components/MyProfile/MyProfile";
 import RequestForRoutine from "./components/RequestForRoutie/RequestForRoutine";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import useFirebase from "./Hook/useFirebase";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUserFromDB, setLoading, setUser } from "./ManageState/DataSlice/dataSlice";
+import { getIdToken, onAuthStateChanged } from "firebase/auth";
 
 const theme = createTheme({
   palette: {
@@ -30,6 +36,10 @@ const theme = createTheme({
   },
 });
 function App() {
+  const dispatch = useDispatch()
+
+  const { auth } = useFirebase({ observer: true })
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -41,14 +51,14 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
 
-          <Route path="/searchRoutine" element={<SearchRoutine />}></Route>
           <Route path="/myNotes" element={<MyNotes />}></Route>
-          <Route path="/myRoutine" element={<MyRoutine />}></Route>
-          <Route path="/createRoutine" element={<CreateRoutine />}></Route>
           <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
-          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/searchRoutine" element={<PrivateRoute><SearchRoutine /></PrivateRoute>}></Route>
+          <Route path="/myRoutine" element={<PrivateRoute><MyRoutine /></PrivateRoute>}></Route>
+          <Route path="/createRoutine" element={<PrivateRoute><CreateRoutine /></PrivateRoute>}></Route>
+          <Route path="/checkout/:id" element={<Checkout />}></Route>
           <Route path="/myProfile" element={<MyProfile />}></Route>
-          <Route path="/requestForRoutine" element={<RequestForRoutine />}></Route>
+          <Route path="/requestForRoutine" element={<PrivateRoute><RequestForRoutine /></PrivateRoute>}></Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

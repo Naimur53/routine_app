@@ -9,7 +9,7 @@ const Logo = () => {
       <Typography
         variant="h6"
         noWrap
-        component="a"
+        component="span"
         href="/"
         sx={{
           mr: 2,

@@ -1,3 +1,4 @@
+import { getDataFromLocalDb } from "./localDb";
 
 // found error and generate data;
 const checkTypeString = (data, keys) => {
@@ -13,24 +14,8 @@ const checkTypeString = (data, keys) => {
     })
     return { data: newData, error }
 }
-const getRoutineDataFromLocalDb = () => {
-    const data = {
-        classes: [
-            {
-                subjectName: 21312,
-                subjectCode: 23232,
-                day: 23232,
-                roomNumber: 4343,
-                startTime: 324,
-                endTime: "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)"
-            }
-        ],
-        institute: 121212,
-        department: 1212,
-        semester: "1st",
-        shift: "dfdff",
-        section: "dfd"
-    }
+const getRoutineDataFromLocalDb = (index) => {
+    const data = getDataFromLocalDb('routines')[index]
     return new Promise((resolve, reject) => {
         let creatingData = {}
         let basicInfoKey = ["institute", "department", "semester", "shift", "section"]
@@ -41,7 +26,7 @@ const getRoutineDataFromLocalDb = () => {
             let newClasses = [];
             let singleClassError = {}
             const classKey = [
-                "subjectName", "subjectCode", "teacherName", "day", "roomNumber", "startTime"]
+                "subjectName", "subjectCode", "teacherName", "day", "roomNumber", "startTime", "endTime"]
             data.classes.forEach(single => {
                 const { data: singleClass, error } = checkTypeString(single, classKey);
                 newClasses = [...newClasses, singleClass]

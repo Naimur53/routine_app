@@ -9,12 +9,16 @@ import { useForm } from "react-hook-form";
 import Class from "./Class/Class";
 
 import Info from "./info/Info";
-import { Container, Step, StepLabel, Stepper } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { CircularProgress, Container, Step, StepLabel, Stepper } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import PreviewRoutine from "./PreviewRoutine/PreviewRoutine";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
+import axios from "axios";
+import { allData } from "../../ManageState/DataSlice/dataSlice";
 const CreateRoutine = () => {
+  const { user } = useSelector(allData)
+  const [postLoading, setPostLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -26,7 +30,7 @@ const CreateRoutine = () => {
   } = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
   const [mainData, setMainData] = useState({ classes: [] });
-
+  console.log(user._id)
   const onSubmit = ({
     subjectName,
     subjectCode,
@@ -56,6 +60,27 @@ const CreateRoutine = () => {
     }
     console.log({ mainData });
   };
+  // published data to db 633e664ed10c105498fab409
+  const publishData = () => {
+    if (user?._id) {
+      setPostLoading(true)
+      axios.post('http://localhost:5001/routine', { ...mainData, creator: user._id })
+        .then(res => {
+          setPostLoading(false);
+          alert('successfully done');
+          setActiveStep(0)
+          reset();
+          setMainData({ classes: [] })
+        })
+        .catch(err => {
+          alert('error wihile pos')
+          setPostLoading(false);
+
+        })
+    } else {
+      alert('user id not found ')
+    }
+  }
 
   //----------------
   const handleNext = () => {
@@ -80,16 +105,19 @@ const CreateRoutine = () => {
         });
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      } else {
-        onSubmit(<div className=""></div>);
       }
+
       return;
     }
     if (activeStep === 1 && !mainData.classes.length) {
       return alert("please add class to go another step");
     }
+    if (activeStep === 2) {
+      publishData()
+    } else {
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
   const steps = [
     {
@@ -138,7 +166,7 @@ const CreateRoutine = () => {
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box className="md:custom_height flex flex-col justify-between ">
+        <Box className="md:custom_height flex flex-col justify-between relative">
           <Box className="pt-1 ">
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((ele, i) => (
@@ -158,15 +186,23 @@ const CreateRoutine = () => {
               activeStep={activeStep}
               sx={{ mt: 2 }}
               nextButton={
-                <Button
+
+                postLoading ? <Button
+                  size="small"
+                  variant="contained"
+                  type={"button"}
+                >
+                  loading
+                </Button> : <Button
                   size="small"
                   variant="contained"
                   onClick={handleNext}
-                  disabled={activeStep === maxSteps - 1}
+                  disabled={activeStep === maxSteps}
                   type={activeStep === 0 ? "submit" : "button"}
                 >
-                  Next
+                  {activeStep === 2 ? 'Publish' : 'Next'}
                 </Button>
+
               }
               backButton={
                 <Button
@@ -180,6 +216,11 @@ const CreateRoutine = () => {
               }
             ></MobileStepper>
           </div>
+          {
+            postLoading ? <div className="absolute inset-0 flex justify-center  items-center backdrop-blur-[2px] ">
+              <CircularProgress></CircularProgress>
+            </div> : <></>
+          }
         </Box>
       </form>
     </MainLayout>

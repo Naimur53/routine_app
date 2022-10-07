@@ -1,13 +1,22 @@
+import { CircularProgress } from "@mui/material";
 import React from "react";
 
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
 import useFirebase from "../../Hook/useFirebase";
 import signImg from "../../images/log.png";
+import { allData } from "../../ManageState/DataSlice/dataSlice";
+import { useNavigate } from "react-router-dom";
+
 
 import PasswordTextField from "../ShareComponents/PasswordTextField/PasswordTextField";
 const SignUp = () => {
-  const { handleRegister } = useFirebase()
+  const { handleRegister, authError } = useFirebase({ observer: false })
+  const { loading } = useSelector(allData)
+  let navigate = useNavigate();
+  const location = useLocation()
+
   const {
     register,
     watch,
@@ -16,7 +25,7 @@ const SignUp = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    handleRegister(data)
+    handleRegister({ ...data, navigate, location })
   };
   return (
     <div>
@@ -54,11 +63,19 @@ const SignUp = () => {
               name="password2"
             ></PasswordTextField>
             {errors.password2 && <div>{errors.password2.message}</div>}
-            <input
-              className="my-3 cursor-pointer transition-all hover:shadow-lg text-lg py-2 font-bold px-6 border-gray-300 text-black border  rounded-full"
-              type="submit"
-              value="Create Account"
-            />
+            {
+              loading ? <div className="w-full flex justify-center pt-4">
+                <CircularProgress color="primary"></CircularProgress>
+              </div> : <input
+                className="my-3 cursor-pointer transition-all hover:shadow-lg text-lg py-2 font-bold px-6 border-gray-300 text-black border  rounded-full"
+                type="submit"
+                value="Create Account"
+              />
+            }
+
+            <div>
+              <p className="text-red-900 px-2">{authError}</p>
+            </div>
             <NavLink to="/login" className="text-center text-primary py-2">
               Already have account?
             </NavLink>

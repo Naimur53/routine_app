@@ -16,10 +16,14 @@ import { NavLink } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import Logo from "../Logo/Logo";
 import DashboardTab from "../DashboardTab/DashboardTab";
-const pages = ["login"];
+import { useSelector } from "react-redux";
+import { allData } from "../../../ManageState/DataSlice/dataSlice";
+import useFirebase from "../../../Hook/useFirebase";
+// const pages = ["login"];
 const TopBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(false);
-
+  const { user, loading } = useSelector(allData);
+  const { logOut } = useFirebase({ observer: false })
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);
   };
@@ -42,17 +46,22 @@ const TopBar = () => {
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
             >
               <div className="flex">
-                {pages.map((page) => (
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    component={NavLink}
-                    to={"/" + page}
+                {
+                  user.email ? <Button
+                    onClick={logOut}
                     sx={{ my: 2, color: "Black", display: "block" }}
                   >
-                    {page}
-                  </Button>
-                ))}
+                    logOut
+                  </Button> :
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      component={NavLink}
+                      to={"/login"}
+                      sx={{ my: 2, color: "Black", display: "block" }}
+                    >
+                      login
+                    </Button>
+                }
               </div>
             </Box>
             <Box

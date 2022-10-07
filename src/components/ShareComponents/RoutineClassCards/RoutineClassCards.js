@@ -7,7 +7,7 @@ const RoutineClassCards = ({ data, day }) => {
     return (
         <div>
             {
-                data.filter(single => single.day === day).map((single, i) => <RoutineClassCard {...single} i={i}></RoutineClassCard>)
+                data.filter(single => single.day === day).map((single, i) => <RoutineClassCard key={i} {...single} i={i}></RoutineClassCard>)
             }
         </div>
     );

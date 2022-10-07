@@ -22,16 +22,29 @@ const getDataFromLocalDb = (key) => {
     return value;
 };
 // put data
-const putDataInLocalDb = (key, data) => {
+const putDataInLocalDb = (key, data, reverse) => {
     const beforeData = getDataFromLocalDb(key);
     if (data) {
-        const newData = [...beforeData, data];
+        const newData = reverse ? [data, ...beforeData,] : [...beforeData, data];
         localStorage.setItem(key, stringifyData(newData));
         return newData;
     }
     console.error("I cannot keep data on local db");
 };
+const saveRoutine = (data) => {
+    const beforeSavedData = getDataFromLocalDb("routines")
+    const exist = beforeSavedData.find(single => single._id === data._id);
+    if (!data?._id) {
+        return { response: 'Something is wrong while save data', status: 400 }
+    }
+    if (!exist) {
+        putDataInLocalDb('routines', data, true)
+        return { response: 'successfully save', status: 200 }
+    }
+    return { response: 'This routine already exist ', status: 400 }
 
+
+}
 const a = {
     classes: [
         {
@@ -55,4 +68,4 @@ const updateLocalDb = (key, updatedData) => {
     localStorage.setItem(key, JSON.stringify(updatedData));
 };
 
-export { putDataInLocalDb, getDataFromLocalDb, updateLocalDb }; 
+export { putDataInLocalDb, getDataFromLocalDb, updateLocalDb, saveRoutine }; 

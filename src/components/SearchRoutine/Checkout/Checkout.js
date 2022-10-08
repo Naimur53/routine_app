@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Skeleton } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,35 +8,111 @@ import MainLayout from "../../ShareComponents/MainLayout/MainLayout";
 
 const Checkout = () => {
   const { id } = useParams();
-  const [data, setData] = useState({ classes: [] })
-  const [getLoading, setGetLoading] = useState(true)
+  const [data, setData] = useState({ classes: [] });
+  const [getLoading, setGetLoading] = useState(true);
   const [save, setSave] = useState(false);
 
   useEffect(() => {
     setGetLoading(true);
-    axios.get(`http://localhost:5001/routine?id=${id}`)
-      .then(res => {
-        setGetLoading(false);
-        setData(res.data)
-      })
-  }, [id])
+    axios.get(`http://localhost:5001/routine?id=${id}`).then((res) => {
+      setGetLoading(false);
+      setData(res.data);
+    });
+  }, [id]);
+  console.log(data, "from checkout");
   const handleSave = () => {
-    console.log(data)
-    setSave(true)
-    const { response, status } = saveRoutine(data)
-    alert(response, status)
-  }
+    console.log(data);
+    setSave(true);
+    const { response, status } = saveRoutine(data);
+    alert(response, status);
+  };
   return (
     <MainLayout>
-      <h1> Routine checkout show info and save method to show on home  soon {id}</h1>
-      {
-        data?._id && <button disabled={save} className="text-lg border  p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300" onClick={handleSave}>Save Routine</button>
-      }
+      <div className="border p-2">
+        <div className="text-center border shadow-md m-2 p-2 rounded-md">
+          {getLoading ? (
+            <>
+              {" "}
+              <Skeleton
+                variant="text"
+                sx={{ mx: "auto" }}
+                width="20%"
+                height={40}
+              />
+            </>
+          ) : (
+            <>
+              {" "}
+              <h1 className="text-2xl font-bold"> {data.institute}</h1>
+            </>
+          )}
 
-      {
-        !getLoading ? <HomeClassShow data={data}></HomeClassShow> : <CircularProgress></CircularProgress>
-      }
+          <div className="text-lg">
+            {getLoading ? (
+              <>
+                <Skeleton
+                  variant="text"
+                  sx={{ mx: "auto" }}
+                  width="20%"
+                  height={20}
+                />
+                <Skeleton
+                  variant="text"
+                  sx={{ mx: "auto" }}
+                  width="20%"
+                  height={20}
+                />
 
+                <Skeleton
+                  variant="text"
+                  sx={{ mx: "auto" }}
+                  width="20%"
+                  height={20}
+                />
+                <Skeleton
+                  variant="text"
+                  sx={{ mx: "auto" }}
+                  width="10%"
+                  height={40}
+                />
+              </>
+            ) : (
+              <>
+                <h1>subject: {data.department}</h1>
+                <h1> semester: {data.semester}</h1>
+                <h1> shift: {data.shift}</h1>
+                <h1> section: {data.section}</h1>
+                <div className="">
+                  {" "}
+                  {data?._id && (
+                    <Button
+                      variant="outlined"
+                      disabled={save}
+                      className="text-lg border  p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
+                      onClick={handleSave}
+                    >
+                      Save Routine
+                    </Button>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        {getLoading ? (
+          <>
+            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
+            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
+            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
+            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
+            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
+          </>
+        ) : (
+          <>
+            <HomeClassShow data={data}></HomeClassShow>
+          </>
+        )}
+      </div>
     </MainLayout>
   );
 };

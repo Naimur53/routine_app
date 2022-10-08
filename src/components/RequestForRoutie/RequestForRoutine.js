@@ -3,9 +3,9 @@ import { Button, TextareaAutosize } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
-import send from "../../images/send.jpg";
-import complate from "../../images/complate.webp";
-import right from "../../images/right.jpg";
+import banner from "../../images/banner.png";
+
+import SendIcon from "@mui/icons-material/Send";
 const RequestForRoutine = () => {
   const onSubmit = (data) => console.log(data);
 
@@ -19,7 +19,7 @@ const RequestForRoutine = () => {
   return (
     <MainLayout>
       <h1 className="text-center font-bold text-4xl">Request for a routine</h1>
-      <div className="flex xs-d-none">
+      <div className="lg:flex xs-d-none">
         <div className="border p-3 shadow-lg rounded-lg">
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className="text-center m-2 font-serif from-neutral-500 text-lg">
@@ -50,14 +50,12 @@ const RequestForRoutine = () => {
             ></textarea>
             <br />
             <Button className="mt-5" variant="outlined" type="submit">
-              Request send
+              Send request <SendIcon className="ml-2"></SendIcon>
             </Button>
           </form>
         </div>
-        <div className="flex">
-          <img className="img-fluid h-50" src={send} alt="" />
-          <img className="img-fluid h-40 items-center" src={right} alt="" />
-          <img className="img-fluid h-50 " src={complate} alt="" />
+        <div className=" ">
+          <img className="img-fluid h-50" src={banner} alt="" />
         </div>
       </div>
     </MainLayout>

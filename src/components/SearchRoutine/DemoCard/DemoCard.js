@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import "./DemoCard.css";
 import profile from "../../../images/profile.png";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { Avatar, Button, IconButton, Skeleton, Tooltip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import textConversion from "./../../../utilities/textConversion";
@@ -41,11 +41,20 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i }) => {
+const DemoCard = ({ item, updateAble, i, getLoeading }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
   const location = useLocation();
 
-  const { institute, department, semester, section, shift, classes, creator, _id } = item;
+  const {
+    institute,
+    department,
+    semester,
+    section,
+    shift,
+    classes,
+    creator,
+    _id,
+  } = item;
   const handleDelete = () => {
     window.confirm("You want to deleted?");
   };
@@ -71,7 +80,17 @@ const DemoCard = ({ item, updateAble, i }) => {
           <div className="content   ">
             <div className="mb-4 flex  gap-3">
               <div className="">
-                <img className="w-[50px]" src={img} alt="" />
+                {img ? (
+                  <>
+                    <img className="w-[50px]" src={img} alt="" />
+                  </>
+                ) : (
+                  <>
+                    <Skeleton variant="circular">
+                      <Avatar />
+                    </Skeleton>
+                  </>
+                )}
               </div>
               <div className="">
                 <Tooltip title={institute}>
@@ -93,7 +112,11 @@ const DemoCard = ({ item, updateAble, i }) => {
               <p className={`text-sm ${contentStyle}`}> Shift:{shift} </p>
             </div>
             <div className=" flex justify-between  mt-3 items-center ">
-              <img className=" rounded-full w-6 mr-2 " src={creator?.photoURL} alt="creator" />
+              <img
+                className=" rounded-full w-6 mr-2 "
+                src={creator?.photoURL}
+                alt="creator"
+              />
 
               <div className="flex-1 ">
                 <h3 className="text-xs">{creator?.displayName}</h3>
@@ -120,7 +143,11 @@ const DemoCard = ({ item, updateAble, i }) => {
                 <p className="text-sm">Published Date {date}</p>
               </div>
               <div className="flex justify-between ">
-                <p className="text-sm"> Total Class {typeof classes === 'number' ? classes : classes?.length}</p>
+                <p className="text-sm">
+                  {" "}
+                  Total Class{" "}
+                  {typeof classes === "number" ? classes : classes?.length}
+                </p>
                 <p className="text-sm"> Total User </p>
               </div>
 

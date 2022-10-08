@@ -1,8 +1,4 @@
-import {
-  Grid,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button, Grid, Select, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -16,8 +12,8 @@ import { useCallback } from "react";
 import axios from "axios";
 import { useState } from "react";
 const SearchRoutine = () => {
-  const [allRoutine, setAllRoutine] = useState([])
-  const [showRoutine, setShowRoutine] = useState([])
+  const [allRoutine, setAllRoutine] = useState([]);
+  const [showRoutine, setShowRoutine] = useState([]);
   const [getLoading, setGetLoading] = useState(false);
   const {
     register,
@@ -47,53 +43,62 @@ const SearchRoutine = () => {
     },
   };
 
-  const onSubmit = data => {
-    console.log(data)
-  }
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
-    const clear = () => { clearInterval(timeCall) }
-    return { clear }
-  }
+    const clear = () => {
+      clearInterval(timeCall);
+    };
+    return { clear };
+  };
 
   //use debounce
-  let institute = watch('institute')
-  let department = watch('department') || ''
-  let semester = watch('semester') || ''
-  let section = watch('section') || ''
+  let institute = watch("institute");
+  let department = watch("department") || "";
+  let semester = watch("semester") || "";
+  let section = watch("section") || "";
 
   // filter
-  console.log({ department, section, semester })
+  console.log({ department, section, semester });
   useEffect(() => {
-
-    const filters = allRoutine.filter(single => {
-      console.log()
-      return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
-    })
-    setShowRoutine(filters)
-
-  }, [allRoutine, department, section, semester,])
+    const filters = allRoutine.filter((single) => {
+      console.log();
+      return (
+        single.department.toLowerCase().includes(department.toLowerCase()) &&
+        single.section.toLowerCase().includes(section.toLowerCase()) &&
+        single.semester.toLowerCase().includes(semester.toLowerCase())
+      );
+    });
+    setShowRoutine(filters);
+  }, [allRoutine, department, section, semester]);
   const fetchData = useCallback(() => {
-    console.log('ami data ante', institute)
-    setGetLoading(true)
-    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`)
-      .then(res => {
-        setAllRoutine(res.data)
-        setGetLoading(false)
-      })
-  }, [institute,])
+    console.log("ami data ante", institute);
+    setGetLoading(true);
+    axios
+      .get(
+        `http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`
+      )
+      .then((res) => {
+        setAllRoutine(res.data);
+        setGetLoading(false);
+      });
+  }, [institute]);
 
   useEffect(() => {
-    const { clear } = debounce(fetchData, 300)
+    const { clear } = debounce(fetchData, 300);
     return () => {
-      clear()
-    }
-  }, [institute, fetchData,])
-
+      clear();
+    };
+  }, [institute, fetchData]);
 
   return (
     <MainLayout>
-      <form onSubmit={handleSubmit(onSubmit)} className="ml-3 flex justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="ml-3 flex justify-center"
+      >
         <Grid container spacing={2}>
           <Grid item xs={12} lg={12} md={6}>
             {" "}
@@ -104,8 +109,7 @@ const SearchRoutine = () => {
                   id="defasult-search"
                   className="block pl-4  rounded-tl-full rounded-bl-full focus:border-0 focus:outline-none bg-transparent   w-full py-3 placeholder:text-medium-purple  text- sm text-black         "
                   placeholder="Enter Your Institute Name..."
-
-                  {...register('institute', { required: true })}
+                  {...register("institute", { required: true })}
                 />
 
                 <button
@@ -156,7 +160,7 @@ const SearchRoutine = () => {
               <Select
                 labelId="demo-multiple-name-label"
                 id="demo-multiple-named"
-                value={watch("semester") || ''}
+                value={watch("semester") || ""}
                 {...register("semester", { required: true })}
                 MenuProps={MenuProps}
               >
@@ -180,7 +184,7 @@ const SearchRoutine = () => {
               <Select
                 labelId="demo-multiple-name-label"
                 id="demo-multiple-namesx"
-                value={watch("section") || ''}
+                value={watch("section") || ""}
                 {...register("section", { required: true })}
                 MenuProps={MenuProps}
               >
@@ -199,16 +203,18 @@ const SearchRoutine = () => {
             </div>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-            <button type="button" onClick={() => reset()}>Reset</button>
+            <Button
+              sx={{ width: "100%" }}
+              variant="contained"
+              type="button"
+              onClick={() => reset()}
+            >
+              Reset
+            </Button>
           </Grid>
-
         </Grid>
       </form>
-      <Grid
-        container
-        spacing={4}
-        sx={{ marginTop: "20px", }}
-      >
+      <Grid container spacing={4} sx={{ marginTop: "20px" }}>
         {showRoutine.map((single, i) => (
           <Grid item lg={3} md={6} xs={12}>
             <DemoCard item={single} i={i} updateAble={false}></DemoCard>

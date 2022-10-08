@@ -12,20 +12,23 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import MuiDateTimePicker from "./MuiDateTimePicker";
 import { useState } from "react";
-import { useEffect } from "react";
 
-const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, setMainData }) => {
-  // const [selectedTime, setSelectedTime] = useState(null) 
+const Class = ({
+  mainData,
+  trigger,
+  register,
+  errors,
+  watch,
+  setValue,
+  reset,
+  setMainData,
+}) => {
   const [defaultValue, setDefaultValue] = useState({
     subjectCode: "",
     subjectName: "",
     teacherName: "",
   });
-  // console.log({
-  //   selectedTime: selectedTime && selectedTime.toLocaleTimeString(),
-  // })
-  //
-  // handle Day input
+
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -47,7 +50,7 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
     "Friday",
   ];
   const addSameClass = async () => {
-    const check = await trigger(undefined, { shouldFocus: true })
+    const check = await trigger(undefined, { shouldFocus: true });
     if (check) {
       const {
         subjectName,
@@ -57,7 +60,7 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
         startTime,
         endTime,
         roomNumber,
-      } = watch()
+      } = watch();
       const data = {
         subjectName,
         subjectCode,
@@ -73,18 +76,11 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
           classes: [...before.classes, data],
         };
       });
-      setValue('day', '')
-      setValue('startTime', null)
-      setValue('endTime', null)
+      setValue("day", "");
+      setValue("startTime", null);
+      setValue("endTime", null);
     }
-
-  }
-
-  // const handleChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  // };
+  };
 
   console.log({ defaultValue });
   return (
@@ -147,7 +143,6 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
         <Grid item xs={12} md={6}>
           <TextField
             {...register("roomNumber", { required: true })}
-
             label="Room Number"
             type="name"
             variant="standard"
@@ -191,7 +186,6 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
               {errors.day && <p>*day is required</p>}{" "}
             </span>
           </div>
-
         </Grid>
         <Grid item xs={6} md={6}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -218,13 +212,18 @@ const Class = ({ mainData, trigger, register, errors, watch, setValue, reset, se
           </LocalizationProvider>
         </Grid>
         <Grid item xs={12} md={12}>
-          <h2 className="  mb-3"> Total added class {mainData.classes?.length}</h2>
+          <h2 className="  mb-3">
+            {" "}
+            Total added class {mainData.classes?.length}
+          </h2>
           <div className="flex gap-4 md:flex-row flex-col">
-
-            <Button type="submit" variant="outlined"   >Add another class</Button>
-            <Button type="button" onClick={addSameClass} variant="outlined" >Add another day on same class</Button>
+            <Button type="submit" variant="outlined">
+              Add another class
+            </Button>
+            <Button type="button" onClick={addSameClass} variant="outlined">
+              Add another day on same class
+            </Button>
           </div>
-
         </Grid>
       </Grid>
     </div>

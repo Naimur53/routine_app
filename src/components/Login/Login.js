@@ -14,7 +14,7 @@ import { CircularProgress } from "@mui/material";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { loading } = useSelector(allData)
+  const { loading } = useSelector(allData);
   const { loginUser, authError } = useFirebase({ observer: false });
 
   const {
@@ -25,8 +25,7 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    loginUser({ ...data, location, navigate })
-
+    loginUser({ ...data, location, navigate });
   };
   return (
     <div className="custom_height flex items-center justify-center flex-col ">
@@ -51,15 +50,17 @@ const Login = () => {
 
           {errors.password && <div>password must be 6 length</div>}
           <div>
-            {
-              loading ? <div className="w-full flex justify-center">
+            {loading ? (
+              <div className="w-full flex justify-center">
                 <CircularProgress></CircularProgress>
-              </div> : <input
+              </div>
+            ) : (
+              <input
                 className="my-3 text-lg py-2 font-bold px-6 border border-gary-300 text-black rounded-full cursor-pointer transition-all hover:shadow-md"
                 type="submit"
                 value="Login"
               />
-            }
+            )}
           </div>
           <div>
             <p className="text-red-900">{authError}</p>

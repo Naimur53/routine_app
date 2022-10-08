@@ -25,7 +25,7 @@ const PreviewClasses = ({ classes, errors, watch, setMainData, register, mainDat
                         className='flex lg:flex-col lg:custom_height_preview overflow-y-auto pb-4'
                     >
                         {
-                            week.map((single, i) => <SingleTab handleChange={handleChange} value={selectValue} key={single} i={i} onClick={handleChange} info={{ day: single, totalClass: 10, totalHours: 5.4 }} />)
+                            week.map((single, i) => <SingleTab handleChange={handleChange} classes={mainData.classes} day={single} value={selectValue} key={single} i={i} onClick={handleChange} />)
                         }
                     </Box>
                 </Grid>

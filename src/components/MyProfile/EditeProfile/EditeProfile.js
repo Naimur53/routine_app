@@ -50,7 +50,7 @@ const EditeProfile = () => {
   };
   const { register, handleSubmit, watch, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+
   };
   const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
   const shifts = ["None", "1st", "2nd"];

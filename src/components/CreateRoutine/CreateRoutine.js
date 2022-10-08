@@ -30,7 +30,7 @@ const CreateRoutine = () => {
   } = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
   const [mainData, setMainData] = useState({ classes: [] });
-  console.log(user._id)
+
   const onSubmit = ({
     subjectName,
     subjectCode,
@@ -58,7 +58,7 @@ const CreateRoutine = () => {
       });
       reset();
     }
-    console.log({ mainData });
+
   };
   // published data to db 633e664ed10c105498fab409
   const publishData = () => {
@@ -85,7 +85,7 @@ const CreateRoutine = () => {
   //----------------
   const handleNext = () => {
     if (activeStep === 0) {
-      console.log(watch());
+
       if (
         watch("institute")?.length &&
         watch("department")?.length &&
@@ -162,7 +162,7 @@ const CreateRoutine = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  console.log({ errors });
+
   return (
     <MainLayout>
       <form onSubmit={handleSubmit(onSubmit)}>

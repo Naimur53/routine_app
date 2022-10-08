@@ -20,13 +20,13 @@ code {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: hsla(156, 17%, 94%, 0.662);
+  background: hsl(0, 0%, 100%);
   border-radius: 40px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb:hover {
-  background: #888;
+  background: rgb(225, 225, 225);
   border-radius: 40px;
 }
 
@@ -37,7 +37,7 @@ code {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background:rgba(225, 225, 225, 0.658);
 }
 
 .Mui-active,
@@ -50,14 +50,14 @@ code {
     @apply bg-dark-purple text-white;
   }
 
-  .active_ className_tab {
+  .active_class_tab {
     @apply text-dark-purple bg-gray-50;
   }
 }
 
 @layer base {
   .dashboard_link {
-    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2;
+    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2 hover:bg-gray-200 hover:text-gray-700 transition-all 
   }
 
   .custom_height {

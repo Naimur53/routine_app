@@ -244,13 +244,13 @@ const Home = () => {
 
     getRoutineDataFromLocalDb(0).then(res => {
       setData(res.data)
-      console.log({ res })
+
     })
       .catch(err => {
-        console.log(err)
+
       })
   }, [])
-  console.log({ main: getDataFromLocalDb("lists") })
+
   return (
     <MainLayout>
       <Grid container spacing={2}>

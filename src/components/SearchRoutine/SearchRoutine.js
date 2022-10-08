@@ -29,8 +29,8 @@ const SearchRoutine = () => {
   } = useForm();
   const handleSearch = () => {
     const value = "default-search".value;
-    console.log(value);
-    console.log(watch("searchName"));
+
+
   };
 
   const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
@@ -48,7 +48,7 @@ const SearchRoutine = () => {
   };
 
   const onSubmit = data => {
-    console.log(data)
+
   }
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
@@ -63,18 +63,18 @@ const SearchRoutine = () => {
   let section = watch('section') || ''
 
   // filter
-  console.log({ department, section, semester })
+
   useEffect(() => {
 
     const filters = allRoutine.filter(single => {
-      console.log()
+
       return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
     })
     setShowRoutine(filters)
 
   }, [allRoutine, department, section, semester,])
   const fetchData = useCallback(() => {
-    console.log('ami data ante', institute)
+
     setGetLoading(true)
     axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`)
       .then(res => {

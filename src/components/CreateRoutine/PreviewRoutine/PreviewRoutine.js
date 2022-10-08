@@ -7,7 +7,7 @@ import PreviewClasses from "./smallCompo/PreviewClasses/PreviewClasses";
 const PreviewRoutine = ({ errors, watch, setValue, setMainData, register, mainData, setActiveStep, trigger }) => {
   const { institute, department, semester, section, shift } = mainData;
 
-  console.log({ mainData });
+
 
   return (
     <>

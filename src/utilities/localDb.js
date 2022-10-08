@@ -18,7 +18,7 @@ const getDataFromLocalDb = (key) => {
         localStorage.setItem(key, stringifyData([]));
         return [];
     }
-    console.log({ value });
+
     return value;
 };
 // put data

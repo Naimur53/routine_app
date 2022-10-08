@@ -21,7 +21,7 @@ const Checkout = () => {
       })
   }, [id])
   const handleSave = () => {
-    console.log(data)
+
     setSave(true)
     const { response, status } = saveRoutine(data)
     alert(response, status)

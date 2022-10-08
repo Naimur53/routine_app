@@ -24,7 +24,7 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+
     handleRegister({ ...data, navigate, location })
   };
   return (

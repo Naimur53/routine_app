@@ -82,7 +82,7 @@ const Class = ({
     }
   };
 
-  console.log({ defaultValue });
+
   return (
     <div>
       {/* register your input into the hook by invoking the "register" function */}

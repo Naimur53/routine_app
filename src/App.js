@@ -27,6 +27,7 @@ import {
   setUser,
 } from "./ManageState/DataSlice/dataSlice";
 import { getIdToken, onAuthStateChanged } from "firebase/auth";
+import UpdateRoutine from "./components/UpdateRoutine/UpdateRoutine";
 
 const theme = createTheme({
   palette: {
@@ -84,6 +85,7 @@ function App() {
           ></Route>
           <Route path="/checkout/:id" element={<Checkout />}></Route>
           <Route path="/myProfile" element={<MyProfile />}></Route>
+          <Route path="/update/:id" element={<PrivateRoute><UpdateRoutine /></PrivateRoute>}></Route>
           <Route
             path="/requestForRoutine"
             element={

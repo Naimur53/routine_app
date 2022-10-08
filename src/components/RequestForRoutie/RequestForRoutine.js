@@ -7,7 +7,9 @@ import send from "../../images/send.jpg";
 import complate from "../../images/complate.webp";
 import right from "../../images/right.jpg";
 const RequestForRoutine = () => {
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data)
+  }
 
   const {
     register,

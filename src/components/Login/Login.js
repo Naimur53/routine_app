@@ -8,18 +8,24 @@ import { useForm } from "react-hook-form";
 
 import PasswordTextField from "../ShareComponents/PasswordTextField/PasswordTextField";
 import useFirebase from "../../Hook/useFirebase";
-
+import { useSelector } from "react-redux";
+import { allData } from "../../ManageState/DataSlice/dataSlice";
+import { CircularProgress } from "@mui/material";
 const Login = () => {
   const location = useLocation();
-  const { handleRegister } = useFirebase();
+  const navigate = useNavigate();
+  const { loading } = useSelector(allData);
+  const { loginUser, authError } = useFirebase({ observer: false });
 
   const {
     register,
+    handleSubmit,
 
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    loginUser({ ...data, location, navigate });
   };
   return (
     <div className="custom_height flex items-center justify-center flex-col ">
@@ -27,7 +33,7 @@ const Login = () => {
         <img className="img-fluid" src={loginimg} alt="" />
         <h2 className="font-bold text-xl mb-2">Login</h2>
         <hr className="w-10   border-t-4 rounded-full" />
-        <form className="flex flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           <input
             className="placeholder-gray-500 bg-transparent border border-gray-300 mt-4 px-4 py-2 rounded-full"
             placeholder="Email"
@@ -44,11 +50,20 @@ const Login = () => {
 
           {errors.password && <div>password must be 6 length</div>}
           <div>
-            <input
-              className="my-3 text-lg py-2 font-bold px-6 border border-gary-300 text-black rounded-full cursor-pointer transition-all hover:shadow-md"
-              type="submit"
-              value="Login"
-            />
+            {loading ? (
+              <div className="w-full flex justify-center">
+                <CircularProgress></CircularProgress>
+              </div>
+            ) : (
+              <input
+                className="my-3 text-lg py-2 font-bold px-6 border border-gary-300 text-black rounded-full cursor-pointer transition-all hover:shadow-md"
+                type="submit"
+                value="Login"
+              />
+            )}
+          </div>
+          <div>
+            <p className="text-red-900">{authError}</p>
           </div>
         </form>
         <div className="  flex align-center justify-center ">

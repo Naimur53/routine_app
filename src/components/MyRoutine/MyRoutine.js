@@ -1,9 +1,28 @@
 import { Grid } from "@mui/material";
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { allData } from "../../ManageState/DataSlice/dataSlice";
 import DemoCard from "../SearchRoutine/DemoCard/DemoCard";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 
 const MyRoutine = () => {
+  const [allRoutine, setAllRoutine] = useState([])
+  const [getLoading, setGetLoading] = useState(true);
+  const { user, } = useSelector(allData);
+  useEffect(() => {
+    if (user?._id) {
+      axios.get(`http://localhost:5001/routine?userId=${user?._id}`)
+        .then(res => {
+          setAllRoutine(res.data)
+          setGetLoading(false);
+        })
+    } else {
+      alert('user id not found')
+    }
+  }, [user])
   const informations = [
     {
       classes: [
@@ -136,7 +155,7 @@ const MyRoutine = () => {
     <MainLayout>
       <div className="text-center">
         <h1 className="text-xl font-bold text-ellipsis text-slate-600">
-          My Created Routins
+          My Created Routines
         </h1>
       </div>
       <Grid
@@ -144,7 +163,7 @@ const MyRoutine = () => {
         spacing={4}
         sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
       >
-        {informations.map((single, i) => (
+        {allRoutine.map((single, i) => (
           <Grid item lg={3} md={6} xs={12}>
             <DemoCard item={single} updateAble={true} i={i}></DemoCard>
           </Grid>

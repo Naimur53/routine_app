@@ -44,11 +44,9 @@ function chooseTheme(i) {
 const DemoCard = ({ item, updateAble, i }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
   const location = useLocation();
-  console.log(location.pathname);
 
-  const { institute, department, semester, section, shift } = item;
+  const { institute, department, semester, section, shift, classes, creator, _id } = item;
   const handleDelete = () => {
-    console.log("clicked");
     window.confirm("You want to deleted?");
   };
   const handleCheckout = () => {
@@ -77,7 +75,7 @@ const DemoCard = ({ item, updateAble, i }) => {
               </div>
               <div className="">
                 <Tooltip title={institute}>
-                  <h3 className=" text-lg"> {textConversion(institute, 40)}</h3>
+                  <h3 className=" text-lg"> {textConversion(institute, 25)}</h3>
                 </Tooltip>
                 <div className="flex gap-5">
                   <Tooltip title={department}>
@@ -95,11 +93,11 @@ const DemoCard = ({ item, updateAble, i }) => {
               <p className={`text-sm ${contentStyle}`}> Shift:{shift} </p>
             </div>
             <div className=" flex justify-between  mt-3 items-center ">
-              <img className=" rounded-full w-6 mr-2 " src={profile} alt="" />
+              <img className=" rounded-full w-6 mr-2 " src={creator?.photoURL} alt="creator" />
 
               <div className="flex-1 ">
-                <h3 className="text-xs">Mehedi Hasan</h3>
-                <p className="text-xs">Mehedi@gmail.com</p>
+                <h3 className="text-xs">{creator?.displayName}</h3>
+                <p className="text-xs">{creator?.email}</p>
               </div>
             </div>
           </div>
@@ -122,7 +120,7 @@ const DemoCard = ({ item, updateAble, i }) => {
                 <p className="text-sm">Published Date {date}</p>
               </div>
               <div className="flex justify-between ">
-                <p className="text-sm"> Total Class </p>
+                <p className="text-sm"> Total Class {typeof classes === 'number' ? classes : classes?.length}</p>
                 <p className="text-sm"> Total User </p>
               </div>
 
@@ -139,7 +137,7 @@ const DemoCard = ({ item, updateAble, i }) => {
                     semester={semester}
                     section={section}
                     shift={shift}
-                    to="/checkout"
+                    to={`/checkout/${_id}`}
                   >
                     Checkout
                   </NavLink>

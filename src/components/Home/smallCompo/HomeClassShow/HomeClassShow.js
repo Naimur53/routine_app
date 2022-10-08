@@ -39,8 +39,8 @@ const HomeClassShow = ({ data }) => {
                     <div className='custom_height overflow-y-auto'>
 
                         {
-                            week.map((single, i) => <TabPanel key={single} value={value} index={i}>
-                                <RoutineClassCards day={single} data={data}></RoutineClassCards>
+                            week.map((single, i) => <TabPanel key={i} value={value} index={i}>
+                                <RoutineClassCards day={single} data={data.classes}></RoutineClassCards>
                             </TabPanel>)
                         }
                     </div>

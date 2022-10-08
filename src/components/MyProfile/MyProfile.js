@@ -22,9 +22,9 @@ const MyProfile = () => {
   return (
     <MainLayout>
       <div className="container lg:w-5/6 xl:w-2/7 sm:w-full md:w-2/3    bg-white  shadow-lg    transform   duration-200 easy-in-out">
-        <div className="lg:flex  ">
+        <div className="lg:flex">
           <div className="flex-auto lg:w-52">
-            <div className="   h-32 overflow-hidden">
+            <div className="h-32 overflow-hidden">
               <img className="w-full" src={profilebg} alt="" />
               <AddAPhotoIcon className="bg-red-500"></AddAPhotoIcon>
             </div>

@@ -1,5 +1,5 @@
 import { PhotoCamera } from "@mui/icons-material";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Tooltip } from "@mui/material";
 import React from "react";
 
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
@@ -15,7 +15,10 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import PhoneIcon from "@mui/icons-material/Phone";
+import textConversion from "../../utilities/textConversion";
 const MyProfile = () => {
+  const institute = "Brahmnbaria Polytechnic Institute";
+  const department = "Computer Secience And Enginnering";
   return (
     <MainLayout>
       <div className="container lg:w-5/6 xl:w-2/7 sm:w-full md:w-2/3    bg-white  shadow-lg    transform   duration-200 easy-in-out">
@@ -73,14 +76,20 @@ const MyProfile = () => {
             </h1>
             <div className="flex">
               <SchoolIcon className="m-2 text-gray-400 "></SchoolIcon>
-
-              <p className="text-gray-400 text-lg mt-2 "> Study at BBPI</p>
+              <Tooltip title={institute}>
+                <p className="text-gray-400 text-lg mt-2 ">
+                  {" "}
+                  Study at {textConversion(institute, 25)}{" "}
+                </p>
+              </Tooltip>
             </div>
             <div className="flex">
               <SubjectIcon className="m-2 text-gray-400 "></SubjectIcon>
-              <p className="text-gray-400 text-lg mt-2 ">
-                Department : Computer
-              </p>
+              <Tooltip title={department}>
+                <p className="text-gray-400 text-lg mt-2 ">
+                  Department: {textConversion(department, 25)}
+                </p>
+              </Tooltip>
             </div>
             <div className="flex">
               <EventSeatIcon className="m-2 text-gray-400 "></EventSeatIcon>

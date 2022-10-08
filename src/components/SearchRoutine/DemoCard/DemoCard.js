@@ -2,24 +2,11 @@ import React, { useState } from "react";
 // import "./DemoCard.css";
 import profile from "../../../images/profile.png";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Container,
-  Grid,
-  IconButton,
-  Select,
-  TextField,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Button, IconButton, Tooltip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import convertToHourMinute from "../../../utilities/ConvertTime";
+
 import textConversion from "./../../../utilities/textConversion";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function chooseTheme(i) {
   const theme = [
@@ -68,8 +55,9 @@ const DemoCard = ({ item, updateAble, i }) => {
     console.log("click in checkout");
   };
   const current = new Date();
-  const date = `${current.getDate()}/${current.getMonth() + 1
-    }/${current.getFullYear()}`;
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
   const [open, setOpen] = useState(false);
   return (
     <div className="card-container w-full   ">
@@ -118,8 +106,9 @@ const DemoCard = ({ item, updateAble, i }) => {
         </div>
 
         <div
-          className={`details_card_wrap  transition-all absolute  left-0 right-0   w-full ${open ? "top-0" : "top-[158px]"
-            }`}
+          className={`details_card_wrap  transition-all absolute  left-0 right-0   w-full ${
+            open ? "top-0" : "top-[158px]"
+          }`}
         >
           <div className="h-full flex flex-col justify-between border  drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
             <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">

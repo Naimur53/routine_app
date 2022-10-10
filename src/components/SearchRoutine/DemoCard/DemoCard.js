@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import textConversion from "./../../../utilities/textConversion";
 import { NavLink, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function chooseTheme(i) {
   const theme = [
@@ -41,19 +42,22 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i }) => {
+const DemoCard = ({ item, updateAble, i, deleteAble, handleDelete }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
-  const location = useLocation();
 
-  const { institute, department, semester, section, shift, classes, creator, _id, handleDelete } = item;
+
+  const { institute, department, semester, section, shift, classes, creator, _id, } = item;
+
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth() + 1
     }/${current.getFullYear()}`;
+
   const [open, setOpen] = useState(false);
+
   return (
     <div className="card-container w-full   ">
       <div
-        onClick={() => {
+        onClick={(e) => {
           setOpen(!open);
         }}
         className="w-full h-[200px]  relative  n overflow-hidden"
@@ -134,8 +138,7 @@ const DemoCard = ({ item, updateAble, i }) => {
                   <>
                     <IconButton
                       aria-label="delete"
-                      onClick={handleDelete}
-                      className=""
+                      onClick={() => handleDelete(_id)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -147,9 +150,16 @@ const DemoCard = ({ item, updateAble, i }) => {
                       </Tooltip>
                     </NavLink>
                   </>
-                ) : (
-                  <></>
-                )}
+                ) : deleteAble ? <IconButton
+                  aria-label="delete"
+                  onClick={(e) => {
+                    handleDelete(_id)
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton> : <></>
+
+                }
               </div>
             </div>
           </div>

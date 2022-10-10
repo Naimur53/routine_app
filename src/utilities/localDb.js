@@ -31,6 +31,12 @@ const putDataInLocalDb = (key, data, reverse) => {
     }
     console.error("I cannot keep data on local db");
 };
+const deleteOneRoutine = (_id) => {
+    const beforeData = getDataFromLocalDb('routines');
+    const filter = beforeData.filter(single => single._id !== _id);
+    localStorage.setItem('routines', stringifyData(filter));
+
+}
 const saveRoutine = (data) => {
     const beforeSavedData = getDataFromLocalDb("routines")
     const exist = beforeSavedData.find(single => single._id === data._id);
@@ -68,4 +74,4 @@ const updateLocalDb = (key, updatedData) => {
     localStorage.setItem(key, JSON.stringify(updatedData));
 };
 
-export { putDataInLocalDb, getDataFromLocalDb, updateLocalDb, saveRoutine }; 
+export { putDataInLocalDb, getDataFromLocalDb, updateLocalDb, saveRoutine, deleteOneRoutine }; 

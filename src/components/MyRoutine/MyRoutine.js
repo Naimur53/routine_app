@@ -4,6 +4,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
 import DemoCard from "../SearchRoutine/DemoCard/DemoCard";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
@@ -151,6 +152,17 @@ const MyRoutine = () => {
       id: "41264",
     },
   ];
+  if (!getLoading && !allRoutine?.length) {
+    return <MainLayout>
+      <div className="custom_height flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          <img src="./images/duck-searching.gif" alt="notfound" />
+          <h4 className="text-lg font-medium mt-5">You don't have any routine <NavLink className='underline underline-dark-purple  text-dark-purple' to='/createRoutine'>create one?</NavLink> </h4>
+        </div>
+
+      </div>
+    </MainLayout>
+  }
   return (
     <MainLayout>
       <div className="text-center">

@@ -18,8 +18,9 @@ const getRoutineDataFromLocalDb = (index) => {
     const data = getDataFromLocalDb('routines')[index]
     return new Promise((resolve, reject) => {
         let creatingData = {}
-        let basicInfoKey = ["institute", "department", "semester", "shift", "section"]
+        let basicInfoKey = ["institute", "department", "semester", "shift", "section", "_id"]
         const { data: basicInfo, error: basicInfoError } = checkTypeString(data, basicInfoKey);
+
         creatingData = { ...creatingData, ...basicInfo }
 
         if (Array.isArray(data.classes)) {
@@ -54,7 +55,15 @@ const getRoutineDataFromLocalDb = (index) => {
                 message: 'Error while getting data try to Re-save your routine'
             })
         }
-        resolve({ data: creatingData })
+        resolve(creatingData)
     })
 }
-export { getRoutineDataFromLocalDb }
+
+// get all routine
+const getAllRoutinesFromLocalDb = () => {
+    const allPromise = getDataFromLocalDb('routines')?.map((single, i) => getRoutineDataFromLocalDb(i))
+    return Promise.all(allPromise);
+
+}
+
+export { getRoutineDataFromLocalDb, getAllRoutinesFromLocalDb }

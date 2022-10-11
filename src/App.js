@@ -27,6 +27,7 @@ import {
   setUser,
 } from "./ManageState/DataSlice/dataSlice";
 import { getIdToken, onAuthStateChanged } from "firebase/auth";
+import EditBySteper from "./components/MyProfile/EditeProfile/EditBySteper/EditBySteper";
 
 const theme = createTheme({
   palette: {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signUp" element={<SignUp />}></Route>
           <Route path="/edite" element={<Edite />}></Route>
+          <Route path="/editeBySteper" element={<EditBySteper />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
 

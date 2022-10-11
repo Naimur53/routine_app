@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import textConversion from "./../../../utilities/textConversion";
 import { NavLink, useLocation } from "react-router-dom";
+import { formatDistance, subDays } from "date-fns";
 
 function chooseTheme(i) {
   const theme = [
@@ -65,6 +66,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading }) => {
   const date = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
+  formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true });
   const [open, setOpen] = useState(false);
   return (
     <div className="card-container w-full   ">
@@ -80,17 +82,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading }) => {
           <div className="content   ">
             <div className="mb-4 flex  gap-3">
               <div className="">
-                {img ? (
-                  <>
-                    <img className="w-[50px]" src={img} alt="" />
-                  </>
-                ) : (
-                  <>
-                    <Skeleton variant="circular">
-                      <Avatar />
-                    </Skeleton>
-                  </>
-                )}
+                <img className="w-[50px]" src={img} alt="" />
               </div>
               <div className="">
                 <Tooltip title={institute}>

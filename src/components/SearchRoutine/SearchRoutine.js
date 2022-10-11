@@ -204,7 +204,7 @@ const SearchRoutine = () => {
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <Button
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", mt: "10px" }}
               variant="contained"
               type="button"
               onClick={() => reset()}

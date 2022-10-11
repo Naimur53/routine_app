@@ -110,7 +110,6 @@ const MyProfile = () => {
                   </>
                 ) : (
                   <>
-                    {" "}
                     <Button variant="outlined">
                       <NavLink to="/editeProfile">Edit Profile</NavLink>
                     </Button>

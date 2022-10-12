@@ -5,7 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import FolderSharedIcon from "@mui/icons-material/FolderShared";
 import SendIcon from "@mui/icons-material/Send";
@@ -27,6 +27,7 @@ const DashboardTab = ({ handleCloseNavMenu }) => {
       Icon: DriveFileRenameOutlineIcon,
     },
     { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
+    { name: "Skeleton", path: "/skeletonDemoCard", Icon: AccountCircleIcon },
   ];
   return (
     <div>

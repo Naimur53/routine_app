@@ -29,6 +29,7 @@ import {
 import { getIdToken, onAuthStateChanged } from "firebase/auth";
 import EditBySteper from "./components/MyProfile/EditeProfile/EditBySteper/EditBySteper";
 import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
+import SkeletonDemoCard from "./components/ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 
 const theme = createTheme({
   palette: {
@@ -59,6 +60,10 @@ function App() {
           <Route path="/editProfile" element={<EditeProfile />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
+          <Route
+            path="/skeletonDemoCard"
+            element={<SkeletonDemoCard />}
+          ></Route>
 
           <Route path="/myNotes" element={<MyNotes />}></Route>
           <Route path="/saveRoutine" element={<SaveRoutine />}></Route>

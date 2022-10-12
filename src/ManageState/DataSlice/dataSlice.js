@@ -5,12 +5,14 @@ const initialState = {
   user: {},
 };
 export const getUserFromDB = createAsyncThunk(
-  'data/getFromDB',
+  "data/getFromDB",
   async (info) => {
-    const response = await axios.get(`http://localhost:5001/user?email=${info.email}`)
-    return response.data
+    const response = await axios.get(
+      `http://localhost:5001/user?email=${info.email}`
+    );
+    return response.data;
   }
-)
+);
 export const dataSlice = createSlice({
   name: "data",
   initialState,
@@ -37,10 +39,9 @@ export const dataSlice = createSlice({
         state.loading = false;
       })
       .addCase(getUserFromDB.rejected, (state, action) => {
-
         state.loading = false;
-      })
-  }
+      });
+  },
 });
 
 // Action creators are generated for each case reducer function

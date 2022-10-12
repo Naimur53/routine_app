@@ -31,6 +31,8 @@ import UpdateRoutine from "./components/UpdateRoutine/UpdateRoutine";
 import EditBySteper from "./components/MyProfile/EditeProfile/EditBySteper/EditBySteper";
 import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
 import SkeletonDemoCard from "./components/ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
+import EditBio from "./components/MyProfile/EditeProfile/EditBySteper/EditBio/EditBio";
+import EditDetails from "./components/MyProfile/EditeProfile/EditBySteper/EditDetails/EditDetails";
 
 const theme = createTheme({
   palette: {
@@ -47,7 +49,8 @@ const theme = createTheme({
 function App() {
   const dispatch = useDispatch();
 
-  const { auth } = useFirebase({ observer: true });
+  const { user } = useFirebase({ observer: true });
+  console.log(user);
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,6 +61,8 @@ function App() {
           <Route path="/signUp" element={<SignUp />}></Route>
           <Route path="/editProfile" element={<EditeProfile />}></Route>
           <Route path="/editBySteper" element={<EditBySteper />}></Route>
+          <Route path="/editBio" element={<EditBio />}></Route>
+          <Route path="/editDetails" element={<EditDetails />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
           <Route

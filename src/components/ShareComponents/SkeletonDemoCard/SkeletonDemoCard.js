@@ -67,19 +67,37 @@ const SkeletonDemoCard = () => {
             style={{ marginLeft: 2 }}
           />
         </Box>
-        <Box>
-          <Skeleton
-            animation="wave"
-            variant="circular"
-            width={40}
-            height={40}
-          />
-          <Skeleton
-            animation="wave"
-            height={30}
-            width="35%"
-            style={{ marginLeft: 2 }}
-          />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            {" "}
+            <Skeleton
+              animation="wave"
+              variant="circular"
+              width={40}
+              height={40}
+            />
+          </Box>
+          <Box sx={{ width: "100%" }}>
+            {" "}
+            <Skeleton
+              animation="wave"
+              height={15}
+              width="35%"
+              style={{ marginLeft: 2 }}
+            />
+            <Skeleton
+              animation="wave"
+              height={15}
+              width="35%"
+              style={{ marginLeft: 2 }}
+            />
+          </Box>
         </Box>
         <Box>
           <Skeleton

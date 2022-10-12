@@ -2,12 +2,13 @@ import React, { useState } from "react";
 // import "./DemoCard.css";
 import profile from "../../../images/profile.png";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { Avatar, Button, IconButton, Skeleton, Tooltip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import textConversion from "./../../../utilities/textConversion";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { formatDistance, subDays } from "date-fns";
 
 function chooseTheme(i) {
   const theme = [
@@ -42,7 +43,7 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i, deleteAble, handleDelete }) => {
+const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
 
 
@@ -90,7 +91,11 @@ const DemoCard = ({ item, updateAble, i, deleteAble, handleDelete }) => {
               <p className={`text-sm ${contentStyle}`}> Shift:{shift} </p>
             </div>
             <div className=" flex justify-between  mt-3 items-center ">
-              <img className=" rounded-full w-6 mr-2 " src={creator?.photoURL} alt="creator" />
+              <img
+                className=" rounded-full w-6 mr-2 "
+                src={creator?.photoURL}
+                alt="creator"
+              />
 
               <div className="flex-1 ">
                 <h3 className="text-xs">{creator?.displayName}</h3>
@@ -116,7 +121,11 @@ const DemoCard = ({ item, updateAble, i, deleteAble, handleDelete }) => {
                 <p className="text-sm">Published Date {date}</p>
               </div>
               <div className="flex justify-between ">
-                <p className="text-sm"> Total Class {typeof classes === 'number' ? classes : classes?.length}</p>
+                <p className="text-sm">
+                  {" "}
+                  Total Class{" "}
+                  {typeof classes === "number" ? classes : classes?.length}
+                </p>
                 <p className="text-sm"> Total User </p>
               </div>
 

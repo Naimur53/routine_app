@@ -28,6 +28,8 @@ import {
 } from "./ManageState/DataSlice/dataSlice";
 import { getIdToken, onAuthStateChanged } from "firebase/auth";
 import UpdateRoutine from "./components/UpdateRoutine/UpdateRoutine";
+import EditBySteper from "./components/MyProfile/EditeProfile/EditBySteper/EditBySteper";
+import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
 
 const theme = createTheme({
   palette: {
@@ -53,7 +55,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signUp" element={<SignUp />}></Route>
-          <Route path="/edite" element={<Edite />}></Route>
+          <Route path="/editProfile" element={<EditeProfile />}></Route>
+          <Route path="/editBySteper" element={<EditBySteper />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
 

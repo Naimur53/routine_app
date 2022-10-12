@@ -1,68 +1,59 @@
 import { PhotoCamera } from "@mui/icons-material";
-import { Button, TextareaAutosize } from "@mui/material";
+import { Button, Grid, TextareaAutosize } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
-import send from "../../images/send.jpg";
-import complate from "../../images/complate.webp";
-import right from "../../images/right.jpg";
-const RequestForRoutine = () => {
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+import banner from "../../images/banner.png";
+import RequestModal from "./comp/RequestModal";
+import { useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { allData } from "../../ManageState/DataSlice/dataSlice";
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+const RequestForRoutine = () => {
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState([]);
+  const [getLoading, setGetLoading] = useState(true);
+  const { user } = useSelector(allData);
+  useEffect(() => {
+    if (user._id) {
+      setGetLoading(true)
+      axios.get(`http://localhost:5001/requestRoutine?uid=${user?._id}`)
+        .then(res => {
+          setData(res.data)
+          setGetLoading(false)
+        })
+        .catch(err => {
+          setGetLoading(false)
+        })
+    }
+  }, [user])
+
 
   return (
     <MainLayout>
-      <h1 className="text-center font-bold text-4xl">Request for a routine</h1>
-      <div className="flex xs-d-none">
-        <div className="border p-3 shadow-lg rounded-lg">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-center m-2 font-serif from-neutral-500 text-lg">
-              Upload Your Routine
-            </h1>
-            {/* register your input into the hook by invoking the "register" function */}
+      <div>
+        <Grid container>
+          <Grid item md={5} xs={12}>
+            <div>
+              <h1 className="text-3xl font-semibold mt-20">Make request for a routine</h1>
+              <p className="mt-5 mb-3">If you don't find routine that match your routine just make a request which will have your class routine as image and we will build it for you </p>
 
-            <Button variant="contained" component="label">
-              Upload
-              <PhotoCamera className="ml-2" />
-              <input
-                {...register("img", { require: true })}
-                hidden
-                accept="image/*"
-                multiple
-                type="file"
-              />
-            </Button>
-            <br />
-            <textarea
-              {...register("massage")}
-              className="border-2 mt-4 mb-5"
-              placeholder="Your Massage"
-              name="massage"
-              id=""
-              cols="30"
-              rows="2"
-            ></textarea>
-            <br />
-            <Button className="mt-5" variant="outlined" type="submit">
-              Request send
-            </Button>
-          </form>
-        </div>
-        <div className="flex">
-          <img className="img-fluid h-50" src={send} alt="" />
-          <img className="img-fluid h-40 items-center" src={right} alt="" />
-          <img className="img-fluid h-50 " src={complate} alt="" />
-        </div>
+              <Button className="mt-5" variant="outlined" type="submit" onClick={() => setOpen(!open)}>
+                Make request
+              </Button>
+            </div>
+          </Grid>
+          <Grid item md={7} xs={12}>
+
+            <img src={banner} alt="" />
+          </Grid>
+
+        </Grid>
+        <RequestModal open={open} setOpen={setOpen}></RequestModal>
       </div>
     </MainLayout>
+
   );
 };
 

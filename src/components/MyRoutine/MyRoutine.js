@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Skeleton, Typography } from "@mui/material";
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
@@ -9,21 +9,25 @@ import { allData } from "../../ManageState/DataSlice/dataSlice";
 import DemoCard from "../SearchRoutine/DemoCard/DemoCard";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 
+import Avatar from "@mui/material/Avatar";
+import { Box } from "@mui/system";
+
 const MyRoutine = () => {
-  const [allRoutine, setAllRoutine] = useState([])
+  const [allRoutine, setAllRoutine] = useState([]);
   const [getLoading, setGetLoading] = useState(true);
-  const { user, } = useSelector(allData);
+  const { user } = useSelector(allData);
   useEffect(() => {
     if (user?._id) {
-      axios.get(`http://localhost:5001/routine?userId=${user?._id}`)
-        .then(res => {
-          setAllRoutine(res.data)
+      axios
+        .get(`http://localhost:5001/routine?userId=${user?._id}`)
+        .then((res) => {
+          setAllRoutine(res.data);
           setGetLoading(false);
-        })
+        });
     } else {
-      alert('user id not found')
+      alert("user id not found");
     }
-  }, [user])
+  }, [user]);
   const informations = [
     {
       classes: [
@@ -166,20 +170,56 @@ const MyRoutine = () => {
   return (
     <MainLayout>
       <div className="text-center">
-        <h1 className="text-xl font-bold text-ellipsis text-slate-600">
-          My Created Routines
-        </h1>
+        {getLoading ? (
+          <>
+            <Skeleton
+              animation="wave"
+              sx={{ mx: "auto" }}
+              variant="text"
+              width="20%"
+              height={40}
+            />
+          </>
+        ) : (
+          <>
+            <h1 className="text-xl font-bold text-ellipsis text-slate-600">
+              My Created Routines
+            </h1>
+          </>
+        )}
       </div>
       <Grid
         container
         spacing={4}
-        sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
+        sx={{
+          marginTop: "20px",
+          justifyContent: "center",
+          display: "flex",
+        }}
       >
-        {allRoutine.map((single, i) => (
-          <Grid item lg={3} md={6} xs={12}>
-            <DemoCard item={single} updateAble={true} i={i}></DemoCard>
-          </Grid>
-        ))}
+        {(getLoading ? Array.from(new Array(2)) : allRoutine).map(
+          (single, i) => (
+            <Grid item lg={3} md={6} xs={12}>
+              {single ? (
+                <>
+                  {" "}
+                  <DemoCard item={single} updateAble={true} i={i}></DemoCard>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <Skeleton
+                    animation="wave"
+                    sx={{ mx: "auto" }}
+                    variant="text"
+                    width="100%"
+                    height={250}
+                  />
+                </>
+              )}
+            </Grid>
+          )
+        )}
       </Grid>
     </MainLayout>
   );

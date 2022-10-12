@@ -111,7 +111,7 @@ const MyProfile = () => {
                 ) : (
                   <>
                     <Button variant="outlined">
-                      <NavLink to="/editeProfile">Edit Profile</NavLink>
+                      <NavLink to="/editProfile">Edit Profile</NavLink>
                     </Button>
                   </>
                 )}

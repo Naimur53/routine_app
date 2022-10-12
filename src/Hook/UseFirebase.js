@@ -169,7 +169,7 @@ const useFirebase = ({ observer }) => {
         }
       });
     }
-  }, [auth, dispatch]);
+  }, [auth, dispatch, observer]);
 
   return {
     signInWithGoogle,

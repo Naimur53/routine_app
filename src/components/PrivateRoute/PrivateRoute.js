@@ -9,6 +9,7 @@ const PrivateRoute = ({ children }) => {
     const { user, loading } = useSelector(allData);
 
     const location = useLocation();
+    console.log('private', loading, user.email)
     if (loading) {
         return <div className='flex justify-center items-center h-screen'>
             <CircularProgress />

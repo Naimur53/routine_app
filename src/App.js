@@ -19,9 +19,10 @@ import MyProfile from "./components/MyProfile/MyProfile";
 import RequestForRoutine from "./components/RequestForRoutie/RequestForRoutine";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import useFirebase from "./Hook/useFirebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  allData,
   getUserFromDB,
   setLoading,
   setUser,
@@ -47,6 +48,11 @@ function App() {
   const dispatch = useDispatch();
 
   const { auth } = useFirebase({ observer: true });
+  const { user } = useSelector(allData)
+  useEffect(() => {
+    console.log(user)
+
+  }, [user])
 
   return (
     <ThemeProvider theme={theme}>

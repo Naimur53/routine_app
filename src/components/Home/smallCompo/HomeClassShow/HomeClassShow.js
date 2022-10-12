@@ -30,7 +30,9 @@ const HomeClassShow = ({ data }) => {
                         className='flex lg:flex-col lg:custom_height overflow-y-auto'
                     >
                         {
-                            week.map((single, i) => <SingleTab handleChange={handleChange} value={value} key={single} i={i} onClick={handleChange} info={{ day: single, totalClass: 10, totalHours: 5.4 }} />)
+                            week.map((single, i) => <SingleTab
+                                day={single}
+                                handleChange={handleChange} value={value} key={single} i={i} onClick={handleChange} classes={data.classes} />)
                         }
                     </Box>
                 </Grid>

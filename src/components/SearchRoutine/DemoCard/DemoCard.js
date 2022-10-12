@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import textConversion from "./../../../utilities/textConversion";
 import { NavLink, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { formatDistance, subDays } from "date-fns";
 
 function chooseTheme(i) {
@@ -42,36 +43,22 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i, getLoeading }) => {
+const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
-  const location = useLocation();
 
-  const {
-    institute,
-    department,
-    semester,
-    section,
-    shift,
-    classes,
-    creator,
-    _id,
-  } = item;
-  const handleDelete = () => {
-    window.confirm("You want to deleted?");
-  };
-  const handleCheckout = () => {
-    console.log("click in checkout");
-  };
+
+  const { institute, department, semester, section, shift, classes, creator, _id, } = item;
+
   const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
-  formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true });
+  const date = `${current.getDate()}/${current.getMonth() + 1
+    }/${current.getFullYear()}`;
+
   const [open, setOpen] = useState(false);
+
   return (
     <div className="card-container w-full   ">
       <div
-        onClick={() => {
+        onClick={(e) => {
           setOpen(!open);
         }}
         className="w-full h-[200px]  relative  n overflow-hidden"
@@ -119,9 +106,8 @@ const DemoCard = ({ item, updateAble, i, getLoeading }) => {
         </div>
 
         <div
-          className={`details_card_wrap  transition-all absolute  left-0 right-0   w-full ${
-            open ? "top-0" : "top-[158px]"
-          }`}
+          className={`details_card_wrap  transition-all absolute  left-0 right-0   w-full ${open ? "top-0" : "top-[158px]"
+            }`}
         >
           <div className="h-full flex flex-col justify-between border  drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
             <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">
@@ -143,40 +129,46 @@ const DemoCard = ({ item, updateAble, i, getLoeading }) => {
                 <p className="text-sm"> Total User </p>
               </div>
 
-              <div className="text-center text-sm flex justify-around  mt-3">
-                <Button
-                  onClick={handleCheckout}
-                  color="secondary"
-                  variant="outlined"
-                  size="small"
+              <div className="text-center text-sm flex items-center justify-around  mt-3">
+                <NavLink
+                  to={`/checkout/${_id}`}
                 >
-                  <NavLink
-                    institute={institute}
-                    department={department}
-                    semester={semester}
-                    section={section}
-                    shift={shift}
-                    to={`/checkout/${_id}`}
+                  <Button
+                    color="secondary"
+                    variant="outlined"
+                    size="small"
                   >
+
                     Checkout
-                  </NavLink>
-                </Button>{" "}
+                  </Button>
+                </NavLink>
+
                 {updateAble ? (
                   <>
                     <IconButton
                       aria-label="delete"
-                      onClick={handleDelete}
-                      className=""
+                      onClick={() => handleDelete(_id)}
                     >
                       <DeleteIcon />
                     </IconButton>
-                    <IconButton aria-label="update">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
+                    <NavLink to={`/update/${_id}`}>
+                      <Tooltip title='Update routine'>
+                        <IconButton aria-label="update">
+                          <DriveFileRenameOutlineIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </NavLink>
                   </>
-                ) : (
-                  <></>
-                )}
+                ) : deleteAble ? <IconButton
+                  aria-label="delete"
+                  onClick={(e) => {
+                    handleDelete(_id)
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton> : <></>
+
+                }
               </div>
             </div>
           </div>

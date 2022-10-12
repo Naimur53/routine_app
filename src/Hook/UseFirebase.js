@@ -103,13 +103,11 @@ const useFirebase = ({ observer }) => {
         // handle saving
         saveUser({ ...userInfo, method: "post" })
           .then((res) => {
-            console.log(res);
             dispatch(setUser(res.data));
             dispatch(setLoading(false));
           })
           .catch((error) => {
             setDataSaveFail(dataSaveFail + 1);
-            console.log("user register handle saving", error);
           });
 
         // setUser(newUser);
@@ -118,9 +116,7 @@ const useFirebase = ({ observer }) => {
           displayName: name,
           photoURL: "https://i.ibb.co/1drKb3X/user.png",
         })
-          .then((res) => {
-            console.log("update data", res);
-          })
+          .then((res) => {})
           .catch((error) => {});
       })
       .catch((error) => {
@@ -136,7 +132,7 @@ const useFirebase = ({ observer }) => {
       .then((userCredential) => {
         const url = location?.state?.from || "/";
         navigate(url);
-        console.log(url);
+
         setAuthError("");
       })
       .catch((error) => {
@@ -144,7 +140,6 @@ const useFirebase = ({ observer }) => {
       });
   };
   useEffect(() => {
-    console.log("observer to ");
     if (observer) {
       dispatch(setLoading(true));
       const unsubscribed = onAuthStateChanged(auth, (user) => {
@@ -159,11 +154,10 @@ const useFirebase = ({ observer }) => {
               uid,
             })
           );
-          console.log("i called");
+
           // getIdToken(user)
           //   .then(idToken =>)
         } else {
-          console.log("i called flase");
           dispatch(setLoading(false));
           dispatch(setUser({ set: true }));
         }

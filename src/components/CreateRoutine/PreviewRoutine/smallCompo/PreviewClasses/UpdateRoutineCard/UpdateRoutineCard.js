@@ -8,18 +8,18 @@ const UpdateRoutineCard = ({ day, value, i, classes, errors, watch, setValue, se
     const [filterData, setFilterData] = useState([])
     useEffect(() => {
         let createData = [];
-        console.log({ classes });
+
         classes?.forEach((element, index) => {
 
             if (element.day === day) {
                 const select = { ...element, index: index };
-                console.log({ select })
+
                 createData = [...createData, select]
 
             }
         });
         setFilterData(createData)
-        console.log({ createData });
+
     }, [day, classes])
 
     return (
@@ -29,6 +29,7 @@ const UpdateRoutineCard = ({ day, value, i, classes, errors, watch, setValue, se
                     filterData.map((single, i) => <ClassUpdateModal
                         errors={errors}
                         watch={watch}
+                        key={i}
                         setValue={setValue}
                         setMainData={setMainData}
                         register={register}

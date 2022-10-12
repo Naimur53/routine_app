@@ -12,6 +12,7 @@ import HomeNoteShow from "../MyNote/HomeNoteShow";
 import { getRoutineDataFromLocalDb } from "../../utilities/dataValidation";
 import { getDataFromLocalDb } from "../../utilities/localDb";
 import { NavLink } from "react-router-dom";
+import RoutineNotFound from "../ShareComponents/RoutineNotFound/RoutineNotFound";
 // const data = {
 //   classes: [
 //     {
@@ -243,23 +244,20 @@ const Home = () => {
   useEffect(() => {
 
     getRoutineDataFromLocalDb(0).then(res => {
-      setData(res.data)
-      console.log({ res })
+      setData(res)
+
     })
       .catch(err => {
-        console.log(err)
+
       })
   }, [])
-  console.log({ main: getDataFromLocalDb("lists") })
+
   return (
     <MainLayout>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {
-            data?.classes.length ? <HomeClassShow data={data}></HomeClassShow> : <div className="flex justify-center items-center custom_height">
-
-              <span>You don't have any routine <NavLink className='text-dark-purple underline underline-dark-pink' to='/searchRoutine'>Find here</NavLink></span>
-            </div>
+            data?.classes.length ? <HomeClassShow data={data}></HomeClassShow> : <RoutineNotFound></RoutineNotFound>
           }
         </Grid>
         <Grid item xs={12} md={4}>
@@ -281,7 +279,7 @@ const Home = () => {
               </Grid>
             </Grid>
             <Grid container>
-              <Grid md={12} xs={12}>
+              <Grid item md={12} xs={12}>
                 <HomeNoteShow list={list} />
               </Grid>
             </Grid>

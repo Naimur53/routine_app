@@ -7,7 +7,7 @@ import { allData } from '../../ManageState/DataSlice/dataSlice';
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useSelector(allData);
-    console.log(loading)
+
     const location = useLocation();
     if (loading) {
         return <div className='flex justify-center items-center h-screen'>

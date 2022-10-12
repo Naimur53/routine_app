@@ -72,7 +72,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
     useEffect(() => {
         setValue('day', classes[index].day)
     }, [])
-    console.log('ch', classes[index])
+
     return (
         <div className='relative'>
             {children}
@@ -96,7 +96,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
                             <Grid item md={6} xs={12}>
                                 <TextField
                                     {...register("subjectName", {
-                                        required:  false,
+                                        required: false,
                                     })}
                                     defaultValue={classes[index].subjectName}
                                     id="standard-search"

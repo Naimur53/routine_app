@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,6 +22,8 @@ import useFirebase from "../../../Hook/useFirebase";
 // const pages = ["login"];
 const TopBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(false);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   const { user, loading } = useSelector(allData);
   const { logOut } = useFirebase({ observer: false })
   const handleOpenNavMenu = (event) => {
@@ -31,7 +33,18 @@ const TopBar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(false);
   };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
+  useEffect(() => {
+    if (!user.displayName) {
+      setAnchorElUser(null)
+    }
+  }, [user])
   return (
     <div className="mb-20">
       <AppBar
@@ -47,12 +60,46 @@ const TopBar = () => {
             >
               <div className="flex">
                 {
-                  user.email ? <Button
-                    onClick={logOut}
-                    sx={{ my: 2, color: "Black", display: "block" }}
-                  >
-                    logOut
-                  </Button> :
+                  user.email ? <div>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar alt={user.displayName} src={user.photoURL} />
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      sx={{ mt: '45px' }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      <div className="flex w-[250px] px-3 flex-col items-center" >
+                        <img className="w-1/2" src={user.photoURL} alt={user.displayName} />
+                        <span className="capitalize pt-2 font-medium text-lg text-center ">Sheikh {user.displayName}</span>
+                        <span className="">{user.email}</span>
+                        <div className="mt-5 w-full flex justify-between">
+                          <NavLink to='/myProfile'><button className="bg-dark-purple text-white py-2 px-3 rounded-full" onClick={handleCloseUserMenu}>View Profile</button></NavLink>
+                          <button onClick={() => {
+                            setAnchorElNav(pre => null);
+
+                            logOut();
+
+                          }} className="bg-dark-purple text-white py-2 px-3 rounded-full" >Logout</button>
+                        </div>
+
+                      </div>
+
+                    </Menu>
+                  </div> :
                     <Button
                       onClick={handleCloseNavMenu}
                       component={NavLink}
@@ -86,15 +133,15 @@ const TopBar = () => {
               onClose={handleCloseNavMenu}
               sx={{ width: "50%" }}
             >
-              <div className="flex justify-center mt-5 mb-3">
+              <div className="hidden md:flex justify-center mt-5 mb-3">
                 <Logo></Logo>
               </div>
-              <DashboardTab></DashboardTab>
+              <DashboardTab handleCloseNavMenu={handleCloseNavMenu} ></DashboardTab>
             </Drawer>
           </Toolbar>
         </Container>
-      </AppBar>
-    </div>
+      </AppBar >
+    </div >
   );
 };
 

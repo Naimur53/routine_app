@@ -3,7 +3,7 @@ import { Stack, TextField } from '@mui/material'
 import { MobileTimePicker, } from '@mui/x-date-pickers';
 import { useEffect } from 'react';
 const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register, defaultValue }) => {
-    console.log(defaultValue)
+
     useEffect(() => {
         if (defaultValue) {
             setValue(name, defaultValue)

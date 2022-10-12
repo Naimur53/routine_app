@@ -111,7 +111,7 @@ const MyProfile = () => {
                 ) : (
                   <>
                     <Button variant="outlined">
-                      <NavLink to="/editBySteper">Edit Profile</NavLink>
+                      <NavLink to="/editProfile">Edit Profile</NavLink>
                     </Button>
                   </>
                 )}

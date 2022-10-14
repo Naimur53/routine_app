@@ -18,7 +18,7 @@ const style = {
     borderRadius: 4,
     p: 4,
 };
-const RequestModal = ({ open, setOpen }) => {
+const RequestModal = ({ open, setOpen, setData }) => {
     const [imgLoading, setImgLoading] = useState(false)
     const [postLoading, setPostLoading] = useState(false)
     const { user } = useSelector(allData)
@@ -64,6 +64,7 @@ const RequestModal = ({ open, setOpen }) => {
             .then(res => {
                 console.log({ res })
                 setPostLoading(false)
+                setData(pre => [...pre, res.data])
                 reset();
                 setOpen(false);
                 alert('successfully request send')

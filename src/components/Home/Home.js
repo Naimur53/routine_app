@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import DashboardTab from "../ShareComponents/DashboardTab/DashboardTab";
+import DashboardTab from "../ShareComponents/MainLayoutTab/MainLayoutTab";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";

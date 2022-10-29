@@ -18,7 +18,7 @@ const UserUpdateExitsRoutine = ({ data, setData }) => {
             >
                 <Grid item xs={12} lg={4} >
                     <div
-                        className='flex overflow-x-auto pb-4'
+                        className='flex md:flex-col overflow-x-auto pb-4'
                     >
                         {
                             week.map((single, i) => <SingleTab handleChange={handleChange} classes={data.classes} day={single} value={selectValue} key={single} i={i} onClick={handleChange} />)

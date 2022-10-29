@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import Logo from "../Logo/Logo";
-import DashboardTab from "../DashboardTab/DashboardTab";
+import MainLayoutTab from "../MainLayoutTab/MainLayoutTab";
 import { useSelector } from "react-redux";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import useFirebase from "../../../Hook/useFirebase";
@@ -136,7 +136,7 @@ const TopBar = () => {
               <div className="hidden md:flex justify-center mt-5 mb-3">
                 <Logo></Logo>
               </div>
-              <DashboardTab handleCloseNavMenu={handleCloseNavMenu} ></DashboardTab>
+              <MainLayoutTab handleCloseNavMenu={handleCloseNavMenu} ></MainLayoutTab>
             </Drawer>
           </Toolbar>
         </Container>

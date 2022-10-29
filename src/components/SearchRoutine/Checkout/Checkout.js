@@ -15,8 +15,12 @@ const Checkout = () => {
   useEffect(() => {
     setGetLoading(true);
     axios.get(`http://localhost:5001/routine?id=${id}`).then((res) => {
-      setGetLoading(false);
-      setData(res.data);
+      if (res.data?._id) {
+        setGetLoading(false);
+        setData(res.data);
+      } else {
+        alert('data not found')
+      }
     });
   }, [id]);
   console.log(data, "from checkout");

@@ -1,0 +1,56 @@
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import RequestTables from '../../DashboradComponents/RequestTables/RequestTables';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { CircularProgress } from '@mui/material';
+const AllRequestRoutines = () => {
+    const [data, setData] = useState([])
+    const [status, setStatus] = useState('pending');
+    const [getLoading, setGetLoading] = useState(true)
+    useEffect(() => {
+        setGetLoading(true)
+        axios.get(`http://localhost:5001/requestRoutine?status=${status === 'all' ? "" : status}`)
+            .then(res => {
+                setData(res.data)
+                setGetLoading(false);
+            })
+    }, [status])
+    const handleChange = (event) => {
+        const value = event.target.value
+        setStatus(value);
+    };
+    return (
+        <div>
+            <div className="w-[220px] mb-5">
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Filter with status</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={status}
+                        label="Age"
+                        onChange={handleChange}
+                    >
+                        <MenuItem value='all'>All</MenuItem>
+                        <MenuItem value='pending'>Pending</MenuItem>
+                        <MenuItem value='success'>Success</MenuItem>
+                        <MenuItem value='rejected'>Rejected</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+            {
+                getLoading ?
+                    <div className='flex justify-center'>
+                        <CircularProgress></CircularProgress>
+                    </div>
+                    : <RequestTables data={data}></RequestTables>
+            }
+
+        </div>
+    );
+};
+
+export default AllRequestRoutines;

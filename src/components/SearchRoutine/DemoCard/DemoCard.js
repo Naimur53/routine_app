@@ -73,14 +73,14 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
               </div>
               <div className="">
                 <Tooltip title={institute}>
-                  <h3 className=" text-lg"> {textConversion(institute, 25)}</h3>
+                  <h3 className=" text-lg"> {textConversion(institute, 18)}</h3>
                 </Tooltip>
                 <div className="flex gap-5">
                   <Tooltip title={department}>
                     <p className={`text-sm ${contentStyle}`}>{department}</p>
                   </Tooltip>
                   <p className={`text-sm ${contentStyle}`}>
-                    {semester} semester
+                    {semester} sem
                   </p>
                 </div>
               </div>
@@ -98,8 +98,8 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
               />
 
               <div className="flex-1 ">
+                <p className="text-xs">creator</p>
                 <h3 className="text-xs">{creator?.displayName}</h3>
-                <p className="text-xs">{creator?.email}</p>
               </div>
             </div>
           </div>

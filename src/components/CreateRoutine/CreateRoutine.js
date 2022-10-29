@@ -16,7 +16,7 @@ import PreviewRoutine from "./PreviewRoutine/PreviewRoutine";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import axios from "axios";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
-const CreateRoutine = () => {
+const CreateRoutine = ({ request, requestId, setRequestData }) => {
   const { user } = useSelector(allData)
   const [postLoading, setPostLoading] = useState(false)
   const {
@@ -64,9 +64,16 @@ const CreateRoutine = () => {
   const publishData = () => {
     if (user?._id) {
       setPostLoading(true)
-      axios.post('http://localhost:5001/routine', { ...mainData, creator: user._id })
+      axios.post('http://localhost:5001/routine', { ...mainData, requestId, creator: user._id })
         .then(res => {
           setPostLoading(false);
+          console.log(res)
+          if (requestId) {
+            setRequestData(pre => {
+              const newOne = { ...pre, requestId: res?.data?._id }
+              return newOne;
+            })
+          }
           alert('successfully done');
           setActiveStep(0)
           reset();
@@ -164,7 +171,7 @@ const CreateRoutine = () => {
   };
 
   return (
-    <MainLayout>
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box className="md:custom_height flex flex-col justify-between relative">
           <Box className="pt-1 ">
@@ -178,7 +185,7 @@ const CreateRoutine = () => {
             <Box className="pt-10">{steps[activeStep].element}</Box>
           </Box>
 
-          <div className="fixed bottom-0 w-full md:w-[calc(100vw-380px)]  ">
+          <div className={request ? "" : "fixed bottom-0 w-full md:w-[calc(100vw-380px)]  "}>
             <MobileStepper
               variant="text"
               steps={maxSteps}
@@ -223,7 +230,7 @@ const CreateRoutine = () => {
           }
         </Box>
       </form>
-    </MainLayout>
+    </>
   );
 };
 

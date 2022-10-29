@@ -2,9 +2,11 @@ import { Button, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const RequestCard = ({ img, message, date, status, adminMessage, _id, setData }) => {
+const RequestCard = ({ img, message, date, status, adminMessage, _id, setData, routineId }) => {
     const [deleteLoading, setDeleteLoading] = useState(false)
+    console.log({ routineId })
     const handleDelete = () => {
         if (window.confirm('are you sure? you want to delete this')) {
             setDeleteLoading(true)
@@ -18,7 +20,6 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData })
                     alert('Error while deleting data')
                 })
         }
-
     }
     return (
         <div className='shadow p-4 rounded-xl'>
@@ -26,11 +27,12 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData })
                 <img src={img} alt="routineImage" />
             </div>
             <div className='mt-2'>
-                <p>{message}</p>
+                <p>Your Message: {message}</p>
             </div>
             <div className='flex justify-between my-3'>
-                <div className='flex items-center gap-2'>
-                    <div className='w-[10px] h-[10px] bg-dark-purple rounded-full'></div>
+                <div className='flex items-center gap-2 capitalize'>
+                    <div className={`w-[10px] h-[10px]  ${status === "pending" ? "bg-dark-purple" : status === "success" ? 'bg-dark-green' : "bg-dark-orange"
+                        } rounded-full`}></div>
                     {status}
                 </div>
                 <div>
@@ -41,16 +43,25 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData })
             </div>
             {
                 adminMessage.length ? <div className='mt-2 text-red-700'>
-                    {adminMessage} dfd
+                    Creator Message: {adminMessage}
                 </div> : <></>
             }
+
             {
                 status === 'pending' ? <div>
                     {
                         deleteLoading ? <CircularProgress></CircularProgress> : <Button onClick={handleDelete} variant='contained' >Delete</Button>
                     }
                 </div> : <div>
-
+                    {
+                        routineId && <div className='mt-4'>
+                            <Button
+                                to={`/checkout/${routineId}`}
+                                component={Link}
+                                variant='contained'
+                            >Checkout</Button>
+                        </div>
+                    }
                 </div>
             }
         </div>

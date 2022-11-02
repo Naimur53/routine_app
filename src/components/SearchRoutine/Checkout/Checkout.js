@@ -14,7 +14,7 @@ const Checkout = () => {
 
   useEffect(() => {
     setGetLoading(true);
-    axios.get(`https://shielded-dusk-65695.herokuapp.com/ routine?id=${id}`).then((res) => {
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id}`).then((res) => {
       if (res.data?._id) {
         setGetLoading(false);
         setData(res.data);

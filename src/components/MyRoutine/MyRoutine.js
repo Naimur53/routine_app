@@ -19,7 +19,7 @@ const MyRoutine = () => {
   useEffect(() => {
     if (user?._id) {
       axios
-        .get(`https://shielded-dusk-65695.herokuapp.com/ routine?userId=${user?._id}`)
+        .get(`https://shielded-dusk-65695.herokuapp.com/routine?userId=${user?._id}`)
         .then((res) => {
           setAllRoutine(res.data);
           setGetLoading(false);

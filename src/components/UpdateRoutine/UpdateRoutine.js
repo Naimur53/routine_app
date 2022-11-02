@@ -51,7 +51,7 @@ const UpdateRoutine = () => {
   useEffect(() => {
     setGetLoading(true)
     if (user._id) {
-      axios.get(`https://shielded-dusk-65695.herokuapp.com/ routine?id=${id}&userId=${user._id}`)
+      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id}&userId=${user._id}`)
         .then(res => {
           console.log('isave');
           setData(res.data)
@@ -79,7 +79,7 @@ const UpdateRoutine = () => {
   const onSubmit = fromData => {
     setUpdateLoading(true)
     const mainData = { ...fromData, classes: data.classes }
-    axios.put(`https://shielded-dusk-65695.herokuapp.com/ routine?id=${data._id}`, { mainData })
+    axios.put(`https://shielded-dusk-65695.herokuapp.com/routine?id=${data._id}`, { mainData })
       .then(res => {
         setUpdateLoading(false)
         alert('updated done')

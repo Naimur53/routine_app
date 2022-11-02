@@ -27,7 +27,7 @@ const RequestRoutineActions = ({ id, setData, data }) => {
         if (!postLoading) {
             setPostLoading(true)
             console.log(adminMessage.current)
-            axios.put(`http://localhost:5001/requestRoutine?id=${id}`, {
+            axios.put(`https://shielded-dusk-65695.herokuapp.com/ requestRoutine?id=${id}`, {
                 status, adminMessage: adminMessage.current.value, routineId: data.requestId
             })
                 .then(res => {

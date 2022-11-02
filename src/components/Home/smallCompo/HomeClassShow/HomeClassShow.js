@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -11,15 +12,22 @@ import SingleTab from '../SingleTab/SingleTab';
 
 
 const HomeClassShow = ({ data }) => {
-    const week = [
-        "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
-    ];
+    // const week = ;
     const [value, setValue] = React.useState(0);
+    const [week, setWeek] = React.useState([]);
 
     const handleChange = (newValue) => {
         setValue(newValue);
     };
+    useEffect(() => {
+        const todayNum = new Date().getDay()
+        const normalWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const newWeek = normalWeek.filter(single => single !== normalWeek[todayNum])
+        console.log(todayNum, [normalWeek[todayNum], ...newWeek], normalWeek[todayNum]);
 
+        setWeek(pre => [normalWeek[todayNum], ...newWeek])
+        setValue(0);
+    }, [])
     return (
         <div className=''>
             <Grid container spacing={2}
@@ -27,7 +35,7 @@ const HomeClassShow = ({ data }) => {
             >
                 <Grid item xs={12} lg={6} >
                     <Box
-                        className='flex lg:flex-col lg:custom_height overflow-y-auto'
+                        className='flex lg:flex-col lg:custom_height_for_classes overflow-y-auto pb-2 md:pb-0'
                     >
                         {
                             week.map((single, i) => <SingleTab
@@ -38,7 +46,7 @@ const HomeClassShow = ({ data }) => {
                 </Grid>
 
                 <Grid item xs={12} lg={6} >
-                    <div className='custom_height overflow-y-auto'>
+                    <div className='custom_height_for_classes overflow-y-auto'>
 
                         {
                             week.map((single, i) => <TabPanel key={i} value={value} index={i}>

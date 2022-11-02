@@ -12,14 +12,14 @@ import SendIcon from "@mui/icons-material/Send";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import { useSelector } from "react-redux";
 import useFirebase from "../../../Hook/useFirebase";
+import AddchartIcon from '@mui/icons-material/Addchart';
 const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   const { user } = useSelector(allData)
   const { logOut } = useFirebase({ observer: false })
   const location = useLocation()
-  console.log(location)
   const pages = location?.pathname?.includes('/dashboard') ? [
     { name: "Home", path: "/", Icon: HomeIcon },
-    { name: "All Request Routine", path: "/dashboard/allRequestRoutines", Icon: HomeIcon },
+    { name: "All Request Routine", path: "/dashboard/allRequestRoutines", Icon: AddchartIcon },
 
   ] : [
     { name: "Dashboard", path: "/dashboard", Icon: AccountCircleIcon },

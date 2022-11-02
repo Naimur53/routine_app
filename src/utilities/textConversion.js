@@ -1,4 +1,7 @@
 function textConversion(text, len) {
+    if (!text?.length) {
+        return ""
+    }
     if (text.includes('.') && text.length >= len) {
         const sliptText = text.split('.')
         const sortText = sliptText.map(single => single.toUpperCase().slice(0, 1));
@@ -10,6 +13,9 @@ function textConversion(text, len) {
     }
     if (text.length >= len) {
         const sliptText = text.split(' ')
+        if (sliptText.length === 1) {
+            return text.slice(0, len - 3) + '...'
+        }
         const sortText = sliptText.slice(1, len).map(single => single.toUpperCase().slice(0, 1));
         const mainText = [sliptText[0], ...sortText]
         return textConversion(mainText.join("."), len)

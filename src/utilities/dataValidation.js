@@ -14,14 +14,25 @@ const checkTypeString = (data, keys) => {
     })
     return { data: newData, error }
 }
-const getRoutineDataFromLocalDb = (index) => {
+const getRoutineDataFromLocalDbWithIndex = (index) => {
     const data = getDataFromLocalDb('routines')[index]
     return new Promise((resolve, reject) => {
         let creatingData = {}
+
+        // basic info validate
         let basicInfoKey = ["institute", "department", "semester", "shift", "section", "_id"]
+
         const { data: basicInfo, error: basicInfoError } = checkTypeString(data, basicInfoKey);
 
-        creatingData = { ...creatingData, ...basicInfo }
+        // user data validating 
+        const userInfoKey = ["_id", "displayName", "email", "photoURL", "uid"]
+        const { data: userInfo, error: userInfoError } = checkTypeString(data.creator, userInfoKey);
+
+        creatingData = { ...creatingData, ...basicInfo, creator: userInfo }
+        // validate total user using those 
+        creatingData.totalUserUsing = typeof data.totalUserUsing !== 'number' ? data.totalUserUsing : 0;
+
+
 
         if (Array.isArray(data.classes)) {
             let newClasses = [];
@@ -61,9 +72,9 @@ const getRoutineDataFromLocalDb = (index) => {
 
 // get all routine
 const getAllRoutinesFromLocalDb = () => {
-    const allPromise = getDataFromLocalDb('routines')?.map((single, i) => getRoutineDataFromLocalDb(i))
+    const allPromise = getDataFromLocalDb('routines')?.map((single, i) => getRoutineDataFromLocalDbWithIndex(i))
     return Promise.all(allPromise);
 
 }
 
-export { getRoutineDataFromLocalDb, getAllRoutinesFromLocalDb }
+export { getRoutineDataFromLocalDbWithIndex, getAllRoutinesFromLocalDb }

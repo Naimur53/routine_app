@@ -12,7 +12,7 @@ const AllRequestRoutines = () => {
     const [getLoading, setGetLoading] = useState(true)
     useEffect(() => {
         setGetLoading(true)
-        axios.get(`http://localhost:5001/requestRoutine?status=${status === 'all' ? "" : status}`)
+        axios.get(`https://shielded-dusk-65695.herokuapp.com/ requestRoutine?status=${status === 'all' ? "" : status}`)
             .then(res => {
                 setData(res.data)
                 setGetLoading(false);
@@ -31,7 +31,7 @@ const AllRequestRoutines = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={status}
-                        label="Age"
+                        label="Filter with status"
                         onChange={handleChange}
                     >
                         <MenuItem value='all'>All</MenuItem>
@@ -41,13 +41,15 @@ const AllRequestRoutines = () => {
                     </Select>
                 </FormControl>
             </div>
-            {
-                getLoading ?
-                    <div className='flex justify-center'>
-                        <CircularProgress></CircularProgress>
-                    </div>
-                    : <RequestTables data={data}></RequestTables>
-            }
+            <div className='custom_height_for_classes overflow-scroll'>
+                {
+                    getLoading ?
+                        <div className='flex justify-center'>
+                            <CircularProgress></CircularProgress>
+                        </div>
+                        : <RequestTables data={data}></RequestTables>
+                }
+            </div>
 
         </div>
     );

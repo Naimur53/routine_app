@@ -40,7 +40,7 @@ const useFirebase = ({ observer }) => {
         uid,
         method,
     }) => {
-        return axios[method]("http://localhost:5001/user", {
+        return axios[method]("https://shielded-dusk-65695.herokuapp.com/ user", {
             displayName,
             email,
             photoURL,

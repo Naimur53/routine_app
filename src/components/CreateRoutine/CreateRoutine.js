@@ -64,7 +64,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   const publishData = () => {
     if (user?._id) {
       setPostLoading(true)
-      axios.post('http://localhost:5001/routine', { ...mainData, requestId, creator: user._id })
+      axios.post('https://shielded-dusk-65695.herokuapp.com/ routine', { ...mainData, requestId, creator: user._id })
         .then(res => {
           setPostLoading(false);
           console.log(res)

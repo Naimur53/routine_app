@@ -14,7 +14,7 @@ const Checkout = () => {
 
   useEffect(() => {
     setGetLoading(true);
-    axios.get(`http://localhost:5001/routine?id=${id}`).then((res) => {
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/ routine?id=${id}`).then((res) => {
       if (res.data?._id) {
         setGetLoading(false);
         setData(res.data);
@@ -28,6 +28,9 @@ const Checkout = () => {
     console.log(data);
     setSave(true);
     const { response, status } = saveRoutine(data);
+    if (status !== 400) {
+      console.log('asd')
+    }
     alert(response, status);
   };
   return (

@@ -72,6 +72,21 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
     useEffect(() => {
         setValue('day', classes[index].day)
     }, [])
+    useEffect(() => {
+        const key = ["subjectName",
+            "subjectCode",
+            "teacherName",
+            "day",
+            "startTime",
+            "endTime",
+            "roomNumber",]
+        if (open) {
+            key.forEach(single => {
+                console.log(single, classes[index][single])
+                setValue(single, classes[index][single])
+            })
+        }
+    }, [open])
 
     return (
         <div className='relative'>

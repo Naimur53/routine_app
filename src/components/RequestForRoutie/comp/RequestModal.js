@@ -18,7 +18,7 @@ const style = {
     borderRadius: 4,
     p: 4,
 };
-const RequestModal = ({ open, setOpen }) => {
+const RequestModal = ({ open, setOpen, setData }) => {
     const [imgLoading, setImgLoading] = useState(false)
     const [postLoading, setPostLoading] = useState(false)
     const { user } = useSelector(allData)
@@ -36,7 +36,7 @@ const RequestModal = ({ open, setOpen }) => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`http://localhost:5001/uploadImage`, data)
+            axios.post(`https://shielded-dusk-65695.herokuapp.com/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)
@@ -60,10 +60,11 @@ const RequestModal = ({ open, setOpen }) => {
             return
         }
         setPostLoading(true)
-        axios.post(`http://localhost:5001/requestRoutine`, { ...data, creator: user._id })
+        axios.post(`https://shielded-dusk-65695.herokuapp.com/requestRoutine`, { ...data, creator: user._id })
             .then(res => {
                 console.log({ res })
                 setPostLoading(false)
+                setData(pre => [...pre, res.data])
                 reset();
                 setOpen(false);
                 alert('successfully request send')

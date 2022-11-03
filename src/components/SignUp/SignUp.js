@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-import useFirebase from "../../Hook/useFirebase";
+import useFirebase from "../../Hook/UseFirebase";
 import signImg from "../../images/log.png";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
 import { useNavigate } from "react-router-dom";

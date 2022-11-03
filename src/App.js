@@ -18,10 +18,11 @@ import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyProfile from "./components/MyProfile/MyProfile";
 import RequestForRoutine from "./components/RequestForRoutie/RequestForRoutine";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import useFirebase from "./Hook/useFirebase";
-import { useDispatch } from "react-redux";
+import useFirebase from "./Hook/UseFirebase";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  allData,
   getUserFromDB,
   setLoading,
   setUser,
@@ -33,6 +34,10 @@ import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
 import SkeletonDemoCard from "./components/ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 import EditBio from "./components/MyProfile/EditeProfile/EditBySteper/EditBio/EditBio";
 import EditDetails from "./components/MyProfile/EditeProfile/EditBySteper/EditDetails/EditDetails";
+import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequestRoutines/AllRequestRoutines";
+import Dashboard from "./components/Dashboard/Dashboard";
+import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
+import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
 
 const theme = createTheme({
   palette: {
@@ -49,8 +54,12 @@ const theme = createTheme({
 function App() {
   const dispatch = useDispatch();
 
-  const { user } = useFirebase({ observer: true });
-  console.log(user);
+  const { auth } = useFirebase({ observer: true });
+  const { user } = useSelector(allData)
+  useEffect(() => {
+    console.log(user)
+
+  }, [user])
 
   return (
     <ThemeProvider theme={theme}>
@@ -92,7 +101,9 @@ function App() {
             path="/createRoutine"
             element={
               <PrivateRoute>
-                <CreateRoutine />
+                <MainLayout>
+                  <CreateRoutine />
+                </MainLayout>
               </PrivateRoute>
             }
           ></Route>
@@ -114,6 +125,36 @@ function App() {
               </PrivateRoute>
             }
           ></Route>
+          {/* dashboard routes  */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          >
+            <Route
+              path="/dashboard"
+              element={
+                <AllRequestRoutines />
+              }
+            ></Route>
+            <Route
+              path="allRequestRoutines"
+              element={
+                <AllRequestRoutines />
+              }
+            ></Route>
+
+            <Route
+              path="createRequestRoutine/:id"
+              element={
+                <CreateRequestRoutine />
+              }
+            ></Route>
+
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

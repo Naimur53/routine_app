@@ -171,7 +171,7 @@ const Class = ({
               {...register("day", {
                 required: true,
               })}
-              value={watch("day") ? watch("day") : ""}
+              value={watch("day") || ""}
               MenuProps={MenuProps}
             >
               {names.map((name) => (

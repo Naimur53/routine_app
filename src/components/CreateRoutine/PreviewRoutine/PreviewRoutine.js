@@ -11,10 +11,6 @@ const PreviewRoutine = ({ errors, watch, setValue, setMainData, register, mainDa
 
   return (
     <>
-      {" "}
-      <Typography style={{ textAlign: "center" }} variant="h5" sx={{ ml: 1 }}>
-        className
-      </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>
           <div className="flex justify-between">

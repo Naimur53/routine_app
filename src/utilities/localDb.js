@@ -1,9 +1,14 @@
 //default function
 const parseData = (data) => {
-    if (data?.length) {
-        return JSON.parse(data);
+    console.log(typeof data);
+    let mainData;
+    try {
+        mainData = JSON.parse(data);
+    } catch {
+        console.error('This data is not valid for parse i have return as it was', data)
+        return data;
     }
-    return null;
+    return mainData;
 };
 
 const stringifyData = (data) => {
@@ -12,15 +17,33 @@ const stringifyData = (data) => {
 // new const  localBb={key:'value'};
 
 // get data. myNotes;
-const getDataFromLocalDb = (key) => {
+const getDataFromLocalDb = (key, type) => {
     const value = parseData(localStorage.getItem(key));
+    if (!value && type === 'num') {
+        localStorage.setItem(key, stringifyData(0));
+        return 0;
+    }
+    if (type === 'num' && typeof value !== 'number') {
+        localStorage.setItem(key, stringifyData(0));
+        return 0
+    }
     if (!value) {
         localStorage.setItem(key, stringifyData([]));
         return [];
     }
 
+
     return value;
 };
+const postNumberInLocalDb = (key, data) => {
+    if (typeof data !== undefined) {
+        localStorage.setItem(key, stringifyData(data))
+        return data;
+    }
+    console.error("I cannot keep data on local db");
+    return null;
+
+}
 // put data
 const putDataInLocalDb = (key, data, reverse) => {
     const beforeData = getDataFromLocalDb(key);
@@ -73,5 +96,12 @@ const a = {
 const updateLocalDb = (key, updatedData) => {
     localStorage.setItem(key, JSON.stringify(updatedData));
 };
+// selected index 
 
-export { putDataInLocalDb, getDataFromLocalDb, updateLocalDb, saveRoutine, deleteOneRoutine }; 
+const findSelectIndex = () => {
+    return getDataFromLocalDb('selectedIndex', 'num')
+}
+const saveSelectIndex = (value) => {
+    return postNumberInLocalDb('selectedIndex', value)
+}
+export { putDataInLocalDb, getDataFromLocalDb, updateLocalDb, saveRoutine, deleteOneRoutine, saveSelectIndex, findSelectIndex }; 

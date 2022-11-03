@@ -27,7 +27,9 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
         <div className={bgStyle + ' p-4 rounded-xl mb-2'}>
             <div className="flex justify-between">
                 <div className='flex gap-4'>
-                    <img src={img} className='w-[50px]' alt="logo" />
+                    {
+                        img ? <img src={img} className='w-[50px]' alt="logo" /> : <img src='./images/blue_bol.png' className='w-[50px]' alt="logo" />
+                    }
                     <div>
                         <Tooltip title={subjectName}>
                             <h1 className={headingStyle + ' font-medium  capitalize'}>{textConversion(subjectName, 20)}</h1>

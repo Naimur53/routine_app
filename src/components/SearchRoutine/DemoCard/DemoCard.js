@@ -122,9 +122,9 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
               />
 
               <div className=" ">
-                <Tooltip title={"Creator" + creator?.displayName}>
+                <Tooltip title={"Creator " + creator?.displayName}>
 
-                  <h3 className="text-xs">{textConversion(creator?.displayName, 25)}</h3>
+                  <h3 className="text-xs capitalize">{textConversion(creator?.displayName, 25)}</h3>
                 </Tooltip>
                 <Tooltip title="Published Date">
                   <div className="text-xs">

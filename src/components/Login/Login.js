@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import PasswordTextField from "../ShareComponents/PasswordTextField/PasswordTextField";
-import useFirebase from "../../Hook/UseFirebase";
+import useFirebase from "../../Hook/useFirebase";
 import { useSelector } from "react-redux";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
 import { CircularProgress } from "@mui/material";

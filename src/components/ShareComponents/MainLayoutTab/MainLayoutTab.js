@@ -11,7 +11,7 @@ import FolderSharedIcon from "@mui/icons-material/FolderShared";
 import SendIcon from "@mui/icons-material/Send";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import { useSelector } from "react-redux";
-import useFirebase from "../../../Hook/UseFirebase";
+import useFirebase from "../../../Hook/useFirebase";
 import AddchartIcon from '@mui/icons-material/Addchart';
 const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   const { user } = useSelector(allData)

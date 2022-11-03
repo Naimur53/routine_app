@@ -18,7 +18,7 @@ import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyProfile from "./components/MyProfile/MyProfile";
 import RequestForRoutine from "./components/RequestForRoutie/RequestForRoutine";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import useFirebase from "./Hook/UseFirebase";
+import useFirebase from "./Hook/useFirebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {

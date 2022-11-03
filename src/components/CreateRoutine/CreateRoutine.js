@@ -9,7 +9,13 @@ import { useForm } from "react-hook-form";
 import Class from "./Class/Class";
 
 import Info from "./info/Info";
-import { CircularProgress, Container, Step, StepLabel, Stepper } from "@mui/material";
+import {
+  CircularProgress,
+  Container,
+  Step,
+  StepLabel,
+  Stepper,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import PreviewRoutine from "./PreviewRoutine/PreviewRoutine";
@@ -30,7 +36,6 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   } = useForm();
   const [activeStep, setActiveStep] = React.useState(0);
   const [mainData, setMainData] = useState({ classes: [] });
-
   const onSubmit = ({
     subjectName,
     subjectCode,
@@ -58,7 +63,6 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
       });
       reset();
     }
-
   };
   // published data to db 633e664ed10c105498fab409
   const publishData = () => {
@@ -77,22 +81,20 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
           alert('successfully done');
           setActiveStep(0)
           reset();
-          setMainData({ classes: [] })
+          setMainData({ classes: [] });
         })
-        .catch(err => {
-          alert('error wihile pos')
+        .catch((err) => {
+          alert("error wihile pos");
           setPostLoading(false);
-
-        })
+        });
     } else {
-      alert('user id not found ')
+      alert("user id not found ");
     }
-  }
+  };
 
   //----------------
   const handleNext = () => {
     if (activeStep === 0) {
-
       if (
         watch("institute")?.length &&
         watch("department")?.length &&
@@ -120,9 +122,8 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
       return alert("please add class to go another step");
     }
     if (activeStep === 2) {
-      publishData()
+      publishData();
     } else {
-
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
@@ -193,23 +194,21 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
               activeStep={activeStep}
               sx={{ mt: 2 }}
               nextButton={
-
-                postLoading ? <Button
-                  size="small"
-                  variant="contained"
-                  type={"button"}
-                >
-                  loading
-                </Button> : <Button
-                  size="small"
-                  variant="contained"
-                  onClick={handleNext}
-                  disabled={activeStep === maxSteps}
-                  type={activeStep === 0 ? "submit" : "button"}
-                >
-                  {activeStep === 2 ? 'Publish' : 'Next'}
-                </Button>
-
+                postLoading ? (
+                  <Button size="small" variant="contained" type={"button"}>
+                    loading
+                  </Button>
+                ) : (
+                  <Button
+                    size="small"
+                    variant="contained"
+                    onClick={handleNext}
+                    disabled={activeStep === maxSteps}
+                    type={activeStep === 0 ? "submit" : "button"}
+                  >
+                    {activeStep === 2 ? "Publish" : "Next"}
+                  </Button>
+                )
               }
               backButton={
                 <Button
@@ -223,11 +222,13 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
               }
             ></MobileStepper>
           </div>
-          {
-            postLoading ? <div className="absolute inset-0 flex justify-center  items-center backdrop-blur-[2px] ">
+          {postLoading ? (
+            <div className="absolute inset-0 flex justify-center  items-center backdrop-blur-[2px] ">
               <CircularProgress></CircularProgress>
-            </div> : <></>
-          }
+            </div>
+          ) : (
+            <></>
+          )}
         </Box>
       </form>
     </>

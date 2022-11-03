@@ -30,8 +30,9 @@ const Checkout = () => {
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
       console.log('asd')
+      axios.put(`http://localhost:5001/routine/increaseUsingValue?id=${data._id}`)
     }
-    alert(response, status);
+    alert(response + status);
   };
   return (
     <MainLayout>

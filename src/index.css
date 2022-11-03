@@ -76,4 +76,8 @@ code {
   .custom_height_preview {
     @apply h-[calc(100vh-300px)]
   }
+  .pagination_button{
+    @apply p-2 bg-light-purple hover:bg-dark-purple transition-all
+    hover:text-white text-dark-purple disabled:text-gray-400 disabled:bg-gray-200 rounded-full
+  }
 }

@@ -51,23 +51,20 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
 
 
   const { institute, department, semester, section, shift, classes, creator, _id, date: publishedDate, totalUserUsing } = item;
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const date = publishedDate ? format(new Date(publishedDate), 'PP') : 'Date is not valid'
   // const date = 'publishedDate'
-  console.log({ publishedDate })
+  // console.log({ publishedDate })
   // console.log({ a })
 
   return (
 
-    <div className="card-container w-full   ">
+    <div className=" w-full   ">
       <div
-        onClick={(e) => {
-          setOpen(!open);
-        }}
-        className="w-full relative  n overflow-hidden"
+        className="w-full relative overflow-hidden   rounded-md shadow-md"
       >
         <div
-          className={`details_card_wrap ${bgStyle}   p-2 shadow-md text-${headingStyle}`}
+          className={`details_card_wrap ${bgStyle}  rounded-md p-2 py-4 text-${headingStyle}`}
         >
           <div className="content   ">
             <div className="mb-4 flex  gap-3">
@@ -80,7 +77,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
                 </Tooltip>
                 <div className="flex gap-5">
                   <Tooltip title={department}>
-                    <p className={`text-sm ${contentStyle}`}>{department}</p>
+                    <p className={`text-sm ${contentStyle}`}>{textConversion(department, 9)}</p>
                   </Tooltip>
                   <p className={`text-sm ${contentStyle}`}>
                     {semester} sem
@@ -175,26 +172,6 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
 
                 }
               </div>
-            </div>
-          </div>
-
-          <div
-            className={`details_card_wrap hidden transition-all abssolute  left-0 right-0   w-full ${open ? "top-0" : "top-[158px]"
-              }`}
-          >
-            <div className="h-full flex flex-col justify-between border  drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
-              <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">
-                <hr
-                  className={`w-[30px] rounded-md h-[4px] ${headingStyle}`}
-                ></hr>
-              </div>
-              <div className="p-2 shadow-sm ">
-
-
-
-              </div>
-
-
             </div>
           </div>
         </div>

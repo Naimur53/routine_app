@@ -1,4 +1,4 @@
-import { Button, Grid, Select, TextField } from "@mui/material";
+import { Button, Grid, IconButton, Select, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -11,10 +11,15 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 import axios from "axios";
 import { useState } from "react";
+import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
+import SearchRoutineNotFound from "../ShareComponents/SearchRoutineNotFound/SearchRoutineNotFound";
+import EastIcon from '@mui/icons-material/East';
+import WestIcon from '@mui/icons-material/West';
 const SearchRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
   const [showRoutine, setShowRoutine] = useState([]);
-  const [getLoading, setGetLoading] = useState(false);
+  const [getLoading, setGetLoading] = useState(true);
+  const [pagination, setPagination] = useState({ len: 8, skip: 1 })
   const {
     register,
     handleSubmit,
@@ -55,7 +60,7 @@ const SearchRoutine = () => {
   };
 
   //use debounce
-  let institute = watch("institute");
+  let institute = watch("institute") || "";
   let department = watch("department") || "";
   let semester = watch("semester") || "";
   let section = watch("section") || "";
@@ -64,30 +69,52 @@ const SearchRoutine = () => {
 
   useEffect(() => {
 
-    const filters = allRoutine.filter(single => {
+    // const filters = allRoutine.filter(single => {
 
-      return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
-    })
-    setShowRoutine(filters)
+    //   return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
+    // })
+    setShowRoutine(allRoutine)
 
   }, [allRoutine, department, section, semester,])
   const fetchData = useCallback(() => {
 
     setGetLoading(true)
-    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`)
+    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `)
       .then(res => {
         setAllRoutine(res.data)
+        setPagination({ len: 8, skip: 0 })
         setGetLoading(false)
       })
-  }, [institute,])
+  }, [institute, department, section, semester,])
 
   useEffect(() => {
     const { clear } = debounce(fetchData, 300);
     return () => {
       clear();
     };
-  }, [institute, fetchData]);
+  }, [institute, department, section, semester, fetchData]);
 
+  //handle pagination 
+  const handlePre = () => {
+    setGetLoading(true)
+    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8} `)
+      .then(res => {
+        setAllRoutine(res.data)
+        setPagination({ len: res.data.length, skip: pagination.skip - 8 })
+        setGetLoading(false)
+      })
+
+  }
+  const handleNext = () => {
+    setGetLoading(true)
+    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len} `)
+      .then(res => {
+        setAllRoutine(res.data)
+        setPagination({ len: res.data.length, skip: pagination.skip + pagination.len })
+        setGetLoading(false)
+      })
+  }
+  console.log(pagination)
   return (
     <MainLayout>
       <form
@@ -98,7 +125,7 @@ const SearchRoutine = () => {
           <Grid item xs={12} lg={12} md={6}>
             {" "}
             <div className="flex w-full justify-center">
-              <div className="flex border  border-gray-300 justify-between pr-4  rounded-full bg-light-purple items-center w-full ">
+              <div className="flex border  border-gray-300 justify-between pr-4 rounded-lg shadow shadow-light-pink items-center w-full ">
                 <input
                   type="text"
                   id="defasult-search"
@@ -209,13 +236,34 @@ const SearchRoutine = () => {
           </Grid>
         </Grid>
       </form>
-      <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-        {showRoutine.map((single, i) => (
-          <Grid item lg={3} md={6} xs={12}>
-            <DemoCard item={single} i={i} updateAble={false}></DemoCard>
-          </Grid>
-        ))}
-      </Grid>
+
+      {
+        showRoutine.length ? <Grid container spacing={4} sx={{ marginTop: "20px" }}>
+          {
+            !getLoading ? showRoutine.map((single, i) => (
+              <Grid item lg={3} md={6} xs={12}>
+                <DemoCard item={single} i={i} updateAble={false}></DemoCard>
+              </Grid>
+            )) : [...new Array(10)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
+              <SkeletonDemoCard></SkeletonDemoCard>
+
+            </Grid>)
+          }
+
+        </Grid> : <div className="mt-10  ">
+          <SearchRoutineNotFound></SearchRoutineNotFound>
+        </div>
+      }
+      {
+        <div className="flex py-5 gap-5">
+          <button onClick={handlePre} disabled={getLoading || !pagination.skip} className="pagination_button">
+            <WestIcon ></WestIcon>
+          </button>
+          <button onClick={handleNext} disabled={getLoading || pagination.len < 8} className="pagination_button">
+            <EastIcon></EastIcon>
+          </button>
+        </div>
+      }
     </MainLayout>
   );
 };

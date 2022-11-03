@@ -39,7 +39,6 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
       Icon: DriveFileRenameOutlineIcon,
     },
     { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
-    { name: "Skeleton", path: "/skeletonDemoCard", Icon: AccountCircleIcon },
   ];
   return (
     <div>

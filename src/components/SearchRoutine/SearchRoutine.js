@@ -19,7 +19,7 @@ const SearchRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
   const [showRoutine, setShowRoutine] = useState([]);
   const [getLoading, setGetLoading] = useState(true);
-  const [pagination, setPagination] = useState({ len: 8, skip: 1 })
+  const [pagination, setPagination] = useState({ len: 8, skip: 0 })
   const {
     register,
     handleSubmit,
@@ -244,7 +244,7 @@ const SearchRoutine = () => {
               <Grid item lg={3} md={6} xs={12}>
                 <DemoCard item={single} i={i} updateAble={false}></DemoCard>
               </Grid>
-            )) : [...new Array(10)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
+            )) : [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
               <SkeletonDemoCard></SkeletonDemoCard>
 
             </Grid>)

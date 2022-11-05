@@ -21,7 +21,7 @@ const SingleTab = ({ day, classes, i, value, handleChange, a11yProps }) => {
             }
 
         });
-        setInfo({ shortClassName: shortClassName.join('-'), totalHour, totalClass: allClasses.length })
+        setInfo({ shortClassName: shortClassName.join(', '), totalHour, totalClass: allClasses.length })
 
     }, [classes, day])
     return (
@@ -32,7 +32,7 @@ const SingleTab = ({ day, classes, i, value, handleChange, a11yProps }) => {
                 </div>
                 <div className='text-left'>
                     <h2 className='text-main-dark '> {info.totalClass} Classes</h2>
-                    <p className='text-content '> <span className='hidden lg:inline-block'> </span>{info.shortClassName} <span className='inline-block lg:hidden'> Hours</span></p>
+                    <p className='text-content '> <span className='hidden lg:inline-block'> </span>{info.shortClassName} <span className='inline-block lg:hidden'></span></p>
                 </div>
             </div>
         </button>

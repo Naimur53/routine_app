@@ -37,6 +37,7 @@ import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequest
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
 import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
+import Overview from "./components/Dashboard/DashboardPages/Overview/Overview";
 
 const theme = createTheme({
   palette: {
@@ -123,15 +124,16 @@ function App() {
           <Route
             path="/dashboard"
             element={
+
               <PrivateRoute>
                 <Dashboard />
               </PrivateRoute>
             }
           >
             <Route
-              path="/dashboard"
+              index
               element={
-                <AllRequestRoutines />
+                <Overview />
               }
             ></Route>
             <Route

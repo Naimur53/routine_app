@@ -19,6 +19,7 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   const location = useLocation()
   const pages = location?.pathname?.includes('/dashboard') ? [
     { name: "Home", path: "/", Icon: HomeIcon },
+    { name: "overview", path: "/dashboard", Icon: HomeIcon },
     { name: "All Request Routine", path: "/dashboard/allRequestRoutines", Icon: AddchartIcon },
 
   ] : [
@@ -42,7 +43,7 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   ];
   return (
     <div>
-      <div className="w-[240px]   md:w-full px-2 md:px-8 py-3">
+      <div className="w-[240px]  md:w-full pr-2 pl-5  py-3">
         {
           user?.email ? <div className="flex  md:hidden px-3 flex-col items-center" >
             <img className="w-1/2" src={user.photoURL} alt={user.displayName} />

@@ -5,15 +5,15 @@ import MainLayoutTab from '../ShareComponents/MainLayoutTab/MainLayoutTab';
 
 const Dashboard = () => {
     return (
-        <div>
-            <Container maxWidth="xxl">
-                <div className="block md:flex">
-                    <div className="w-[340px] hidden md:block">
-                        <div className="fixed custom_height overflow-y-auto left-0 w-[340px] ">
+        <div className=' '>
+            <Container maxWidth="xxl" >
+                <div className="block md:flex ">
+                    <div className="mainLayoutTabWidth hidden md:block bg-white ">
+                        <div className="fixed custom_height overflow-y-auto  left-0 bg-white mainLayoutTabWidth">
                             <MainLayoutTab dashboard={true}></MainLayoutTab>
                         </div>
                     </div>
-                    <div className="w-full md:w-[calc(100vw-340px)]   ">
+                    <div className="w-full md:w-[calc(100vw-300px)]   p-2">
                         <Grid container>
                             <Grid item xs={12} md={12}>
                                 <div>

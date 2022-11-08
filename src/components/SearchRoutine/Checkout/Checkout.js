@@ -5,7 +5,10 @@ import { useParams } from "react-router-dom";
 import { saveRoutine } from "../../../utilities/localDb";
 import HomeClassShow from "../../Home/smallCompo/HomeClassShow/HomeClassShow";
 import MainLayout from "../../ShareComponents/MainLayout/MainLayout";
-
+import AddIcon from '@mui/icons-material/Add';
+import { format } from "date-fns";
+import RoutineNotFound from "../../ShareComponents/RoutineNotFound/RoutineNotFound";
+import ShareIcon from '@mui/icons-material/Share';
 const Checkout = () => {
   const { id } = useParams();
   const [data, setData] = useState({ classes: [] });
@@ -21,7 +24,10 @@ const Checkout = () => {
       } else {
         alert('data not found')
       }
-    });
+    })
+      .catch(err => {
+        setGetLoading(false)
+      })
   }, [id]);
   console.log(data, "from checkout");
   const handleSave = () => {
@@ -34,92 +40,78 @@ const Checkout = () => {
     }
     alert(response + status);
   };
+  if (getLoading) {
+    return <MainLayout>
+      <div className="flex justify-center">
+        <CircularProgress></CircularProgress>
+      </div>
+
+    </MainLayout>
+  }
+  if (!getLoading && !data._id && !data.date) {
+    return <MainLayout>
+      <div >
+        <RoutineNotFound title='Sorry routine not Found!'></RoutineNotFound>
+      </div>
+    </MainLayout>
+  }
+  const handleShare = () => {
+    navigator.clipboard.writeText(data._id)
+      .then(res => {
+        alert("The id has copy now you can share it")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
   return (
     <MainLayout>
-      <div className="border p-2">
-        <div className="text-center border shadow-md m-2 p-2 rounded-md">
-          {getLoading ? (
-            <>
-              {" "}
-              <Skeleton
-                variant="text"
-                sx={{ mx: "auto" }}
-                width="20%"
-                height={40}
-              />
-            </>
-          ) : (
-            <>
-              {" "}
-              <h1 className="text-2xl font-bold"> {data.institute}</h1>
-            </>
+      <div className="  p-2">
+        <div className="flex justify-end pb-5">
+          {data?._id && (
+            <div className="flex gap-4">
+              <Button
+                variant="contained"
+                disabled={save}
+                className="text-lg border  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
+                onClick={handleSave}
+              >
+                {/* <AddIcon></AddIcon>  */}
+                <span className="ml-1">Save Routine</span>
+              </Button>
+              <Button
+                variant="outlined"
+                className="text-lg border  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
+                onClick={() => handleShare()}
+              >
+                {/* <AddIcon></AddIcon>  */}
+                <ShareIcon></ShareIcon>
+                <span className="ml-1">Share</span>
+              </Button>
+            </div>
           )}
+        </div>
+        <div className="flex justify-center  shadow-md">
+          <div className="text-center  w-full md:w-1/2 mb-5    m-2 relative px-2 py-5 rounded-md">
+            <h1 className="text-2xl font-bold"> {data.institute}</h1>
+            <div className="text-lg">
+              <div className="flex justify-center items-center">
+                <div>
+                  <h1 className="py-3"><span className="text-dark-purple ">{data.department}</span> department <span className="text-dark-purple ">{data.semester}</span> semester </h1>
+                  <div className="flex justify-between">
 
-          <div className="text-lg">
-            {getLoading ? (
-              <>
-                <Skeleton
-                  variant="text"
-                  sx={{ mx: "auto" }}
-                  width="20%"
-                  height={20}
-                />
-                <Skeleton
-                  variant="text"
-                  sx={{ mx: "auto" }}
-                  width="20%"
-                  height={20}
-                />
+                    <h1>Shift: {data.shift}</h1>
+                    <h1> section: {data.section}</h1>
+                  </div>
 
-                <Skeleton
-                  variant="text"
-                  sx={{ mx: "auto" }}
-                  width="20%"
-                  height={20}
-                />
-                <Skeleton
-                  variant="text"
-                  sx={{ mx: "auto" }}
-                  width="10%"
-                  height={40}
-                />
-              </>
-            ) : (
-              <>
-                <h1>subject: {data.department}</h1>
-                <h1> semester: {data.semester}</h1>
-                <h1> shift: {data.shift}</h1>
-                <h1> section: {data.section}</h1>
-                <div className="">
-                  {" "}
-                  {data?._id && (
-                    <Button
-                      variant="outlined"
-                      disabled={save}
-                      className="text-lg border  p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
-                      onClick={handleSave}
-                    >
-                      Save Routine
-                    </Button>
-                  )}
                 </div>
-              </>
-            )}
+              </div>
+            </div>
           </div>
         </div>
-        {getLoading ? (
-          <>
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-          </>
-        ) : (
-          <>
-            <HomeClassShow data={data}></HomeClassShow>
-          </>
-        )}
+        <p className="mt-5 mb-10 text-center w-[100%] text-sm text-gray-400">Published on {format(new Date(data.date), 'PP')} <br /> Total {data.totalUserUsing} user using this routine </p>
+        <HomeClassShow data={data}></HomeClassShow>
+
       </div>
     </MainLayout>
   );

@@ -6,10 +6,10 @@ import convertToHourMinute from "../../../utilities/ConvertTime";
 
 function chooseTheme(i) {
     const theme = [
-        { img: './images/blue_bol.png', headingStyle: 'text-dark-blue', contentStyle: 'text-medium-blue', bgStyle: "bg-light-blue" },
-        { img: './images/purple_bol.png', headingStyle: 'text-dark-purple', contentStyle: 'text-medium-purple', bgStyle: "bg-light-purple" },
-        { img: './images/orange_bol.png', headingStyle: 'text-dark-orange', contentStyle: 'text-medium-orange', bgStyle: "bg-light-orange" },
-        { img: './images/green_bol.png', headingStyle: 'text-dark-green', contentStyle: 'text-medium-green', bgStyle: "bg-light-green" },
+        { img: '/images/blue_bol.png', headingStyle: 'text-dark-blue', contentStyle: 'text-medium-blue', bgStyle: "bg-light-blue" },
+        { img: '/images/purple_bol.png', headingStyle: 'text-dark-purple', contentStyle: 'text-medium-purple', bgStyle: "bg-light-purple" },
+        { img: '/images/orange_bol.png', headingStyle: 'text-dark-orange', contentStyle: 'text-medium-orange', bgStyle: "bg-light-orange" },
+        { img: '/images/green_bol.png', headingStyle: 'text-dark-green', contentStyle: 'text-medium-green', bgStyle: "bg-light-green" },
 
     ]
     if (i < 4) {
@@ -28,7 +28,7 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
             <div className="flex justify-between">
                 <div className='flex gap-4'>
                     {
-                        img ? <img src={img} className='w-[50px]' alt="logo" /> : <img src='./images/blue_bol.png' className='w-[50px]' alt="logo" />
+                        img ? <img src={process.env.PUBLIC_URL + img} className='w-[50px]' alt="logo" /> : <img src='./images/blue_bol.png' className='w-[50px]' alt="logo" />
                     }
                     <div>
                         <Tooltip title={subjectName}>

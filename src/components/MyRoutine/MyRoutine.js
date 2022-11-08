@@ -11,6 +11,7 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
+import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 
 const MyRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
@@ -28,134 +29,6 @@ const MyRoutine = () => {
       alert("user id not found");
     }
   }, [user]);
-  const informations = [
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "45",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "78352",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "445",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "44512",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "4843215",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "41264",
-    },
-  ];
   if (!getLoading && !allRoutine?.length) {
     return <MainLayout>
       <div className="custom_height flex justify-center items-center">
@@ -197,24 +70,17 @@ const MyRoutine = () => {
           display: "flex",
         }}
       >
-        {(getLoading ? Array.from(new Array(2)) : allRoutine).map(
+        {(getLoading ? Array.from(new Array(8)) : allRoutine).map(
           (single, i) => (
             <Grid item lg={3} md={6} xs={12}>
               {single ? (
                 <>
                   {" "}
-                  <DemoCard item={single} updateAble={true} i={i}></DemoCard>
+                  <DemoCard item={single} updateAble={true} setData={setAllRoutine} i={i}></DemoCard>
                 </>
               ) : (
                 <>
-                  {" "}
-                  <Skeleton
-                    animation="wave"
-                    sx={{ mx: "auto" }}
-                    variant="text"
-                    width="100%"
-                    height={250}
-                  />
+                  <SkeletonDemoCard></SkeletonDemoCard>
                 </>
               )}
             </Grid>

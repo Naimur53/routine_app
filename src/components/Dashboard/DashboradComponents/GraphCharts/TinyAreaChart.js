@@ -47,7 +47,7 @@ const data = [
         amt: 2100,
     },
 ];
-const TinyAreaChart = () => {
+const TinyAreaChart = ({ data }) => {
     return (
         <div className='w-full h-[200px]  '>
             <ResponsiveContainer width="100%" height="100%">
@@ -59,10 +59,10 @@ const TinyAreaChart = () => {
                         top: 5,
                         right: 0,
                         left: 0,
-                        bottom: 5,
+                        bottom: 0,
                     }}
                 >
-                    <Area type="monotone" dataKey="uv" strokeWidth={2} stroke="#5946ad" fill="#efedfb" />
+                    <Area type="monotone" dataKey="totalUserUsing" strokeWidth={2} stroke="#5946ad" fill="#efedfb" />
                 </AreaChart>
             </ResponsiveContainer>
         </div>

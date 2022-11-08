@@ -13,57 +13,37 @@ import { recentMoment, totalApproveOrders, totalEarning, totalOrders, totalSales
 import MainLayout from '../../../ShareComponents/MainLayout/MainLayout';
 import TinyAreaChart from '../../DashboradComponents/GraphCharts/TinyAreaChart';
 import BarChartCompo from '../../DashboradComponents/GraphCharts/BarChartCompo';
-
+import AllRequestRoutines from '../AllRequestRoutines/AllRequestRoutines';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 const Overview = () => {
-    const [allOrders, setAllOrders] = useState([]);
-    const [allProvider, setAllProvider] = useState([]);
-    const [serviceCount, setServiceCount] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [allData, setAllData] = useState({
-        recentMoment: [],
-        earning: 0,
-        sales: 0,
-        orders: 0,
-        providers: 0,
-        ordersApprove: 0,
-        totalService: 0,
+    const [getLoading, setGetLoading] = useState(true);
+    // start
+    const [routineInfo, setRoutineInfo] = useState({ totalRoutine: 0, totalRoutineUsing: 0, routineStatus: [], totalUser: 0 })
+    const [requestInfo, setRequestInfo] = useState({ pending: 0, approve: 0, rejected: 0 })
 
-    });
+    // my work
     useEffect(() => {
-        setLoading(true);
-        let one = "https://dry-sea-00611.herokuapp.com/orders/"
-        let two = "https://dry-sea-00611.herokuapp.com/provider/allProvider"
-        let three = "https://dry-sea-00611.herokuapp.com/singleservice/count"
-        const requestOne = axios.get(one);
-        const requestTwo = axios.get(two);
-        const requestThree = axios.get(three);
-        axios.all([requestOne, requestTwo, requestThree])
+        setGetLoading(true)
+        const getRoutineInfo = axios.get('http://localhost:5001/admin/totalRoutineUsing')
+        const getRoutineStatus = axios.get('http://localhost:5001/admin/routineStatus?len=10')
+        const getRequestInfo = axios.get('http://localhost:5001/admin/requestStatus')
+        const getUserCount = axios.get('http://localhost:5001/admin/userCount')
+        axios.all([getRoutineInfo, getRoutineStatus, getRequestInfo, getUserCount])
             .then(
                 axios.spread((...responses) => {
-                    setAllOrders(responses[0].data)
-                    setAllProvider(responses[1].data);
-                    setServiceCount(responses[2].data.count)
+                    setRoutineInfo({
+                        ...responses[0].data,
+                        routineStatus: responses[1].data,
+                        totalUser: responses[3].data
+                    })
+                    setRequestInfo(responses[2].data)
                 })).catch(errors => {
                     // react on errors.
-                }).finally(() => setLoading(false))
+                }).finally(() => setGetLoading(false))
     }, [])
 
-    useEffect(() => {
-        if (!loading) {
-            setAllData(state => {
-                return {
-                    recentMoment: recentMoment(allOrders),
-                    earning: totalEarning(allOrders),
-                    sales: totalSales(allOrders),
-                    orders: totalOrders(allOrders),
-                    ordersApprove: totalApproveOrders(allOrders),
-                    providers: allProvider.length,
-                    totalService: serviceCount,
-                }
-            })
-        }
-    }, [loading])
-    if (loading) {
+    if (getLoading) {
         return <Stack alignItems='center' >
             <CircularProgress></CircularProgress>
         </Stack >
@@ -74,56 +54,56 @@ const Overview = () => {
                 <Grid item xs={12} md={4}>
                     <Grid container spacing={2} sx={{ height: '100%' }}>
                         <Grid item xs={12}>
-                            <div>
-                                <div className='flex justify-between'>
-                                    <div>
+                            <Paper elevation={3} >
+                                <div className='flex justify-between px-4 pt-4 pb-2'>
+                                    <div className=''>
                                         <h2 className='font-bold mb-2'>Total Using</h2>
                                         <p className='text-sm text-gray-400'>January-july 2002</p>
                                     </div>
                                     <div>
-                                        <h1 className='font-bold text-dark-purple text-lg'>50332</h1>
+                                        <h1 className='font-bold text-dark-purple text-lg'>
+                                            <CountUp end={routineInfo.totalRoutineUsing}></CountUp>
+                                        </h1>
                                     </div>
                                 </div>
-                                <TinyAreaChart></TinyAreaChart>
-                            </div>
+                                <TinyAreaChart data={routineInfo.routineStatus}></TinyAreaChart>
+                            </Paper>
 
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Paper elevation={3} sx={{ p: 2 }}>
                                 <Box sx={{
                                     display: 'flex',
-                                    justifyContent: "space-between"
+                                    justifyContent: "space-between",
+                                    alignItems: 'center'
                                 }}>
-                                    <Typography variant='body1' >Service Provider</Typography>
+                                    <Typography variant='body1' >Routine</Typography>
                                     <IconButton
                                         sx={{
-                                            background: 'hsl(215deg 69% 90%)',
-                                            color: 'hsl(215deg 70% 71%)'
+                                            background: '#f6f4ff',
+                                            color: '#5946ad'
                                         }}
-                                    > <HomeRepairServiceIcon></HomeRepairServiceIcon></IconButton>
+                                    > <LibraryBooksIcon></LibraryBooksIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={allData.providers} /></Typography>
-                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>Good</Typography>
-                                <Typography variant='body1' component={'span'}> lever provider</Typography>
+                                <h2 className='text-center text-3xl font-bold'><CountUp end={routineInfo.totalRoutine} /></h2>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Paper elevation={3} sx={{ p: 2 }}>
                                 <Box sx={{
                                     display: 'flex',
-                                    justifyContent: "space-between"
+                                    justifyContent: "space-between",
+                                    alignItems: 'center'
                                 }}>
-                                    <Typography variant='body1' >Orders</Typography>
+                                    <Typography variant='body1' >User</Typography>
                                     <IconButton
                                         sx={{
-                                            background: 'hsl(215deg 69% 90%)',
-                                            color: 'hsl(215deg 70% 71%)'
+                                            background: '#f6f4ff',
+                                            color: '#5946ad'
                                         }}
-                                    > <LocalGroceryStoreIcon></LocalGroceryStoreIcon></IconButton>
+                                    > <PeopleAltIcon></PeopleAltIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={allData.orders} /></Typography>
-                                <Typography color='red' variant='body1' component={'span'}>Bad</Typography>
-                                <Typography variant='body1' component={'span'}> orders </Typography>
+                                <h2 className='text-center text-3xl font-bold'><CountUp end={routineInfo.totalUser} /></h2>
                             </Paper>
                         </Grid>
 
@@ -131,19 +111,22 @@ const Overview = () => {
                 </Grid>
                 <Grid item xs={12} md={8}>
                     {/* <RecentMomentChart data={allData.recentMoment}></RecentMomentChart> */}
-                    <div className='shadow-lg p-2'>
-                        <div className='p-4'>
+                    <Paper elevation={3} className='pb-4'>
+                        <div className='p-4 pl-5'>
                             <h2 className='text-lg font-bold'>Routine status</h2>
                             <p className='text-gray-400'>last 10</p>
                         </div>
-                        <BarChartCompo></BarChartCompo>
-                    </div>
+                        <BarChartCompo data={routineInfo.routineStatus}></BarChartCompo>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <RoundedServiceCart allData={allData}></RoundedServiceCart>
+                    <RoundedServiceCart allData={requestInfo}></RoundedServiceCart>
                 </Grid>
                 <Grid item xs={12} md={9}>
                     {/* <OrdersTable allOrders={allOrders}></OrdersTable> */}
+                    <Paper elevation={3}>
+                        <AllRequestRoutines short></AllRequestRoutines>
+                    </Paper>
                 </Grid>
             </Grid>
 

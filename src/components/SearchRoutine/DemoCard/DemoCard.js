@@ -13,28 +13,29 @@ import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import axios from "axios";
 function chooseTheme(i) {
   const theme = [
     {
-      img: "./images/blue_bol.png",
+      img: "/images/blue_bol.png",
       headingStyle: "bg-dark-blue",
       contentStyle: "text-medium-blue",
       bgStyle: "bg-light-blue",
     },
     {
-      img: "./images/purple_bol.png",
+      img: "/images/purple_bol.png",
       headingStyle: "bg-dark-purple",
       contentStyle: "text-medium-purple",
       bgStyle: "bg-light-purple",
     },
     {
-      img: "./images/orange_bol.png",
+      img: "/images/orange_bol.png",
       headingStyle: "bg-dark-orange",
       contentStyle: "text-medium-orange",
       bgStyle: "bg-light-orange",
     },
     {
-      img: "./images/green_bol.png",
+      img: "/images/green_bol.png",
       headingStyle: "bg-dark-green",
       contentStyle: "text-medium-green",
       bgStyle: "bg-light-green",
@@ -46,9 +47,9 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }) => {
+const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
-
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const { institute, department, semester, section, shift, classes, creator, _id, date: publishedDate, totalUserUsing } = item;
   // const [open, setOpen] = useState(false);
@@ -56,20 +57,41 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
   // const date = 'publishedDate'
   // console.log({ publishedDate })
   // console.log({ a })
-
+  const handleDelete = () => {
+    if (!deleteLoading) {
+      if (window.confirm("are you sure ?")) {
+        setDeleteLoading(true)
+        axios.delete(`http://localhost:5001/routine/${_id}`)
+          .then(res => {
+            setDeleteLoading(false)
+            setData(pre => {
+              return pre.filter(single => single._id !== _id)
+            })
+          })
+      }
+    }
+  }
   return (
 
-    <div className=" w-full   ">
+    <div className=" w-full ">
       <div
-        className="w-full relative overflow-hidden   rounded-md shadow-md"
+        className="w-full relative overflow-hidden  rounded-md shadow-md"
       >
+        {
+          deleteLoading && <div className="absolute inset-0 backdrop-blur-sm bg-white/[.3] z-10  "></div>
+        }
+
+
         <div
-          className={`details_card_wrap ${bgStyle}  rounded-md p-2 py-4 text-${headingStyle}`}
+          className={`details_card_wrap ${bgStyle}  rounded-md p-2 text-${headingStyle}`}
         >
           <div className="content   ">
             <div className="mb-4 flex  gap-3">
               <div className="">
-                <img className="w-[50px]" src={img} alt="" />
+                {
+                  img && <img className="w-[50px]" src={process.env.PUBLIC_URL + img} alt="logo" />
+                }
+
               </div>
               <div className="">
                 <Tooltip title={institute}>
@@ -153,7 +175,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
                     >
                       <DeleteIcon />
                     </IconButton>
-                    <NavLink to={`/update/${_id}`}>
+                    <NavLink to={admin ? `/dashboard/manageRoutine/update/${_id}` : `/update/${_id}`}>
                       <Tooltip title='Update routine'>
                         <IconButton aria-label="update">
                           <DriveFileRenameOutlineIcon />

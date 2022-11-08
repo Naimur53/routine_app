@@ -38,6 +38,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
 import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
 import Overview from "./components/Dashboard/DashboardPages/Overview/Overview";
+import ManageRoutine from "./components/Dashboard/DashboardPages/ManageRoutine/ManageRoutine";
+import OnlineRoute from "./components/ShareComponents/OnlineRoute/OnlineRoute";
 
 const theme = createTheme({
   palette: {
@@ -66,12 +68,16 @@ function App() {
       <BrowserRouter>
         <TopBar></TopBar>
         <Routes>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signUp" element={<SignUp />}></Route>
-          <Route path="/editProfile" element={<EditeProfile />}></Route>
+          <Route path="/login" element={<OnlineRoute><Login /></OnlineRoute>}></Route>
+          <Route path="/signUp" element={<OnlineRoute><SignUp /></OnlineRoute>}></Route>
+
+          {/* not working on this */}
+
+          {/* <Route path="/editProfile" element={<EditeProfile />}></Route>
           <Route path="/editBySteper" element={<EditBySteper />}></Route>
           <Route path="/editBio" element={<EditBio />}></Route>
-          <Route path="/editDetails" element={<EditDetails />}></Route>
+          <Route path="/editDetails" element={<EditDetails />}></Route> */}
+
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
           <Route path="/myNotes" element={<MyNotes />}></Route>
@@ -79,55 +85,72 @@ function App() {
           <Route
             path="/searchRoutine"
             element={
-              <PrivateRoute>
+              <OnlineRoute>
+
                 <SearchRoutine />
-              </PrivateRoute>
+
+              </OnlineRoute>
             }
           ></Route>
           <Route
             path="/myRoutine"
             element={
-              <PrivateRoute>
-                <MyRoutine />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MyRoutine />
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
           <Route
             path="/createRoutine"
             element={
-              <PrivateRoute>
-                <MainLayout>
-                  <CreateRoutine />
-                </MainLayout>
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MainLayout>
+                    <CreateRoutine />
+                  </MainLayout>
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
-          <Route path="/checkout/:id" element={<Checkout />}></Route>
-          <Route path="/myProfile" element={<MyProfile />}></Route>
+          <Route path="/checkout/:id" element={<OnlineRoute><Checkout /></OnlineRoute>}></Route>
+          <Route path="/myProfile" element={<OnlineRoute><PrivateRoute>
+            <MyProfile />
+          </PrivateRoute></OnlineRoute>}></Route>
           <Route
             path="/update/:id"
             element={
-              <PrivateRoute>
-                <UpdateRoutine />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MainLayout>
+
+                    <UpdateRoutine />
+                  </MainLayout>
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
           <Route
             path="/requestForRoutine"
             element={
-              <PrivateRoute>
-                <RequestForRoutine />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <RequestForRoutine />
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
           {/* dashboard routes  */}
           <Route
             path="/dashboard"
             element={
+              <OnlineRoute>
 
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              </OnlineRoute>
             }
           >
             <Route
@@ -147,6 +170,18 @@ function App() {
               path="createRequestRoutine/:id"
               element={
                 <CreateRequestRoutine />
+              }
+            ></Route>
+            <Route
+              path="manageRoutine"
+              element={
+                <ManageRoutine />
+              }
+            ></Route>
+            <Route
+              path="manageRoutine/update/:id"
+              element={
+                <UpdateRoutine admin={true} />
               }
             ></Route>
 

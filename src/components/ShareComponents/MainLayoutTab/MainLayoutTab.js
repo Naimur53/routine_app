@@ -12,15 +12,18 @@ import SendIcon from "@mui/icons-material/Send";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import { useSelector } from "react-redux";
 import useFirebase from "../../../Hook/useFirebase";
+import EqualizerIcon from '@mui/icons-material/Equalizer';
 import AddchartIcon from '@mui/icons-material/Addchart';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   const { user } = useSelector(allData)
   const { logOut } = useFirebase({ observer: false })
   const location = useLocation()
   const pages = location?.pathname?.includes('/dashboard') ? [
     { name: "Home", path: "/", Icon: HomeIcon },
-    { name: "overview", path: "/dashboard", Icon: HomeIcon },
+    { name: "overview", path: "/dashboard", Icon: EqualizerIcon },
     { name: "All Request Routine", path: "/dashboard/allRequestRoutines", Icon: AddchartIcon },
+    { name: "Manage Routine", path: "/dashboard/manageRoutine", Icon: ManageSearchIcon },
 
   ] : [
     { name: "Dashboard", path: "/dashboard", Icon: AccountCircleIcon },
@@ -75,8 +78,7 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
               onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
               to={path}
               className={({ isActive }) =>
-                isActive
-                  ? "dashboard_link active_dashboard_link"
+                location?.pathname === path ? "dashboard_link active_dashboard_link"
                   : "dashboard_link"
               }
             >

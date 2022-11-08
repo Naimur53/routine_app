@@ -90,16 +90,22 @@ const useFirebase = ({ observer }) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setAuthError("");
+                console.log('from CreateUserWithEmailAndPassword ', userCredential.user)
+
                 const userInfo = {
                     displayName: name,
                     email: userCredential.user.email,
                     photoURL: "https://i.ibb.co/1drKb3X/user.png",
-                    createdAt: userCredential.user.createdAt,
+                    createdAt: userCredential.user.metadata.createdAt,
                     uid: userCredential.user.uid,
                 };
+                // set data to redux
                 dispatch(setUser(userInfo));
+
+                // change route
                 const url = location?.state?.from || "/";
                 navigate(url);
+
                 // handle saving
                 saveUser({ ...userInfo, method: "post" })
                     .then((res) => {
@@ -150,6 +156,7 @@ const useFirebase = ({ observer }) => {
             const unsubscribed = onAuthStateChanged(auth, (user) => {
                 if (user) {
                     const { displayName, email, photoURL, createdAt, uid } = user;
+                    console.log('from onAuthStateChange ', user)
                     dispatch(
                         getUserFromDB({
                             displayName,
@@ -165,6 +172,7 @@ const useFirebase = ({ observer }) => {
                 } else {
 
                     dispatch(setLoading(false));
+                    // set data {} as i have give nothing
                     dispatch(setUser({ set: true }));
                 }
             });

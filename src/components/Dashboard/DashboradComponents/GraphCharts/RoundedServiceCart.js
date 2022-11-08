@@ -3,12 +3,12 @@ import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, R
 import { Box, Container, Stack, Grid, Paper, Typography, IconButton } from '@mui/material';
 
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#00dc64', '#5946ad', '#ff6464', '#ea7d4b'];
 const RoundedServiceCart = ({ allData }) => {
     const data01 = [
-        { name: 'Order Approve', value: allData.ordersApprove },
-        { name: 'Order pending', value: allData.orders },
-        { name: 'Available Service', value: allData.totalService },
+        { name: 'Approve', value: allData.approve },
+        { name: 'Pending', value: allData.pending },
+        { name: 'Rejected', value: allData.rejected },
     ];
     return (
         <Paper elevation={3} sx={{ height: '100%' }}>

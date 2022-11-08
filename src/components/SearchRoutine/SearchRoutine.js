@@ -76,15 +76,44 @@ const SearchRoutine = () => {
     setShowRoutine(allRoutine)
 
   }, [allRoutine, department, section, semester,])
-  const fetchData = useCallback(() => {
 
-    setGetLoading(true)
+  const textSearchRequest = () => {
     axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `)
       .then(res => {
         setAllRoutine(res.data)
         setPagination({ len: 8, skip: 0 })
         setGetLoading(false)
       })
+      .catch(err => {
+        setAllRoutine([])
+        setPagination({ len: 8, skip: 0 })
+        setGetLoading(false)
+      })
+  }
+
+  const fetchData = useCallback(() => {
+
+    setGetLoading(true)
+    console.log(institute, institute.match(/^[0-9a-fA-F]{24}$/), 'output')
+
+    // institute will work for both id and text name of institute
+    if (institute?.length === 24) {
+      axios.get(`http://localhost:5001/routine/findById?id=${institute}`)
+        .then(res => {
+
+          setAllRoutine([res.data])
+          setPagination({ len: 8, skip: 0 })
+          setGetLoading(false)
+
+        })
+        .catch(err => {
+          textSearchRequest()
+        })
+    } else {
+      textSearchRequest()
+    }
+
+
   }, [institute, department, section, semester,])
 
   useEffect(() => {
@@ -130,13 +159,13 @@ const SearchRoutine = () => {
                   type="text"
                   id="defasult-search"
                   className="block pl-4  rounded-tl-full rounded-bl-full focus:border-0 focus:outline-none bg-transparent   w-full py-3 placeholder:text-medium-purple  text- sm text-black         "
-                  placeholder="Enter Your Institute Name..."
+                  placeholder="Enter Your Institute Name or id"
                   {...register("institute", { required: true })}
                 />
 
                 <button
                   onClick={handleSearch}
-                  type="submit"
+                  type="button"
                   className="text-dark-purple  font-medium rounded-full text-sm p-1 "
                 >
                   <svg
@@ -236,24 +265,20 @@ const SearchRoutine = () => {
           </Grid>
         </Grid>
       </form>
+      <Grid container spacing={4} sx={{ marginTop: "20px" }}>
+        {
+          getLoading ? [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
+            <SkeletonDemoCard></SkeletonDemoCard>
 
-      {
-        showRoutine.length ? <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-          {
-            !getLoading ? showRoutine.map((single, i) => (
-              <Grid item lg={3} md={6} xs={12}>
-                <DemoCard item={single} i={i} updateAble={false}></DemoCard>
-              </Grid>
-            )) : [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
-              <SkeletonDemoCard></SkeletonDemoCard>
-
-            </Grid>)
-          }
-
-        </Grid> : <div className="mt-10  ">
-          <SearchRoutineNotFound></SearchRoutineNotFound>
-        </div>
-      }
+          </Grid>) : showRoutine.length ? showRoutine.map((single, i) => (
+            <Grid item lg={3} md={6} xs={12}>
+              <DemoCard item={single} i={i} updateAble={false}></DemoCard>
+            </Grid>
+          )) : <div className="mt-10  ">
+            <SearchRoutineNotFound></SearchRoutineNotFound>
+          </div>
+        }
+      </Grid>
       {
         <div className="flex py-5 gap-5">
           <button onClick={handlePre} disabled={getLoading || !pagination.skip} className="pagination_button">

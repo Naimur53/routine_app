@@ -16,110 +16,56 @@ import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import PhoneIcon from "@mui/icons-material/Phone";
 import textConversion from "../../utilities/textConversion";
+import { useSelector } from "react-redux";
+import { allData } from "../../ManageState/DataSlice/dataSlice";
 const MyProfile = () => {
   const [loeadeing, setLoeading] = useState(false);
+  const { user, } = useSelector(allData)
   const institute = "Brahmnbaria Polytechnic Institute";
   const department = "Computer Secience And Enginnering";
   return (
     <MainLayout>
-      <div className="container lg:w-5/6 xl:w-2/7 sm:w-full md:w-2/3    bg-white  shadow-lg    transform   duration-200 easy-in-out">
+      <div className="container lg:w-5/6 xl:w-2/7 sm:w-full md:w-2/3  bg-white    duration-200 easy-in-out">
         <div className="lg:flex">
           <div className="flex-auto lg:w-52">
             <div className="h-32 overflow-hidden">
-              {loeadeing ? (
-                <>
-                  <Skeleton
-                    animation="wave"
-                    variant="rectangular"
-                    width="100%"
-                    height={200}
-                  />
-                </>
-              ) : (
-                <>
-                  <img className="w-full" src={profilebg} alt="" />
-                  <AddAPhotoIcon className="bg-red-500"></AddAPhotoIcon>
-                </>
-              )}
+
+              <>
+                <img className="w-full" src={profilebg} alt="" />
+              </>
+
             </div>
-            <div className="flex justify-center px-5     -mt-12">
-              {loeadeing ? (
-                <>
-                  <Skeleton variant="circular" width="40%" height={100} />
-                </>
-              ) : (
-                <>
-                  <img
-                    className="h-32 w-32 bg-gray-200 p-2 rounded-full  "
-                    src={profile}
-                    alt=""
-                  />
-                  <IconButton
-                    color="secondary"
-                    aria-label="upload picture"
-                    component="label"
-                    className="mt-14 ml-2"
-                  >
-                    <input hidden accept="image/*" type="file" />
-                    <PhotoCamera />
-                  </IconButton>
-                </>
-              )}
+            <div className="flex justify-center px-5 -mt-12">
+
+
+              <img
+                className="h-32 w-32 bg-gray-200 p-2 rounded-full  "
+                src={user.photoURL}
+                alt="user"
+              />
             </div>
 
-            <div className="px-5">
-              <div className="">
-                {loeadeing ? (
-                  <>
-                    <Skeleton variant="text" />
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <h2 className="text-gray-800 text-xl font-bold">
-                      Mehedi Hasan
-                    </h2>
-                  </>
-                )}
+            <div className="py-5">
+              <div className=" text-center">
 
-                <div className="flex">
-                  {loeadeing ? (
-                    <>
-                      <Skeleton variant="text" width="70%" />
-                    </>
-                  ) : (
-                    <>
-                      {" "}
-                      <MarkEmailReadIcon className="text-gray-400 m-2"></MarkEmailReadIcon>
-                      <p className="text-gray-400 text-sm mt-2 ">
-                        mehedihasan23159287@gmail.com
-                      </p>
-                    </>
-                  )}
+                <h2 className="text-gray-800 text-xl font-bold">
+                  {
+                    user.displayName
+                  }
+                </h2>
+
+                <div className="flex justify-center">
+                  <MarkEmailReadIcon className="text-gray-400 m-2"></MarkEmailReadIcon>
+                  <p className="text-gray-400 text-sm mt-2 ">
+                    {user.email}
+                  </p>
                 </div>
               </div>
-              <div className="m-2">
-                {loeadeing ? (
-                  <>
-                    <Skeleton
-                      animation="wave"
-                      variant="text"
-                      width="30%"
-                      height={50}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Button variant="outlined">
-                      <NavLink to="/editBySteper">Edit Profile</NavLink>
-                    </Button>
-                  </>
-                )}
-              </div>
+
             </div>
           </div>
 
-          <div className="flex-auto lg:w-96  p-4 pl-6   text-gray-500 text-lg">
+          {/* <div className="flex-auto lg:w-96  p-4 pl-6 hidden   text-gray-500 text-lg">
             {loeadeing ? (
               <>
                 <Skeleton
@@ -208,7 +154,7 @@ const MyProfile = () => {
                 </>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <hr className="mt-6" />

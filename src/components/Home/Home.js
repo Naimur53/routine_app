@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { toast } from "react-toastify";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
@@ -39,8 +40,6 @@ const Home = () => {
       })
 
   }, [])
-  console.log({ a: findSelectIndex() })
-
   // useEffect(() => {
   //   getRoutineDataFromLocalDbWithIndex(selectIndex).then(res => {
   //     setData(res)

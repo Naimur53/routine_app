@@ -76,9 +76,12 @@ const SignUp = () => {
             <div>
               <p className="text-red-900 px-2">{authError}</p>
             </div>
-            <NavLink to="/login" className="text-center text-primary py-2">
+            <div className="text-center mt-2 pb-3">
               Already have account?
-            </NavLink>
+              <NavLink to="/login" className="text-center text-dark-purple font-bold  text-primary ml-1 py-2">
+                Let's Login
+              </NavLink>
+            </div>
           </form>
         </div>
       </div>

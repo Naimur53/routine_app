@@ -40,6 +40,8 @@ import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
 import Overview from "./components/Dashboard/DashboardPages/Overview/Overview";
 import ManageRoutine from "./components/Dashboard/DashboardPages/ManageRoutine/ManageRoutine";
 import OnlineRoute from "./components/ShareComponents/OnlineRoute/OnlineRoute";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = createTheme({
   palette: {
@@ -66,6 +68,17 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="light"
+        />
         <TopBar></TopBar>
         <Routes>
           <Route path="/login" element={<OnlineRoute><Login /></OnlineRoute>}></Route>
@@ -146,7 +159,6 @@ function App() {
             path="/dashboard"
             element={
               <OnlineRoute>
-
                 <PrivateRoute>
                   <Dashboard />
                 </PrivateRoute>

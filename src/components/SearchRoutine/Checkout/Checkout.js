@@ -9,6 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { format } from "date-fns";
 import RoutineNotFound from "../../ShareComponents/RoutineNotFound/RoutineNotFound";
 import ShareIcon from '@mui/icons-material/Share';
+import { toast } from "react-toastify";
 const Checkout = () => {
   const { id } = useParams();
   const [data, setData] = useState({ classes: [] });
@@ -22,7 +23,7 @@ const Checkout = () => {
         setGetLoading(false);
         setData(res.data);
       } else {
-        alert('data not found')
+        toast.error('data not found')
       }
     })
       .catch(err => {
@@ -35,10 +36,11 @@ const Checkout = () => {
     setSave(true);
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
-      console.log('asd')
+      toast.success(response)
       axios.put(`http://localhost:5001/routine/increaseUsingValue?id=${data._id}`)
+    } else {
+      toast.error(status)
     }
-    alert(response + status);
   };
   if (getLoading) {
     return <MainLayout>
@@ -58,10 +60,10 @@ const Checkout = () => {
   const handleShare = () => {
     navigator.clipboard.writeText(data._id)
       .then(res => {
-        alert("The id has copy now you can share it")
+        toast.success("The Id has a copy to the clipboard")
       })
       .catch(err => {
-        console.log(err)
+        toast.error("Id can't be copy try again")
       })
   }
   return (

@@ -60,7 +60,7 @@ const useFirebase = ({ observer }) => {
                     if (dataSaveFail <= 3) {
                         setDataSaveFail(dataSaveFail + 1);
                     } else {
-                        alert("cant able to save user info");
+                        // alert("cant able to save user info");
                     }
                 });
         }

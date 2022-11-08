@@ -71,7 +71,7 @@ const Login = () => {
         </form>
         <div className="  flex align-center justify-center ">
           <NavLink to="/signUp" className="text-center text-primary py-2 ">
-            Don't have Account? <span className="">Let's Create account</span>
+            Don't have Account? <span className="text-dark-purple font-bold">Let's Create account.</span>
           </NavLink>
         </div>
       </div>

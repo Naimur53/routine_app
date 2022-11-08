@@ -12,6 +12,7 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
 import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
+import { toast } from "react-toastify";
 
 const MyRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
@@ -26,7 +27,7 @@ const MyRoutine = () => {
           setGetLoading(false);
         });
     } else {
-      alert("user id not found");
+      toast("User not found")
     }
   }, [user]);
   if (!getLoading && !allRoutine?.length) {

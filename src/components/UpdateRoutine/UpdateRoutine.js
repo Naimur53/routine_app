@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import UserUpdateExitsRoutine from "./SmallCompo/UserUpdateExitsRoutine";
 import AddMoreClass from "./SmallCompo/AddMoreClass";
+import { toast } from "react-toastify";
 
 const UpdateRoutine = ({ admin }) => {
   const { id } = useParams();
@@ -95,12 +96,12 @@ const UpdateRoutine = ({ admin }) => {
     axios.put(`https://shielded-dusk-65695.herokuapp.com/routine?id=${data._id}`, { mainData })
       .then(res => {
         setUpdateLoading(false)
-        alert('updated done')
+        toast.success('Successfully updated')
       })
       .catch(err => {
         console.error(errors)
         setUpdateLoading(true)
-        alert('fail to update')
+        toast.error('Failed to update try again later')
       })
   }
   return (

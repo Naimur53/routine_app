@@ -22,6 +22,7 @@ import PreviewRoutine from "./PreviewRoutine/PreviewRoutine";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import axios from "axios";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
+import { toast } from "react-toastify";
 const CreateRoutine = ({ request, requestId, setRequestData }) => {
   const { user } = useSelector(allData)
   const [postLoading, setPostLoading] = useState(false)
@@ -78,17 +79,17 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
               return newOne;
             })
           }
-          alert('successfully done');
+          toast.success('Routine successfully created')
           setActiveStep(0)
           reset();
           setMainData({ classes: [] });
         })
         .catch((err) => {
-          alert("error wihile pos");
+          toast.error("Data is not created")
           setPostLoading(false);
         });
     } else {
-      alert("user id not found ");
+      toast.error("User not found")
     }
   };
 
@@ -119,7 +120,8 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
       return;
     }
     if (activeStep === 1 && !mainData.classes.length) {
-      return alert("please add class to go another step");
+      toast.error("Please add class to go another step")
+      return;
     }
     if (activeStep === 2) {
       publishData();

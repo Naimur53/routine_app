@@ -12,16 +12,17 @@ import TopBar from "./components/ShareComponents/TopBar/TopBar";
 import SearchRoutine from "./components/SearchRoutine/SearchRoutine";
 import MyNotes from "./components/MyNote/MyNotes";
 import SaveRoutine from "./components/SaveRoutine/SaveRoutine";
-import Edite from "./components/CreateRoutine/PreviewRoutine/Edite/Edite";
+
 import Checkout from "./components/SearchRoutine/Checkout/Checkout";
 import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyProfile from "./components/MyProfile/MyProfile";
 import RequestForRoutine from "./components/RequestForRoutie/RequestForRoutine";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import useFirebase from "./Hook/useFirebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  allData,
   getUserFromDB,
   setLoading,
   setUser,
@@ -49,8 +50,11 @@ const theme = createTheme({
 function App() {
   const dispatch = useDispatch();
 
-  const { user } = useFirebase({ observer: true });
-  console.log(user);
+  const { auth } = useFirebase({ observer: true });
+  const { user } = useSelector(allData);
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <ThemeProvider theme={theme}>

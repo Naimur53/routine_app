@@ -11,6 +11,7 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
+import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 
 const MyRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
@@ -157,36 +158,31 @@ const MyRoutine = () => {
     },
   ];
   if (!getLoading && !allRoutine?.length) {
-    return <MainLayout>
-      <div className="custom_height flex justify-center items-center">
-        <div className="flex flex-col justify-center items-center">
-          <img src="./images/duck-searching.gif" alt="notfound" />
-          <h4 className="text-lg font-medium mt-5">You don't have any routine <NavLink className='underline underline-dark-purple  text-dark-purple' to='/createRoutine'>create one?</NavLink> </h4>
+    return (
+      <MainLayout>
+        <div className="custom_height flex justify-center items-center">
+          <div className="flex flex-col justify-center items-center">
+            <img src="./images/duck-searching.gif" alt="notfound" />
+            <h4 className="text-lg font-medium mt-5">
+              You don't have any routine{" "}
+              <NavLink
+                className="underline underline-dark-purple  text-dark-purple"
+                to="/createRoutine"
+              >
+                create one?
+              </NavLink>{" "}
+            </h4>
+          </div>
         </div>
-
-      </div>
-    </MainLayout>
+      </MainLayout>
+    );
   }
   return (
     <MainLayout>
       <div className="text-center">
-        {getLoading ? (
-          <>
-            <Skeleton
-              animation="wave"
-              sx={{ mx: "auto" }}
-              variant="text"
-              width="20%"
-              height={40}
-            />
-          </>
-        ) : (
-          <>
-            <h1 className="text-xl font-bold text-ellipsis text-slate-600">
-              My Created Routines
-            </h1>
-          </>
-        )}
+        <h1 className="text-xl font-bold text-ellipsis text-slate-600">
+          My Created Routines
+        </h1>
       </div>
       <Grid
         container
@@ -197,24 +193,16 @@ const MyRoutine = () => {
           display: "flex",
         }}
       >
-        {(getLoading ? Array.from(new Array(2)) : allRoutine).map(
+        {(getLoading ? Array.from(new Array(4)) : allRoutine).map(
           (single, i) => (
             <Grid item lg={3} md={6} xs={12}>
               {single ? (
                 <>
-                  {" "}
                   <DemoCard item={single} updateAble={true} i={i}></DemoCard>
                 </>
               ) : (
                 <>
-                  {" "}
-                  <Skeleton
-                    animation="wave"
-                    sx={{ mx: "auto" }}
-                    variant="text"
-                    width="100%"
-                    height={250}
-                  />
+                  <SkeletonDemoCard></SkeletonDemoCard>
                 </>
               )}
             </Grid>

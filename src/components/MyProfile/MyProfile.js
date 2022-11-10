@@ -38,7 +38,6 @@ const MyProfile = () => {
               ) : (
                 <>
                   <img className="w-full" src={profilebg} alt="" />
-                  <AddAPhotoIcon className="bg-red-500"></AddAPhotoIcon>
                 </>
               )}
             </div>

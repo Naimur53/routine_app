@@ -127,7 +127,7 @@ const useFirebase = ({ observer }) => {
   };
   // login in user
   const loginUser = ({ email, password, location, navigate }) => {
-    // dispatch(setLoading(true));
+    dispatch(setLoading(true));
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const url = location?.state?.from || "/";
@@ -163,7 +163,7 @@ const useFirebase = ({ observer }) => {
         }
       });
     }
-  }, [auth, dispatch]);
+  }, [auth, dispatch, observer]);
 
   return {
     signInWithGoogle,

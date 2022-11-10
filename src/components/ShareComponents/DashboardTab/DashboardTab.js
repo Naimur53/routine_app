@@ -13,8 +13,8 @@ import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import { useSelector } from "react-redux";
 import useFirebase from "../../../Hook/useFirebase";
 const DashboardTab = ({ handleCloseNavMenu }) => {
-  const { user } = useSelector(allData)
-  const { logOut } = useFirebase({ observer: false })
+  const { user } = useSelector(allData);
+  const { logOut } = useFirebase({ observer: false });
   const pages = [
     { name: "Home", path: "/", Icon: HomeIcon },
     { name: "Saved Routine", path: "/saveRoutine", Icon: AddTaskIcon },
@@ -32,40 +32,69 @@ const DashboardTab = ({ handleCloseNavMenu }) => {
       Icon: DriveFileRenameOutlineIcon,
     },
     { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
-    { name: "Skeleton", path: "/skeletonDemoCard", Icon: AccountCircleIcon },
+
+    { name: "Edit Bio", path: "/editBio", Icon: AccountCircleIcon },
+    { name: "Edit Details", path: "/editDetails", Icon: AccountCircleIcon },
   ];
   return (
     <div>
       <div className="w-[240px]   md:w-full px-2 md:px-8 py-3">
-        {
-          user?.email ? <div className="flex  md:hidden px-3 flex-col items-center" >
+        {user?.email ? (
+          <div className="flex  md:hidden px-3 flex-col items-center">
             <img className="w-1/2" src={user.photoURL} alt={user.displayName} />
-            <span className="capitalize pt-2 font-medium text-lg text-center ">Sheikh {user.displayName}</span>
+            <span className="capitalize pt-2 font-medium text-lg text-center ">
+              Sheikh {user.displayName}
+            </span>
             <span className="">{user.email}</span>
             <div className="mt-5 w-full flex justify-between">
-              <NavLink onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }} to='/myProfile'><button className="bg-dark-purple text-white py-2 px-3 rounded-full" >View Profile</button></NavLink>
-              <button onClick={() => {
-                logOut();
-                handleCloseNavMenu();
-
-              }} className="bg-dark-purple text-white py-2 px-3 rounded-full" >Logout</button>
+              <NavLink
+                onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
+                to="/myProfile"
+              >
+                <button className="bg-dark-purple text-white py-2 px-3 rounded-full">
+                  View Profile
+                </button>
+              </NavLink>
+              <button
+                onClick={() => {
+                  logOut();
+                  handleCloseNavMenu();
+                }}
+                className="bg-dark-purple text-white py-2 px-3 rounded-full"
+              >
+                Logout
+              </button>
             </div>
-
-          </div> : <div className="flex md:hidden  flex-col gap-2">
+          </div>
+        ) : (
+          <div className="flex md:hidden  flex-col gap-2">
             <div className="flex flex-col pb-3 items-center w-full">
-
               <img className="w-2/3" src="./images/cryduck.gif" alt="" />
               <h6 className="mt-2">You are not logged in</h6>
             </div>
-            <NavLink onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }} to='/login'><button className="bg-dark-purple text-white py-2 px-3 rounded-full " >Login</button></NavLink>
-            <NavLink onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }} to='/signUp'><button className="bg-dark-purple text-white py-2 px-3 rounded-full" >Create Account</button></NavLink>
+            <NavLink
+              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
+              to="/login"
+            >
+              <button className="bg-dark-purple text-white py-2 px-3 rounded-full ">
+                Login
+              </button>
+            </NavLink>
+            <NavLink
+              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
+              to="/signUp"
+            >
+              <button className="bg-dark-purple text-white py-2 px-3 rounded-full">
+                Create Account
+              </button>
+            </NavLink>
           </div>
-        }
+        )}
         <div className="flex mt-5 flex-col w-full">
           {pages.map(({ name, path, Icon }, i) => (
             <NavLink
               key={i}
-              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
               to={path}
               className={({ isActive }) =>
                 isActive

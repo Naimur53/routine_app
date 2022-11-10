@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 import axios from "axios";
 import { useState } from "react";
+import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 const SearchRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
   const [showRoutine, setShowRoutine] = useState([]);
@@ -25,8 +26,6 @@ const SearchRoutine = () => {
   } = useForm();
   const handleSearch = () => {
     const value = "default-search".value;
-
-
   };
 
   const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
@@ -43,9 +42,7 @@ const SearchRoutine = () => {
     },
   };
 
-  const onSubmit = data => {
-
-  }
+  const onSubmit = (data) => {};
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
     const clear = () => {
@@ -63,23 +60,26 @@ const SearchRoutine = () => {
   // filter
 
   useEffect(() => {
-
-    const filters = allRoutine.filter(single => {
-
-      return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
-    })
-    setShowRoutine(filters)
-
-  }, [allRoutine, department, section, semester,])
+    const filters = allRoutine.filter((single) => {
+      return (
+        single.department.toLowerCase().includes(department.toLowerCase()) &&
+        single.section.toLowerCase().includes(section.toLowerCase()) &&
+        single.semester.toLowerCase().includes(semester.toLowerCase())
+      );
+    });
+    setShowRoutine(filters);
+  }, [allRoutine, department, section, semester]);
   const fetchData = useCallback(() => {
-
-    setGetLoading(true)
-    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`)
-      .then(res => {
-        setAllRoutine(res.data)
-        setGetLoading(false)
-      })
-  }, [institute,])
+    setGetLoading(true);
+    axios
+      .get(
+        `http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`
+      )
+      .then((res) => {
+        setAllRoutine(res.data);
+        setGetLoading(false);
+      });
+  }, [institute]);
 
   useEffect(() => {
     const { clear } = debounce(fetchData, 300);
@@ -210,11 +210,31 @@ const SearchRoutine = () => {
         </Grid>
       </form>
       <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-        {showRoutine.map((single, i) => (
-          <Grid item lg={3} md={6} xs={12}>
-            <DemoCard item={single} i={i} updateAble={false}></DemoCard>
-          </Grid>
-        ))}
+        {getLoading ? (
+          <>
+            <Grid item lg={3} md={6} xs={12}>
+              <SkeletonDemoCard></SkeletonDemoCard>
+            </Grid>
+            <Grid item lg={3} md={6} xs={12}>
+              <SkeletonDemoCard></SkeletonDemoCard>
+            </Grid>
+            <Grid item lg={3} md={6} xs={12}>
+              <SkeletonDemoCard></SkeletonDemoCard>
+            </Grid>
+            <Grid item lg={3} md={6} xs={12}>
+              <SkeletonDemoCard></SkeletonDemoCard>
+            </Grid>
+          </>
+        ) : (
+          <>
+            {" "}
+            {showRoutine.map((single, i) => (
+              <Grid item lg={3} md={6} xs={12}>
+                <DemoCard item={single} i={i} updateAble={false}></DemoCard>
+              </Grid>
+            ))}
+          </>
+        )}
       </Grid>
     </MainLayout>
   );

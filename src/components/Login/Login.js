@@ -14,8 +14,8 @@ import { CircularProgress } from "@mui/material";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { loading } = useSelector(allData);
-  const { loginUser, authError } = useFirebase({ observer: false });
+  const { loading, user } = useSelector(allData);
+  const { loginUser, logOut, authError } = useFirebase({ observer: false });
 
   const {
     register,
@@ -24,7 +24,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-
     loginUser({ ...data, location, navigate });
   };
   return (
@@ -53,6 +52,19 @@ const Login = () => {
             {loading ? (
               <div className="w-full flex justify-center">
                 <CircularProgress></CircularProgress>
+              </div>
+            ) : user?.email ? (
+              <div className="text-center mt-5">
+                <p className="font-medium text-lg">
+                  You are already logged in want to{" "}
+                  <span
+                    className="text-dark-purple font-semibold underline cursor-pointer underline-dark-purple"
+                    onClick={logOut}
+                  >
+                    logout
+                  </span>{" "}
+                  ?
+                </p>
               </div>
             ) : (
               <input

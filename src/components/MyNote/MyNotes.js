@@ -1,12 +1,14 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import EditIcon from "@mui/icons-material/Edit";
-import MainLayout from "../ShareComponents/MainLayout/MainLayout";
+
 import { getDataFromLocalDb, updateLocalDb } from "../../utilities/localDb";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ArticleIcon from "@mui/icons-material/Article";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import MainLayout from "./../ShareComponents/MainLayout/MainLayout";
 
 const style = {
   position: "absolute",
@@ -36,7 +38,27 @@ const MyNotes = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [isEdit, setEdit] = useState(false);
   const [editId, setEditId] = useState(null);
-
+  //   <div className={"bg-light-purple p-4 rounded-xl mb-2"}>
+  //   <div className="flex flex-wrap">
+  //     <div className="flex-1 w-64 text-justify">
+  //       <p className="font-bold">{singleCacheItem.title}</p>
+  //       <p>{singleCacheItem.note}</p>
+  //     </div>
+  //     <div className="w-16">
+  //       <Button
+  //         onClick={() => {
+  //           setOpen(true);
+  //           editItem(singleCacheItem.id);
+  //         }}
+  //       >
+  //         <EditIcon />
+  //       </Button>
+  //       <Button onClick={() => removeItem(singleCacheItem.id)}>
+  //         <DeleteForeverIcon />
+  //       </Button>
+  //     </div>
+  //   </div>
+  // </div>
   useEffect(() => {
     updateLocalDb("lists", list);
   }, [list]);
@@ -71,7 +93,7 @@ const MyNotes = () => {
   };
 
   return (
-    <>
+    <MainLayout>
       <div>
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
@@ -99,58 +121,84 @@ const MyNotes = () => {
 
               <button
                 type="submit"
-                className="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+                className="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-green-400 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-green-700 hover:bg-green-600"
               >
-                Edit Note
+                Update Note
               </button>
             </form>
           </Box>
         </Modal>
       </div>
-      <MainLayout>
-        <div className="flex flex-wrap mb-2">
-          <div className="flex-1 w-64 text-xl ">
-            <ArticleIcon /> MY NOTES
-          </div>
-          <div>
-            <Button onClick={handleOpenAdd}>
-              Add Note
-              <NoteAddIcon sx={{ ml: 1 }} />
-            </Button>
-            <ModalProvider
-              open={openAdd}
-              onClose={handleCloseAdd}
-              setList={setList}
-            />
-          </div>
+      <div className="flex flex-wrap mb-2">
+        <div className="flex-1 w-64 text-xl ">
+          <ArticleIcon /> MY NOTES
         </div>
+        <div>
+          <Button onClick={handleOpenAdd}>
+            Add Note
+            <NoteAddIcon sx={{ ml: 1 }} />
+          </Button>
+          <ModalProvider
+            open={openAdd}
+            onClose={handleCloseAdd}
+            setList={setList}
+          />
+        </div>
+      </div>
+      <Grid
+        container
+        spacing={4}
+        sx={{
+          marginTop: "20px",
+          marginBottom: "20px",
+          alignContent: "center",
+          justifyContent: "around",
+
+          padding: "10px",
+        }}
+      >
         {list?.reverse().map((singleCacheItem, i) => (
-          <>
-            <div className={"bg-light-purple p-4 rounded-xl mb-2"}>
-              <div className="flex flex-wrap">
-                <div className="flex-1 w-64 text-justify">
-                  <p className="font-bold">{singleCacheItem.title}</p>
-                  <p>{singleCacheItem.note}</p>
-                </div>
-                <div className="w-16">
-                  <Button
-                    onClick={() => {
-                      setOpen(true);
-                      editItem(singleCacheItem.id);
-                    }}
-                  >
-                    <EditIcon />
-                  </Button>
-                  <Button onClick={() => removeItem(singleCacheItem.id)}>
-                    <DeleteForeverIcon />
-                  </Button>
+          <Grid item md={6} lg={4}>
+            <div class="bg-white  border-t-lime-400 border-b-lime-400 border-2 p-5   rounded-tl-xl rounded-br-xl shadow-md w-[320px]   min-h-[150px]">
+              <div className="flex justify-between">
+                {" "}
+                <h1 title="title" class="text-xl font-bold">
+                  {singleCacheItem.title}
+                </h1>
+                <FormatQuoteIcon sx={{ color: "lightGreen" }} />
+              </div>
+
+              <div class="mb-3">
+                <div class="bg-gray-400 w-24 h-1 rounded-lg mt-2   overflow-hidden">
+                  <div class="bg-gray-100 w-full h-full rounded-lg shadow-md"></div>
                 </div>
               </div>
+
+              <h2 title="note" class="tracking-wide">
+                {singleCacheItem.note}
+              </h2>
+              <div className="mt-2">
+                <Button
+                  onClick={() => {
+                    setOpen(true);
+                    editItem(singleCacheItem.id);
+                  }}
+                >
+                  <EditIcon sx={{ color: "lightGreen" }} />
+                </Button>
+                <Button
+                  onClick={() => {
+                    removeItem(singleCacheItem.id);
+                  }}
+                >
+                  <DeleteForeverIcon sx={{ color: "lightGreen" }} />
+                </Button>
+              </div>
             </div>
-          </>
+          </Grid>
         ))}
-      </MainLayout>
-    </>
+      </Grid>
+    </MainLayout>
   );
 };
 

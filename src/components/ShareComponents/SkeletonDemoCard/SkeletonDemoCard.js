@@ -5,8 +5,8 @@ import Skeleton from "@mui/material/Skeleton";
 
 const SkeletonDemoCard = () => {
   return (
-    <MainLayout>
-      <Card sx={{ width: "300px", m: 2, p: 1 }}>
+    <div>
+      <Card className="lg:w-[260px] p-2">
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box>
             <Skeleton
@@ -108,7 +108,7 @@ const SkeletonDemoCard = () => {
           />
         </Box>
       </Card>
-    </MainLayout>
+    </div>
   );
 };
 

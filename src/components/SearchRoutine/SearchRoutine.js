@@ -73,7 +73,7 @@ const SearchRoutine = () => {
     setGetLoading(true);
     axios
       .get(
-        `http://localhost:5001/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`
+        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`
       )
       .then((res) => {
         setAllRoutine(res.data);

@@ -121,7 +121,7 @@ const MyNotes = () => {
 
               <button
                 type="submit"
-                className="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-green-400 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-green-700 hover:bg-green-600"
+                className="inline-flex items-center mt-3 px-5 py-2 text-sm font-medium text-center text-white bg-blue-400 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-700 hover:bg-blue-600"
               >
                 Update Note
               </button>
@@ -159,13 +159,12 @@ const MyNotes = () => {
       >
         {list?.reverse().map((singleCacheItem, i) => (
           <Grid item md={6} lg={4}>
-            <div class="bg-white  border-t-lime-400 border-b-lime-400 border-2 p-5   rounded-tl-xl rounded-br-xl shadow-md w-[320px]   min-h-[150px]">
+            <div class="bg-white border-t-4 border-t-green-300  p-5   rounded-tl-xl rounded-br-xl shadow-md w-[320px]   min-h-[150px]">
               <div className="flex justify-between">
                 {" "}
                 <h1 title="title" class="text-xl font-bold">
                   {singleCacheItem.title}
                 </h1>
-                <FormatQuoteIcon sx={{ color: "lightGreen" }} />
               </div>
 
               <div class="mb-3">
@@ -179,19 +178,25 @@ const MyNotes = () => {
               </h2>
               <div className="mt-2">
                 <Button
+                  title="Edit "
                   onClick={() => {
                     setOpen(true);
                     editItem(singleCacheItem.id);
                   }}
                 >
-                  <EditIcon sx={{ color: "lightGreen" }} />
+                  <EditIcon sx={{ color: "blue" }} />
                 </Button>
                 <Button
+                  title="Delete "
                   onClick={() => {
-                    removeItem(singleCacheItem.id);
+                    window.confirm("You wnat to delete?") ? (
+                      removeItem(singleCacheItem.id)
+                    ) : (
+                      <></>
+                    );
                   }}
                 >
-                  <DeleteForeverIcon sx={{ color: "lightGreen" }} />
+                  <DeleteForeverIcon sx={{ color: "blue" }} />
                 </Button>
               </div>
             </div>

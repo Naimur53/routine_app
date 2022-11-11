@@ -34,6 +34,10 @@ import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
 import SkeletonDemoCard from "./components/ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 import EditBio from "./components/MyProfile/EditeProfile/EditBySteper/EditBio/EditBio";
 import EditDetails from "./components/MyProfile/EditeProfile/EditBySteper/EditDetails/EditDetails";
+import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequestRoutines/AllRequestRoutines";
+import Dashboard from "./components/Dashboard/Dashboard";
+import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
+import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
 
 const theme = createTheme({
   palette: {
@@ -96,7 +100,9 @@ function App() {
             path="/createRoutine"
             element={
               <PrivateRoute>
-                <CreateRoutine />
+                <MainLayout>
+                  <CreateRoutine />
+                </MainLayout>
               </PrivateRoute>
             }
           ></Route>
@@ -118,6 +124,26 @@ function App() {
               </PrivateRoute>
             }
           ></Route>
+          {/* dashboard routes  */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          >
+            <Route path="/dashboard" element={<AllRequestRoutines />}></Route>
+            <Route
+              path="allRequestRoutines"
+              element={<AllRequestRoutines />}
+            ></Route>
+
+            <Route
+              path="createRequestRoutine/:id"
+              element={<CreateRequestRoutine />}
+            ></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

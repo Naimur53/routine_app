@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
+import RequestCard from "./comp/RequestCard";
 
 const RequestForRoutine = () => {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ const RequestForRoutine = () => {
   useEffect(() => {
     if (user._id) {
       setGetLoading(true)
-      axios.get(`http://localhost:5001/requestRoutine?uid=${user?._id}`)
+      axios.get(`https://shielded-dusk-65695.herokuapp.com/requestRoutine?uid=${user?._id}`)
         .then(res => {
           setData(res.data)
           setGetLoading(false)
@@ -33,7 +34,7 @@ const RequestForRoutine = () => {
   return (
     <MainLayout>
       <div>
-        <Grid container>
+        <Grid container spacing={4}>
           <Grid item md={5} xs={12}>
             <div>
               <h1 className="text-3xl font-semibold mt-20">Make request for a routine</h1>
@@ -45,12 +46,16 @@ const RequestForRoutine = () => {
             </div>
           </Grid>
           <Grid item md={7} xs={12}>
-
             <img src={banner} alt="" />
           </Grid>
+          {
+            data.map((single, i) => <Grid item key={i} xs={12} md={4}>
+              <RequestCard {...single} setData={setData}></RequestCard>
 
+            </Grid>)
+          }
         </Grid>
-        <RequestModal open={open} setOpen={setOpen}></RequestModal>
+        <RequestModal open={open} setData={setData} setOpen={setOpen}></RequestModal>
       </div>
     </MainLayout>
 

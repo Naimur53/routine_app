@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import DashboardTab from "../ShareComponents/DashboardTab/DashboardTab";
+
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
@@ -9,12 +9,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
 import HomeNoteShow from "../MyNote/HomeNoteShow";
-import { getRoutineDataFromLocalDb } from "../../utilities/dataValidation";
+import { getRoutineDataFromLocalDbWithIndex } from "../../utilities/dataValidation";
 import { getDataFromLocalDb } from "../../utilities/localDb";
 import { NavLink } from "react-router-dom";
 import RoutineNotFound from "../ShareComponents/RoutineNotFound/RoutineNotFound";
 // const data = {
-//   classes: [
+//   classes:
 //     {
 //       day: "Sunday",
 //       endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
@@ -232,33 +232,31 @@ import RoutineNotFound from "../ShareComponents/RoutineNotFound/RoutineNotFound"
 //       roomNumber: '3233',
 //     },
 
-
 //   ]
 // }
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState({ classes: [] })
+  const [data, setData] = useState({ classes: [] });
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   useEffect(() => {
-
-    getRoutineDataFromLocalDb(0).then(res => {
-      setData(res)
-
-    })
-      .catch(err => {
-
+    getRoutineDataFromLocalDbWithIndex(0)
+      .then((res) => {
+        setData(res);
       })
-  }, [])
+      .catch((err) => {});
+  }, []);
 
   return (
     <MainLayout>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-          {
-            data?.classes.length ? <HomeClassShow data={data}></HomeClassShow> : <RoutineNotFound></RoutineNotFound>
-          }
+          {data?.classes.length ? (
+            <HomeClassShow data={data}></HomeClassShow>
+          ) : (
+            <RoutineNotFound></RoutineNotFound>
+          )}
         </Grid>
         <Grid item xs={12} md={4}>
           <div className="custom_height hidden md:block">
@@ -274,7 +272,11 @@ const Home = () => {
                     Add Note
                     <NoteAddIcon sx={{ ml: 1 }} />
                   </Button>
-                  <ModalProvider open={open} setList={setList} onClose={handleClose} />
+                  <ModalProvider
+                    open={open}
+                    setList={setList}
+                    onClose={handleClose}
+                  />
                 </div>
               </Grid>
             </Grid>

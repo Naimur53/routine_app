@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import HomeIcon from "@mui/icons-material/Home";
 import AddTaskIcon from "@mui/icons-material/AddTask";
@@ -12,30 +12,42 @@ import SendIcon from "@mui/icons-material/Send";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import { useSelector } from "react-redux";
 import useFirebase from "../../../Hook/useFirebase";
-const DashboardTab = ({ handleCloseNavMenu }) => {
+import AddchartIcon from "@mui/icons-material/Addchart";
+const MainLayoutTab = ({ handleCloseNavMenu }) => {
   const { user } = useSelector(allData);
   const { logOut } = useFirebase({ observer: false });
-  const pages = [
-    { name: "Home", path: "/", Icon: HomeIcon },
-    { name: "Saved Routine", path: "/saveRoutine", Icon: AddTaskIcon },
-    { name: "My Notes", path: "/myNotes", Icon: TextSnippetIcon },
-    { name: "Search Routine", path: "/searchRoutine", Icon: SearchIcon },
-    { name: "My Routine", path: "/myRoutine", Icon: FolderSharedIcon },
-    {
-      name: "Request for routine",
-      path: "/requestForRoutine",
-      Icon: SendIcon,
-    },
-    {
-      name: "Create Routine",
-      path: "/createRoutine",
-      Icon: DriveFileRenameOutlineIcon,
-    },
-    { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
+  const location = useLocation();
+  const pages = location?.pathname?.includes("/dashboard")
+    ? [
+        { name: "Home", path: "/", Icon: HomeIcon },
+        {
+          name: "All Request Routine",
+          path: "/dashboard/allRequestRoutines",
+          Icon: AddchartIcon,
+        },
+      ]
+    : [
+        { name: "Dashboard", path: "/dashboard", Icon: AccountCircleIcon },
+        { name: "Home", path: "/", Icon: HomeIcon },
+        { name: "Saved Routine", path: "/saveRoutine", Icon: AddTaskIcon },
+        { name: "My Notes", path: "/myNotes", Icon: TextSnippetIcon },
+        { name: "Search Routine", path: "/searchRoutine", Icon: SearchIcon },
+        { name: "My Routine", path: "/myRoutine", Icon: FolderSharedIcon },
+        {
+          name: "Request for routine",
+          path: "/requestForRoutine",
+          Icon: SendIcon,
+        },
+        {
+          name: "Create Routine",
+          path: "/createRoutine",
+          Icon: DriveFileRenameOutlineIcon,
+        },
+        { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
 
-    { name: "Edit Bio", path: "/editBio", Icon: AccountCircleIcon },
-    { name: "Edit Details", path: "/editDetails", Icon: AccountCircleIcon },
-  ];
+        { name: "Edit Bio", path: "/editBio", Icon: AccountCircleIcon },
+        { name: "Edit Details", path: "/editDetails", Icon: AccountCircleIcon },
+      ];
   return (
     <div>
       <div className="w-[240px]   md:w-full px-2 md:px-8 py-3">
@@ -114,4 +126,4 @@ const DashboardTab = ({ handleCloseNavMenu }) => {
   );
 };
 
-export default DashboardTab;
+export default MainLayoutTab;

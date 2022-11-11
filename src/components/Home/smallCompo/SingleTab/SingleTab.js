@@ -1,8 +1,10 @@
+import { Tab } from '@mui/material';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
-const SingleTab = ({ day, classes, i, value, handleChange }) => {
+const SingleTab = ({ day, classes, i, value, handleChange, a11yProps }) => {
     const [info, setInfo] = useState({ totalClass: 0, totalHour: 0 })
+
     useEffect(() => {
         const allClasses = classes.filter(single => single.day === day);
         let totalHour = 0;

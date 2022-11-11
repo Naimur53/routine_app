@@ -14,9 +14,13 @@ const Checkout = () => {
 
   useEffect(() => {
     setGetLoading(true);
-    axios.get(`http://localhost:5001/routine?id=${id}`).then((res) => {
-      setGetLoading(false);
-      setData(res.data);
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id}`).then((res) => {
+      if (res.data?._id) {
+        setGetLoading(false);
+        setData(res.data);
+      } else {
+        alert('data not found')
+      }
     });
   }, [id]);
   console.log(data, "from checkout");
@@ -24,7 +28,11 @@ const Checkout = () => {
     console.log(data);
     setSave(true);
     const { response, status } = saveRoutine(data);
-    alert(response, status);
+    if (status !== 400) {
+      console.log('asd')
+      axios.put(`http://localhost:5001/routine/increaseUsingValue?id=${data._id}`)
+    }
+    alert(response + status);
   };
   return (
     <MainLayout>

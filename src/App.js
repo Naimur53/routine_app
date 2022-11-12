@@ -12,7 +12,6 @@ import TopBar from "./components/ShareComponents/TopBar/TopBar";
 import SearchRoutine from "./components/SearchRoutine/SearchRoutine";
 import MyNotes from "./components/MyNote/MyNotes";
 import SaveRoutine from "./components/SaveRoutine/SaveRoutine";
-import Edite from "./components/CreateRoutine/PreviewRoutine/Edite/Edite";
 import Checkout from "./components/SearchRoutine/Checkout/Checkout";
 import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyProfile from "./components/MyProfile/MyProfile";
@@ -29,10 +28,6 @@ import {
 } from "./ManageState/DataSlice/dataSlice";
 import { getIdToken, onAuthStateChanged } from "firebase/auth";
 import UpdateRoutine from "./components/UpdateRoutine/UpdateRoutine";
-import EditBySteper from "./components/MyProfile/EditeProfile/EditBySteper/EditBySteper";
-import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
-import EditBio from "./components/MyProfile/EditeProfile/EditBySteper/EditBio/EditBio";
-import EditDetails from "./components/MyProfile/EditeProfile/EditBySteper/EditDetails/EditDetails";
 import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequestRoutines/AllRequestRoutines";
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
@@ -42,6 +37,8 @@ import ManageRoutine from "./components/Dashboard/DashboardPages/ManageRoutine/M
 import OnlineRoute from "./components/ShareComponents/OnlineRoute/OnlineRoute";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
+import EditeProfile from "./components/EditeProfile/EditeProfile";
 
 const theme = createTheme({
   palette: {
@@ -86,10 +83,13 @@ function App() {
 
           {/* not working on this */}
 
-          {/* <Route path="/editProfile" element={<EditeProfile />}></Route>
-          <Route path="/editBySteper" element={<EditBySteper />}></Route>
-          <Route path="/editBio" element={<EditBio />}></Route>
-          <Route path="/editDetails" element={<EditDetails />}></Route> */}
+          <Route path="/editProfile" element={
+            <PrivateRoute>
+              <MainLayout>
+                <EditeProfile />
+              </MainLayout>
+            </PrivateRoute>
+          }></Route>
 
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
@@ -154,7 +154,10 @@ function App() {
               </OnlineRoute>
             }
           ></Route>
-          {/* dashboard routes  */}
+
+
+          {/* ---------------------dashboard routes -------------------------- */}
+
           <Route
             path="/dashboard"
             element={
@@ -194,6 +197,12 @@ function App() {
               path="manageRoutine/update/:id"
               element={
                 <UpdateRoutine admin={true} />
+              }
+            ></Route>
+            <Route
+              path="manageAdmin"
+              element={
+                <ManageAdmin />
               }
             ></Route>
 

@@ -147,6 +147,7 @@ const useFirebase = ({ observer }) => {
             })
             .catch((error) => {
                 setAuthError(error.message);
+                dispatch(setLoading(false));
             });
     };
     useEffect(() => {

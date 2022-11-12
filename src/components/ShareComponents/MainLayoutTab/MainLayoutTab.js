@@ -15,6 +15,7 @@ import useFirebase from "../../../Hook/useFirebase";
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   const { user } = useSelector(allData)
   const { logOut } = useFirebase({ observer: false })
@@ -24,6 +25,7 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
     { name: "overview", path: "/dashboard", Icon: EqualizerIcon },
     { name: "All Request Routine", path: "/dashboard/allRequestRoutines", Icon: AddchartIcon },
     { name: "Manage Routine", path: "/dashboard/manageRoutine", Icon: ManageSearchIcon },
+    { name: "Manage Admin", path: "/dashboard/manageAdmin", Icon: AdminPanelSettingsIcon },
 
   ] : [
     { name: "Dashboard", path: "/dashboard", Icon: AccountCircleIcon },

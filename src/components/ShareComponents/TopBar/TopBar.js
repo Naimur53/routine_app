@@ -95,7 +95,12 @@ const TopBar = () => {
                       onClose={handleCloseUserMenu}
                     >
                       <div className="flex w-[250px] px-3 flex-col items-center" >
-                        <img className="w-1/2" src={user.photoURL} alt={user.displayName} />
+                        {/* <img className="w-1/2 rounded-full" src={user.photoURL} alt={user.displayName} /> */}
+                        <Avatar
+                          alt={user.displayName}
+                          src={user.photoURL}
+                          sx={{ width: 150, height: 150 }}
+                        />
                         <span className="capitalize pt-2 font-medium text-lg text-center ">Sheikh {user.displayName}</span>
                         <span className="">{user.email}</span>
                         <div className="mt-5 w-full flex justify-between">

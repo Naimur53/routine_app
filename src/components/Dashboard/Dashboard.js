@@ -1,9 +1,19 @@
 import { Container, Grid } from '@mui/material';
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { allData } from '../../ManageState/DataSlice/dataSlice';
 import MainLayoutTab from '../ShareComponents/MainLayoutTab/MainLayoutTab';
 
 const Dashboard = () => {
+    const { user } = useSelector(allData)
+    const location = useLocation();
+    if (!user?.isAdmin) {
+
+        toast.error('Your are not authorize!!!')
+        return <Navigate to='/login' state={{ from: location }} ></Navigate>
+    }
     return (
         <div className=' '>
             <Container maxWidth="xxl" >

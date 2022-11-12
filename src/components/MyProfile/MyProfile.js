@@ -1,5 +1,5 @@
 import { PhotoCamera } from "@mui/icons-material";
-import { Button, IconButton, Skeleton, Tooltip } from "@mui/material";
+import { Avatar, Button, IconButton, Skeleton, Tooltip } from "@mui/material";
 import React, { useState } from "react";
 
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
@@ -18,31 +18,39 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import textConversion from "../../utilities/textConversion";
 import { useSelector } from "react-redux";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
+import EditIcon from '@mui/icons-material/Edit';
 const MyProfile = () => {
   const [loeadeing, setLoeading] = useState(false);
-  const { user, } = useSelector(allData)
+  const { user, } = useSelector(allData);
   const institute = "Brahmnbaria Polytechnic Institute";
   const department = "Computer Secience And Enginnering";
   return (
     <MainLayout>
-      <div className="container lg:w-5/6 xl:w-2/7 sm:w-full md:w-2/3  bg-white    duration-200 easy-in-out">
-        <div className="lg:flex">
-          <div className="flex-auto lg:w-52">
-            <div className="h-32 overflow-hidden">
+      <div className="container    bg-white    duration-200 easy-in-out mt-5">
+        <div className="w-full">
+          <div className="flex-auto lg:w-full">
+            <div className="h-32 md:h-[250px] overflow-hidden rounded relative bg-cover bg-center bg-on-repeat" style={{ backgroundImage: `url('${user.thumbnail}')`, }}>
+              <div className="absolute top-2 right-2">
+                <Button variant="contained" sx={{ background: 'white', color: 'black' }} component={NavLink} to='/editProfile' >  Edit Profile </Button>
 
-              <>
-                <img className="w-full" src={profilebg} alt="" />
-              </>
-
+              </div>
             </div>
-            <div className="flex justify-center px-5 -mt-12">
+            <div className="flex justify-center px-5 -mt-16">
 
 
-              <img
-                className="h-32 w-32 bg-gray-200 p-2 rounded-full  "
+              {/* <img
+                className="h-32 relative z-10 md:h-[150px] w-32 md:w-[150px] bg-gray-200 p-2 rounded-full  "
                 src={user.photoURL}
                 alt="user"
-              />
+              /> */}
+              <div className="p-2 bg-gray-200 rounded-full shadow relative">
+
+                <Avatar
+                  alt={user.displayName}
+                  src={user.photoURL}
+                  sx={{ width: 150, height: 150 }}
+                />
+              </div>
             </div>
 
             <div className="py-5">
@@ -60,101 +68,61 @@ const MyProfile = () => {
                     {user.email}
                   </p>
                 </div>
+                <div className="px-0 md:px-5">
+                  <p>{user.bio}</p>
+                </div>
               </div>
 
             </div>
           </div>
 
-          {/* <div className="flex-auto lg:w-96  p-4 pl-6 hidden   text-gray-500 text-lg">
-            {loeadeing ? (
-              <>
-                <Skeleton
-                  animation="wave"
-                  variant="text"
-                  width="20%"
-                  height={40}
-                />
-              </>
-            ) : (
-              <>
-                <h1 className="text-2xl   text-bold text-gray-700  mb-2">
-                  Details
-                </h1>
-              </>
-            )}
+          <div className="flex-auto   text-gray-500 text-lg">
+
+            <h1 className="text-2xl   text-bold text-gray-700  mb-2">
+              Details
+            </h1>
 
             <div className="flex">
-              {loeadeing ? (
-                <>
-                  <Skeleton animation="wave" variant="text" width="70%" />
-                </>
-              ) : (
-                <>
-                  <SchoolIcon className="m-2 text-gray-400 "></SchoolIcon>
-                  <Tooltip title={institute}>
-                    <p className="text-gray-400 text-lg mt-2 ">
-                      Study at {textConversion(institute, 25)}{" "}
-                    </p>
-                  </Tooltip>
-                </>
-              )}
-            </div>
-            <div className="flex">
-              {loeadeing ? (
-                <>
-                  <Skeleton animation="wave" variant="text" width="70%" />
-                </>
-              ) : (
-                <>
-                  <SubjectIcon className="m-2 text-gray-400 "></SubjectIcon>
-                  <Tooltip title={department}>
-                    <p className="text-gray-400 text-lg mt-2 ">
-                      Department: {textConversion(department, 25)}
-                    </p>
-                  </Tooltip>
-                </>
-              )}
-            </div>
-            <div className="flex">
-              {loeadeing ? (
-                <>
-                  <Skeleton animation="wave" variant="text" width="70%" />
-                </>
-              ) : (
-                <>
-                  <EventSeatIcon className="m-2 text-gray-400 "></EventSeatIcon>
+              <SchoolIcon className="m-2 text-gray-400 "></SchoolIcon>
+              <Tooltip title={institute}>
+                <p className="text-gray-400 text-lg mt-2 ">
+                  Study at {textConversion(institute, 100)}{" "}
+                </p>
+              </Tooltip>
 
-                  <p className="text-gray-400 text-lg mt-2 "> Semester : 6th</p>
-                </>
-              )}
             </div>
             <div className="flex">
-              {loeadeing ? (
-                <>
-                  <Skeleton animation="wave" variant="text" width="70%" />
-                </>
-              ) : (
-                <>
-                  <FilterTiltShiftIcon className="m-2 text-gray-400 "></FilterTiltShiftIcon>
 
-                  <p className=" text-gray-400 text-lg mt-2"> Shift : 1st</p>
-                </>
-              )}
+              <SubjectIcon className="m-2 text-gray-400 "></SubjectIcon>
+              <Tooltip title={department}>
+                <p className="text-gray-400 text-lg mt-2 ">
+                  Department: {textConversion(department, 100)}
+                </p>
+              </Tooltip>
+
             </div>
             <div className="flex">
-              {loeadeing ? (
-                <>
-                  <Skeleton animation="wave" variant="text" width="70%" />
-                </>
-              ) : (
-                <>
-                  <RememberMeIcon className="m-2 text-gray-400 "></RememberMeIcon>
 
-                  <p className="text-gray-400 text-lg mt-2 "> Id : 5461322</p>
-                </>
-              )}
+              <EventSeatIcon className="m-2 text-gray-400 "></EventSeatIcon>
+
+              <p className="text-gray-400 text-lg mt-2 "> Semester : 6th</p>
+
+
             </div>
-          </div> */}
+            <div className="flex">
+              <FilterTiltShiftIcon className="m-2 text-gray-400 "></FilterTiltShiftIcon>
+
+              <p className=" text-gray-400 text-lg mt-2"> Shift : 1st</p>
+
+            </div>
+            <div className="flex">
+
+              <RememberMeIcon className="m-2 text-gray-400 "></RememberMeIcon>
+
+              <p className="text-gray-400 text-lg mt-2 "> section : 5461322</p>
+
+            </div>
+          </div>
         </div>
 
         <hr className="mt-6" />

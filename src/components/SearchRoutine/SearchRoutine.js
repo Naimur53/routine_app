@@ -274,7 +274,7 @@ const SearchRoutine = () => {
             <Grid item lg={3} md={6} xs={12}>
               <DemoCard item={single} i={i} updateAble={false}></DemoCard>
             </Grid>
-          )) : <div className="mt-10  ">
+          )) : <div className="my-10 flex justify-center w-full ">
             <SearchRoutineNotFound></SearchRoutineNotFound>
           </div>
         }

@@ -13,6 +13,7 @@ import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import { useSelector } from "react-redux";
 import useFirebase from "../../../Hook/useFirebase";
 import AddchartIcon from "@mui/icons-material/Addchart";
+import InfoIcon from "@mui/icons-material/Info";
 const MainLayoutTab = ({ handleCloseNavMenu }) => {
   const { user } = useSelector(allData);
   const { logOut } = useFirebase({ observer: false });
@@ -32,6 +33,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
         { name: "Saved Routine", path: "/saveRoutine", Icon: AddTaskIcon },
         { name: "My Notes", path: "/myNotes", Icon: TextSnippetIcon },
         { name: "Search Routine", path: "/searchRoutine", Icon: SearchIcon },
+        { name: "About Us", path: "/aboutUs", Icon: InfoIcon },
         { name: "My Routine", path: "/myRoutine", Icon: FolderSharedIcon },
         {
           name: "Request for routine",

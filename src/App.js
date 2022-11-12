@@ -38,6 +38,8 @@ import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequest
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
 import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
+import About from "./components/About/About";
+import ContactUs from "./components/About/ContactUs/ContactUs";
 
 const theme = createTheme({
   palette: {
@@ -71,6 +73,8 @@ function App() {
           <Route path="/editBySteper" element={<EditBySteper />}></Route>
           <Route path="/editBio" element={<EditBio />}></Route>
           <Route path="/editDetails" element={<EditDetails />}></Route>
+          <Route path="/aboutUs" element={<About />}></Route>
+          <Route path="/contactUs" element={<ContactUs />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
           <Route

@@ -123,7 +123,6 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
     }, [updatable, trigger, setEdit, setUpdatable])
 
     useEffect(() => {
-        console.log(displayName, bio)
         if (displayName !== user.displayName || bio !== user.bio) {
             setUpdatable(pre => {
                 return { ...pre, disabled: false }

@@ -23,8 +23,6 @@ const HomeClassShow = ({ data }) => {
         const todayNum = new Date().getDay()
         const normalWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const newWeek = normalWeek.filter(single => single !== normalWeek[todayNum])
-        console.log(todayNum, [normalWeek[todayNum], ...newWeek], normalWeek[todayNum]);
-
         setWeek(pre => [normalWeek[todayNum], ...newWeek])
         setValue(0);
     }, [])

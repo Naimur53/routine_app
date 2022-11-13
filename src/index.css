@@ -12,11 +12,15 @@ code {
     monospace;
 }
 
+* {
+  overflow-wrap: break-word;
+}
+
 /* width */
 ::-webkit-scrollbar {
-  width:4px;
-  height:8px;
-  border-radius: 40px; 
+  width: 4px;
+  height: 8px;
+  border-radius: 40px;
   margin-top: 20px;
 }
 
@@ -39,7 +43,7 @@ div:hover::-webkit-scrollbar-thumb {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:rgb(225, 225, 225);
+  background: rgb(225, 225, 225);
 }
 
 .Mui-active,
@@ -59,12 +63,13 @@ div:hover::-webkit-scrollbar-thumb {
 
 @layer base {
   .dashboard_link {
-    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2 hover:bg-gray-200 hover:text-gray-700 transition-all 
+    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2 hover:bg-gray-200 hover:text-gray-700 transition-all
   }
 
   .custom_height_for_classes {
     @apply h-[calc(100vh-150px)];
   }
+
   .custom_height {
     @apply h-[calc(100vh-80px)];
   }
@@ -72,14 +77,16 @@ div:hover::-webkit-scrollbar-thumb {
   .details_card_wrap {
     @apply h-full
   }
-  .mainLayoutTabWidth{
+
+  .mainLayoutTabWidth {
     @apply w-[260px]
   }
+
   .custom_height_preview {
     @apply h-[calc(100vh-300px)]
   }
-  .pagination_button{
-    @apply p-2 bg-light-purple hover:bg-dark-purple transition-all
-    hover:text-white text-dark-purple disabled:text-gray-400 disabled:bg-gray-200 rounded-full
+
+  .pagination_button {
+    @apply p-2 bg-light-purple hover:bg-dark-purple transition-all hover:text-white text-dark-purple disabled:text-gray-400 disabled:bg-gray-200 rounded-full
   }
 }

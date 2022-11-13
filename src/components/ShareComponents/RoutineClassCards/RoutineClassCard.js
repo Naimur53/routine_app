@@ -2,7 +2,7 @@ import React from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Tooltip } from "@mui/material";
 import textConversion from "../../../utilities/textConversion";
-import convertToHourMinute from "../../../utilities/ConvertTime";
+import convertToHourMinute, { getAmOrPm } from "../../../utilities/ConvertTime";
 
 function chooseTheme(i) {
     const theme = [
@@ -46,10 +46,10 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
                 </div>
             </div>
             <div className='mt-4'>
-                <div className='flex justify-between'>
-                    <div className={headingStyle + " flex gap-2 mb-2"}>
+                <div className='flex items-center justify-between'>
+                    <div className={headingStyle + " flex items-center gap-2 mb-2"}>
                         <AccessTimeIcon className={headingStyle}></AccessTimeIcon>
-                        <p>{convertToHourMinute(startTime)} - {convertToHourMinute(endTime)}</p>
+                        <p className="text-sm">{convertToHourMinute(startTime)} {getAmOrPm(startTime)} - {convertToHourMinute(endTime)} {getAmOrPm(endTime)}</p>
                     </div>
                     <Tooltip title={roomNumber}>
                         <p className={contentStyle + " font-semibold text-sm"}>

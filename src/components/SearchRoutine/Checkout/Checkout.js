@@ -75,6 +75,7 @@ const Checkout = () => {
               <Button
                 variant="contained"
                 disabled={save}
+                size='small'
                 className="text-lg border  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
                 onClick={handleSave}
               >
@@ -83,6 +84,7 @@ const Checkout = () => {
               </Button>
               <Button
                 variant="outlined"
+                size='small'
                 className="text-lg border  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
                 onClick={() => handleShare()}
               >
@@ -99,7 +101,10 @@ const Checkout = () => {
             <div className="text-lg">
               <div className="flex justify-center items-center">
                 <div>
-                  <h1 className="py-3"><span className="text-dark-purple ">{data.department}</span> department <span className="text-dark-purple ">{data.semester}</span> semester </h1>
+                  <h1 className="py-3 block break-words">
+                    <span className="text-dark-purple">{data.department}</span> department
+                    <br className=" md:hidden block" />
+                    <span className="text-dark-purple  "> {data.semester}</span> semester </h1>
                   <div className="flex justify-between">
 
                     <h1>Shift: {data.shift}</h1>

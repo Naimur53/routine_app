@@ -159,7 +159,7 @@ const SearchRoutine = () => {
                   type="text"
                   id="defasult-search"
                   className="block pl-4  rounded-tl-full rounded-bl-full focus:border-0 focus:outline-none bg-transparent   w-full py-3 placeholder:text-medium-purple  text- sm text-black         "
-                  placeholder="Enter Your Institute Name or id"
+                  placeholder="Institute Name or id"
                   {...register("institute", { required: true })}
                 />
 

@@ -25,6 +25,7 @@ import { allData } from "../../ManageState/DataSlice/dataSlice";
 import textConversion from "../../utilities/textConversion";
 import EditProfileLayout from "./compo/EditProfileLayout/EditProfileLayout";
 import UpdateProfileAndCover from "./compo/UpdateProfileAndCover/UpdateProfileAndCover";
+import UpdateDetails from "./compo/UpdateDetails/UpdateDetails";
 
 const EditeProfile = () => {
   const [bio, setBio] = useState(false);
@@ -71,165 +72,18 @@ const EditeProfile = () => {
           >
 
           </EditProfileLayout>
-
         </div>
 
-        <div assName="">
-
-
-        </div>
-
-        <div className="">
-          <div className="flex justify-between">
-            {/* -------------------edit bio information------------------  */}
-            <h1 className="text-xl text-gray-400"> Bio</h1>
-            <button onClick={handleBio}>
-              <span className="text-blue-500"> Edit</span>
-            </button>
-          </div>
-          <div className="p-4">
-            {!bio ? (
-              <h2 className="text-gray-800 text-lg font-bold">
-                Mehedi Hasan
-              </h2>
-            ) : (
-              <TextField
-                {...register("name")}
-                defaultValue="Mehedi Hasan"
-                id="standard-basic"
-                variant="standard"
-              />
-            )}
-
-            <div className=" ">
-              <div className="flex">
-                <MarkEmailReadIcon className="text-gray-400 m-2"></MarkEmailReadIcon>
-
-                <p className="text-gray-400 text-sm mt-2 ">
-                  mehedihasan23159287@gmail.com
-                </p>
-              </div>
-
-              <div className="flex">
-                <PhoneIcon className="text-gray-400 m-2"></PhoneIcon>
-
-                <p className="text-gray-400 text-sm mt-2 ">017******8</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="      text-gray-500 text-lg">
-          <div className="flex justify-between  overflow-hidden ">
+        <div className=" text-gray-500 text-lg">
+          <div  >
             {/*------------------------ edit details information-----------------------  */}
-            <h1 className="text-xl text-gray-400"> Details</h1>
+            <EditProfileLayout title="Details"
+              Element={UpdateDetails}
+            >
 
-            <button onClick={handleDetails}>
-              <span className="text-blue-500"> Edit</span>
-            </button>
+            </EditProfileLayout>
           </div>
-          <div className="p-4">
-            <div className="flex">
-              <SchoolIcon className="m-2 text-gray-400 "></SchoolIcon>
-              {!details ? (
-                <Tooltip title={department}>
-                  <p className="text-gray-400 text-lg mt-2 ">
-                    Study at{textConversion(institute, 25)}
-                  </p>
-                </Tooltip>
-              ) : (
-                <TextField
-                  id="standard-basic"
-                  {...register("institute")}
-                  defaultValue=" Study at BBPI"
-                  variant="standard"
-                />
-              )}
-            </div>
-            <div className="flex">
-              <SubjectIcon className="m-2 text-gray-400 "></SubjectIcon>
-              {!details ? (
-                <Tooltip title={department}>
-                  <p className="text-gray-400 text-lg mt-2 ">
-                    Department: {textConversion(department, 25)}{" "}
-                  </p>
-                </Tooltip>
-              ) : (
-                <TextField
-                  id="standard-basic"
-                  {...register("department")}
-                  defaultValue="Computer"
-                  variant="standard"
-                />
-              )}
-            </div>
-            <div className="flex">
-              <EventSeatIcon className="m-2 text-gray-400 "></EventSeatIcon>
-              {!details ? (
-                <p className="text-gray-400 text-lg mt-2 "> Semester : 6th</p>
-              ) : (
-                <FormControl variant="standard" className=" w-44">
-                  <InputLabel id="demo-multiple-name-label">
-                    Semester
-                  </InputLabel>
-                  <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
-                    value={watch("semester")}
-                    {...register("semester", { required: false })}
-                    MenuProps={MenuProps}
-                  >
-                    {semesters.map((semester) => (
-                      <MenuItem key={semester} value={semester}>
-                        {semester}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              )}
-            </div>
-            <div className="flex">
-              <FilterTiltShiftIcon className="m-2 text-gray-400 "></FilterTiltShiftIcon>
-              {!details ? (
-                <p className=" text-gray-400 text-lg mt-2"> Shift : 1st</p>
-              ) : (
-                <FormControl variant="standard" className=" w-44">
-                  <InputLabel id="demo-multiple-name-label">Shift</InputLabel>
-                  <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
-                    value={watch("shift")}
-                    {...register("shift", { required: true })}
-                    MenuProps={MenuProps}
-                  >
-                    {shifts.map((shift) => (
-                      <MenuItem key={shift} value={shift}>
-                        {shift}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              )}
-            </div>
-            <div className="flex">
-              <RememberMeIcon className="m-2 text-gray-400 "></RememberMeIcon>
-              {!details ? (
-                <p className="text-gray-400 text-lg mt-2 "> Id : 5461322</p>
-              ) : (
-                <TextField
-                  id="standard-basic"
-                  defaultValue={"5461322"}
-                  {...register("id")}
-                  variant="standard"
-                />
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="ml-2">
-          <Button type="submit" className=" ml-3" variant="outlined">
-            Update Profile
-          </Button>
+
         </div>
 
         <hr className="mt-6" />

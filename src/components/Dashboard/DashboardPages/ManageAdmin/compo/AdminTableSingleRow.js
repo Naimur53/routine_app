@@ -17,7 +17,7 @@ const AdminTableSingleRow = ({ makeAdmin, _id, isAdmin, photoURL, email, display
 
         if (!postLoading) {
             setPostLoading(true)
-            axios.put(`http://localhost:5001/admin?email=${email}&adminStatus=${status}`)
+            axios.put(`https://shielded-dusk-65695.herokuapp.com/admin?email=${email}&adminStatus=${status}`)
                 .then(res => {
                     setPostLoading(false)
                     if (status) {

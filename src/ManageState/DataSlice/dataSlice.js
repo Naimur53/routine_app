@@ -7,7 +7,7 @@ const initialState = {
 export const getUserFromDB = createAsyncThunk(
   "data/getFromDB",
   async (info) => {
-    const response = await axios.get(`http://localhost:5001/user?email=${info.email}`)
+    const response = await axios.get(`https://shielded-dusk-65695.herokuapp.com/user?email=${info.email}`)
     return response.data
   }
 );

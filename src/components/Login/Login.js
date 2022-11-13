@@ -24,7 +24,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-
     loginUser({ ...data, location, navigate });
   };
   return (
@@ -54,15 +53,25 @@ const Login = () => {
               <div className="w-full flex justify-center">
                 <CircularProgress></CircularProgress>
               </div>
+            ) : user?.email ? (
+              <div className="text-center mt-5">
+                <p className="font-medium text-lg">
+                  You are already logged in want to{" "}
+                  <span
+                    className="text-dark-purple font-semibold underline cursor-pointer underline-dark-purple"
+                    onClick={logOut}
+                  >
+                    logout
+                  </span>{" "}
+                  ?
+                </p>
+              </div>
             ) : (
-              user?.email ? <div className="text-center mt-5">
-                <p className="font-medium text-lg">You are already logged in want to <span className="text-dark-purple font-semibold underline cursor-pointer underline-dark-purple" onClick={logOut}>logout</span> ?</p>
-              </div> :
-                <input
-                  className="my-3 text-lg py-2 font-bold px-6 border border-gary-300 text-black rounded-full cursor-pointer transition-all hover:shadow-md"
-                  type="submit"
-                  value="Login"
-                />
+              <input
+                className="my-3 text-lg py-2 font-bold px-6 border border-gary-300 text-black rounded-full cursor-pointer transition-all hover:shadow-md"
+                type="submit"
+                value="Login"
+              />
             )}
           </div>
           <div>

@@ -31,36 +31,31 @@ const MyRoutine = () => {
     }
   }, [user]);
   if (!getLoading && !allRoutine?.length) {
-    return <MainLayout>
-      <div className="custom_height flex justify-center items-center">
-        <div className="flex flex-col justify-center items-center">
-          <img src="./images/duck-searching.gif" alt="notfound" />
-          <h4 className="text-lg font-medium mt-5">You don't have any routine <NavLink className='underline underline-dark-purple  text-dark-purple' to='/createRoutine'>create one?</NavLink> </h4>
+    return (
+      <MainLayout>
+        <div className="custom_height flex justify-center items-center">
+          <div className="flex flex-col justify-center items-center">
+            <img src="./images/duck-searching.gif" alt="notfound" />
+            <h4 className="text-lg font-medium mt-5">
+              You don't have any routine{" "}
+              <NavLink
+                className="underline underline-dark-purple  text-dark-purple"
+                to="/createRoutine"
+              >
+                create one?
+              </NavLink>{" "}
+            </h4>
+          </div>
         </div>
-
-      </div>
-    </MainLayout>
+      </MainLayout>
+    );
   }
   return (
     <MainLayout>
       <div className="text-center">
-        {getLoading ? (
-          <>
-            <Skeleton
-              animation="wave"
-              sx={{ mx: "auto" }}
-              variant="text"
-              width="20%"
-              height={40}
-            />
-          </>
-        ) : (
-          <>
-            <h1 className="text-xl font-bold text-ellipsis text-slate-600">
-              My Created Routines
-            </h1>
-          </>
-        )}
+        <h1 className="text-xl font-bold text-ellipsis text-slate-600">
+          My Created Routines
+        </h1>
       </div>
       <Grid
         container

@@ -61,7 +61,7 @@ const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble
     if (!deleteLoading) {
       if (window.confirm("are you sure ?")) {
         setDeleteLoading(true)
-        axios.delete(`http://localhost:5001/routine/${_id}`)
+        axios.delete(`https://shielded-dusk-65695.herokuapp.com/routine/${_id}`)
           .then(res => {
             setDeleteLoading(false)
             setData(pre => {

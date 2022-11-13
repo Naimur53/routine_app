@@ -30,8 +30,6 @@ const SearchRoutine = () => {
   } = useForm();
   const handleSearch = () => {
     const value = "default-search".value;
-
-
   };
 
   const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
@@ -48,9 +46,7 @@ const SearchRoutine = () => {
     },
   };
 
-  const onSubmit = data => {
-
-  }
+  const onSubmit = (data) => { };
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
     const clear = () => {
@@ -78,7 +74,7 @@ const SearchRoutine = () => {
   }, [allRoutine, department, section, semester,])
 
   const textSearchRequest = () => {
-    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `)
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `)
       .then(res => {
         setAllRoutine(res.data)
         setPagination({ len: 8, skip: 0 })
@@ -98,7 +94,7 @@ const SearchRoutine = () => {
 
     // institute will work for both id and text name of institute
     if (institute?.length === 24) {
-      axios.get(`http://localhost:5001/routine/findById?id=${institute}`)
+      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine/findById?id=${institute}`)
         .then(res => {
 
           setAllRoutine([res.data])
@@ -126,7 +122,7 @@ const SearchRoutine = () => {
   //handle pagination 
   const handlePre = () => {
     setGetLoading(true)
-    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8} `)
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8} `)
       .then(res => {
         setAllRoutine(res.data)
         setPagination({ len: res.data.length, skip: pagination.skip - 8 })
@@ -136,7 +132,7 @@ const SearchRoutine = () => {
   }
   const handleNext = () => {
     setGetLoading(true)
-    axios.get(`http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len} `)
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len} `)
       .then(res => {
         setAllRoutine(res.data)
         setPagination({ len: res.data.length, skip: pagination.skip + pagination.len })

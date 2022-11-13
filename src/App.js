@@ -39,6 +39,8 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
 import EditeProfile from "./components/EditeProfile/EditeProfile";
+import About from "./components/About/About";
+import ContactUs from "./components/About/ContactUs/ContactUs";
 
 const theme = createTheme({
   palette: {
@@ -61,11 +63,10 @@ function App() {
   const dispatch = useDispatch();
 
   const { auth } = useFirebase({ observer: true });
-  const { user } = useSelector(allData)
+  const { user } = useSelector(allData);
   useEffect(() => {
-    console.log(user)
-
-  }, [user])
+    console.log(user);
+  }, [user]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,6 +85,8 @@ function App() {
         <TopBar></TopBar>
         <Routes>
           <Route path="/login" element={<OnlineRoute><Login /></OnlineRoute>}></Route>
+          <Route path="/about" element={<About></About>}></Route>
+          <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
           <Route path="/signUp" element={<OnlineRoute><SignUp /></OnlineRoute>}></Route>
 
           {/* not working on this */}
@@ -181,16 +184,12 @@ function App() {
             ></Route>
             <Route
               path="allRequestRoutines"
-              element={
-                <AllRequestRoutines />
-              }
+              element={<AllRequestRoutines />}
             ></Route>
 
             <Route
               path="createRequestRoutine/:id"
-              element={
-                <CreateRequestRoutine />
-              }
+              element={<CreateRequestRoutine />}
             ></Route>
             <Route
               path="manageRoutine"

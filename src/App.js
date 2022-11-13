@@ -50,6 +50,11 @@ const theme = createTheme({
       // This is green.A700 as hex.
       main: "#103d7b",
     },
+    white: {
+      // This is green.A700 as hex.
+      main: "#fff",
+    },
+
   },
 });
 function App() {

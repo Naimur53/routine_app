@@ -107,7 +107,6 @@ const TopBar = () => {
                           <NavLink to='/myProfile'><button className="bg-dark-purple text-white py-2 px-3 rounded-full" onClick={handleCloseUserMenu}>View Profile</button></NavLink>
                           <button onClick={() => {
                             setAnchorElNav(pre => null);
-
                             logOut();
 
                           }} className="bg-dark-purple text-white py-2 px-3 rounded-full" >Logout</button>
@@ -161,7 +160,13 @@ const TopBar = () => {
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
-                <MenuIcon />
+                {/* <MenuIcon />  */}
+                <div className="flex justify-center items-end gap-1 flex-col">
+                  <div className="h-[3px] w-[10px] bg-black rounded-md"></div>
+                  <div className="h-[3px] w-[20px] bg-black rounded-md"></div>
+                  <div className="h-[3px] w-[15px] bg-black rounded-md"></div>
+                </div>
+
               </IconButton>
             </Box>
 
@@ -169,9 +174,9 @@ const TopBar = () => {
               anchor="left"
               open={anchorElNav}
               onClose={handleCloseNavMenu}
-              sx={{ width: "50%" }}
+              sx={{ width: "85vw", pt: 0, }}
             >
-              <div className="hidden md:flex justify-center mt-5 mb-3">
+              <div className="hidden md:flex justify-center mt-5 mb-3 ">
                 <Logo></Logo>
               </div>
               <MainLayoutTab handleCloseNavMenu={handleCloseNavMenu} ></MainLayoutTab>

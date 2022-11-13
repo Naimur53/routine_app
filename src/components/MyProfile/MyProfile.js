@@ -17,7 +17,7 @@ const MyProfile = () => {
         <div className="w-full">
           <div className="flex-auto lg:w-full">
             <div className="h-32 md:h-[250px] overflow-hidden rounded relative bg-cover bg-center bg-on-repeat" style={{ backgroundImage: `url('${user.thumbnail}')`, }}>
-              <div className="absolute top-2 right-2">
+              <div className="hidden md:block absolute top-2 right-2">
                 <Button variant="contained" sx={{ background: 'white', color: 'black' }} component={NavLink} to='/editProfile' >  Edit Profile </Button>
 
               </div>

@@ -65,14 +65,14 @@ const Home = () => {
   console.log(data)
   return (
     <MainLayout>
-      <Grid container spacing={2}>
+      <Grid container spacing={0}>
         <Grid item xs={12} md={8}>
 
           {
             data?.classes?.length ?
               <div>
                 <div className="flex justify-between">
-                  <div className="w-[300px] mb-2">
+                  <div className="w-[230px] md:w-[300px] mb-2">
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Select Routine</InputLabel>
                       <Select
@@ -80,10 +80,12 @@ const Home = () => {
                         id="demo-simple-select"
                         value={selectIndex}
                         label="Select Routine"
+                        sx={{ fontSize: { md: '16px', xs: '13px' } }}
                         onChange={handleChange}
                       >
                         {
-                          allRoutineData.map(({ department, semester, section, shift }, i) => <MenuItem value={i}>
+                          allRoutineData.map(({ department, semester, section, shift }, i) => <MenuItem sx={{ fontSize: { md: '16px', sm: '13px' } }}
+                            value={i}>
                             {shift === 'None' ? `${department} sem-${semester}  sec-${section} ` : section === 'None' ? `${department}  sem-${semester} shift-${shift}` : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
                             { }
                           </MenuItem>)

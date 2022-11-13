@@ -46,8 +46,8 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
                 </div>
             </div>
             <div className='mt-4'>
-                <div className='flex items-center justify-between'>
-                    <div className={headingStyle + " flex items-center gap-2 mb-2"}>
+                <div className='flex items-center justify-between py-2'>
+                    <div className={headingStyle + " flex items-center gap-2 "}>
                         <AccessTimeIcon className={headingStyle}></AccessTimeIcon>
                         <p className="text-sm">{convertToHourMinute(startTime)} {getAmOrPm(startTime)} - {convertToHourMinute(endTime)} {getAmOrPm(endTime)}</p>
                     </div>

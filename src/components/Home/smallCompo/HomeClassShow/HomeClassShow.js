@@ -44,7 +44,7 @@ const HomeClassShow = ({ data }) => {
                 </Grid>
 
                 <Grid item xs={12} lg={6} >
-                    <div className='custom_height_for_classes overflow-y-auto'>
+                    <div className='custom_height_for_classes  overflow-y-auto'>
 
                         {
                             week.map((single, i) => <TabPanel key={i} value={value} index={i}>

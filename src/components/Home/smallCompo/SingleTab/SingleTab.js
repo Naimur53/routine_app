@@ -67,13 +67,13 @@ const SingleTab = ({ day, classes, i, value, handleChange, a11yProps }) => {
     }, [classes, day])
     return (
         <button className='cursor-pointer' type='button' onClick={() => handleChange(i)}>
-            <div className={`flex flex-col lg:flex-row justify-center lg:justify-start items-center py-3 px-2 gap-4 rounded-2xl text-main-dark ${value === i && " active_class_tab"}`}>
+            <div className={`flex flex-col lg:flex-row justify-center lg:justify-start items-center py-1 md:py-3 px-2 gap-4 rounded-2xl text-main-dark ${value === i && " active_class_tab"}`}>
                 <div className={`border-b lg:border-b-0 lg:border-r w-[80px] h-[50px] flex justify-center items-center  border-content `}>
-                    <h1 className='text-2xl  font-medium'>{day.slice(0, 3)}</h1>
+                    <h1 className='text-xl md:text-2xl  font-medium'>{day.slice(0, 3)}</h1>
                 </div>
-                <div className='text-left text-sm'>
+                <div className='text-left text-sm pb-2'>
                     <h2 className='text-main-dark '> {info.totalClass} Classes</h2>
-                    <p className='text-content '> <span className='hidden lg:inline-block'> </span>{info.totalHour} hours total <span className='inline-block lg:hidden'></span></p>
+                    <p className='text-content '> <span className='hidden lg:inline-block'> </span>{info.totalHour} hours<span className='inline-block lg:hidden'></span></p>
                 </div>
             </div>
         </button>

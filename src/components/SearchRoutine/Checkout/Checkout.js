@@ -39,7 +39,7 @@ const Checkout = () => {
       toast.success(response)
       axios.put(`http://localhost:5001/routine/increaseUsingValue?id=${data._id}`)
     } else {
-      toast.error(status)
+      toast.error("Routine already exist``")
     }
   };
   if (getLoading) {

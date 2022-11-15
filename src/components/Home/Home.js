@@ -19,6 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { toast } from "react-toastify";
+import CustomTooltip from "../ShareComponents/CustomTooltip/CustomTooltip";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
@@ -72,14 +73,15 @@ const Home = () => {
             data?.classes?.length ?
               <div>
                 <div className="flex justify-between">
-                  <div className="w-[230px] md:w-[300px] mb-2">
+                  <div className="w-[230px] md:w-[300px] mb-3">
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Select Routine</InputLabel>
+                      <InputLabel id="demo-simple-select-label">Select Routine </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={selectIndex}
-                        label="Select Routine"
+                        label="Selected Routine "
+                        size="small"
                         sx={{ fontSize: { md: '16px', xs: '13px' } }}
                         onChange={handleChange}
                       >
@@ -94,13 +96,13 @@ const Home = () => {
                     </FormControl>
                   </div>
                   <div>
-                    <Tooltip
-                      title={data.institute}
+                    <CustomTooltip
+                      title={"Institute: " + data.institute}
                     >
                       <IconButton>
                         <HelpOutlineIcon />
                       </IconButton>
-                    </Tooltip>
+                    </CustomTooltip>
                   </div>
                 </div>
                 <HomeClassShow data={data}></HomeClassShow>

@@ -14,11 +14,9 @@ const MainLayout = ({ children }) => {
             </div>
           </div>
           <div className="w-full md:w-[calc(100vw-260px)]   ">
-            <Grid container>
-              <Grid item xs={12} md={12}>
-                <div>{children}</div>
-              </Grid>
-            </Grid>
+
+            <div>{children}</div>
+
           </div>
         </div>
       </Container>

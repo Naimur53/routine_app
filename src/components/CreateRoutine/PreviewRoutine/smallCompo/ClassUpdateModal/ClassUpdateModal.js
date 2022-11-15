@@ -5,6 +5,7 @@ import Class from '../../../Class/Class';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import MuiDateTimePicker from '../../../Class/MuiDateTimePicker';
+import CustomTooltip from '../../../../ShareComponents/CustomTooltip/CustomTooltip';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -92,11 +93,11 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
         <div className='relative'>
             {children}
             <div className='absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-100  bg-black/10 rounded-md transition-all'>
-                <Tooltip title='Edit this class'>
+                <CustomTooltip title='Edit this class'>
                     <IconButton onClick={() => setOpen(true)}>
                         <EditIcon sx={{ color: '#5946ad' }}></EditIcon>
                     </IconButton>
-                </Tooltip>
+                </CustomTooltip>
 
             </div>
             <Modal

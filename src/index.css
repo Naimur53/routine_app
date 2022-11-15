@@ -73,7 +73,7 @@ div:hover::-webkit-scrollbar-thumb {
   }
 
   .custom_height_for_classes {
-    @apply h-[calc(100vh-295px)] md:h-[calc(100vh-150px)];
+    @apply h-[calc(100vh-260px)] md:h-[calc(100vh-150px)];
   }
 
   .custom_height {

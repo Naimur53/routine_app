@@ -3,6 +3,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import { Tooltip } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import CustomTooltip from '../../../ShareComponents/CustomTooltip/CustomTooltip';
 
 const TableSingleRow = ({ _id, img, message, date, creator, status, adminMessage }) => {
     return (
@@ -13,21 +14,21 @@ const TableSingleRow = ({ _id, img, message, date, creator, status, adminMessage
                 <img src={img} className='w-[40px] shadow-xl rounded-md' alt="s" />
             </TableCell>
             <TableCell align="left">
-                <Tooltip title={message || 'No Message'}>
+                <CustomTooltip title={message || 'No Message'}>
                     <div>
 
                         {message ? message?.slice(0, 10) : 'No Message'}
                     </div>
-                </Tooltip>
+                </CustomTooltip>
             </TableCell>
             <TableCell align="left">{new Date(date).toLocaleDateString()}</TableCell>
             <TableCell align="left">
-                <Tooltip title={adminMessage || 'No Message'}>
+                <CustomTooltip title={adminMessage || 'No Message'}>
                     <div>
 
                         {adminMessage ? adminMessage?.slice(0, 10) : 'No Message'}
                     </div>
-                </Tooltip>
+                </CustomTooltip>
             </TableCell>
             <TableCell align="left">{status}</TableCell>
             <TableCell component="th" scope="row">

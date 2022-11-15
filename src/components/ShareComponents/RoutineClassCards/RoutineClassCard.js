@@ -3,6 +3,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Tooltip } from "@mui/material";
 import textConversion from "../../../utilities/textConversion";
 import convertToHourMinute, { getAmOrPm } from "../../../utilities/ConvertTime";
+import CustomTooltip from "../CustomTooltip/CustomTooltip";
 
 function chooseTheme(i) {
     const theme = [
@@ -31,18 +32,18 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
                         img ? <img src={process.env.PUBLIC_URL + img} className='w-[50px]' alt="logo" /> : <img src='./images/blue_bol.png' className='w-[50px]' alt="logo" />
                     }
                     <div>
-                        <Tooltip title={subjectName}>
+                        <CustomTooltip title={subjectName}>
                             <h1 className={headingStyle + ' font-medium  capitalize'}>{textConversion(subjectName, 20)}</h1>
-                        </Tooltip>
+                        </CustomTooltip>
                         <p className={contentStyle + " text-sm"}>{subjectCode}</p>
                     </div>
                 </div>
                 <div>
-                    <Tooltip title={teacherName}>
+                    <CustomTooltip title={teacherName}>
                         <p className={contentStyle + " font-semibold text-right text-sm"}>
                             {textConversion(teacherName, 15)}
                         </p>
-                    </Tooltip>
+                    </CustomTooltip>
                 </div>
             </div>
             <div className='mt-4'>
@@ -51,11 +52,11 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
                         <AccessTimeIcon className={headingStyle}></AccessTimeIcon>
                         <p className="text-sm">{convertToHourMinute(startTime)} {getAmOrPm(startTime)} - {convertToHourMinute(endTime)} {getAmOrPm(endTime)}</p>
                     </div>
-                    <Tooltip title={roomNumber}>
+                    <CustomTooltip title={roomNumber}>
                         <p className={contentStyle + " font-semibold text-sm"}>
                             {textConversion(roomNumber, 15)}
                         </p>
-                    </Tooltip>
+                    </CustomTooltip>
                 </div>
             </div>
         </div>

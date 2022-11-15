@@ -159,10 +159,11 @@ const TopBar = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
+                sx={{ pr: 0 }}
                 color="inherit"
               >
                 {/* <MenuIcon />  */}
-                <div className="flex justify-center items-end gap-1 flex-col">
+                <div className="flex justify-center items-end gap-1 flex-col pr-0">
                   <div className="h-[3px] w-[10px] bg-black rounded-md"></div>
                   <div className="h-[3px] w-[20px] bg-black rounded-md"></div>
                   <div className="h-[3px] w-[15px] bg-black rounded-md"></div>

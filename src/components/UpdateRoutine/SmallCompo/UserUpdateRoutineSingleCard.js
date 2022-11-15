@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import MuiDateTimePicker from '../../CreateRoutine/Class/MuiDateTimePicker';
 import { useForm } from 'react-hook-form';
 import CloseIcon from '@mui/icons-material/Close';
+import CustomTooltip from '../../ShareComponents/CustomTooltip/CustomTooltip';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -74,16 +75,16 @@ const UserUpdateRoutineSingleCard = ({ children, classes, index, setData }) => {
         <div className='relative'>
             {children}
             <div className='absolute inset-0 flex justify-center items-center md:opacity-0 hover:opacity-100  bg-black/10 rounded-md transition-all'>
-                <Tooltip title='Edit this class'>
+                <CustomTooltip title='Edit this class'>
                     <IconButton onClick={() => setOpen(true)}>
                         <EditIcon sx={{ color: '#5946ad' }}></EditIcon>
                     </IconButton>
-                </Tooltip>
-                <Tooltip title='Delete this class'>
+                </CustomTooltip>
+                <CustomTooltip title='Delete this class'>
                     <IconButton onClick={() => handleDelete()}>
                         <DeleteIcon sx={{ color: '#5946ad' }}></DeleteIcon>
                     </IconButton>
-                </Tooltip>
+                </CustomTooltip>
 
             </div>
             <Modal

@@ -18,7 +18,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import textConversion from '../../utilities/textConversion'
 import { toast } from "react-toastify";
+import CustomTooltip from "../ShareComponents/CustomTooltip/CustomTooltip";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
@@ -72,35 +74,42 @@ const Home = () => {
             data?.classes?.length ?
               <div>
                 <div className="flex justify-between">
-                  <div className="w-[230px] md:w-[300px] mb-2">
+                  <div className="w-[230px] md:w-[300px] mb-3">
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Select Routine</InputLabel>
+                      <InputLabel id="demo-simple-select-label">Select Routine </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={selectIndex}
-                        label="Select Routine"
+                        label="Selected Routine "
+                        size="small"
                         sx={{ fontSize: { md: '16px', xs: '13px' } }}
                         onChange={handleChange}
                       >
                         {
                           allRoutineData.map(({ department, semester, section, shift }, i) => <MenuItem sx={{ fontSize: { md: '16px', sm: '13px' } }}
                             value={i}>
-                            {shift === 'None' ? `${department} sem-${semester}  sec-${section} ` : section === 'None' ? `${department}  sem-${semester} shift-${shift}` : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
+                            {shift === 'None' ? `${textConversion(department, 20)} sem-${semester}  sec-${section} ` : section === 'None' ? `${department}  sem-${semester} shift-${shift}` : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
                             { }
                           </MenuItem>)
                         }
                       </Select>
                     </FormControl>
                   </div>
-                  <div>
-                    <Tooltip
-                      title={data.institute}
+                  <div >
+                    <CustomTooltip
+                      title={`
+                        institute: ${data.institute}, 
+                        department: ${data.department},
+                       ${data.semester} semester,
+                        section ${data.section}, ${data.shift} shift
+                      
+                      `}
                     >
                       <IconButton>
                         <HelpOutlineIcon />
                       </IconButton>
-                    </Tooltip>
+                    </CustomTooltip>
                   </div>
                 </div>
                 <HomeClassShow data={data}></HomeClassShow>

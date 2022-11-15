@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import useFirebase from "../../../Hook/useFirebase";
 import SearchIcon from '@mui/icons-material/Search';
+import CustomTooltip from "../CustomTooltip/CustomTooltip";
 // const pages = ["login"];
 const TopBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(false);
@@ -47,10 +48,11 @@ const TopBar = () => {
     }
   }, [user])
   return (
-    <div className="mb-20">
+    <div className="mb-16 md:mb-20">
       <AppBar
         position="fixed"
-        sx={{ background: "white", color: "black", boxShadow: "none" }}
+        elevation={0}
+        sx={{ background: "#ffffffd1", color: "black", backdropFilter: "blur(15px)" }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -73,11 +75,11 @@ const TopBar = () => {
               <div className="flex">
                 {
                   user.email ? <div>
-                    <Tooltip title="Open settings">
+                    <CustomTooltip title="Open settings">
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt={user.displayName} src={user.photoURL} />
                       </IconButton>
-                    </Tooltip>
+                    </CustomTooltip>
                     <Menu
                       sx={{ mt: '45px' }}
                       id="menu-appbar"
@@ -139,16 +141,16 @@ const TopBar = () => {
             </Box>
             <Box
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-              className="justify-between"
+              className="justify-between items-center"
             >
               <div></div>
               <div className="md:hidden block">
                 <NavLink to='/searchRoutine'>
                   <div className="">
-                    <Button >
-                      <span className="mr-2 ">Find Routine</span>
+                    {/* <Button variant="outlined">
+                      <span className="mr-2 ">Search</span>
                       <SearchIcon sx={{ color: "#5946ad" }}></SearchIcon>
-                    </Button>
+                    </Button> */}
                   </div>
                 </NavLink>
               </div>
@@ -158,10 +160,11 @@ const TopBar = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
+                sx={{ pr: 0 }}
                 color="inherit"
               >
                 {/* <MenuIcon />  */}
-                <div className="flex justify-center items-end gap-1 flex-col">
+                <div className="flex justify-center items-end gap-1 flex-col pr-0">
                   <div className="h-[3px] w-[10px] bg-black rounded-md"></div>
                   <div className="h-[3px] w-[20px] bg-black rounded-md"></div>
                   <div className="h-[3px] w-[15px] bg-black rounded-md"></div>

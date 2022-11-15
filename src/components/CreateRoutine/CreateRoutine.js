@@ -69,7 +69,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   const publishData = () => {
     if (user?._id) {
       setPostLoading(true)
-      axios.post('https://shielded-dusk-65695.herokuapp.com/routine', { ...mainData, requestId, creator: user._id })
+      axios.post('http://localhost:5001/routine', { ...mainData, requestId, creator: user._id })
         .then(res => {
           setPostLoading(false);
           console.log(res)
@@ -85,7 +85,8 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
           setMainData({ classes: [] });
         })
         .catch((err) => {
-          toast.error("Data is not created")
+          console.log(err)
+          toast.error("Data is not created try again")
           setPostLoading(false);
         });
     } else {
@@ -131,8 +132,8 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   };
   const steps = [
     {
-      label: "Add basic information of your institute",
-      element: <Info errors={errors} watch={watch} register={register}></Info>,
+      label: "Add basic information",
+      element: <Info setValue={setValue} mainData={mainData} errors={errors} watch={watch} register={register}></Info>,
     },
     {
       label: "Add classes",
@@ -176,8 +177,8 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box className="md:custom_height flex flex-col justify-between relative">
-          <Box className="pt-1 ">
+        <Box className="md:custom_height overflow-y-scroll flex flex-col justify-between relative">
+          <Box className="pt-0 pb-16 ">
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((ele, i) => (
                 <Step key={ele.label}>
@@ -185,10 +186,10 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
                 </Step>
               ))}
             </Stepper>
-            <Box className="pt-10">{steps[activeStep].element}</Box>
+            <Box className="pt-8">{steps[activeStep].element}</Box>
           </Box>
 
-          <div className={request ? "" : "fixed bottom-0 w-full md:w-[calc(100vw-380px)]  "}>
+          <div className={request ? "" : "fixed bottom-0 w-full md:w-[calc(100vw-280px)] pr-8  "}>
             <MobileStepper
               variant="text"
               steps={maxSteps}

@@ -10,6 +10,7 @@ import textConversion from "../../../../utilities/textConversion";
 import { Tooltip } from "@mui/material";
 import { useSelector } from "react-redux";
 import { allData } from "../../../../ManageState/DataSlice/dataSlice";
+import CustomTooltip from "../../../ShareComponents/CustomTooltip/CustomTooltip";
 const DetailsInfo = () => {
     const { user } = useSelector(allData)
     return (
@@ -17,18 +18,18 @@ const DetailsInfo = () => {
             <div className="flex">
                 <SchoolIcon className="m-2 text-gray-400 "></SchoolIcon>
 
-                <Tooltip title={user.institute}>
+                <CustomTooltip title={user.institute}>
                     <p className="text-gray-400 text-lg mt-2 ">
                         {
                             user.institute ? <span> Study at {textConversion(user.institute, 100)}</span> : <span>Study at Institute name </span>
                         }
                     </p>
-                </Tooltip>
+                </CustomTooltip>
             </div>
             <div className="flex">
                 <SubjectIcon className="m-2 text-gray-400 "></SubjectIcon>
 
-                <Tooltip title={user.department}>
+                <CustomTooltip title={user.department}>
                     <p className="text-gray-400 text-lg mt-2 ">
                         {
                             user.department ? <span>
@@ -36,7 +37,7 @@ const DetailsInfo = () => {
                             </span> : <span>Department:  Your department</span>
                         }
                     </p>
-                </Tooltip>
+                </CustomTooltip>
 
             </div>
             <div className="flex">

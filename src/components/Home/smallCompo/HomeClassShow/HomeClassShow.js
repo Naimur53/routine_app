@@ -33,7 +33,7 @@ const HomeClassShow = ({ data }) => {
             >
                 <Grid item xs={12} lg={6} >
                     <Box
-                        className='flex lg:flex-col lg:custom_height_for_classes overflow-y-auto pb-2 md:pb-0 px-2'
+                        className='flex lg:flex-col lg:custom_height_for_classes overflow-y-auto pb-0 md:pb-0 px-2'
                     >
                         {
                             week.map((single, i) => <SingleTab

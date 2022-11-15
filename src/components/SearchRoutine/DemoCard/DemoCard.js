@@ -14,6 +14,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import axios from "axios";
+import CustomTooltip from "../../ShareComponents/CustomTooltip/CustomTooltip";
 function chooseTheme(i) {
   const theme = [
     {
@@ -94,13 +95,13 @@ const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble
 
               </div>
               <div className="">
-                <Tooltip title={institute}>
+                <CustomTooltip title={institute}>
                   <h3 className=" text-lg"> {textConversion(institute, 18)}</h3>
-                </Tooltip>
+                </CustomTooltip>
                 <div className="flex gap-5">
-                  <Tooltip title={department}>
+                  <CustomTooltip title={department}>
                     <p className={`text-sm ${contentStyle}`}>{textConversion(department, 9)}</p>
-                  </Tooltip>
+                  </CustomTooltip>
                   <p className={`text-sm ${contentStyle}`}>
                     {semester} sem
                   </p>
@@ -111,24 +112,24 @@ const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble
             <div className="flex justify-between text-xs ">
               <div className={`text-sm ${contentStyle}`}>
                 <p > Shift:{shift} </p>
-                <Tooltip title='Total class'>
+                <CustomTooltip title='Total class'>
                   <div className="flex justify-center items-center mt-3  gap-2">
                     <LibraryBooksIcon></LibraryBooksIcon>
                     <span>
                       {typeof classes === "number" ? classes : classes?.length}
                     </span>
                   </div>
-                </Tooltip>
+                </CustomTooltip>
               </div>
               <div className={`text-sm text-right ${contentStyle}`}>
                 <p className={`text-sm ${contentStyle}`}> Section: {section} </p>
                 <div className={`text-sm mt-3 ${contentStyle}`}>
-                  <Tooltip title='Total user using this routine'>
+                  <CustomTooltip title='Total user using this routine'>
                     <div className="flex justify-center items-center gap-2">
                       <PeopleIcon></PeopleIcon>
                       <span className="text-sm"> {totalUserUsing} </span>
                     </div>
-                  </Tooltip>
+                  </CustomTooltip>
 
                 </div>
               </div>
@@ -141,15 +142,15 @@ const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble
               />
 
               <div className=" ">
-                <Tooltip title={"Creator " + creator?.displayName}>
+                <CustomTooltip title={"Creator " + creator?.displayName}>
 
                   <h3 className="text-xs capitalize">{textConversion(creator?.displayName, 25)}</h3>
-                </Tooltip>
-                <Tooltip title="Published Date">
+                </CustomTooltip>
+                <CustomTooltip title="Published Date">
                   <div className="text-xs">
                     <span className=""> {date}</span>
                   </div>
-                </Tooltip>
+                </CustomTooltip>
               </div>
             </div>
             <div>
@@ -176,11 +177,11 @@ const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble
                       <DeleteIcon />
                     </IconButton>
                     <NavLink to={admin ? `/dashboard/manageRoutine/update/${_id}` : `/update/${_id}`}>
-                      <Tooltip title='Update routine'>
+                      <CustomTooltip title='Update routine'>
                         <IconButton aria-label="update">
                           <DriveFileRenameOutlineIcon />
                         </IconButton>
-                      </Tooltip>
+                      </CustomTooltip>
                     </NavLink>
                   </>
                 ) : deleteAble ? <IconButton

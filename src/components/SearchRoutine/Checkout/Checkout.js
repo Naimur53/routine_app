@@ -39,7 +39,7 @@ const Checkout = () => {
       toast.success(response)
       axios.put(`https://shielded-dusk-65695.herokuapp.com/routine/increaseUsingValue?id=${data._id}`)
     } else {
-      toast.error(status)
+      toast.error("Routine already exist``")
     }
   };
   if (getLoading) {

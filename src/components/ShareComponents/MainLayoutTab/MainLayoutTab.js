@@ -32,7 +32,7 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   ]
   const commonNav = [
     // { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
-    { name: "Notes", path: "/myNotes", Icon: TextSnippetIcon },
+    // { name: "Notes", path: "/myNotes", Icon: TextSnippetIcon },
     {
       name: "Create Routine",
       path: "/createRoutine",
@@ -52,13 +52,17 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
     { name: "Manage Routine", path: "/dashboard/manageRoutine", Icon: ManageSearchIcon },
     { name: "Manage Admin", path: "/dashboard/manageAdmin", Icon: AdminPanelSettingsIcon },
 
-  ] : user.isAdmin ? [
+  ] : user.isAdmin ? window.innerWidth > 900 ? [
+    { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
+    ...horizontalNav,
+    ...commonNav,
+  ] : [
     { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
     ...commonNav
   ] : window.innerWidth > 900 ? [...horizontalNav, ...commonNav] : commonNav
   return (
-    <div className="h-full md:h-auto ">
-      <div className="w-[85vw] md:w-full h-full">
+    <div className="h-full md:h-full border-r border-gray-100 ">
+      <div className="w-[85vw]  md:w-full h-full md:h-auto">
         <div className="">
           {
             user?.email ? <div style={{

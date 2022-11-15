@@ -99,7 +99,7 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
                 if (res) {
                     const mainData = watch()
                     console.log(mainData, 'going')
-                    axios.put('http://localhost:5001/user', { email: user.email, ...mainData })
+                    axios.put('https://shielded-dusk-65695.herokuapp.com/user', { email: user.email, ...mainData })
                         .then(res => {
                             if (res.data.modifiedCount) {
                                 setUpdatable({ click: false, disabled: true })
@@ -125,7 +125,7 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
         <div className="p-4">
             {
                 edit.status ? <form onSubmit={handleSubmit(onSubmit)}>
-                    <Info disabled={edit.loading} watch={watch} register={register} errors={errors}></Info>
+                    <Info setValue={setValue} disabled={edit.loading} mainData={watch() || {}} watch={watch} register={register} errors={errors}></Info>
                 </form> : <div>
                     <DetailsInfo></DetailsInfo>
                 </div>

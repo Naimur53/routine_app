@@ -205,7 +205,7 @@ const SearchRoutine = () => {
               </span>
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={6} md={6} lg={3}>
             <FormControl variant="standard" sx={{ width: "100%" }}>
               <InputLabel id="demo-multiple-name-label">Semester</InputLabel>
               <Select
@@ -229,7 +229,7 @@ const SearchRoutine = () => {
               </span>
             </div>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={6} md={6} lg={3}>
             <FormControl variant="standard" sx={{ width: "100%" }}>
               <InputLabel id="demo-multiple-name-label">section</InputLabel>
               <Select
@@ -274,20 +274,22 @@ const SearchRoutine = () => {
             <Grid item lg={3} md={6} xs={12}>
               <DemoCard item={single} i={i} updateAble={false}></DemoCard>
             </Grid>
-          )) : <div className="my-10 flex justify-center w-full ">
-            <SearchRoutineNotFound></SearchRoutineNotFound>
-          </div>
+          )) : <Grid item xs={12}>
+            <div className="my-10 flex justify-center w-full ">
+              <SearchRoutineNotFound></SearchRoutineNotFound>
+            </div>
+          </Grid>
         }
       </Grid>
       {
-        <div className="flex py-5 gap-5">
+        showRoutine.length ? <div className="flex py-5 gap-5">
           <button onClick={handlePre} disabled={getLoading || !pagination.skip} className="pagination_button">
             <WestIcon ></WestIcon>
           </button>
           <button onClick={handleNext} disabled={getLoading || pagination.len < 8} className="pagination_button">
             <EastIcon></EastIcon>
           </button>
-        </div>
+        </div> : <></>
       }
     </MainLayout>
   );

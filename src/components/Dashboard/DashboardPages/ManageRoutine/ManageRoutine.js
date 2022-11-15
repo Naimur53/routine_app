@@ -41,7 +41,6 @@ const ManageRoutine = () => {
                         <Grid item lg={3} md={6} xs={12} key={i}>
                             {single ? (
                                 <>
-                                    {" "}
                                     <DemoCard item={single} setData={setAllRoutine} admin updateAble={true} i={i}></DemoCard>
                                 </>
                             ) : (

@@ -125,7 +125,7 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
         <div className="p-4">
             {
                 edit.status ? <form onSubmit={handleSubmit(onSubmit)}>
-                    <Info disabled={edit.loading} watch={watch} register={register} errors={errors}></Info>
+                    <Info setValue={setValue} disabled={edit.loading} mainData={watch() || {}} watch={watch} register={register} errors={errors}></Info>
                 </form> : <div>
                     <DetailsInfo></DetailsInfo>
                 </div>

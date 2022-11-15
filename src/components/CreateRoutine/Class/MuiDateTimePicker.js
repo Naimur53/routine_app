@@ -20,7 +20,7 @@ const MuiDateTimePicker = ({ setValue, name, errors, label, watch, register, def
                 onChange={newValue => {
                     setValue(name, newValue.toString())
                 }}
-                renderInput={params => <TextField color="primary"  {...register(name, {
+                renderInput={params => <TextField variant='standard' color="primary"  {...register(name, {
                     required: true,
                 })} {...params} />}
 

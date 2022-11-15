@@ -55,6 +55,7 @@ const MainLayoutTab = ({ handleCloseNavMenu, }) => {
   ] : user.isAdmin ? window.innerWidth > 900 ? [
     { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
     ...horizontalNav,
+    ...commonNav,
   ] : [
     { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
     ...commonNav

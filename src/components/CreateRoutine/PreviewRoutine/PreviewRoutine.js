@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,22 +16,23 @@ const PreviewRoutine = ({ errors, watch, setValue, setMainData, register, mainDa
           <div className="flex justify-between">
             <div className="flex justify-center w-full">
               <div className="text-center">
-                <h1 className="text-2xl">
+                <h1 className="text-xl capitalize md:text-2xl">
                   {institute}
                 </h1>
-                <h3 className="text-xl">
-                  {department} department, {semester} semester
+                <h3 className="text-md ">
+                  <span className="capitalize">{department}</span> department, {semester} semester
                 </h3>
                 <h4  >
                   {section} section, {shift} shift
                 </h4>
               </div>
             </div>
-            <div>
-              <IconButton variant='primary' onClick={() => setActiveStep(0)}>
-                <EditIcon sx={{ color: '#5946ad' }}></EditIcon>
-              </IconButton>
-            </div>
+          </div>
+          <div className="flex justify-center mt-2">
+            <Button variant='outlined' onClick={() => setActiveStep(0)}>
+              <span className="mr-2">Edit basic information</span>
+              <EditIcon sx={{ color: '#5946ad' }}></EditIcon>
+            </Button>
           </div>
         </Grid>
 

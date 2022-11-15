@@ -1,10 +1,11 @@
 import { Button, Grid, Select, TextField } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -29,7 +30,27 @@ function getStyles(name, personName, theme) {
         : theme.typography.fontWeightMedium,
   };
 }
-const Info = ({ errors, register, watch, disabled }) => {
+const Info = ({ setValue, errors, register, watch, disabled, mainData }) => {
+  const keys = useMemo(() => {
+
+    const inputKeys = [
+      "institute",
+      "department",
+      "semester",
+      "shift",
+      "section"
+    ]
+    return inputKeys
+  }, [])
+
+  useEffect(() => {
+    keys.forEach(single => {
+      setValue(single, mainData[single] ?? "")
+    })
+  }, [])
+  useEffect(() => {
+    console.log('hi icalll djfkdjfkdlfjdklfjdklfjdklfjdklf')
+  }, [])
   return (
     <div>
       <Grid container spacing={2}>

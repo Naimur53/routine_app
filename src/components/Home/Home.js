@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import textConversion from '../../utilities/textConversion'
 import { toast } from "react-toastify";
 import CustomTooltip from "../ShareComponents/CustomTooltip/CustomTooltip";
 const Home = () => {
@@ -88,16 +89,22 @@ const Home = () => {
                         {
                           allRoutineData.map(({ department, semester, section, shift }, i) => <MenuItem sx={{ fontSize: { md: '16px', sm: '13px' } }}
                             value={i}>
-                            {shift === 'None' ? `${department} sem-${semester}  sec-${section} ` : section === 'None' ? `${department}  sem-${semester} shift-${shift}` : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
+                            {shift === 'None' ? `${textConversion(department, 20)} sem-${semester}  sec-${section} ` : section === 'None' ? `${department}  sem-${semester} shift-${shift}` : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
                             { }
                           </MenuItem>)
                         }
                       </Select>
                     </FormControl>
                   </div>
-                  <div>
+                  <div >
                     <CustomTooltip
-                      title={"Institute: " + data.institute}
+                      title={`
+                        institute: ${data.institute}, 
+                        department: ${data.department},
+                       ${data.semester} semester,
+                        section ${data.section}, ${data.shift} shift
+                      
+                      `}
                     >
                       <IconButton>
                         <HelpOutlineIcon />

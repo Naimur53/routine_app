@@ -51,7 +51,8 @@ const TopBar = () => {
     <div className="mb-16 md:mb-20">
       <AppBar
         position="fixed"
-        sx={{ background: "white", color: "black", boxShadow: "none" }}
+        elevation={0}
+        sx={{ background: "#ffffffd1", color: "black", backdropFilter: "blur(15px)" }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>

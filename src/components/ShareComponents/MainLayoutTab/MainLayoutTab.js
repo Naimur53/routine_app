@@ -14,6 +14,8 @@ import { useSelector } from "react-redux";
 import useFirebase from "../../../Hook/useFirebase";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import InfoIcon from "@mui/icons-material/Info";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
 const MainLayoutTab = ({ handleCloseNavMenu }) => {
   const { user } = useSelector(allData);
   const { logOut } = useFirebase({ observer: false });
@@ -28,12 +30,11 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
         },
       ]
     : [
-        { name: "Dashboard", path: "/dashboard", Icon: AccountCircleIcon },
         { name: "Home", path: "/", Icon: HomeIcon },
         { name: "Saved Routine", path: "/saveRoutine", Icon: AddTaskIcon },
         { name: "My Notes", path: "/myNotes", Icon: TextSnippetIcon },
         { name: "Search Routine", path: "/searchRoutine", Icon: SearchIcon },
-        { name: "About Us", path: "/aboutUs", Icon: InfoIcon },
+        { name: " Contact Us", path: "/contactUs", Icon: RecentActorsIcon },
         { name: "My Routine", path: "/myRoutine", Icon: FolderSharedIcon },
         {
           name: "Request for routine",
@@ -49,6 +50,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
 
         { name: "Edit Bio", path: "/editBio", Icon: AccountCircleIcon },
         { name: "Edit Details", path: "/editDetails", Icon: AccountCircleIcon },
+        { name: "Dashboard", path: "/dashboard", Icon: DashboardIcon },
       ];
   return (
     <div>

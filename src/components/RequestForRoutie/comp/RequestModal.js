@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../ManageState/DataSlice/dataSlice';
+import { toast } from 'react-toastify';
 
 const style = {
     position: 'absolute',
@@ -45,18 +46,18 @@ const RequestModal = ({ open, setOpen, setData }) => {
                 .catch(err => {
                     setImgLoading(false)
                     setValue('img', '');
-                    alert('Something wrong when getting image')
+                    toast.error('Something wrong when getting image')
                 })
         }
     }
     const onSubmit = (data) => {
         console.log(data)
         if (!data?.img?.length) {
-            alert('please add image of your routine')
+            toast.error('Please add image of your routine')
             return
         }
         if (!user._id) {
-            alert('user required')
+            toast.error('User not found')
             return
         }
         setPostLoading(true)
@@ -67,7 +68,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
                 setData(pre => [...pre, res.data])
                 reset();
                 setOpen(false);
-                alert('successfully request send')
+                toast.success('Thanks for your request. we will build routine for you soon!')
 
             })
             .catch(err => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-const PasswordTextField = ({ register, name, watch }) => {
+const PasswordTextField = ({ register, name, watch, placeholder }) => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(false);
   const handleToggle = () => {
@@ -16,18 +16,21 @@ const PasswordTextField = ({ register, name, watch }) => {
       setIcon(false);
     }
   };
-  const re = name === 'password2' ? {
-    ...register(name, {
-      validate: value =>
-        value === watch('password') || "The passwords do not match"
-    })
-  } : { ...register(name, { required: true, minLength: 6 }) }
+  const re =
+    name === "password2"
+      ? {
+          ...register(name, {
+            validate: (value) =>
+              value === watch("password") || "The passwords do not match",
+          }),
+        }
+      : { ...register(name, { required: true, minLength: 6 }) };
   return (
     <div>
       <div className="flex justify-content-around relative">
         <input
           className="placeholder-gray-500 w-full bg-transparent border border-gray-300 mt-4 px-4 py-2 rounded-full"
-          placeholder="Password"
+          placeholder={placeholder}
           type={type}
           label="Password"
           name="password"

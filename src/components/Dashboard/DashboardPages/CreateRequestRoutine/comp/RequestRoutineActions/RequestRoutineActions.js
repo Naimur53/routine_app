@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const RequestRoutineActions = ({ id, setData, data }) => {
     const [status, setStatus] = useState(data.status);
     const [postLoading, setPostLoading] = useState(false)
@@ -17,7 +18,7 @@ const RequestRoutineActions = ({ id, setData, data }) => {
     const handleChange = (event) => {
         const value = event.target.value
         if (!data.requestId && value === 'success') {
-            alert('sorry we did not found response _id so success status cannot update ')
+            toast.error('sorry we did not found response _id so success status cannot update')
             return
         }
         setStatus(value);
@@ -37,10 +38,9 @@ const RequestRoutineActions = ({ id, setData, data }) => {
                 })
                 .catch(err => {
                     setPostLoading(false)
-                    alert(err)
+                    toast.error('Error while update try again')
                 })
         }
-        // alert('googing')
     }
     // check data is already exit
     // useEffect(()=>{

@@ -12,6 +12,7 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
 import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
+import { toast } from "react-toastify";
 
 const MyRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
@@ -26,137 +27,9 @@ const MyRoutine = () => {
           setGetLoading(false);
         });
     } else {
-      alert("user id not found");
+      toast("User not found")
     }
   }, [user]);
-  const informations = [
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "45",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "78352",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "445",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "44512",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "4843215",
-    },
-    {
-      classes: [
-        {
-          subjectName: "Fundamental",
-          subjectCode: "6645dfd4",
-          teacherName: "Naimur Rahman",
-          day: "Sunday",
-          roomNumber: "116",
-          startTime:
-            "Thu Sep 29 2022 07:00:00 GMT+0600 (Bangladesh Standard Time)",
-          endTime:
-            "Thu Sep 29 2022 04:00:00 GMT+0600 (Bangladesh Standard Time)",
-        },
-      ],
-      institute: "Brahmanbaria Polytechnic Institute , Brahmanbaria",
-      department: "dfdsf",
-      semester: "1st",
-      shift: "None",
-      section: "B",
-      id: "41264",
-    },
-  ];
   if (!getLoading && !allRoutine?.length) {
     return (
       <MainLayout>
@@ -193,12 +66,13 @@ const MyRoutine = () => {
           display: "flex",
         }}
       >
-        {(getLoading ? Array.from(new Array(4)) : allRoutine).map(
+        {(getLoading ? Array.from(new Array(8)) : allRoutine).map(
           (single, i) => (
             <Grid item lg={3} md={6} xs={12}>
               {single ? (
                 <>
-                  <DemoCard item={single} updateAble={true} i={i}></DemoCard>
+                  {" "}
+                  <DemoCard item={single} updateAble={true} setData={setAllRoutine} i={i}></DemoCard>
                 </>
               ) : (
                 <>

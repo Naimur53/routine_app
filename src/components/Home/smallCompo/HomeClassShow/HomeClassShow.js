@@ -23,8 +23,6 @@ const HomeClassShow = ({ data }) => {
         const todayNum = new Date().getDay()
         const normalWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const newWeek = normalWeek.filter(single => single !== normalWeek[todayNum])
-        console.log(todayNum, [normalWeek[todayNum], ...newWeek], normalWeek[todayNum]);
-
         setWeek(pre => [normalWeek[todayNum], ...newWeek])
         setValue(0);
     }, [])
@@ -35,7 +33,7 @@ const HomeClassShow = ({ data }) => {
             >
                 <Grid item xs={12} lg={6} >
                     <Box
-                        className='flex lg:flex-col lg:custom_height_for_classes overflow-y-auto pb-2 md:pb-0'
+                        className='flex lg:flex-col lg:custom_height_for_classes overflow-y-auto pb-2 md:pb-0 px-2'
                     >
                         {
                             week.map((single, i) => <SingleTab
@@ -46,7 +44,7 @@ const HomeClassShow = ({ data }) => {
                 </Grid>
 
                 <Grid item xs={12} lg={6} >
-                    <div className='custom_height_for_classes overflow-y-auto'>
+                    <div className='custom_height_for_classes  overflow-y-auto'>
 
                         {
                             week.map((single, i) => <TabPanel key={i} value={value} index={i}>

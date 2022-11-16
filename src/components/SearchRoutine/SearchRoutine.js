@@ -1,4 +1,4 @@
-import { Button, Grid, Select, TextField } from "@mui/material";
+import { Button, Grid, IconButton, Select, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -12,10 +12,14 @@ import { useCallback } from "react";
 import axios from "axios";
 import { useState } from "react";
 import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
+import SearchRoutineNotFound from "../ShareComponents/SearchRoutineNotFound/SearchRoutineNotFound";
+import EastIcon from '@mui/icons-material/East';
+import WestIcon from '@mui/icons-material/West';
 const SearchRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
   const [showRoutine, setShowRoutine] = useState([]);
-  const [getLoading, setGetLoading] = useState(false);
+  const [getLoading, setGetLoading] = useState(true);
+  const [pagination, setPagination] = useState({ len: 8, skip: 0 })
   const {
     register,
     handleSubmit,
@@ -42,7 +46,7 @@ const SearchRoutine = () => {
     },
   };
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => { };
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
     const clear = () => {
@@ -52,7 +56,7 @@ const SearchRoutine = () => {
   };
 
   //use debounce
-  let institute = watch("institute");
+  let institute = watch("institute") || "";
   let department = watch("department") || "";
   let semester = watch("semester") || "";
   let section = watch("section") || "";
@@ -60,34 +64,82 @@ const SearchRoutine = () => {
   // filter
 
   useEffect(() => {
-    const filters = allRoutine.filter((single) => {
-      return (
-        single.department.toLowerCase().includes(department.toLowerCase()) &&
-        single.section.toLowerCase().includes(section.toLowerCase()) &&
-        single.semester.toLowerCase().includes(semester.toLowerCase())
-      );
-    });
-    setShowRoutine(filters);
-  }, [allRoutine, department, section, semester]);
+
+    // const filters = allRoutine.filter(single => {
+
+    //   return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
+    // })
+    setShowRoutine(allRoutine)
+
+  }, [allRoutine, department, section, semester,])
+
+  const textSearchRequest = () => {
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `)
+      .then(res => {
+        setAllRoutine(res.data)
+        setPagination({ len: 8, skip: 0 })
+        setGetLoading(false)
+      })
+      .catch(err => {
+        setAllRoutine([])
+        setPagination({ len: 8, skip: 0 })
+        setGetLoading(false)
+      })
+  }
+
   const fetchData = useCallback(() => {
-    setGetLoading(true);
-    axios
-      .get(
-        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&semester=${semester}&section=${section}`
-      )
-      .then((res) => {
-        setAllRoutine(res.data);
-        setGetLoading(false);
-      });
-  }, [institute]);
+
+    setGetLoading(true)
+    console.log(institute, institute.match(/^[0-9a-fA-F]{24}$/), 'output')
+
+    // institute will work for both id and text name of institute
+    if (institute?.length === 24) {
+      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine/findById?id=${institute}`)
+        .then(res => {
+
+          setAllRoutine([res.data])
+          setPagination({ len: 8, skip: 0 })
+          setGetLoading(false)
+
+        })
+        .catch(err => {
+          textSearchRequest()
+        })
+    } else {
+      textSearchRequest()
+    }
+
+
+  }, [institute, department, section, semester,])
 
   useEffect(() => {
     const { clear } = debounce(fetchData, 300);
     return () => {
       clear();
     };
-  }, [institute, fetchData]);
+  }, [institute, department, section, semester, fetchData]);
 
+  //handle pagination 
+  const handlePre = () => {
+    setGetLoading(true)
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8} `)
+      .then(res => {
+        setAllRoutine(res.data)
+        setPagination({ len: res.data.length, skip: pagination.skip - 8 })
+        setGetLoading(false)
+      })
+
+  }
+  const handleNext = () => {
+    setGetLoading(true)
+    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len} `)
+      .then(res => {
+        setAllRoutine(res.data)
+        setPagination({ len: res.data.length, skip: pagination.skip + pagination.len })
+        setGetLoading(false)
+      })
+  }
+  console.log(pagination)
   return (
     <MainLayout>
       <form
@@ -98,18 +150,18 @@ const SearchRoutine = () => {
           <Grid item xs={12} lg={12} md={6}>
             {" "}
             <div className="flex w-full justify-center">
-              <div className="flex border  border-gray-300 justify-between pr-4  rounded-full bg-light-purple items-center w-full ">
+              <div className="flex border  border-gray-300 justify-between pr-4 rounded-lg shadow shadow-light-pink items-center w-full ">
                 <input
                   type="text"
                   id="defasult-search"
                   className="block pl-4  rounded-tl-full rounded-bl-full focus:border-0 focus:outline-none bg-transparent   w-full py-3 placeholder:text-medium-purple  text- sm text-black         "
-                  placeholder="Enter Your Institute Name..."
+                  placeholder="Institute Name or id"
                   {...register("institute", { required: true })}
                 />
 
                 <button
                   onClick={handleSearch}
-                  type="submit"
+                  type="button"
                   className="text-dark-purple  font-medium rounded-full text-sm p-1 "
                 >
                   <svg
@@ -210,32 +262,29 @@ const SearchRoutine = () => {
         </Grid>
       </form>
       <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-        {getLoading ? (
-          <>
+        {
+          getLoading ? [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
+            <SkeletonDemoCard></SkeletonDemoCard>
+
+          </Grid>) : showRoutine.length ? showRoutine.map((single, i) => (
             <Grid item lg={3} md={6} xs={12}>
-              <SkeletonDemoCard></SkeletonDemoCard>
+              <DemoCard item={single} i={i} updateAble={false}></DemoCard>
             </Grid>
-            <Grid item lg={3} md={6} xs={12}>
-              <SkeletonDemoCard></SkeletonDemoCard>
-            </Grid>
-            <Grid item lg={3} md={6} xs={12}>
-              <SkeletonDemoCard></SkeletonDemoCard>
-            </Grid>
-            <Grid item lg={3} md={6} xs={12}>
-              <SkeletonDemoCard></SkeletonDemoCard>
-            </Grid>
-          </>
-        ) : (
-          <>
-            {" "}
-            {showRoutine.map((single, i) => (
-              <Grid item lg={3} md={6} xs={12}>
-                <DemoCard item={single} i={i} updateAble={false}></DemoCard>
-              </Grid>
-            ))}
-          </>
-        )}
+          )) : <div className="my-10 flex justify-center w-full ">
+            <SearchRoutineNotFound></SearchRoutineNotFound>
+          </div>
+        }
       </Grid>
+      {
+        <div className="flex py-5 gap-5">
+          <button onClick={handlePre} disabled={getLoading || !pagination.skip} className="pagination_button">
+            <WestIcon ></WestIcon>
+          </button>
+          <button onClick={handleNext} disabled={getLoading || pagination.len < 8} className="pagination_button">
+            <EastIcon></EastIcon>
+          </button>
+        </div>
+      }
     </MainLayout>
   );
 };

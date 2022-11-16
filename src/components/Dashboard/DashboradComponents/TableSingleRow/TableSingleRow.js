@@ -10,7 +10,7 @@ const TableSingleRow = ({ _id, img, message, date, creator, status, adminMessage
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell component="th" scope="row">
-                <img src={img} className='w-[80px]' alt="s" />
+                <img src={img} className='w-[40px] shadow-xl rounded-md' alt="s" />
             </TableCell>
             <TableCell align="left">
                 <Tooltip title={message || 'No Message'}>

@@ -12,7 +12,6 @@ import TopBar from "./components/ShareComponents/TopBar/TopBar";
 import SearchRoutine from "./components/SearchRoutine/SearchRoutine";
 import MyNotes from "./components/MyNote/MyNotes";
 import SaveRoutine from "./components/SaveRoutine/SaveRoutine";
-
 import Checkout from "./components/SearchRoutine/Checkout/Checkout";
 import MyRoutine from "./components/MyRoutine/MyRoutine";
 import MyProfile from "./components/MyProfile/MyProfile";
@@ -29,16 +28,18 @@ import {
 } from "./ManageState/DataSlice/dataSlice";
 import { getIdToken, onAuthStateChanged } from "firebase/auth";
 import UpdateRoutine from "./components/UpdateRoutine/UpdateRoutine";
-import EditBySteper from "./components/MyProfile/EditeProfile/EditBySteper/EditBySteper";
-import EditeProfile from "./components/MyProfile/EditeProfile/EditeProfile";
-import SkeletonDemoCard from "./components/ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
-import EditBio from "./components/MyProfile/EditeProfile/EditBySteper/EditBio/EditBio";
-import EditDetails from "./components/MyProfile/EditeProfile/EditBySteper/EditDetails/EditDetails";
 import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequestRoutines/AllRequestRoutines";
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
 import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
 import ContactUs from "./components/ContactUs/ContactUs";
+import Overview from "./components/Dashboard/DashboardPages/Overview/Overview";
+import ManageRoutine from "./components/Dashboard/DashboardPages/ManageRoutine/ManageRoutine";
+import OnlineRoute from "./components/ShareComponents/OnlineRoute/OnlineRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
+import EditeProfile from "./components/EditeProfile/EditeProfile";
 
 const theme = createTheme({
   palette: {
@@ -49,6 +50,10 @@ const theme = createTheme({
     secondary: {
       // This is green.A700 as hex.
       main: "#103d7b",
+    },
+    white: {
+      // This is green.A700 as hex.
+      main: "#fff",
     },
   },
 });
@@ -64,79 +69,143 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="light"
+        />
         <TopBar></TopBar>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signUp" element={<SignUp />}></Route>
           <Route path="/editProfile" element={<EditeProfile />}></Route>
-          <Route path="/editBySteper" element={<EditBySteper />}></Route>
-          <Route path="/editBio" element={<EditBio />}></Route>
-          <Route path="/editDetails" element={<EditDetails />}></Route>
 
           <Route path="/contactUs" element={<ContactUs />}></Route>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="home" element={<Home />}></Route>
           <Route
-            path="/skeletonDemoCard"
-            element={<SkeletonDemoCard />}
+            path="/login"
+            element={
+              <OnlineRoute>
+                <Login />
+              </OnlineRoute>
+            }
           ></Route>
 
+          <Route
+            path="/signUp"
+            element={
+              <OnlineRoute>
+                <SignUp />
+              </OnlineRoute>
+            }
+          ></Route>
+
+          {/* not working on this */}
+
+          <Route
+            path="/editProfile"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <EditeProfile />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          ></Route>
+
+          <Route path="/" element={<Home />}></Route>
+          <Route path="home" element={<Home />}></Route>
           <Route path="/myNotes" element={<MyNotes />}></Route>
           <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
           <Route
             path="/searchRoutine"
             element={
-              <PrivateRoute>
+              <OnlineRoute>
                 <SearchRoutine />
-              </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
           <Route
             path="/myRoutine"
             element={
-              <PrivateRoute>
-                <MyRoutine />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MyRoutine />
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
           <Route
             path="/createRoutine"
             element={
-              <PrivateRoute>
-                <MainLayout>
-                  <CreateRoutine />
-                </MainLayout>
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MainLayout>
+                    <CreateRoutine />
+                  </MainLayout>
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
-          <Route path="/checkout/:id" element={<Checkout />}></Route>
-          <Route path="/myProfile" element={<MyProfile />}></Route>
+          <Route
+            path="/checkout/:id"
+            element={
+              <OnlineRoute>
+                <Checkout />
+              </OnlineRoute>
+            }
+          ></Route>
+          <Route
+            path="/myProfile"
+            element={
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MyProfile />
+                </PrivateRoute>
+              </OnlineRoute>
+            }
+          ></Route>
           <Route
             path="/update/:id"
             element={
-              <PrivateRoute>
-                <UpdateRoutine />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MainLayout>
+                    <UpdateRoutine />
+                  </MainLayout>
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
           <Route
             path="/requestForRoutine"
             element={
-              <PrivateRoute>
-                <RequestForRoutine />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <RequestForRoutine />
+                </PrivateRoute>
+              </OnlineRoute>
             }
           ></Route>
-          {/* dashboard routes  */}
+
+          {/* ---------------------dashboard routes -------------------------- */}
+
           <Route
             path="/dashboard"
             element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
+              <OnlineRoute>
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              </OnlineRoute>
             }
           >
-            <Route path="/dashboard" element={<AllRequestRoutines />}></Route>
+            <Route index element={<Overview />}></Route>
             <Route
               path="allRequestRoutines"
               element={<AllRequestRoutines />}
@@ -146,6 +215,12 @@ function App() {
               path="createRequestRoutine/:id"
               element={<CreateRequestRoutine />}
             ></Route>
+            <Route path="manageRoutine" element={<ManageRoutine />}></Route>
+            <Route
+              path="manageRoutine/update/:id"
+              element={<UpdateRoutine admin={true} />}
+            ></Route>
+            <Route path="manageAdmin" element={<ManageAdmin />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

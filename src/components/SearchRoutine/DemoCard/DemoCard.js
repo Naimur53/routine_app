@@ -13,28 +13,29 @@ import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import axios from "axios";
 function chooseTheme(i) {
   const theme = [
     {
-      img: "./images/blue_bol.png",
+      img: "/images/blue_bol.png",
       headingStyle: "bg-dark-blue",
       contentStyle: "text-medium-blue",
       bgStyle: "bg-light-blue",
     },
     {
-      img: "./images/purple_bol.png",
+      img: "/images/purple_bol.png",
       headingStyle: "bg-dark-purple",
       contentStyle: "text-medium-purple",
       bgStyle: "bg-light-purple",
     },
     {
-      img: "./images/orange_bol.png",
+      img: "/images/orange_bol.png",
       headingStyle: "bg-dark-orange",
       contentStyle: "text-medium-orange",
       bgStyle: "bg-light-orange",
     },
     {
-      img: "./images/green_bol.png",
+      img: "/images/green_bol.png",
       headingStyle: "bg-dark-green",
       contentStyle: "text-medium-green",
       bgStyle: "bg-light-green",
@@ -46,33 +47,51 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }) => {
+const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
-
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const { institute, department, semester, section, shift, classes, creator, _id, date: publishedDate, totalUserUsing } = item;
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const date = publishedDate ? format(new Date(publishedDate), 'PP') : 'Date is not valid'
   // const date = 'publishedDate'
-  console.log({ publishedDate })
+  // console.log({ publishedDate })
   // console.log({ a })
-
+  const handleDelete = () => {
+    if (!deleteLoading) {
+      if (window.confirm("are you sure ?")) {
+        setDeleteLoading(true)
+        axios.delete(`https://shielded-dusk-65695.herokuapp.com/routine/${_id}`)
+          .then(res => {
+            setDeleteLoading(false)
+            setData(pre => {
+              return pre.filter(single => single._id !== _id)
+            })
+          })
+      }
+    }
+  }
   return (
 
-    <div className="card-container w-full   ">
+    <div className=" w-full ">
       <div
-        onClick={(e) => {
-          setOpen(!open);
-        }}
-        className="w-full relative  n overflow-hidden"
+        className="w-full relative overflow-hidden  rounded-md shadow-md"
       >
+        {
+          deleteLoading && <div className="absolute inset-0 backdrop-blur-sm bg-white/[.3] z-10  "></div>
+        }
+
+
         <div
-          className={`details_card_wrap ${bgStyle}   p-2 shadow-md text-${headingStyle}`}
+          className={`details_card_wrap ${bgStyle}  rounded-md p-2 text-${headingStyle}`}
         >
           <div className="content   ">
             <div className="mb-4 flex  gap-3">
               <div className="">
-                <img className="w-[50px]" src={img} alt="" />
+                {
+                  img && <img className="w-[50px]" src={process.env.PUBLIC_URL + img} alt="logo" />
+                }
+
               </div>
               <div className="">
                 <Tooltip title={institute}>
@@ -80,7 +99,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
                 </Tooltip>
                 <div className="flex gap-5">
                   <Tooltip title={department}>
-                    <p className={`text-sm ${contentStyle}`}>{department}</p>
+                    <p className={`text-sm ${contentStyle}`}>{textConversion(department, 9)}</p>
                   </Tooltip>
                   <p className={`text-sm ${contentStyle}`}>
                     {semester} sem
@@ -124,7 +143,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
               <div className=" ">
                 <Tooltip title={"Creator " + creator?.displayName}>
 
-                  <h3 className="text-xs">{textConversion(creator?.displayName, 25)}</h3>
+                  <h3 className="text-xs capitalize">{textConversion(creator?.displayName, 25)}</h3>
                 </Tooltip>
                 <Tooltip title="Published Date">
                   <div className="text-xs">
@@ -156,7 +175,7 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
                     >
                       <DeleteIcon />
                     </IconButton>
-                    <NavLink to={`/update/${_id}`}>
+                    <NavLink to={admin ? `/dashboard/manageRoutine/update/${_id}` : `/update/${_id}`}>
                       <Tooltip title='Update routine'>
                         <IconButton aria-label="update">
                           <DriveFileRenameOutlineIcon />
@@ -175,26 +194,6 @@ const DemoCard = ({ item, updateAble, i, getLoeading, handleDelete, deleteAble }
 
                 }
               </div>
-            </div>
-          </div>
-
-          <div
-            className={`details_card_wrap hidden transition-all abssolute  left-0 right-0   w-full ${open ? "top-0" : "top-[158px]"
-              }`}
-          >
-            <div className="h-full flex flex-col justify-between border  drop-shadow-lg border-bottom-1   bg-white shadow-xl   text-black ">
-              <div className="h-[40px] bg-white shadow-md flex justify-center items-center mb-2  border-gray-200">
-                <hr
-                  className={`w-[30px] rounded-md h-[4px] ${headingStyle}`}
-                ></hr>
-              </div>
-              <div className="p-2 shadow-sm ">
-
-
-
-              </div>
-
-
             </div>
           </div>
         </div>

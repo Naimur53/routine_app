@@ -12,34 +12,38 @@ code {
     monospace;
 }
 
+* {
+  overflow-wrap: break-word;
+}
+
 /* width */
 ::-webkit-scrollbar {
-  width:4px;
-  height:8px;
-  border-radius: 40px; 
-  margin-top: 20px;
+  width: 1px;
+  height: 1px;
+  border-radius: 40px;
+  margin-top: 0px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: hsl(0, 0%, 100%);
+  background: rgb(255, 255, 255);
   border-radius: 40px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(225, 225, 225);
+  background: rgb(255, 255, 255);
   border-radius: 40px;
 }
 
-*:hover::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 1);
+div:hover::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
   border-radius: 40px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:rgb(225, 225, 225);
+  background: rgb(255, 255, 255);
 }
 
 .Mui-active,
@@ -51,6 +55,9 @@ code {
   .active_dashboard_link {
     @apply bg-dark-purple text-white;
   }
+  .active_dashboard_link_horizontal {
+    @apply bg-dark-purple text-white;
+  }
 
   .active_class_tab {
     @apply text-dark-purple bg-light-purple;
@@ -59,12 +66,16 @@ code {
 
 @layer base {
   .dashboard_link {
-    @apply w-full block text-content px-3 py-4 rounded-2xl mb-2 hover:bg-gray-200 hover:text-gray-700 transition-all 
+    @apply w-full block text-content px-2 py-4 rounded-2xl mb-2  hover:bg-gray-200 hover:text-gray-700 transition-all
+  }
+  .dashboard_link_horizontal {
+    @apply w-full block text-black text-center text-sm rounded-2xl mb-2 py-2 bg-gray-200 hover:bg-gray-400 hover:text-gray-700 transition-all
   }
 
   .custom_height_for_classes {
-    @apply h-[calc(100vh-150px)];
+    @apply h-[calc(100vh-295px)] md:h-[calc(100vh-150px)];
   }
+
   .custom_height {
     @apply h-[calc(100vh-80px)];
   }
@@ -73,7 +84,15 @@ code {
     @apply h-full
   }
 
+  .mainLayoutTabWidth {
+    @apply w-[260px]
+  }
+
   .custom_height_preview {
     @apply h-[calc(100vh-300px)]
+  }
+
+  .pagination_button {
+    @apply p-2 bg-light-purple hover:bg-dark-purple transition-all hover:text-white text-dark-purple disabled:text-gray-400 disabled:bg-gray-200 rounded-full
   }
 }

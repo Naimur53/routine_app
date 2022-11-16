@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { CircularProgress } from '@mui/material';
-const AllRequestRoutines = () => {
+const AllRequestRoutines = ({ short }) => {
     const [data, setData] = useState([])
     const [status, setStatus] = useState('pending');
     const [getLoading, setGetLoading] = useState(true)
@@ -24,24 +24,26 @@ const AllRequestRoutines = () => {
     };
     return (
         <div>
-            <div className="w-[220px] mb-5">
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Filter with status</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={status}
-                        label="Filter with status"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value='all'>All</MenuItem>
-                        <MenuItem value='pending'>Pending</MenuItem>
-                        <MenuItem value='success'>Success</MenuItem>
-                        <MenuItem value='rejected'>Rejected</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
-            <div className='custom_height_for_classes overflow-scroll'>
+            {
+                !short && <div className="w-[220px] mb-5">
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Filter with status</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={status}
+                            label="Filter with status"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value='all'>All</MenuItem>
+                            <MenuItem value='pending'>Pending</MenuItem>
+                            <MenuItem value='success'>Success</MenuItem>
+                            <MenuItem value='rejected'>Rejected</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+            }
+            <div className={`${short ? "h-[370px]" : 'custom_height_for_classes'} overflow-scroll`}>
                 {
                     getLoading ?
                         <div className='flex justify-center'>

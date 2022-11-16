@@ -29,7 +29,7 @@ function getStyles(name, personName, theme) {
         : theme.typography.fontWeightMedium,
   };
 }
-const Info = ({ errors, register, watch }) => {
+const Info = ({ errors, register, watch, disabled }) => {
   return (
     <div>
       <Grid container spacing={2}>
@@ -44,6 +44,7 @@ const Info = ({ errors, register, watch }) => {
             variant="standard"
             sx={{ width: "100%" }}
             color="primary"
+            disabled={disabled}
           />
           <div>
             <span className="text-red-700">
@@ -61,6 +62,8 @@ const Info = ({ errors, register, watch }) => {
             variant="standard"
             color="primary"
             sx={{ width: "100%" }}
+            disabled={disabled}
+
           />
 
           <div>
@@ -76,9 +79,12 @@ const Info = ({ errors, register, watch }) => {
             <Select
               labelId="demo-multiple-name-label"
               id="demo-multiple-name"
-              value={watch("semester")}
+              value={watch("semester") ?? ''}
               {...register("semester", { required: true })}
               MenuProps={MenuProps}
+              disabled={disabled}
+
+              defaultValue={''}
             >
               {semesters.map((semester) => (
                 <MenuItem key={semester} value={semester}>
@@ -99,10 +105,13 @@ const Info = ({ errors, register, watch }) => {
             <InputLabel id="demo-multiple-name-label">Shift</InputLabel>
             <Select
               labelId="demo-multiple-name-label"
+              defaultValue={''}
               id="demo-multiple-name"
-              value={watch("shift")}
+              value={watch("shift") ?? ""}
               {...register("shift", { required: true })}
               MenuProps={MenuProps}
+              disabled={disabled}
+
             >
               {shifts.map((shift) => (
                 <MenuItem key={shift} value={shift}>
@@ -124,9 +133,13 @@ const Info = ({ errors, register, watch }) => {
             <Select
               labelId="demo-multiple-name-label"
               id="demo-multiple-name"
-              value={watch("section")}
+              value={watch("section") ?? ""}
               {...register("section", { required: true })}
               MenuProps={MenuProps}
+              defaultValue={''}
+              disabled={disabled}
+
+
             >
               {sections.map((section) => (
                 <MenuItem key={section} value={section}>

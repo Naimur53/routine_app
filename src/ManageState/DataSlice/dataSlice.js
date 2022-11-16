@@ -21,7 +21,7 @@ export const dataSlice = createSlice({
         delete data.set;
         state.user = action.payload;
       } else {
-        state.user = { ...action.payload };
+        state.user = { ...state.user, ...action.payload };
       }
     },
     setLoading: (state, action) => {

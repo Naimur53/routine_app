@@ -21,7 +21,7 @@ const Logo = () => {
           textDecoration: "none",
         }}
       >
-        LOGO
+
       </Typography>
     </NavLink>
   );

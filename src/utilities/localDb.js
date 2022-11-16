@@ -68,7 +68,7 @@ const saveRoutine = (data) => {
     }
     if (!exist) {
         putDataInLocalDb('routines', data, true)
-        return { response: 'successfully save', status: 200 }
+        return { response: 'Routine successfully save', status: 200 }
     }
     return { response: 'This routine already exist ', status: 400 }
 

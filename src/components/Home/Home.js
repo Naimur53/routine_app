@@ -1,6 +1,6 @@
-import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, IconButton, Modal, Tooltip, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
+import DashboardTab from "../ShareComponents/MainLayoutTab/MainLayoutTab";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
@@ -9,254 +9,104 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
 import HomeNoteShow from "../MyNote/HomeNoteShow";
-import { getRoutineDataFromLocalDbWithIndex } from "../../utilities/dataValidation";
-import { getDataFromLocalDb } from "../../utilities/localDb";
+import { getAllRoutinesFromLocalDb, getRoutineDataFromLocalDbWithIndex } from "../../utilities/dataValidation";
+import { findSelectIndex, getDataFromLocalDb, saveSelectIndex } from "../../utilities/localDb";
 import { NavLink } from "react-router-dom";
 import RoutineNotFound from "../ShareComponents/RoutineNotFound/RoutineNotFound";
-// const data = {
-//   classes:
-//     {
-//       day: "Sunday",
-//       endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "Fundamental",
-//       teacherName: "Naimur Rahman",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Monday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Chemistry",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Ovi Sheikh",
-//       day: "Monday",
-//       startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       "subjectName": "Biology",
-//       "subjectCode": "6645dfd4",
-//       "teacherName": "Akash Hossain",
-//       "day": "Tuesday",
-//       "startTime": "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       "endTime": "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Sunday",
-//       endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "Fundamental tor main khai mehedi df ddf dfdf d",
-//       teacherName: "Naimur Rahman",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Monday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Chemistry",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Ovi Sheikh",
-//       day: "Monday",
-//       startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Tuesday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Tuesday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Tuesday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Tuesday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Sunday",
-//       endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "Fundamental",
-//       teacherName: "Naimur Rahman",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Monday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Chemistry",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Ovi Sheikh",
-//       day: "Monday",
-//       startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Tuesday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Sunday",
-//       endTime: "Sat Sep 17 2022 03:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 02:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "Fundamental",
-//       teacherName: "Naimur Rahman",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Monday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Chemistry",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Ovi Sheikh",
-//       day: "Saturday",
-//       startTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 02:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology tor mai dfd dfd dfd dfdfd dfd ",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Tuesday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       subjectName: "Biology tor mai dfd dfd dfd dfdfd dfd ",
-//       subjectCode: "6645dfd4",
-//       teacherName: "Akash Hossain",
-//       day: "Friday",
-//       startTime: "Sat Sep 17 2022 03:00:00 GMT+0600 (Bangladesh Standard Time)",
-//       endTime: "Sat Sep 17 2022 03:45:00 GMT+0600 (Bangladesh Standard Time)",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Friday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Wednesday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Wednesday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-//     {
-//       day: "Thursday",
-//       endTime: "Sat Sep 17 2022 02:15:00 GMT+0600 (Bangladesh Standard Time)",
-//       startTime: "Sat Sep 17 2022 01:30:00 GMT+0600 (Bangladesh Standard Time)",
-//       subjectCode: "6645dfd4",
-//       subjectName: "physics",
-//       teacherName: "Sheikh Sadi",
-//       roomNumber: '3233',
-//     },
-
-//   ]
-// }
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { toast } from "react-toastify";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState({ classes: [] });
+  const [data, setData] = useState({ classes: [] })
+  const [allRoutineData, setAllRoutineData] = useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  useEffect(() => {
-    getRoutineDataFromLocalDbWithIndex(0)
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {});
-  }, []);
+  const [selectIndex, setSelectIndex] = React.useState(findSelectIndex());
 
+  const handleChange = (event) => {
+    console.log(event.target.value)
+    setSelectIndex(event.target.value);
+    saveSelectIndex(event.target.value)
+  };
+  useEffect(() => {
+    getAllRoutinesFromLocalDb()
+      .then(res => {
+        setAllRoutineData(res)
+      })
+
+  }, [])
+  // useEffect(() => {
+  //   getRoutineDataFromLocalDbWithIndex(selectIndex).then(res => {
+  //     setData(res)
+
+  //   })
+  //     .catch(err => {
+
+  //     })
+  // }, [selectIndex])
+  useEffect(() => {
+    if (allRoutineData[selectIndex]?.institute) {
+      setData(() => allRoutineData[selectIndex])
+    } else {
+      if (allRoutineData.length) {
+        setSelectIndex(0)
+        // setData(allRoutineData[0])
+      }
+      else {
+        setData({})
+      }
+    }
+  }, [selectIndex, allRoutineData])
+  console.log(data)
   return (
     <MainLayout>
-      <Grid container spacing={2}>
+      <Grid container spacing={0}>
         <Grid item xs={12} md={8}>
-          {data?.classes.length ? (
-            <HomeClassShow data={data}></HomeClassShow>
-          ) : (
-            <RoutineNotFound></RoutineNotFound>
-          )}
+
+          {
+            data?.classes?.length ?
+              <div>
+                <div className="flex justify-between">
+                  <div className="w-[230px] md:w-[300px] mb-2">
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Select Routine</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={selectIndex}
+                        label="Select Routine"
+                        sx={{ fontSize: { md: '16px', xs: '13px' } }}
+                        onChange={handleChange}
+                      >
+                        {
+                          allRoutineData.map(({ department, semester, section, shift }, i) => <MenuItem sx={{ fontSize: { md: '16px', sm: '13px' } }}
+                            value={i}>
+                            {shift === 'None' ? `${department} sem-${semester}  sec-${section} ` : section === 'None' ? `${department}  sem-${semester} shift-${shift}` : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
+                            { }
+                          </MenuItem>)
+                        }
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div>
+                    <Tooltip
+                      title={data.institute}
+                    >
+                      <IconButton>
+                        <HelpOutlineIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                </div>
+                <HomeClassShow data={data}></HomeClassShow>
+              </div> :
+              <RoutineNotFound></RoutineNotFound>
+          }
         </Grid>
         <Grid item xs={12} md={4}>
           <div className="custom_height hidden md:block">
@@ -272,11 +122,7 @@ const Home = () => {
                     Add Note
                     <NoteAddIcon sx={{ ml: 1 }} />
                   </Button>
-                  <ModalProvider
-                    open={open}
-                    setList={setList}
-                    onClose={handleClose}
-                  />
+                  <ModalProvider open={open} setList={setList} onClose={handleClose} />
                 </div>
               </Grid>
             </Grid>

@@ -5,7 +5,11 @@ import { useParams } from "react-router-dom";
 import { saveRoutine } from "../../../utilities/localDb";
 import HomeClassShow from "../../Home/smallCompo/HomeClassShow/HomeClassShow";
 import MainLayout from "../../ShareComponents/MainLayout/MainLayout";
-
+import AddIcon from '@mui/icons-material/Add';
+import { format } from "date-fns";
+import RoutineNotFound from "../../ShareComponents/RoutineNotFound/RoutineNotFound";
+import ShareIcon from '@mui/icons-material/Share';
+import { toast } from "react-toastify";
 const Checkout = () => {
   const { id } = useParams();
   const [data, setData] = useState({ classes: [] });
@@ -19,9 +23,12 @@ const Checkout = () => {
         setGetLoading(false);
         setData(res.data);
       } else {
-        alert('data not found')
+        toast.error('data not found')
       }
-    });
+    })
+      .catch(err => {
+        setGetLoading(false)
+      })
   }, [id]);
   console.log(data, "from checkout");
   const handleSave = () => {
@@ -29,104 +36,89 @@ const Checkout = () => {
     setSave(true);
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
-      console.log('asd')
-      axios.put(`http://localhost:5001/routine/increaseUsingValue?id=${data._id}`)
+      toast.success(response)
+      axios.put(`https://shielded-dusk-65695.herokuapp.com/routine/increaseUsingValue?id=${data._id}`)
+    } else {
+      toast.error(status)
     }
-    alert(response + status);
   };
+  if (getLoading) {
+    return <MainLayout>
+      <div className="flex justify-center">
+        <CircularProgress></CircularProgress>
+      </div>
+
+    </MainLayout>
+  }
+  if (!getLoading && !data._id && !data.date) {
+    return <MainLayout>
+      <div >
+        <RoutineNotFound title='Sorry routine not Found!'></RoutineNotFound>
+      </div>
+    </MainLayout>
+  }
+  const handleShare = () => {
+    navigator.clipboard.writeText(data._id)
+      .then(res => {
+        toast.success("The Id has a copy to the clipboard")
+      })
+      .catch(err => {
+        toast.error("Id can't be copy try again")
+      })
+  }
   return (
     <MainLayout>
-      <div className="p-2">
-        <div className="text-center border shadow-md m-2 p-2 rounded-md">
-          <Box>
-            <div className="lg:flex justify-items-center  ">
-              <div className="text-lg flex-1">
-                {getLoading ? (
-                  <>
-                    <Skeleton
-                      variant="text"
-                      sx={{ mx: "auto" }}
-                      width="20%"
-                      height={40}
-                    />
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <h1 className="text-2xl font-bold"> {data.institute}</h1>
-                  </>
-                )}
-                {getLoading ? (
-                  <>
-                    <Skeleton
-                      variant="text"
-                      sx={{ mx: "auto" }}
-                      width="20%"
-                      height={20}
-                    />
-                    <Skeleton
-                      variant="text"
-                      sx={{ mx: "auto" }}
-                      width="20%"
-                      height={20}
-                    />
+      <div className="  p-2">
+        <div className="flex justify-end pb-5">
+          {data?._id && (
+            <div className="flex gap-4">
+              <Button
+                variant="contained"
+                disabled={save}
+                size='small'
+                className="text-lg border  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
+                onClick={handleSave}
+              >
+                {/* <AddIcon></AddIcon>  */}
+                <span className="ml-1">Save Routine</span>
+              </Button>
+              <Button
+                variant="outlined"
+                size='small'
+                className="text-lg border  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
+                onClick={() => handleShare()}
+              >
+                {/* <AddIcon></AddIcon>  */}
+                <ShareIcon></ShareIcon>
+                <span className="ml-1">Share</span>
+              </Button>
+            </div>
+          )}
+        </div>
+        <div className="flex justify-center  shadow-md">
+          <div className="text-center  w-full md:w-1/2 mb-5    m-2 relative px-2 py-5 rounded-md">
+            <h1 className="text-2xl font-bold"> {data.institute}</h1>
+            <div className="text-lg">
+              <div className="flex justify-center items-center">
+                <div>
+                  <h1 className="py-3 block break-words">
+                    <span className="text-dark-purple">{data.department}</span> department
+                    <br className=" md:hidden block" />
+                    <span className="text-dark-purple  "> {data.semester}</span> semester </h1>
+                  <div className="flex justify-between">
 
-                    <Skeleton
-                      variant="text"
-                      sx={{ mx: "auto" }}
-                      width="20%"
-                      height={20}
-                    />
-                    <Skeleton
-                      variant="text"
-                      sx={{ mx: "auto" }}
-                      width="10%"
-                      height={40}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <div className="">
-                      <h1> {data.department} Department</h1>
-                      <h1>
-                        {" "}
-                        {data.semester} Semester , {data.shift} Shift
-                      </h1>
-                      <h1> </h1>
-                      <h1> section: {data.section}</h1>
-                    </div>
-                  </>
-                )}
-              </div>
-              <div className=" ">
-                {data?._id && (
-                  <Button
-                    variant="outlined"
-                    disabled={save}
-                    className="text-lg border  p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
-                    onClick={handleSave}
-                  >
-                    Save Routine
-                  </Button>
-                )}
+                    <h1>Shift: {data.shift}</h1>
+                    <h1> section: {data.section}</h1>
+                  </div>
+
+                </div>
               </div>
             </div>
-          </Box>
+          </div>
         </div>
+        <p className="mt-5 mb-10 text-center w-[100%] text-sm text-gray-400">Published on {format(new Date(data.date), 'PP')} <br /> Total {data.totalUserUsing} user using this routine </p>
+        <HomeClassShow data={data}></HomeClassShow>
 
-        {getLoading ? (
-          <>
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-            <Skeleton variant="text" sx={{ ms: 5 }} width="20%" height={80} />
-          </>
-        ) : (
-          <>
-            <HomeClassShow data={data}></HomeClassShow>
-          </>
-        )}
       </div>
     </MainLayout>
   );

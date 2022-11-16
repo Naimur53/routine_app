@@ -13,8 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import UserUpdateExitsRoutine from "./SmallCompo/UserUpdateExitsRoutine";
 import AddMoreClass from "./SmallCompo/AddMoreClass";
+import { toast } from "react-toastify";
 
-const UpdateRoutine = () => {
+const UpdateRoutine = ({ admin }) => {
   const { id } = useParams();
   const [data, setData] = useState({})
   const [getLoading, setGetLoading] = useState(true)
@@ -50,10 +51,9 @@ const UpdateRoutine = () => {
   //working
   useEffect(() => {
     setGetLoading(true)
-    if (user._id) {
-      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id}&userId=${user._id}`)
+    if (admin) {
+      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id} `)
         .then(res => {
-          console.log('isave');
           setData(res.data)
           setGetLoading(false)
 
@@ -62,17 +62,31 @@ const UpdateRoutine = () => {
 
         })
     }
+    else if (user._id) {
+      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id}&userId=${user._id}`)
+        .then(res => {
+          setData(res.data)
+          setGetLoading(false)
+        }).catch(err => {
+          setGetLoading(false)
+
+        })
+    }
   }, [id, user])
 
   if (!getLoading && !data._id) {
-    return <MainLayout>
-      you dont have access to this routine for update
-    </MainLayout>
+    return <>
+      <div className="custom_height flex justify-center items-center">
+        <h2 className="text-center text-xl text-red-500">
+          You don't have access to this routine for update
+        </h2>
+      </div>
+    </>
   }
   if (getLoading) {
-    return <MainLayout>
+    return <div className="flex justify-center">
       <CircularProgress></CircularProgress>
-    </MainLayout>
+    </div>
   }
 
   // handle basic from submit
@@ -82,16 +96,16 @@ const UpdateRoutine = () => {
     axios.put(`https://shielded-dusk-65695.herokuapp.com/routine?id=${data._id}`, { mainData })
       .then(res => {
         setUpdateLoading(false)
-        alert('updated done')
+        toast.success('Successfully updated')
       })
       .catch(err => {
         console.error(errors)
         setUpdateLoading(true)
-        alert('fail to update')
+        toast.error('Failed to update try again later')
       })
   }
   return (
-    <MainLayout>
+    <>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="pb-2 flex justify-end">
@@ -222,7 +236,7 @@ const UpdateRoutine = () => {
           <UserUpdateExitsRoutine data={data} setData={setData}></UserUpdateExitsRoutine>
         </div>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

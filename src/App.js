@@ -39,6 +39,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
 import EditeProfile from "./components/EditeProfile/EditeProfile";
+import useSocket from "./Hook/useSocket";
 
 const theme = createTheme({
   palette: {
@@ -61,7 +62,7 @@ function App() {
   const dispatch = useDispatch();
 
   const { auth } = useFirebase({ observer: true });
-  const { user } = useSelector(allData)
+  const { user, loading } = useSelector(allData)
   useEffect(() => {
     console.log(user)
 

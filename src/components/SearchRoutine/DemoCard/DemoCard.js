@@ -15,6 +15,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import axios from "axios";
 import CustomTooltip from "../../ShareComponents/CustomTooltip/CustomTooltip";
+
 function chooseTheme(i) {
   const theme = [
     {
@@ -48,7 +49,7 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble }) => {
+const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, getLoeading, setData, deleteAble }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
@@ -61,6 +62,11 @@ const DemoCard = ({ item, updateAble, i, admin, getLoeading, setData, deleteAble
   const handleDelete = () => {
     if (!deleteLoading) {
       if (window.confirm("are you sure ?")) {
+        if (deleteFromLocal) {
+          deleteFromLocal(_id)
+          console.log('hi')
+          return
+        }
         setDeleteLoading(true)
         axios.delete(`http://localhost:5001/routine/${_id}`)
           .then(res => {

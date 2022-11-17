@@ -21,7 +21,6 @@ const RoutineClassCards = ({ data, day }) => {
     pm.sort(function (a, b) {
         return new Date(a.startTime).toLocaleTimeString().localeCompare(new Date(b.startTime).toLocaleTimeString());
     });
-    console.log(am, pm)
 
     return (
         <div>

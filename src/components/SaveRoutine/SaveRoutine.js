@@ -169,7 +169,7 @@ const SaveRoutine = () => {
       >
         {data.map((single, i) => (
           <Grid key={i} item lg={3} md={6} xs={12}>
-            <DemoCard item={{ ...single, }} handleDelete={handleDelete} i={i} deleteAble={true}></DemoCard>
+            <DemoCard deleteFromLocal={handleDelete} item={{ ...single, }} i={i} deleteAble={true}></DemoCard>
           </Grid>
         ))}
       </Grid>

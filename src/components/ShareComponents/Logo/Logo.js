@@ -15,13 +15,13 @@ const Logo = () => {
         sx={{
           mr: 2,
           // display: { xs: 'none', md: 'flex' },
-          fontFamily: "monospace",
+          // fontFamily: "monospace",
           fontWeight: 700,
-          letterSpacing: ".3rem",
+          // letterSpacing: ".3rem",
           textDecoration: "none",
         }}
       >
-
+        <span className="">R.</span> <span className="text-dark-purple font-mono font-thin">Manager</span>
       </Typography>
     </NavLink>
   );

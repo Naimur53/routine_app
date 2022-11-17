@@ -1,10 +1,10 @@
-import { Box, Button, Container, Grid, IconButton, Modal, Tooltip, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, Drawer, Grid, IconButton, Modal, Tooltip, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import DashboardTab from "../ShareComponents/MainLayoutTab/MainLayoutTab";
 import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
-
+import CloseIcon from '@mui/icons-material/Close';
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
@@ -21,25 +21,28 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import textConversion from '../../utilities/textConversion'
 import { toast } from "react-toastify";
 import CustomTooltip from "../ShareComponents/CustomTooltip/CustomTooltip";
+import { useDispatch, useSelector } from "react-redux";
+import { accessAllRoutineInLocal, allData, setSelectIndex } from "../../ManageState/DataSlice/dataSlice";
+import Chat from "./smallCompo/Chat/Chat";
+import CommentIcon from '@mui/icons-material/Comment';
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
+  const [chatOpen, setChatOpen] = React.useState(false);
   const [data, setData] = useState({ classes: [] })
-  const [allRoutineData, setAllRoutineData] = useState([]);
+  // const [allRoutineData, setAllRoutineData] = useState([]);
+  const dispatch = useDispatch()
+  const { allRoutineData, selectIndex, loading } = useSelector(allData)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [selectIndex, setSelectIndex] = React.useState(findSelectIndex());
+  // const [selectIndex, setSelectIndex] = React.useState(findSelectIndex());
 
   const handleChange = (event) => {
-    console.log(event.target.value)
-    setSelectIndex(event.target.value);
-    saveSelectIndex(event.target.value)
+    dispatch(setSelectIndex(event.target.value))
+
   };
   useEffect(() => {
-    getAllRoutinesFromLocalDb()
-      .then(res => {
-        setAllRoutineData(res)
-      })
+    dispatch(accessAllRoutineInLocal())
 
   }, [])
   // useEffect(() => {
@@ -56,31 +59,37 @@ const Home = () => {
       setData(() => allRoutineData[selectIndex])
     } else {
       if (allRoutineData.length) {
-        setSelectIndex(0)
-        // setData(allRoutineData[0])
+        dispatch(setSelectIndex(0))
       }
       else {
         setData({})
       }
     }
-  }, [selectIndex, allRoutineData])
-  console.log(data)
+  }, [selectIndex, dispatch, allRoutineData])
+  if (loading) {
+    return <MainLayout>
+      <div className="custom_height flex justify-center items-center">
+        <CircularProgress></CircularProgress>
+      </div>
+    </MainLayout>
+
+  }
   return (
     <MainLayout>
-      <Grid container spacing={0}>
-        <Grid item xs={12} md={8}>
-
-          {
-            data?.classes?.length ?
+      {
+        data?.classes?.length ?
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={7}>
               <div>
-                <div className="flex justify-between">
-                  <div className="w-[230px] md:w-[300px] mb-3">
+                <div className="flex justify-between items-center mb-3">
+                  <div className="w-[230px] md:w-[300px]  ">
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Select Routine </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={selectIndex}
+                        defaultValue={selectIndex}
                         label="Selected Routine "
                         size="small"
                         sx={{ fontSize: { md: '16px', xs: '13px' } }}
@@ -96,7 +105,7 @@ const Home = () => {
                       </Select>
                     </FormControl>
                   </div>
-                  <div >
+                  <div className="flex items-center">
                     <CustomTooltip
                       title={`
                         institute: ${data.institute}, 
@@ -110,16 +119,19 @@ const Home = () => {
                         <HelpOutlineIcon />
                       </IconButton>
                     </CustomTooltip>
+                    <div className="block md:hidden">
+
+                      <IconButton color="primary" onClick={() => setChatOpen(true)}><CommentIcon></CommentIcon></IconButton>
+                    </div>
                   </div>
                 </div>
                 <HomeClassShow data={data}></HomeClassShow>
-              </div> :
-              <RoutineNotFound></RoutineNotFound>
-          }
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <div className="custom_height hidden md:block">
-            <Grid container>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <div className="custom_height hidden md:block">
+                <Chat></Chat>
+                {/* <Grid container>
               <Grid item md={6}>
                 <h6 className="text-s hidden md:block dashboard_link active_dashboard_link p-2 ">
                   <NoteIcon sx={{ mr: 1, ml: 1 }} /> My Notes
@@ -139,10 +151,41 @@ const Home = () => {
               <Grid item md={12} xs={12}>
                 <HomeNoteShow list={list} />
               </Grid>
+            </Grid> */}
+              </div>
             </Grid>
+          </Grid>
+          :
+          <RoutineNotFound></RoutineNotFound>
+      }
+      <Drawer
+        anchor={'bottom'}
+        open={chatOpen}
+        onClose={() => setChatOpen(false)}
+      >
+        <div className="flex flex-col  justify-between">
+          <div className="h-[60px] bg-dark-purple text-white flex justify-between items-center px-2 shadow">
+            <div>
+              <h2 className="text-xl font-bold">{textConversion(data.department, 20)}</h2>
+              <div>
+                <p className="text-sm">
+                  <span className="font-bold">Semester</span>:{data.semester},
+                  <span className="font-bold"> Section</span>: {data.section},
+                  <span className="font-bold"> Shift</span>: {data.shift}
+                </p>
+              </div>
+            </div>
+            <div>
+              <IconButton color='white' onClick={() => setChatOpen(false)}>
+                <CloseIcon></CloseIcon>
+              </IconButton>
+            </div>
           </div>
-        </Grid>
-      </Grid>
+          <div className="h-[calc(100vh-60px)]">
+            <Chat></Chat>
+          </div>
+        </div>
+      </Drawer>
     </MainLayout>
   );
 };

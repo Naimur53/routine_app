@@ -33,7 +33,7 @@ const RoutineClassCard = ({ startTime, endTime, teacherName, roomNumber, subject
                     }
                     <div>
                         <CustomTooltip title={subjectName}>
-                            <h1 className={headingStyle + ' font-medium  capitalize'}>{textConversion(subjectName, 20)}</h1>
+                            <h1 className={headingStyle + ' font-medium'}>{textConversion(subjectName, 20)}</h1>
                         </CustomTooltip>
                         <p className={contentStyle + " text-sm"}>{subjectCode}</p>
                     </div>

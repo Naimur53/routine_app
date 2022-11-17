@@ -1,8 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAllRoutinesFromLocalDb } from "../../utilities/dataValidation";
+import { findSelectIndex, saveSelectIndex } from "../../utilities/localDb";
 const initialState = {
   loading: true,
+  getMessageLoading: true,
   user: {},
+  messages: [],
+  allRoutineData: [],
+  selectIndex: findSelectIndex(),
 };
 export const getUserFromDB = createAsyncThunk(
   "data/getFromDB",
@@ -11,6 +17,24 @@ export const getUserFromDB = createAsyncThunk(
     return response.data
   }
 );
+export const getMessageFromDb = createAsyncThunk(
+  "data/getMessage",
+  async (info) => {
+    const response = await axios.get(`https://shielded-dusk-65695.herokuapp.com/message?routineId=${info}`)
+    return response.data
+  }
+);
+export const postMessageToDb = createAsyncThunk(
+  "data/postToDb",
+  async (info) => {
+    const response = await axios.post(`https://shielded-dusk-65695.herokuapp.com/message`, info)
+    return response.data
+  }
+);
+export const accessAllRoutineInLocal = createAsyncThunk("data/accessFromLocal", async (info) => {
+  const response = await getAllRoutinesFromLocalDb()
+  return response
+})
 export const dataSlice = createSlice({
   name: "data",
   initialState,
@@ -24,8 +48,16 @@ export const dataSlice = createSlice({
         state.user = { ...state.user, ...action.payload };
       }
     },
+    addMessage: (state, action) => {
+      state.messages = [...state.messages, ...action.payload]
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    setSelectIndex: (state, action) => {
+      saveSelectIndex(action.payload)
+
+      state.selectIndex = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -38,11 +70,24 @@ export const dataSlice = createSlice({
       })
       .addCase(getUserFromDB.rejected, (state, action) => {
         state.loading = false;
-      });
+      })
+      .addCase(accessAllRoutineInLocal.fulfilled, (state, action) => {
+        state.allRoutineData = action.payload
+      })
+      .addCase(getMessageFromDb.pending, (state, action) => {
+        state.getMessageLoading = true;
+      })
+      .addCase(getMessageFromDb.rejected, (state, action) => {
+        state.getMessageLoading = false;
+      })
+      .addCase(getMessageFromDb.fulfilled, (state, action) => {
+        state.messages = [...state.messages, ...action.payload]
+        state.getMessageLoading = false;
+      })
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, setLoading } = dataSlice.actions;
+export const { setUser, setLoading, addMessage, setSelectIndex } = dataSlice.actions;
 export const allData = (state) => state.data;
 export default dataSlice.reducer;

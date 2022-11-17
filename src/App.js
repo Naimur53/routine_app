@@ -41,6 +41,7 @@ import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/Manag
 import EditeProfile from "./components/EditeProfile/EditeProfile";
 import About from "./components/About/About";
 import ContactUs from "./components/About/ContactUs/ContactUs";
+import useSocket from "./Hook/useSocket";
 
 const theme = createTheme({
   palette: {
@@ -63,7 +64,7 @@ function App() {
   const dispatch = useDispatch();
 
   const { auth } = useFirebase({ observer: true });
-  const { user } = useSelector(allData);
+  const { user, loading } = useSelector(allData)
   useEffect(() => {
     console.log(user);
   }, [user]);

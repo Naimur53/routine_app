@@ -72,7 +72,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       transition: { staggerChildren: 0.07, delayChildren: 0.2 },
     },
     initial: {
-      opacity: 0,
+      opacity: window.innerWidth > 900 ? 1 : 0,
       transition: { staggerChildren: 0.07, delayChildren: 0.2 },
     },
   };
@@ -83,7 +83,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       // transition: { type: 'easeOut' }
     },
     initial: {
-      opacity: 0,
+      opacity: window.innerWidth > 900 ? 1 : 0,
       // x: -250,
     },
   };

@@ -119,7 +119,10 @@ const Home = () => {
                         <HelpOutlineIcon />
                       </IconButton>
                     </CustomTooltip>
-                    <IconButton color="primary" onClick={() => setChatOpen(true)}><CommentIcon></CommentIcon></IconButton>
+                    <div className="block md:hidden">
+
+                      <IconButton color="primary" onClick={() => setChatOpen(true)}><CommentIcon></CommentIcon></IconButton>
+                    </div>
                   </div>
                 </div>
                 <HomeClassShow data={data}></HomeClassShow>

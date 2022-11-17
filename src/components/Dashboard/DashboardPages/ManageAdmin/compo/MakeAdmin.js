@@ -16,7 +16,7 @@ const MakeAdmin = ({ setAllAdmin }) => {
         }
         setGetLoading(true)
         if (email) {
-            axios.get(`http://localhost:5001/user?email=${email}`)
+            axios.get(`https://shielded-dusk-65695.herokuapp.com/user?email=${email}`)
                 .then(res => {
                     setUsers([res.data])
                     setGetLoading(false)

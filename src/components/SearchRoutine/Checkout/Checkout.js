@@ -37,7 +37,7 @@ const Checkout = () => {
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
       toast.success(response)
-      axios.put(`http://localhost:5001/routine/increaseUsingValue?id=${data._id}`)
+      axios.put(`https://shielded-dusk-65695.herokuapp.com/routine/increaseUsingValue?id=${data._id}`)
     } else {
       toast.error("Routine already exist``")
     }

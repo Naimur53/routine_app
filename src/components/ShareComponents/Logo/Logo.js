@@ -17,11 +17,11 @@ const Logo = () => {
           // display: { xs: 'none', md: 'flex' },
           // fontFamily: "monospace",
           fontWeight: 700,
-          letterSpacing: ".3rem",
+          // letterSpacing: ".3rem",
           textDecoration: "none",
         }}
       >
-        Rou.Man
+        <span className="">R.</span> <span className="text-dark-purple font-mono font-thin">Manager</span>
       </Typography>
     </NavLink>
   );

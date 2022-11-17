@@ -93,7 +93,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
                         thumbnail: watch("thumbnail") || user.thumbnail,
                         email: user.email,
                     }
-                    axios.put('http://localhost:5001/user', {
+                    axios.put('https://shielded-dusk-65695.herokuapp.com/user', {
                         ...data
                     })
                         .then(res => {

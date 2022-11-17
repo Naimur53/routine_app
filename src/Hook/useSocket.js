@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client'
 import { addMessage, allData, postMessageToDb } from '../ManageState/DataSlice/dataSlice';
 
-// const io = io.connect('http://localhost:5001/')
+// const io = io.connect('https://shielded-dusk-65695.herokuapp.com/')
 
 const useSocket = () => {
     const { allRoutineData, selectIndex } = useSelector(allData)
@@ -14,7 +14,7 @@ const useSocket = () => {
 
     useEffect(() => {
         if (socket === null) {
-            setSocket(io("http://localhost:5001/"))
+            setSocket(io("https://shielded-dusk-65695.herokuapp.com/"))
         }
         if (socket) {
             socket.on('connect', () => {

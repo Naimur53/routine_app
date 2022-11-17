@@ -21,7 +21,7 @@ const ChatRoom = () => {
     const { user, allRoutineData, selectIndex, messages } = useSelector(allData);
     const routineId = allRoutineData[selectIndex]?._id;
 
-    // const socket = io.connect('http://localhost:5001/');
+    // const socket = io.connect('https://shielded-dusk-65695.herokuapp.com/');
     // socket.on('receive_message', data => {
     //     dispatch(addMessage([data]))
     //     console.log('reviece', data.message)

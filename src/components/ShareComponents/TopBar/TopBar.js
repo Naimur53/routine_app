@@ -64,7 +64,7 @@ const TopBar = () => {
               alignItems: "center",
             }}
           >
-            {/* <Logo></Logo>  */}
+            <div className="hidden md:block"><Logo></Logo></div>
             <Box
               className="justify-end "
               sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}

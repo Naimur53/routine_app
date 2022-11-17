@@ -40,6 +40,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
 import EditeProfile from "./components/EditeProfile/EditeProfile";
+import AllUsers from "./components/Dashboard/DashboardPages/AllUsers/AllUsers";
 
 const theme = createTheme({
   palette: {
@@ -87,6 +88,7 @@ function App() {
           <Route path="/editProfile" element={<EditeProfile />}></Route>
 
           <Route path="/contactUs" element={<ContactUs />}></Route>
+
           <Route
             path="/login"
             element={
@@ -210,6 +212,7 @@ function App() {
               path="allRequestRoutines"
               element={<AllRequestRoutines />}
             ></Route>
+            <Route path="allUsers" element={<AllUsers />}></Route>
 
             <Route
               path="createRequestRoutine/:id"

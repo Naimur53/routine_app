@@ -21,6 +21,7 @@ import textConversion from "../../../utilities/textConversion";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import EditIcon from "@mui/icons-material/Edit";
+import { motion } from "framer-motion";
 const MainLayoutTab = ({ handleCloseNavMenu }) => {
   const { user } = useSelector(allData);
   const { logOut } = useFirebase({ observer: false });
@@ -64,6 +65,11 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
           path: "/dashboard/manageAdmin",
           Icon: AdminPanelSettingsIcon,
         },
+        {
+          name: "All users",
+          path: "/dashboard/allUsers",
+          Icon: AdminPanelSettingsIcon,
+        },
       ]
     : user.isAdmin
     ? [
@@ -73,6 +79,24 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
     : window.innerWidth > 900
     ? [...horizontalNav, ...commonNav]
     : commonNav;
+  const menuContainer = {
+    animate: {
+      opacity: 1,
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+    initial: {
+      opacity: 0,
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+  };
+  const menuItem = {
+    animate: {
+      x: 0,
+    },
+    initial: {
+      x: -250,
+    },
+  };
   return (
     <div className="h-full md:h-auto ">
       <div className="w-[85vw] md:w-full h-full">
@@ -196,23 +220,30 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
         </div>
         <hr className="md:hidden mt-3" />
         {/* large device */}
-        <div className="flex md:mt-5 flex-col   md:w-full pr-5 pl-3  pb-3 w-full">
+        <motion.div
+          animate="animate"
+          initial="initial"
+          variants={menuContainer}
+          className="flex md:mt-5 flex-col   md:w-full pr-5 pl-3  pb-3 w-full"
+        >
           {pages.map(({ name, path, Icon }, i) => (
-            <NavLink
-              key={i}
-              onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
-              to={path}
-              className={({ isActive }) =>
-                location?.pathname === path
-                  ? "dashboard_link active_dashboard_link"
-                  : "dashboard_link"
-              }
-            >
-              <div className=" flex gap-3">
-                <Icon></Icon>
-                <h6>{name}</h6>
-              </div>
-            </NavLink>
+            <motion.div variants={menuItem} className="">
+              <NavLink
+                key={i}
+                onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
+                to={path}
+                className={({ isActive }) =>
+                  location?.pathname === path
+                    ? "dashboard_link active_dashboard_link"
+                    : "dashboard_link"
+                }
+              >
+                <div className=" flex gap-3">
+                  <Icon></Icon>
+                  <h6>{name}</h6>
+                </div>
+              </NavLink>
+            </motion.div>
           ))}
           {user.email && (
             <div
@@ -228,7 +259,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

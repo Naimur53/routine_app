@@ -13,13 +13,14 @@ import axios from "axios";
 import { useState } from "react";
 import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 import SearchRoutineNotFound from "../ShareComponents/SearchRoutineNotFound/SearchRoutineNotFound";
-import EastIcon from '@mui/icons-material/East';
-import WestIcon from '@mui/icons-material/West';
+import EastIcon from "@mui/icons-material/East";
+import WestIcon from "@mui/icons-material/West";
+import { motion } from "framer-motion";
 const SearchRoutine = () => {
   const [allRoutine, setAllRoutine] = useState([]);
   const [showRoutine, setShowRoutine] = useState([]);
   const [getLoading, setGetLoading] = useState(true);
-  const [pagination, setPagination] = useState({ len: 8, skip: 0 })
+  const [pagination, setPagination] = useState({ len: 8, skip: 0 });
   const {
     register,
     handleSubmit,
@@ -46,7 +47,7 @@ const SearchRoutine = () => {
     },
   };
 
-  const onSubmit = (data) => { };
+  const onSubmit = (data) => {};
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
     const clear = () => {
@@ -64,53 +65,52 @@ const SearchRoutine = () => {
   // filter
 
   useEffect(() => {
-
     // const filters = allRoutine.filter(single => {
 
     //   return single.department.toLowerCase().includes(department.toLowerCase()) && single.section.toLowerCase().includes(section.toLowerCase()) && single.semester.toLowerCase().includes(semester.toLowerCase())
     // })
-    setShowRoutine(allRoutine)
-
-  }, [allRoutine, department, section, semester,])
+    setShowRoutine(allRoutine);
+  }, [allRoutine, department, section, semester]);
 
   const textSearchRequest = () => {
-    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `)
-      .then(res => {
-        setAllRoutine(res.data)
-        setPagination({ len: 8, skip: 0 })
-        setGetLoading(false)
+    axios
+      .get(
+        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
+      )
+      .then((res) => {
+        setAllRoutine(res.data);
+        setPagination({ len: 8, skip: 0 });
+        setGetLoading(false);
       })
-      .catch(err => {
-        setAllRoutine([])
-        setPagination({ len: 8, skip: 0 })
-        setGetLoading(false)
-      })
-  }
+      .catch((err) => {
+        setAllRoutine([]);
+        setPagination({ len: 8, skip: 0 });
+        setGetLoading(false);
+      });
+  };
 
   const fetchData = useCallback(() => {
-
-    setGetLoading(true)
-    console.log(institute, institute.match(/^[0-9a-fA-F]{24}$/), 'output')
+    setGetLoading(true);
+    console.log(institute, institute.match(/^[0-9a-fA-F]{24}$/), "output");
 
     // institute will work for both id and text name of institute
     if (institute?.length === 24) {
-      axios.get(`https://shielded-dusk-65695.herokuapp.com/routine/findById?id=${institute}`)
-        .then(res => {
-
-          setAllRoutine([res.data])
-          setPagination({ len: 8, skip: 0 })
-          setGetLoading(false)
-
+      axios
+        .get(
+          `https://shielded-dusk-65695.herokuapp.com/routine/findById?id=${institute}`
+        )
+        .then((res) => {
+          setAllRoutine([res.data]);
+          setPagination({ len: 8, skip: 0 });
+          setGetLoading(false);
         })
-        .catch(err => {
-          textSearchRequest()
-        })
+        .catch((err) => {
+          textSearchRequest();
+        });
     } else {
-      textSearchRequest()
+      textSearchRequest();
     }
-
-
-  }, [institute, department, section, semester,])
+  }, [institute, department, section, semester]);
 
   useEffect(() => {
     const { clear } = debounce(fetchData, 300);
@@ -119,27 +119,49 @@ const SearchRoutine = () => {
     };
   }, [institute, department, section, semester, fetchData]);
 
-  //handle pagination 
+  //handle pagination
   const handlePre = () => {
-    setGetLoading(true)
-    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8} `)
-      .then(res => {
-        setAllRoutine(res.data)
-        setPagination({ len: res.data.length, skip: pagination.skip - 8 })
-        setGetLoading(false)
-      })
-
-  }
+    setGetLoading(true);
+    axios
+      .get(
+        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${
+          pagination.skip - 8
+        } `
+      )
+      .then((res) => {
+        setAllRoutine(res.data);
+        setPagination({ len: res.data.length, skip: pagination.skip - 8 });
+        setGetLoading(false);
+      });
+  };
   const handleNext = () => {
-    setGetLoading(true)
-    axios.get(`https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len} `)
-      .then(res => {
-        setAllRoutine(res.data)
-        setPagination({ len: res.data.length, skip: pagination.skip + pagination.len })
-        setGetLoading(false)
-      })
-  }
-  console.log(pagination)
+    setGetLoading(true);
+    axios
+      .get(
+        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${
+          pagination.skip + pagination.len
+        } `
+      )
+      .then((res) => {
+        setAllRoutine(res.data);
+        setPagination({
+          len: res.data.length,
+          skip: pagination.skip + pagination.len,
+        });
+        setGetLoading(false);
+      });
+  };
+  console.log(pagination);
+  const democardContainer = {
+    animate: {
+      opacity: 1,
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+    initial: {
+      opacity: 0,
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+  };
   return (
     <MainLayout>
       <form
@@ -261,26 +283,46 @@ const SearchRoutine = () => {
           </Grid>
         </Grid>
       </form>
-      <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-        {
-          getLoading ? [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
-            <SkeletonDemoCard></SkeletonDemoCard>
-
-          </Grid>) : showRoutine.length ? showRoutine.map((single, i) => (
-            <Grid item lg={3} md={6} xs={12}>
-              <DemoCard item={single} i={i} updateAble={false}></DemoCard>
-            </Grid>
-          )) : <div className="my-10 flex justify-center w-full ">
-            <SearchRoutineNotFound></SearchRoutineNotFound>
-          </div>
-        }
-      </Grid>
+      <motion.div
+        animate="animate"
+        initial="initial"
+        variants={democardContainer}
+        className=""
+      >
+        <Grid container spacing={4} sx={{ marginTop: "20px" }}>
+          {getLoading ? (
+            [...new Array(8)].map((single, i) => (
+              <Grid key={i} item lg={3} md={6} xs={12}>
+                <SkeletonDemoCard></SkeletonDemoCard>
+              </Grid>
+            ))
+          ) : showRoutine.length ? (
+            showRoutine.map((single, i) => (
+              <Grid item lg={3} md={6} xs={12}>
+                <DemoCard item={single} i={i} updateAble={false}></DemoCard>
+              </Grid>
+            ))
+          ) : (
+            <div className="my-10 flex justify-center w-full ">
+              <SearchRoutineNotFound></SearchRoutineNotFound>
+            </div>
+          )}
+        </Grid>
+      </motion.div>
       {
         <div className="flex py-5 gap-5">
-          <button onClick={handlePre} disabled={getLoading || !pagination.skip} className="pagination_button">
-            <WestIcon ></WestIcon>
+          <button
+            onClick={handlePre}
+            disabled={getLoading || !pagination.skip}
+            className="pagination_button"
+          >
+            <WestIcon></WestIcon>
           </button>
-          <button onClick={handleNext} disabled={getLoading || pagination.len < 8} className="pagination_button">
+          <button
+            onClick={handleNext}
+            disabled={getLoading || pagination.len < 8}
+            className="pagination_button"
+          >
             <EastIcon></EastIcon>
           </button>
         </div>

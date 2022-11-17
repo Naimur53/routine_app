@@ -32,16 +32,17 @@ import AllRequestRoutines from "./components/Dashboard/DashboardPages/AllRequest
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateRequestRoutine from "./components/Dashboard/DashboardPages/CreateRequestRoutine/CreateRequestRoutine";
 import MainLayout from "./components/ShareComponents/MainLayout/MainLayout";
+import ContactUs from "./components/ContactUs/ContactUs";
 import Overview from "./components/Dashboard/DashboardPages/Overview/Overview";
 import ManageRoutine from "./components/Dashboard/DashboardPages/ManageRoutine/ManageRoutine";
 import OnlineRoute from "./components/ShareComponents/OnlineRoute/OnlineRoute";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
 import EditeProfile from "./components/EditeProfile/EditeProfile";
-import About from "./components/About/About";
-import ContactUs from "./components/About/ContactUs/ContactUs";
 import useSocket from "./Hook/useSocket";
+import AllUsers from "./components/Dashboard/DashboardPages/AllUsers/AllUsers";
+import ViewProfile from "./components/ViewProfile/ViewProfile";
 
 const theme = createTheme({
   palette: {
@@ -52,12 +53,12 @@ const theme = createTheme({
     secondary: {
       // This is green.A700 as hex.
       main: "#103d7b",
+
     },
     white: {
       // This is green.A700 as hex.
       main: "#fff",
     },
-
   },
 });
 function App() {
@@ -85,20 +86,42 @@ function App() {
         />
         <TopBar></TopBar>
         <Routes>
-          <Route path="/login" element={<OnlineRoute><Login /></OnlineRoute>}></Route>
-          <Route path="/about" element={<About></About>}></Route>
-          <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
-          <Route path="/signUp" element={<OnlineRoute><SignUp /></OnlineRoute>}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signUp" element={<SignUp />}></Route>
+          <Route path="/editProfile" element={<EditeProfile />}></Route>
+
+          <Route path="/contactUs" element={<ContactUs />}></Route>
+
+          <Route
+            path="/login"
+            element={
+              <OnlineRoute>
+                <Login />
+              </OnlineRoute>
+            }
+          ></Route>
+
+          <Route
+            path="/signUp"
+            element={
+              <OnlineRoute>
+                <SignUp />
+              </OnlineRoute>
+            }
+          ></Route>
 
           {/* not working on this */}
 
-          <Route path="/editProfile" element={
-            <PrivateRoute>
-              <MainLayout>
-                <EditeProfile />
-              </MainLayout>
-            </PrivateRoute>
-          }></Route>
+          <Route
+            path="/editProfile"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <EditeProfile />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          ></Route>
 
           <Route path="/" element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
@@ -108,9 +131,7 @@ function App() {
             path="/searchRoutine"
             element={
               <OnlineRoute>
-
                 <SearchRoutine />
-
               </OnlineRoute>
             }
           ></Route>
@@ -136,17 +157,30 @@ function App() {
               </OnlineRoute>
             }
           ></Route>
-          <Route path="/checkout/:id" element={<OnlineRoute><Checkout /></OnlineRoute>}></Route>
-          <Route path="/myProfile" element={<OnlineRoute><PrivateRoute>
-            <MyProfile />
-          </PrivateRoute></OnlineRoute>}></Route>
+          <Route
+            path="/checkout/:id"
+            element={
+              <OnlineRoute>
+                <Checkout />
+              </OnlineRoute>
+            }
+          ></Route>
+          <Route
+            path="/myProfile"
+            element={
+              <OnlineRoute>
+                <PrivateRoute>
+                  <MyProfile />
+                </PrivateRoute>
+              </OnlineRoute>
+            }
+          ></Route>
           <Route
             path="/update/:id"
             element={
               <OnlineRoute>
                 <PrivateRoute>
                   <MainLayout>
-
                     <UpdateRoutine />
                   </MainLayout>
                 </PrivateRoute>
@@ -163,8 +197,7 @@ function App() {
               </OnlineRoute>
             }
           ></Route>
-
-
+          <Route path="viewProfile/:id" element={<ViewProfile />}></Route>
           {/* ---------------------dashboard routes -------------------------- */}
 
           <Route
@@ -177,40 +210,24 @@ function App() {
               </OnlineRoute>
             }
           >
-            <Route
-              index
-              element={
-                <Overview />
-              }
-            ></Route>
+            <Route index element={<Overview />}></Route>
             <Route
               path="allRequestRoutines"
               element={<AllRequestRoutines />}
             ></Route>
+            <Route path="allUsers" element={<AllUsers />}></Route>
 
             <Route
               path="createRequestRoutine/:id"
               element={<CreateRequestRoutine />}
             ></Route>
-            <Route
-              path="manageRoutine"
-              element={
-                <ManageRoutine />
-              }
-            ></Route>
+
+            <Route path="manageRoutine" element={<ManageRoutine />}></Route>
             <Route
               path="manageRoutine/update/:id"
-              element={
-                <UpdateRoutine admin={true} />
-              }
+              element={<UpdateRoutine admin={true} />}
             ></Route>
-            <Route
-              path="manageAdmin"
-              element={
-                <ManageAdmin />
-              }
-            ></Route>
-
+            <Route path="manageAdmin" element={<ManageAdmin />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

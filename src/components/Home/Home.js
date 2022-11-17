@@ -9,8 +9,15 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIcon from "@mui/icons-material/Note";
 import HomeNoteShow from "../MyNote/HomeNoteShow";
-import { getAllRoutinesFromLocalDb, getRoutineDataFromLocalDbWithIndex } from "../../utilities/dataValidation";
-import { findSelectIndex, getDataFromLocalDb, saveSelectIndex } from "../../utilities/localDb";
+import {
+  getAllRoutinesFromLocalDb,
+  getRoutineDataFromLocalDbWithIndex,
+} from "../../utilities/dataValidation";
+import {
+  findSelectIndex,
+  getDataFromLocalDb,
+  saveSelectIndex,
+} from "../../utilities/localDb";
 import { NavLink } from "react-router-dom";
 import RoutineNotFound from "../ShareComponents/RoutineNotFound/RoutineNotFound";
 import InputLabel from '@mui/material/InputLabel';
@@ -56,7 +63,7 @@ const Home = () => {
   // }, [selectIndex])
   useEffect(() => {
     if (allRoutineData[selectIndex]?.institute) {
-      setData(() => allRoutineData[selectIndex])
+      setData(() => allRoutineData[selectIndex]);
     } else {
       if (allRoutineData.length) {
         dispatch(setSelectIndex(0))
@@ -82,7 +89,7 @@ const Home = () => {
             <Grid item xs={12} md={7}>
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <div className="w-[230px] md:w-[300px]  ">
+                  <div className="min-w-[150px] max-w-[300px] md:w-[300px]  ">
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Select Routine </InputLabel>
                       <Select

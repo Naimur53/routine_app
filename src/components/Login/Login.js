@@ -1,7 +1,7 @@
 import React from "react";
 import loginimg from "../../images/login.png";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import googleLogo from "../../images/googleicon.png";
 import { useLocation } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
@@ -15,7 +15,9 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { loading, user } = useSelector(allData);
-  const { loginUser, logOut, authError } = useFirebase({ observer: false });
+  const { loginUser, logOut, authError, signInWithGoogle } = useFirebase({
+    observer: false,
+  });
 
   const {
     register,
@@ -26,11 +28,14 @@ const Login = () => {
   const onSubmit = (data) => {
     loginUser({ ...data, location, navigate });
   };
+  const handleLoginWithGoogle = () => {
+    signInWithGoogle();
+  };
   return (
     <div className="custom_height flex items-center justify-center flex-col ">
       <div className="w-11/12	shadow-md md:w-1/3  px-3 py-8 rounded-lg">
         <img className="img-fluid" src={loginimg} alt="" />
-        <h2 className="font-bold text-xl mb-2">Login</h2>
+        <h2 className="font-bold text-xl text-gray-500 mb-2">Login</h2>
         <hr className="w-10   border-t-4 rounded-full" />
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           <input
@@ -41,13 +46,18 @@ const Login = () => {
             type="email"
             {...register("email", { required: true })}
           />
-          {errors.email && <div>This filed is required</div>}
+          {errors.email && (
+            <div className="text-pink-600 ">This filed is required</div>
+          )}
           <PasswordTextField
+            placeholder="Password"
             register={register}
             name="password"
           ></PasswordTextField>
 
-          {errors.password && <div>password must be 6 length</div>}
+          {errors.password && (
+            <div className="text-pink-600 ">password must be 6 length</div>
+          )}
           <div>
             {loading ? (
               <div className="w-full flex justify-center">
@@ -68,7 +78,7 @@ const Login = () => {
               </div>
             ) : (
               <input
-                className="my-3 text-lg py-2 font-bold px-6 border border-gary-300 text-black rounded-full cursor-pointer transition-all hover:shadow-md"
+                className="w-full text-white  my-3 text-lg py-2 font-bold px-6 border border-gary-300 bg-blue-500  rounded-full cursor-pointer transition-all hover:shadow-md"
                 type="submit"
                 value="Login"
               />
@@ -78,9 +88,21 @@ const Login = () => {
             <p className="text-red-900">{authError}</p>
           </div>
         </form>
-        <div className="  flex align-center justify-center ">
+        <div
+          onClick={handleLoginWithGoogle}
+          className="bg-gray-100 shadow-md p-2 rounded-full flex  mx-auto cursor-pointer "
+        >
+          <img className="w-8 mr-3" src={googleLogo} alt="" />
+          <button className="font-bold text-gray-600 text-center">
+            Login With Goole
+          </button>
+        </div>
+        <div className="  flex align-center justify-center  mt-4">
           <NavLink to="/signUp" className="text-center text-primary py-2 ">
-            Don't have Account? <span className="text-dark-purple font-bold">Let's Create account.</span>
+            Don't have Account?{" "}
+            <span className="text-dark-purple font-bold">
+              Let's Create account.
+            </span>
           </NavLink>
         </div>
       </div>

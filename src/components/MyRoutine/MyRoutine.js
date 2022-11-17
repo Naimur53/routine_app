@@ -13,21 +13,33 @@ import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
 import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 import { toast } from "react-toastify";
-
+import { motion } from "framer-motion";
 const MyRoutine = () => {
+  const cardContainer = {
+    animate: {
+      opacity: 1,
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+    initial: {
+      opacity: 0,
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+  };
   const [allRoutine, setAllRoutine] = useState([]);
   const [getLoading, setGetLoading] = useState(true);
   const { user } = useSelector(allData);
   useEffect(() => {
     if (user?._id) {
       axios
-        .get(`https://shielded-dusk-65695.herokuapp.com/routine?userId=${user?._id}`)
+        .get(
+          `https://shielded-dusk-65695.herokuapp.com/routine?userId=${user?._id}`
+        )
         .then((res) => {
           setAllRoutine(res.data);
           setGetLoading(false);
         });
     } else {
-      toast("User not found")
+      toast("User not found");
     }
   }, [user]);
   if (!getLoading && !allRoutine?.length) {
@@ -57,6 +69,7 @@ const MyRoutine = () => {
           My Created Routines
         </h1>
       </div>
+
       <Grid
         container
         spacing={4}
@@ -71,12 +84,31 @@ const MyRoutine = () => {
             <Grid item lg={3} md={6} xs={12}>
               {single ? (
                 <>
-                  {" "}
-                  <DemoCard item={single} updateAble={true} setData={setAllRoutine} i={i}></DemoCard>
+                  <motion.div
+                    animate="animate"
+                    initial="initial"
+                    variants={cardContainer}
+                    className=""
+                  >
+                    <DemoCard
+                      item={single}
+                      updateAble={true}
+                      setData={setAllRoutine}
+                      i={i}
+                    ></DemoCard>
+                  </motion.div>
                 </>
               ) : (
                 <>
-                  <SkeletonDemoCard></SkeletonDemoCard>
+                  {" "}
+                  <motion.div
+                    animate="animate"
+                    initial="initial"
+                    variants={cardContainer}
+                    className=""
+                  >
+                    <SkeletonDemoCard></SkeletonDemoCard>
+                  </motion.div>
                 </>
               )}
             </Grid>

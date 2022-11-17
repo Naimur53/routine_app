@@ -27,7 +27,8 @@ const TopBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const { user, loading } = useSelector(allData);
-  const { logOut } = useFirebase({ observer: false })
+  console.log(user, "fire base user ");
+  const { logOut } = useFirebase({ observer: false });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);
   };
@@ -44,34 +45,30 @@ const TopBar = () => {
 
   useEffect(() => {
     if (!user.displayName) {
-      setAnchorElUser(null)
+      setAnchorElUser(null);
     }
-  }, [user])
+  }, [user]);
   return (
     <div className="mb-16 md:mb-20">
       <AppBar
         position="fixed"
         elevation={0}
-        sx={{ background: "#ffffffd1", color: "black", backdropFilter: "blur(15px)" }}
+        sx={{ background: "#ffffffe1", color: "black", backdropFilter: "blur(15px)" }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Logo></Logo>
-            <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-              <NavLink to='/searchRoutine'>
-                <div className="">
-                  <Button >
-                    <span className="mr-2 ">Find Routine</span>
-                    <SearchIcon sx={{ color: "#5946ad" }}></SearchIcon>
-                  </Button>
-                </div>
-              </NavLink>
-            </div>
+          <Toolbar
+            disableGutters
+            sx={{
+              position: "relative",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            {/* <Logo></Logo>  */}
             <Box
               className="justify-end "
               sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}
             >
-
               <div className="flex">
                 {
                   user.email ? <div>
@@ -81,78 +78,92 @@ const TopBar = () => {
                       </IconButton>
                     </CustomTooltip>
                     <Menu
-                      sx={{ mt: '45px' }}
+                      sx={{ mt: "45px" }}
                       id="menu-appbar"
                       anchorEl={anchorElUser}
                       anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
+                        vertical: "top",
+                        horizontal: "right",
                       }}
                       keepMounted
                       transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
+                        vertical: "top",
+                        horizontal: "right",
                       }}
                       open={Boolean(anchorElUser)}
                       onClose={handleCloseUserMenu}
                     >
-                      <div className="flex w-[250px] px-3 flex-col items-center" >
+                      <div className="flex w-[250px] px-3 flex-col items-center">
                         {/* <img className="w-1/2 rounded-full" src={user.photoURL} alt={user.displayName} /> */}
                         <Avatar
                           alt={user.displayName}
                           src={user.photoURL}
                           sx={{ width: 150, height: 150 }}
                         />
-                        <span className="capitalize pt-2 font-medium text-lg text-center ">Sheikh {user.displayName}</span>
+                        <span className="capitalize pt-2 font-medium text-lg text-center ">
+                          Sheikh {user.displayName}
+                        </span>
                         <span className="">{user.email}</span>
                         <div className="mt-5 w-full flex justify-between">
-                          <NavLink to='/myProfile'><button className="bg-dark-purple text-white py-2 px-3 rounded-full" onClick={handleCloseUserMenu}>View Profile</button></NavLink>
-                          <button onClick={() => {
-                            setAnchorElNav(pre => null);
-                            logOut();
-
-                          }} className="bg-dark-purple text-white py-2 px-3 rounded-full" >Logout</button>
+                          <NavLink to="/myProfile">
+                            <button
+                              className="bg-dark-purple text-white py-2 px-3 rounded-full"
+                              onClick={handleCloseUserMenu}
+                            >
+                              View Profile
+                            </button>
+                          </NavLink>
+                          <button
+                            onClick={() => {
+                              setAnchorElNav((pre) => null);
+                              logOut();
+                            }}
+                            className="bg-dark-purple text-white py-2 px-3 rounded-full"
+                          >
+                            Logout
+                          </button>
                         </div>
-
                       </div>
-
                     </Menu>
-                  </div> :
-                    <div className="flex gap-2">
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        component={NavLink}
-                        to={"/signUp"}
-                        sx={{ my: 2, color: "Black", display: "block" }}
-                      >
-                        sign Up
-                      </Button>
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        component={NavLink}
-                        to={"/login"}
-                        sx={{ my: 2, color: "Black", display: "block" }}
-                      >
-                        login
-                      </Button>
-                    </div>
-                }
+                  </div>
+                    : (
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={handleCloseNavMenu}
+                          component={NavLink}
+                          to={"/signUp"}
+                          sx={{ my: 2, color: "Black", display: "block" }}
+                        >
+                          sign Up
+                        </Button>
+                        <Button
+                          onClick={handleCloseNavMenu}
+                          component={NavLink}
+                          to={"/login"}
+                          sx={{ my: 2, color: "Black", display: "block" }}
+                        >
+                          login
+                        </Button>
+                      </div>
+                    )}
               </div>
             </Box>
             <Box
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-              className="justify-between items-center"
+              className="justify-between items-center flex-row-reverse"
             >
-              <div></div>
+
               <div className="md:hidden block">
-                <NavLink to='/searchRoutine'>
+                <NavLink to="/searchRoutine">
                   <div className="">
-                    {/* <Button variant="outlined">
-                      <span className="mr-2 ">Search</span>
+                    <IconButton component={NavLink} to='/searchRoutine' >
                       <SearchIcon sx={{ color: "#5946ad" }}></SearchIcon>
-                    </Button> */}
+                    </IconButton>
                   </div>
                 </NavLink>
+              </div>
+              <div>
+                <Logo></Logo>
               </div>
               <IconButton
                 size="large"
@@ -164,12 +175,11 @@ const TopBar = () => {
                 color="inherit"
               >
                 {/* <MenuIcon />  */}
-                <div className="flex justify-center items-end gap-1 flex-col pr-0">
+                <div className="flex justify-center items-start gap-1 flex-col pr-0">
                   <div className="h-[3px] w-[10px] bg-black rounded-md"></div>
                   <div className="h-[3px] w-[20px] bg-black rounded-md"></div>
                   <div className="h-[3px] w-[15px] bg-black rounded-md"></div>
                 </div>
-
               </IconButton>
             </Box>
 
@@ -177,17 +187,19 @@ const TopBar = () => {
               anchor="left"
               open={anchorElNav}
               onClose={handleCloseNavMenu}
-              sx={{ width: "85vw", pt: 0, }}
+              sx={{ width: "85vw", pt: 0 }}
             >
               <div className="hidden md:flex justify-center mt-5 mb-3 ">
                 <Logo></Logo>
               </div>
-              <MainLayoutTab handleCloseNavMenu={handleCloseNavMenu} ></MainLayoutTab>
+              <MainLayoutTab
+                handleCloseNavMenu={handleCloseNavMenu}
+              ></MainLayoutTab>
             </Drawer>
           </Toolbar>
         </Container>
-      </AppBar >
-    </div >
+      </AppBar>
+    </div>
   );
 };
 

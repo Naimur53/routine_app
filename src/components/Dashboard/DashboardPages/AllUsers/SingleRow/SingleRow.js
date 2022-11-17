@@ -2,11 +2,17 @@ import { TableCell, TableRow, Tooltip } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SingleRow = ({ photoURL, displayName, email }) => {
+const SingleRow = ({ photoURL, displayName, email, _id }) => {
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell component="th" scope="row">
-        <img src={photoURL} className="w-[40px] shadow-xl rounded-md" alt="s" />
+        <NavLink className={"cursor-pointer"} to={`/viewProfile/${_id}`}>
+          <img
+            src={photoURL}
+            className="w-[40px] shadow-xl rounded-md"
+            alt="s"
+          />
+        </NavLink>
       </TableCell>
       <TableCell align="left">
         <Tooltip>

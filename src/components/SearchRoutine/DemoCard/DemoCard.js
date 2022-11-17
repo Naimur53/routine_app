@@ -166,11 +166,16 @@ const DemoCard = ({
               </div>
             </div>
             <div className="flex gap-2 px-2 mt-3 items-center ">
-              <Avatar
-                sx={{ width: 32, height: 32 }}
-                src={creator?.photoURL}
-                alt="creator"
-              />
+              <NavLink
+                className={"cursor-pointer"}
+                to={`/viewProfile/${creator?._id || creator}`}
+              >
+                <Avatar
+                  sx={{ width: 32, height: 32 }}
+                  src={creator?.photoURL}
+                  alt="creator"
+                />
+              </NavLink>
 
               <div className=" ">
                 <Tooltip title={"Creator " + creator?.displayName}>

@@ -41,6 +41,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ManageAdmin from "./components/Dashboard/DashboardPages/ManageAdmin/ManageAdmin";
 import EditeProfile from "./components/EditeProfile/EditeProfile";
 import AllUsers from "./components/Dashboard/DashboardPages/AllUsers/AllUsers";
+import ViewProfile from "./components/ViewProfile/ViewProfile";
 
 const theme = createTheme({
   palette: {
@@ -194,7 +195,7 @@ function App() {
               </OnlineRoute>
             }
           ></Route>
-
+          <Route path="viewProfile/:id" element={<ViewProfile />}></Route>
           {/* ---------------------dashboard routes -------------------------- */}
 
           <Route
@@ -218,6 +219,7 @@ function App() {
               path="createRequestRoutine/:id"
               element={<CreateRequestRoutine />}
             ></Route>
+
             <Route path="manageRoutine" element={<ManageRoutine />}></Route>
             <Route
               path="manageRoutine/update/:id"

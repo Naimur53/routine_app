@@ -29,6 +29,11 @@ const AllUsers = () => {
       <h1 className="text-center font-bold text-2xl text-gray-500 m-3">
         All Users
       </h1>
+      <div className="flex justify-end">
+        <div className="w-32 rounded bg-gray-200  left-0  p-2">
+          <p className="text-right ">Total Users : {allUser.length}</p>
+        </div>
+      </div>
       <Paper sx={{ width: "100%" }}>
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">

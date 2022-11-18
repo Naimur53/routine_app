@@ -1,11 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import MainLayout from "./../../ShareComponents/MainLayout/MainLayout";
+import TokenCard from "./TokenCard";
 
 const Notification = () => {
+  const [tokens, setTokens] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://shielded-dusk-65695.herokuapp.com/notificationToken`)
+      .then((res) => {
+        console.log(res);
+        let mainData = [];
+
+        res.data.forEach((element) => {
+          const exits = mainData.find(
+            (single) => single.token === element.token
+          );
+          if (!exits?._id) {
+            mainData = [...mainData, element];
+          }
+        });
+        setTokens(mainData);
+      })
+      .catch((err) => {});
+  }, []);
   return (
-    <MainLayout>
-      <div className="shadow-md  border border-1 bg-gray-100">token</div>
-    </MainLayout>
+    <>
+      <div className="flex flex-col gap-3">
+        {tokens.map((token, i) => (
+          <TokenCard key={isFinite} token={token}></TokenCard>
+        ))}
+      </div>
+    </>
   );
 };
 

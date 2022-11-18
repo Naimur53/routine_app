@@ -30,7 +30,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
     { name: "Home", path: "/", Icon: HomeIcon },
     { name: "Search", path: "/searchRoutine", Icon: SearchIcon },
     { name: "Saved", path: "/saveRoutine", Icon: AddTaskIcon },
-  ]
+  ];
   const commonNav = [
     // { name: "My Profile", path: "/myProfile", Icon: AccountCircleIcon },
     // { name: "Notes", path: "/myNotes", Icon: TextSnippetIcon },
@@ -45,27 +45,48 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       Icon: SendIcon,
     },
     { name: "My Created Routine", path: "/myRoutine", Icon: FolderSharedIcon },
-  ]
+  ];
   const dashboardNav = [
     { name: "overview", path: "/dashboard", Icon: EqualizerIcon },
-    { name: "All Request Routine", path: "/dashboard/allRequestRoutines", Icon: AddchartIcon },
-    { name: "Manage Routine", path: "/dashboard/manageRoutine", Icon: ManageSearchIcon },
-    { name: "Manage Admin", path: "/dashboard/manageAdmin", Icon: AdminPanelSettingsIcon },
-  ]
-  const pages = location?.pathname?.includes('/dashboard') ? window.innerWidth > 900 ? [
-    { name: "Home", path: "/", Icon: HomeIcon },
-    ...dashboardNav
-
-  ] : [
-    ...dashboardNav
-  ] : user.isAdmin ? window.innerWidth > 900 ? [
-    { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
-    ...horizontalNav,
-    ...commonNav,
-  ] : [
-    { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
-    ...commonNav
-  ] : window.innerWidth > 900 ? [...horizontalNav, ...commonNav] : commonNav
+    {
+      name: "All Request Routine",
+      path: "/dashboard/allRequestRoutines",
+      Icon: AddchartIcon,
+    },
+    {
+      name: "Manage Routine",
+      path: "/dashboard/manageRoutine",
+      Icon: ManageSearchIcon,
+    },
+    {
+      name: "Manage Admin",
+      path: "/dashboard/manageAdmin",
+      Icon: AdminPanelSettingsIcon,
+    },
+    {
+      name: "Notification Token",
+      path: "/dashboard/notification",
+      Icon: AdminPanelSettingsIcon,
+    },
+  ];
+  const pages = location?.pathname?.includes("/dashboard")
+    ? window.innerWidth > 900
+      ? [{ name: "Home", path: "/", Icon: HomeIcon }, ...dashboardNav]
+      : [...dashboardNav]
+    : user.isAdmin
+    ? window.innerWidth > 900
+      ? [
+          { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
+          ...horizontalNav,
+          ...commonNav,
+        ]
+      : [
+          { name: "Dashboard", path: "/dashboard", Icon: LeaderboardIcon },
+          ...commonNav,
+        ]
+    : window.innerWidth > 900
+    ? [...horizontalNav, ...commonNav]
+    : commonNav;
   const menuContainer = {
     animate: {
       opacity: 1,
@@ -105,7 +126,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
               >
                 <Avatar
                   component={NavLink}
-                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
                   to="/myProfile"
                   alt={user.displayName}
                   src={user.photoURL}
@@ -124,7 +145,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                 <IconButton
                   component={NavLink}
                   to="/editProfile"
-                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
                   color="white"
                   variant="outline"
                 >
@@ -163,7 +184,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                 <Button
                   sx={{ backdropFilter: "blur(5px)" }}
                   color="white"
-                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
                   component={NavLink}
                   to="/login"
                   variant="outlined"
@@ -172,7 +193,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                   Login
                 </Button>
                 <NavLink
-                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+                  onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
                   to="/signUp"
                 >
                   <Button
@@ -189,14 +210,17 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
         </div>
 
         {/* mobile */}
-        <motion.div animate="animate"
+        <motion.div
+          animate="animate"
           initial="initial"
-          variants={menuContainer} className="pt-5 flex md:hidden justify-between gap-2 pr-5 pl-3 pb-0">
+          variants={menuContainer}
+          className="pt-5 flex md:hidden justify-between gap-2 pr-5 pl-3 pb-0"
+        >
           {horizontalNav.slice(0, 3).map(({ name, path, Icon }, i) => (
             <motion.div variants={menuItem} className="w-full">
               <NavLink
                 key={i}
-                onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+                onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
                 to={path}
                 className={({ isActive }) =>
                   location?.pathname === path
@@ -210,7 +234,6 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                 </div>
               </NavLink>
             </motion.div>
-
           ))}
         </motion.div>
         <hr className="md:hidden mt-3" />
@@ -225,7 +248,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
             <motion.div variants={menuItem} className="">
               <NavLink
                 key={i}
-                onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
+                onClick={handleCloseNavMenu ? handleCloseNavMenu : () => {}}
                 to={path}
                 className={({ isActive }) =>
                   location?.pathname === path

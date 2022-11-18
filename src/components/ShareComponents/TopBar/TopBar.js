@@ -107,10 +107,10 @@ const TopBar = () => {
                           src={user.photoURL}
                           sx={{ width: 150, height: 150 }}
                         />
-                        <span className="capitalize pt-2 font-medium text-lg text-center ">
-                          Sheikh {user.displayName}
+                        <span className="capitalize break-words pt-2 font-medium text-lg text-center ">
+                          {user.displayName}
                         </span>
-                        <span className="">{user.email}</span>
+                        <span className="break-words">{user.email}</span>
                         <div className="mt-5 w-full flex justify-between">
                           <NavLink to="/myProfile">
                             <button

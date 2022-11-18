@@ -1,3 +1,4 @@
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import firebaseConfig from "./Firebase/Firebase.config";
@@ -24,8 +25,9 @@ function requestPermission() {
             getToken(messaging, { vapidKey: 'BK9Dmr-FK93B3HcHPC5zN38jj5FY4cYNXv3rrHb625HnJFrUp8604TYsmtEdabgtg0Jp0U96dZuEx2CoIMLShGI' }).then((currentToken) => {
                 if (currentToken) {
                     // Send the token to your server and update the UI if necessary
+                    axios.post('https://shielded-dusk-65695.herokuapp.com/notificationToken', { token: currentToken })
                     // ...
-                    console.log({ currentToken })
+                    console.log({ token: currentToken }, "dfkfdf")
                 } else {
                     // Show permission request UI
                     console.log('No registration token available. Request permission to generate one.');

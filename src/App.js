@@ -43,6 +43,7 @@ import EditeProfile from "./components/EditeProfile/EditeProfile";
 import useSocket from "./Hook/useSocket";
 import AllUsers from "./components/Dashboard/DashboardPages/AllUsers/AllUsers";
 import ViewProfile from "./components/ViewProfile/ViewProfile";
+import Notification from "./components/Dashboard/Notification/Notification";
 
 const theme = createTheme({
   palette: {
@@ -53,7 +54,6 @@ const theme = createTheme({
     secondary: {
       // This is green.A700 as hex.
       main: "#103d7b",
-
     },
     white: {
       // This is green.A700 as hex.
@@ -65,7 +65,7 @@ function App() {
   const dispatch = useDispatch();
 
   const { auth } = useFirebase({ observer: true });
-  const { user, loading } = useSelector(allData)
+  const { user, loading } = useSelector(allData);
   useEffect(() => {
     console.log(user);
   }, [user]);
@@ -228,6 +228,7 @@ function App() {
               element={<UpdateRoutine admin={true} />}
             ></Route>
             <Route path="manageAdmin" element={<ManageAdmin />}></Route>
+            <Route path="notification" element={<Notification />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

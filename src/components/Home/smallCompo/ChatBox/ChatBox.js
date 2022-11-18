@@ -7,9 +7,7 @@ import Message from '../Message/Message';
 
 const ChatBox = () => {
     const { messages, allRoutineData, selectIndex, user, getMessageLoading } = useSelector(allData)
-    console.log({ messages })
     const filterMessages = messages.filter(single => single.routineId === allRoutineData[selectIndex]._id)
-    console.log(filterMessages)
     return (
         <Box className=' pb-2  w-full' sx={{ height: '85%', flexGrow: '1' }}>
             {/* <RightBar info={{ name: client?.displayName, photo: client?.photoURL }}></RightBar> */}

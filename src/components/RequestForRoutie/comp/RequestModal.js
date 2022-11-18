@@ -113,7 +113,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
                                                     onChange={handleImgUpload}
                                                     hidden
                                                     accept="image/*"
-                                                    multiple
+                                                    // multiple
 
                                                     type="file"
 

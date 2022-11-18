@@ -15,7 +15,7 @@ import SingleRow from "./SingleRow/SingleRow";
 const AllUsers = () => {
   const fetchData = () => {
     return axios
-      .get("http://localhost:5001/user")
+      .get("https://shielded-dusk-65695.herokuapp.com/user")
       .then((response) => setAllUser(response.data));
   };
 

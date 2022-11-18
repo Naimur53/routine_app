@@ -2,6 +2,7 @@
 
 import {
   Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -30,7 +31,7 @@ import UpdateDetails from "./compo/UpdateDetails/UpdateDetails";
 const EditeProfile = () => {
   const [bio, setBio] = useState(false);
   const [details, setDetails] = useState(false);
-  const { user } = useSelector(allData)
+  const { user, loading } = useSelector(allData)
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -61,8 +62,16 @@ const EditeProfile = () => {
   const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
   const shifts = ["None", "1st", "2nd"];
   const sections = ["None", "A", "B", "C", "D"];
+  if (loading) {
+    return <MainLayout>
+      <div className="flex justify-center">
+        <CircularProgress></CircularProgress>
+      </div>
+
+    </MainLayout>
+  }
   return (
-    <>
+    <MainLayout>
       <div className="container     bg-white  shadow-lg    transform   duration-200 easy-in-out p-3">
         {/*--------------------- using react hook from ------------------------ */}
         <div className=" ">
@@ -88,7 +97,7 @@ const EditeProfile = () => {
 
         <hr className="mt-6" />
       </div>
-    </>
+    </MainLayout>
   );
 };
 

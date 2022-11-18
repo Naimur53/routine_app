@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatBox from '../ChatBox/ChatBox';
-import { CircularProgress, LinearProgress, selectClasses, Stack } from '@mui/material';
+import { Button, CircularProgress, IconButton, LinearProgress, selectClasses, Stack } from '@mui/material';
 import axios from 'axios'
 import { Box } from '@mui/system';
 import ImageIcon from '@mui/icons-material/Image';
@@ -14,11 +14,11 @@ import useSocket from '../../../../Hook/useSocket';
 import io from 'socket.io-client'
 import { useEffect } from 'react';
 const ChatRoom = () => {
-    const { socket, sendMessage } = useSocket();
+    const { socket, sendMessage } = useSocket({ observer: false });
     const { register, reset, watch, setValue, handleSubmit, formState: { errors } } = useForm();
     const [imgLoading, setImgLoading] = useState(false)
     const dispatch = useDispatch()
-    const { user, allRoutineData, selectIndex, messages } = useSelector(allData);
+    const { user, allRoutineData, selectIndex, messages, getMessageLoading } = useSelector(allData);
     const routineId = allRoutineData[selectIndex]?._id;
 
     // const socket = io.connect('https://shielded-dusk-65695.herokuapp.com/');
@@ -33,9 +33,7 @@ const ChatRoom = () => {
 
         const exits = selectedRoutineMessage.find(single => single.routineId === allRoutineData[selectIndex]._id)
 
-        console.log({ selectedRoutineMessage, a: allRoutineData[selectIndex]._id, messages, exits })
         if (!exits?._id) {
-            console.info('getting message data')
             dispatch(getMessageFromDb(allRoutineData[selectIndex]._id))
         }
     }, [selectIndex, dispatch, allRoutineData])
@@ -67,11 +65,34 @@ const ChatRoom = () => {
     return (
         <div className='h-full flex flex-col bg-light-purple px-4 rounded-md '>
             <ChatBox ></ChatBox>
+
             <Box sx={{ flexGrow: '0' }} className='rows-span    bg-primary  w-full   flex '>
+
                 <form className='flex items-center  w-full mb-5' onSubmit={handleSubmit(onSubmit)}>
                     <div className='relative'>
-                        <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label>
-                        <input id="files" onChange={handleImgUpload} accept='image/*' className='hidden' type="file" />
+                        {/* <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label> */}
+                        <IconButton variant="contained" component="label">
+
+                            <ImageIcon  ></ImageIcon>
+                            <input
+                                onChange={handleImgUpload}
+                                hidden
+                                accept="image/*"
+                                // multiple
+
+                                type="file"
+
+                            />
+                        </IconButton>
+                        <input
+                            onChange={handleImgUpload}
+                            hidden
+                            accept="image/*"
+                            // multiple
+
+                            type="file"
+
+                        />
                         {
                             imgLoading ? <span className=' absolute top-0 right-0 font-semibold'><CircularProgress size={15}></CircularProgress></span> : watch('img')?.length ? <span className='text-red-800  absolute top-0 right-0 font-semibold'>1</span> : ''
                         }
@@ -79,7 +100,7 @@ const ChatRoom = () => {
                     <input type='text' className='flex-1 bg-white rounded-lg pl-2 py-1 mx-2 md:mx-4' placeholder=" write some thing" {...register("message", { required: watch('img')?.length ? false : true })} />
                     <div>
                         {
-                            imgLoading ? <button disabled={imgLoading} className='bg-gray-100 text-gray-500 opacity-75  rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button> : <button className='bg-white rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button>
+                            imgLoading ? <button disabled={imgLoading || getMessageLoading} className='bg-gray-100 text-gray-500 opacity-75  rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button> : <button className='bg-white rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button>
                         }
                     </div>
                 </form>

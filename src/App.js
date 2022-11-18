@@ -43,6 +43,8 @@ import EditeProfile from "./components/EditeProfile/EditeProfile";
 import useSocket from "./Hook/useSocket";
 import AllUsers from "./components/Dashboard/DashboardPages/AllUsers/AllUsers";
 import ViewProfile from "./components/ViewProfile/ViewProfile";
+import { getMessaging, onMessage } from "firebase/messaging";
+import './messaging_init_in_sw'
 import Notification from "./components/Dashboard/Notification/Notification";
 
 const theme = createTheme({
@@ -63,6 +65,7 @@ const theme = createTheme({
 });
 function App() {
   const dispatch = useDispatch();
+  const { } = useSocket({ observer: true });
 
   const { auth } = useFirebase({ observer: true });
   const { user, loading } = useSelector(allData);
@@ -70,6 +73,11 @@ function App() {
     console.log(user);
   }, [user]);
 
+  const messaging = getMessaging();
+  onMessage(messaging, (payload) => {
+    console.log('Message received. ', payload);
+    // ...
+  });
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>

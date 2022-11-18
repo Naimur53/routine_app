@@ -5,29 +5,46 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client'
 import { addMessage, allData, postMessageToDb } from '../ManageState/DataSlice/dataSlice';
 
-// const io = io.connect('https://shielded-dusk-65695.herokuapp.com/')
+const socket = io.connect('http://localhost:5001/')
 
-const useSocket = () => {
+const useSocket = ({ observer }) => {
     const { allRoutineData, selectIndex } = useSelector(allData)
     const dispatch = useDispatch()
-    const [socket, setSocket] = useState(null)
-
+    // const [socket, setSocket] = useState(ioInit)
     useEffect(() => {
-        if (socket === null) {
-            setSocket(io("https://shielded-dusk-65695.herokuapp.com/"))
-        }
-        if (socket) {
+        if (observer) {
             socket.on('connect', () => {
-                socket.emit('joined', { 'serverchannel': 120 })
                 console.log("Connected")
             })
-
             socket.on('receive_message', (data) => {
                 dispatch(addMessage([data]))
-                console.log(data.content)
+                console.log({ in: data._id })
             })
         }
-    }, [socket, dispatch])
+    }, [])
+
+    // useEffect(() => {
+    //     if (socket === null) {
+    //         setSocket(io("http://localhost:5001/"))
+    //     }
+    //     if (socket) {
+    //         socket.on('connect', () => {
+    //             console.log("Connected")
+    //         })
+
+
+    //     }
+    // }, [socket, dispatch])
+    // useEffect(() => {
+    //     if (socket) {
+
+    //         socket.on('receive_message', (data) => {
+    //             dispatch(addMessage([data]))
+    //             console.log({ in: data._id })
+    //         })
+    //         console.log({ out: 'ooodfkdfjdk' })
+    //     }
+    // }, [socket])
 
     const sendMessage = (data) => {
         socket?.emit('message', data)

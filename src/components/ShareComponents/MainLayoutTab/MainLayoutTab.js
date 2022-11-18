@@ -134,11 +134,11 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                 />
               </div>
               <div className="flex justify-between items-center w-full backdrop-blur-md rounded-xl ">
-                <div className="bg-black/[.1] w-full  py-2 rounded-xl text-left pl-3 pr-1">
+                <div className="bg-black/[.1]  py-2 rounded-xl text-left pl-3 w-[85%] pr-1">
                   <span className="block   capitalize font-medium ">
                     {textConversion(user.displayName, 100)}
                   </span>
-                  <span className="text-gray-300 block text-sm">
+                  <span className="text-gray-300 break-words block text-sm">
                     {user.email}
                   </span>
                 </div>

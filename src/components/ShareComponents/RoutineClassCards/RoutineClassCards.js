@@ -46,10 +46,10 @@ const RoutineClassCards = ({ data, day }) => {
       ) : (
         <>
           <div className="flex justify-center items-center">
-            <h2>No class for today! </h2>
+            <img src={noClass} alt="" />
           </div>
           <div className="flex justify-center items-center">
-            <img src={noClass} alt="" />
+            <h2 className="font-bold text-lg">No class for today ! </h2>
           </div>
         </>
       )}

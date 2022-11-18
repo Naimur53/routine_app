@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatBox from '../ChatBox/ChatBox';
-import { CircularProgress, LinearProgress, selectClasses, Stack } from '@mui/material';
+import { Button, CircularProgress, IconButton, LinearProgress, selectClasses, Stack } from '@mui/material';
 import axios from 'axios'
 import { Box } from '@mui/system';
 import ImageIcon from '@mui/icons-material/Image';
@@ -68,8 +68,29 @@ const ChatRoom = () => {
             <Box sx={{ flexGrow: '0' }} className='rows-span    bg-primary  w-full   flex '>
                 <form className='flex items-center  w-full mb-5' onSubmit={handleSubmit(onSubmit)}>
                     <div className='relative'>
-                        <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label>
-                        <input id="files" onChange={handleImgUpload} accept='image/*' hidden type="file" />
+                        {/* <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label> */}
+                        <IconButton variant="contained" component="label">
+
+                            <ImageIcon  ></ImageIcon>
+                            <input
+                                onChange={handleImgUpload}
+                                hidden
+                                accept="image/*"
+                                // multiple
+
+                                type="file"
+
+                            />
+                        </IconButton>
+                        <input
+                            onChange={handleImgUpload}
+                            hidden
+                            accept="image/*"
+                            // multiple
+
+                            type="file"
+
+                        />
                         {
                             imgLoading ? <span className=' absolute top-0 right-0 font-semibold'><CircularProgress size={15}></CircularProgress></span> : watch('img')?.length ? <span className='text-red-800  absolute top-0 right-0 font-semibold'>1</span> : ''
                         }

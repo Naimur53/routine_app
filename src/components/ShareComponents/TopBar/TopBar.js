@@ -19,7 +19,7 @@ import MainLayoutTab from "../MainLayoutTab/MainLayoutTab";
 import { useSelector } from "react-redux";
 import { allData } from "../../../ManageState/DataSlice/dataSlice";
 import useFirebase from "../../../Hook/useFirebase";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import CustomTooltip from "../CustomTooltip/CustomTooltip";
 // const pages = ["login"];
 const TopBar = () => {
@@ -53,7 +53,12 @@ const TopBar = () => {
       <AppBar
         position="fixed"
         elevation={0}
-        sx={{ background: "#ffffffe1", color: "black", backdropFilter: "blur(15px)" }}
+        sx={{
+          color: "black",
+          backdropFilter: "blur(15px)",
+          background: "white",
+          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+        }}
       >
         <Container maxWidth="xl">
           <Toolbar
@@ -64,14 +69,16 @@ const TopBar = () => {
               alignItems: "center",
             }}
           >
-            <div className="hidden md:block"><Logo></Logo></div>
+            <div className="hidden md:block">
+              <Logo></Logo>
+            </div>
             <Box
               className="justify-end "
               sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}
             >
               <div className="flex">
-                {
-                  user.email ? <div>
+                {user.email ? (
+                  <div>
                     <CustomTooltip title="Open settings">
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt={user.displayName} src={user.photoURL} />
@@ -126,37 +133,36 @@ const TopBar = () => {
                       </div>
                     </Menu>
                   </div>
-                    : (
-                      <div className="flex gap-2">
-                        <Button
-                          onClick={handleCloseNavMenu}
-                          component={NavLink}
-                          to={"/signUp"}
-                          sx={{ my: 2, color: "Black", display: "block" }}
-                        >
-                          sign Up
-                        </Button>
-                        <Button
-                          onClick={handleCloseNavMenu}
-                          component={NavLink}
-                          to={"/login"}
-                          sx={{ my: 2, color: "Black", display: "block" }}
-                        >
-                          login
-                        </Button>
-                      </div>
-                    )}
+                ) : (
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      component={NavLink}
+                      to={"/signUp"}
+                      sx={{ my: 2, color: "Black", display: "block" }}
+                    >
+                      sign Up
+                    </Button>
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      component={NavLink}
+                      to={"/login"}
+                      sx={{ my: 2, color: "Black", display: "block" }}
+                    >
+                      login
+                    </Button>
+                  </div>
+                )}
               </div>
             </Box>
             <Box
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
               className="justify-between items-center flex-row-reverse"
             >
-
               <div className="md:hidden block">
                 <NavLink to="/searchRoutine">
                   <div className="">
-                    <IconButton component={NavLink} to='/searchRoutine' >
+                    <IconButton component={NavLink} to="/searchRoutine">
                       <SearchIcon sx={{ color: "#5946ad" }}></SearchIcon>
                     </IconButton>
                   </div>

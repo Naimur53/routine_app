@@ -64,6 +64,7 @@ const theme = createTheme({
 });
 function App() {
   const dispatch = useDispatch();
+  const { } = useSocket({ observer: true });
 
   const { auth } = useFirebase({ observer: true });
   const { user, loading } = useSelector(allData)

@@ -13,7 +13,7 @@ const ViewProfile = () => {
   useEffect(() => {
     setGetLoading(true);
     axios
-      .get(`http://localhost:5001/user?id=${id}`)
+      .get(`https://shielded-dusk-65695.herokuapp.com/user?id=${id}`)
       .then((res) => {
         console.log(res);
         if (res.data?._id) {

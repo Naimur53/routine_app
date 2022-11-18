@@ -27,7 +27,7 @@ const TopBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const { user, loading } = useSelector(allData);
-  console.log(user, "fire base user ");
+  // console.log(user, "fire base user ");
   const { logOut } = useFirebase({ observer: false });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);

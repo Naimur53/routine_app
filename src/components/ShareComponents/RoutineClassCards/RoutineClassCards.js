@@ -6,7 +6,7 @@ const RoutineClassCards = ({ data, day }) => {
     const mainData = data.filter((single) => single.day === day);
     const am = mainData.filter((single) => getAmOrPm(single.startTime) === "AM");
     const pm = mainData.filter((single) => getAmOrPm(single.startTime) === "PM");
-    console.log({ am, pm });
+    // console.log({ am, pm });
     const shortAm = [];
     const cardContainer = {
         animate: {
@@ -34,8 +34,6 @@ const RoutineClassCards = ({ data, day }) => {
             .toLocaleTimeString()
             .localeCompare(new Date(b.startTime).toLocaleTimeString());
     });
-    console.log(am, pm);
-
     return (
         <motion.div animate="animate" initial="initial" variants={cardContainer}>
             {mainData.length ? (

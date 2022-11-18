@@ -127,7 +127,7 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
                 edit.status ? <form onSubmit={handleSubmit(onSubmit)}>
                     <Info setValue={setValue} disabled={edit.loading} mainData={watch() || {}} watch={watch} register={register} errors={errors}></Info>
                 </form> : <div>
-                    <DetailsInfo></DetailsInfo>
+                    <DetailsInfo data={user}></DetailsInfo>
                 </div>
             }
         </div>

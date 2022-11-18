@@ -33,9 +33,7 @@ const ChatRoom = () => {
 
         const exits = selectedRoutineMessage.find(single => single.routineId === allRoutineData[selectIndex]._id)
 
-        console.log({ selectedRoutineMessage, a: allRoutineData[selectIndex]._id, messages, exits })
         if (!exits?._id) {
-            console.info('getting message data')
             dispatch(getMessageFromDb(allRoutineData[selectIndex]._id))
         }
     }, [selectIndex, dispatch, allRoutineData])
@@ -71,7 +69,7 @@ const ChatRoom = () => {
                 <form className='flex items-center  w-full mb-5' onSubmit={handleSubmit(onSubmit)}>
                     <div className='relative'>
                         <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label>
-                        <input id="files" onChange={handleImgUpload} accept='image/*' className='hidden' type="file" />
+                        <input id="files" onChange={handleImgUpload} accept='image/*' hidden type="file" />
                         {
                             imgLoading ? <span className=' absolute top-0 right-0 font-semibold'><CircularProgress size={15}></CircularProgress></span> : watch('img')?.length ? <span className='text-red-800  absolute top-0 right-0 font-semibold'>1</span> : ''
                         }

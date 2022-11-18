@@ -88,7 +88,7 @@ const Login = () => {
             <p className="text-red-900">{authError}</p>
           </div>
         </form>
-        <div
+        {/* <div
           onClick={handleLoginWithGoogle}
           className="bg-gray-100 shadow-md p-2 rounded-full flex  mx-auto cursor-pointer "
         >
@@ -96,7 +96,7 @@ const Login = () => {
           <button className="font-bold text-gray-600 text-center">
             Login With Goole
           </button>
-        </div>
+        </div> */}
         <div className="  flex align-center justify-center  mt-4">
           <NavLink to="/signUp" className="text-center text-primary py-2 ">
             Don't have Account?{" "}

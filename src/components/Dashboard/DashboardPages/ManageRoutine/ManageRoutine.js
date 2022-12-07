@@ -10,7 +10,7 @@ const ManageRoutine = () => {
     useEffect(() => {
 
         axios
-            .get(`https://shielded-dusk-65695.herokuapp.com/routine`)
+            .get(`https://routineappserver-production-5617.up.railway.app/routine`)
             .then((res) => {
                 setAllRoutine(res.data);
                 setGetLoading(false);

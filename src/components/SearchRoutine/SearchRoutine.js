@@ -74,7 +74,7 @@ const SearchRoutine = () => {
   const textSearchRequest = () => {
     axios
       .get(
-        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
+        `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
       )
       .then((res) => {
         setAllRoutine(res.data);
@@ -96,7 +96,7 @@ const SearchRoutine = () => {
     if (institute?.length === 24) {
       axios
         .get(
-          `https://shielded-dusk-65695.herokuapp.com/routine/findById?id=${institute}`
+          `https://routineappserver-production-5617.up.railway.app/routine/findById?id=${institute}`
         )
         .then((res) => {
           setAllRoutine([res.data]);
@@ -123,7 +123,7 @@ const SearchRoutine = () => {
     setGetLoading(true);
     axios
       .get(
-        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8
+        `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip - 8
         } `
       )
       .then((res) => {
@@ -136,7 +136,7 @@ const SearchRoutine = () => {
     setGetLoading(true);
     axios
       .get(
-        `https://shielded-dusk-65695.herokuapp.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len
+        `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${pagination.skip + pagination.len
         } `
       )
       .then((res) => {

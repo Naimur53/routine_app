@@ -11,7 +11,7 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData, r
     const handleDelete = () => {
         if (window.confirm('are you sure? you want to delete this')) {
             setDeleteLoading(true)
-            axios.delete(`https://shielded-dusk-65695.herokuapp.com/requestRoutine?id=${_id}`)
+            axios.delete(`https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${_id}`)
                 .then(res => {
                     setDeleteLoading(false)
                     setData(pre => pre.filter(single => single._id !== _id))

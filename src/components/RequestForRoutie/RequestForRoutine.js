@@ -19,7 +19,7 @@ const RequestForRoutine = () => {
   useEffect(() => {
     if (user._id) {
       setGetLoading(true)
-      axios.get(`https://shielded-dusk-65695.herokuapp.com/requestRoutine?uid=${user?._id}`)
+      axios.get(`https://routineappserver-production-5617.up.railway.app/requestRoutine?uid=${user?._id}`)
         .then(res => {
           setData(res.data)
           setGetLoading(false)

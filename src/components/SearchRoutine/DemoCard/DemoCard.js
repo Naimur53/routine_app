@@ -82,7 +82,7 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, getLoeading, se
           return
         }
         setDeleteLoading(true)
-        axios.delete(`https://shielded-dusk-65695.herokuapp.com/routine/${_id}`)
+        axios.delete(`https://routineappserver-production-5617.up.railway.app/routine/${_id}`)
           .then(res => {
             setDeleteLoading(false)
             setData(pre => {

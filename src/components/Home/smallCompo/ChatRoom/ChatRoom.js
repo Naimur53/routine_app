@@ -21,7 +21,7 @@ const ChatRoom = () => {
     const { user, allRoutineData, selectIndex, messages, getMessageLoading } = useSelector(allData);
     const routineId = allRoutineData[selectIndex]?._id;
 
-    // const socket = io.connect('https://shielded-dusk-65695.herokuapp.com/');
+    // const socket = io.connect('https://routineappserver-production-5617.up.railway.app/');
     // socket.on('receive_message', data => {
     //     dispatch(addMessage([data]))
     //     console.log('reviece', data.message)
@@ -49,7 +49,7 @@ const ChatRoom = () => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`https://shielded-dusk-65695.herokuapp.com/uploadImage`, data)
+            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)

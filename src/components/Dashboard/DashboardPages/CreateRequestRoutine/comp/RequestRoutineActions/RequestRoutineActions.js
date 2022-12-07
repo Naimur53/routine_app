@@ -28,7 +28,7 @@ const RequestRoutineActions = ({ id, setData, data }) => {
         if (!postLoading) {
             setPostLoading(true)
             console.log(adminMessage.current)
-            axios.put(`https://shielded-dusk-65695.herokuapp.com/requestRoutine?id=${id}`, {
+            axios.put(`https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${id}`, {
                 status, adminMessage: adminMessage.current.value, routineId: data.requestId
             })
                 .then(res => {

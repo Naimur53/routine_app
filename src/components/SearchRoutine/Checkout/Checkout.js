@@ -20,7 +20,7 @@ const Checkout = () => {
   useEffect(() => {
     setGetLoading(true);
     axios
-      .get(`https://shielded-dusk-65695.herokuapp.com/routine?id=${id}`)
+      .get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}`)
       .then((res) => {
         if (res.data?._id) {
           setGetLoading(false);
@@ -41,7 +41,7 @@ const Checkout = () => {
     if (status !== 400) {
       toast.success(response);
       axios.put(
-        `https://shielded-dusk-65695.herokuapp.com/routine/increaseUsingValue?id=${data._id}`
+        `https://routineappserver-production-5617.up.railway.app/routine/increaseUsingValue?id=${data._id}`
       );
     } else {
       toast.error("Routine already exist``")

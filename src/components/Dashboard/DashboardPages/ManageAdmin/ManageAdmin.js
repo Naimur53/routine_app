@@ -8,7 +8,7 @@ const ManageAdmin = () => {
     const [allAdmin, setAllAdmin] = useState([])
     const [getLoading, setGetLoading] = useState(true)
     useEffect(() => {
-        axios.get('https://shielded-dusk-65695.herokuapp.com/admin')
+        axios.get('https://routineappserver-production-5617.up.railway.app/admin')
             .then(res => {
                 setAllAdmin(res.data)
             })

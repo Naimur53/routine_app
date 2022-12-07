@@ -32,7 +32,7 @@ const MyRoutine = () => {
     if (user?._id) {
       axios
         .get(
-          `https://shielded-dusk-65695.herokuapp.com/routine?userId=${user?._id}`
+          `https://routineappserver-production-5617.up.railway.app/routine?userId=${user?._id}`
         )
         .then((res) => {
           setAllRoutine(res.data);

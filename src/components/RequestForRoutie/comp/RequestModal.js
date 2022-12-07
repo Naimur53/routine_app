@@ -37,7 +37,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`https://shielded-dusk-65695.herokuapp.com/uploadImage`, data)
+            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)
@@ -61,7 +61,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
             return
         }
         setPostLoading(true)
-        axios.post(`https://shielded-dusk-65695.herokuapp.com/requestRoutine`, { ...data, creator: user._id })
+        axios.post(`https://routineappserver-production-5617.up.railway.app/requestRoutine`, { ...data, creator: user._id })
             .then(res => {
                 console.log({ res })
                 setPostLoading(false)

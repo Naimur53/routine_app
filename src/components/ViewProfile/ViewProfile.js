@@ -13,7 +13,7 @@ const ViewProfile = () => {
   useEffect(() => {
     setGetLoading(true);
     axios
-      .get(`https://shielded-dusk-65695.herokuapp.com/user?id=${id}`)
+      .get(`https://routineappserver-production-5617.up.railway.app/user?id=${id}`)
       .then((res) => {
         console.log(res);
         if (res.data?._id) {

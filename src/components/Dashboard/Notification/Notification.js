@@ -7,7 +7,7 @@ const Notification = () => {
   const [tokens, setTokens] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://shielded-dusk-65695.herokuapp.com/notificationToken`)
+      .get(`https://routineappserver-production-5617.up.railway.app/notificationToken`)
       .then((res) => {
         console.log(res);
         let mainData = [];
@@ -22,7 +22,7 @@ const Notification = () => {
         });
         setTokens(mainData);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
   return (
     <>

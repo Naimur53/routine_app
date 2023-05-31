@@ -25,7 +25,7 @@ function requestPermission() {
             getToken(messaging, { vapidKey: 'BK9Dmr-FK93B3HcHPC5zN38jj5FY4cYNXv3rrHb625HnJFrUp8604TYsmtEdabgtg0Jp0U96dZuEx2CoIMLShGI' }).then((currentToken) => {
                 if (currentToken) {
                     // Send the token to your server and update the UI if necessary
-                    axios.post('https://routineappserver-production-5617.up.railway.app/notificationToken', { token: currentToken })
+                    axios.post('http://localhost:5001/notificationToken', { token: currentToken })
                     // ...
                     console.log({ token: currentToken }, "dfkfdf")
                 } else {

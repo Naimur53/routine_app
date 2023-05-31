@@ -1,6 +1,6 @@
 import { Box, Button, CircularProgress, IconButton, Modal } from '@mui/material';
 import { PhotoCamera, } from "@mui/icons-material";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SendIcon from "@mui/icons-material/Send";
 import { useForm } from 'react-hook-form';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../ManageState/DataSlice/dataSlice';
 import { toast } from 'react-toastify';
+import { useAddRequestForRoutineMutation } from '../../../ManageState/features/requestRoutine/requestRoutineApi';
 
 const style = {
     position: 'absolute',
@@ -21,7 +22,8 @@ const style = {
 };
 const RequestModal = ({ open, setOpen, setData }) => {
     const [imgLoading, setImgLoading] = useState(false)
-    const [postLoading, setPostLoading] = useState(false)
+    const [addRequest, { isLoading, isError, isSuccess }] = useAddRequestForRoutineMutation()
+
     const { user } = useSelector(allData)
     const {
         register,
@@ -37,7 +39,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
+            axios.post(`http://localhost:5001/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)
@@ -60,21 +62,21 @@ const RequestModal = ({ open, setOpen, setData }) => {
             toast.error('User not found')
             return
         }
-        setPostLoading(true)
-        axios.post(`https://routineappserver-production-5617.up.railway.app/requestRoutine`, { ...data, creator: user._id })
-            .then(res => {
-                console.log({ res })
-                setPostLoading(false)
-                setData(pre => [...pre, res.data])
-                reset();
-                setOpen(false);
-                toast.success('Thanks for your request. we will build routine for you soon!')
-
-            })
-            .catch(err => {
-                console.log({ err })
-            })
+        addRequest({ ...data, creator: user._id })
     }
+    useEffect(() => {
+
+        if (!isLoading) {
+            if (isError) {
+                toast.error('Failed to make request')
+            }
+            if (isSuccess) {
+                toast.success('Request submitted successfully!')
+                setOpen(false)
+                reset()
+            }
+        }
+    }, [isLoading, isError, isSuccess])
     return (
         <div>
             <Modal
@@ -106,7 +108,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
                                             watch('img')?.length ? <img className='max-h-[200px]' src={watch('img')} alt="choose img" /> : <></>
                                         }
                                         <div className='mt-3 '>
-                                            <Button variant="contained" component="label">
+                                            <Button variant="contained" disabled={isLoading} component="label">
                                                 Upload
                                                 <PhotoCamera className="ml-2" />
                                                 <input
@@ -138,7 +140,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
                             ></textarea>
                             <br />
                             {
-                                postLoading ? <CircularProgress></CircularProgress> : <Button disabled={imgLoading} className="mt-5" variant="outlined" type="submit">
+                                isLoading ? <CircularProgress></CircularProgress> : <Button disabled={imgLoading} className="mt-5" variant="outlined" type="submit">
                                     Send request <SendIcon className="ml-2"></SendIcon>
                                 </Button>
                             }

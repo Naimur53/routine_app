@@ -21,7 +21,7 @@ const ChatRoom = () => {
     const { user, allRoutineData, selectIndex, messages, getMessageLoading } = useSelector(allData);
     const routineId = allRoutineData[selectIndex]?._id;
 
-    // const socket = io.connect('https://routineappserver-production-5617.up.railway.app/');
+    // const socket = io.connect('http://localhost:5001/');
     // socket.on('receive_message', data => {
     //     dispatch(addMessage([data]))
     //     console.log('reviece', data.message)
@@ -49,7 +49,7 @@ const ChatRoom = () => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
+            axios.post(`http://localhost:5001/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)

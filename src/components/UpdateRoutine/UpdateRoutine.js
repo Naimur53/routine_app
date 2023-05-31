@@ -52,7 +52,7 @@ const UpdateRoutine = ({ admin }) => {
   useEffect(() => {
     setGetLoading(true)
     if (admin) {
-      axios.get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id} `)
+      axios.get(`http://localhost:5001/routine?id=${id} `)
         .then(res => {
           setData(res.data)
           setGetLoading(false)
@@ -63,7 +63,7 @@ const UpdateRoutine = ({ admin }) => {
         })
     }
     else if (user._id) {
-      axios.get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}&userId=${user._id}`)
+      axios.get(`http://localhost:5001/routine?id=${id}&userId=${user._id}`)
         .then(res => {
           setData(res.data)
           setGetLoading(false)
@@ -93,7 +93,7 @@ const UpdateRoutine = ({ admin }) => {
   const onSubmit = fromData => {
     setUpdateLoading(true)
     const mainData = { ...fromData, classes: data.classes }
-    axios.put(`https://routineappserver-production-5617.up.railway.app/routine?id=${data._id}`, { mainData })
+    axios.put(`http://localhost:5001/routine?id=${data._id}`, { mainData })
       .then(res => {
         setUpdateLoading(false)
         toast.success('Successfully updated')

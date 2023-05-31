@@ -1,31 +1,33 @@
 import { Button, CircularProgress } from '@mui/material';
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useDeleteRequestOfRoutineWithIdMutation } from '../../../ManageState/features/requestRoutine/requestRoutineApi';
+import { useSelector } from 'react-redux';
+import { allData } from '../../../ManageState/DataSlice/dataSlice';
 
 const RequestCard = ({ img, message, date, status, adminMessage, _id, setData, routineId }) => {
-    const [deleteLoading, setDeleteLoading] = useState(false)
-    console.log({ routineId })
+    const [deleteRequest, { isLoading, isError, data, isSuccess, error }] = useDeleteRequestOfRoutineWithIdMutation()
+    const { user } = useSelector(allData)
     const handleDelete = () => {
-        if (window.confirm('are you sure? you want to delete this')) {
-            setDeleteLoading(true)
-            axios.delete(`https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${_id}`)
-                .then(res => {
-                    setDeleteLoading(false)
-                    setData(pre => pre.filter(single => single._id !== _id))
-                })
-                .catch(err => {
-                    setDeleteLoading(false)
-                    toast.error('Error while deleting routine')
-                })
+        if (window.confirm('Are you sure? you want to delete this')) {
+            deleteRequest({ id: _id, userId: user._id }).then(res => {
+                console.log("my respmonse", res);
+            })
         }
     }
+    useEffect(() => {
+        if (!isLoading && isError) {
+            toast.error("Failed to delete")
+        }
+    }, [isLoading, isError])
+    console.log(isLoading, isError, error);
     return (
         <div className='shadow p-4 rounded-xl'>
-            <div >
-                <img src={img} alt="routineImage" />
+            <div className='flex justify-center'>
+                <img className='w-auto max-h-[600px]' src={img} alt="routineImage" />
             </div>
             <div className='mt-2'>
                 <p>Your Message: {message}</p>
@@ -51,7 +53,7 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData, r
             {
                 status === 'pending' ? <div>
                     {
-                        deleteLoading ? <CircularProgress></CircularProgress> : <Button onClick={handleDelete} variant='contained' >Delete</Button>
+                        isLoading ? <CircularProgress></CircularProgress> : <Button onClick={handleDelete} variant='contained' >Delete</Button>
                     }
                 </div> : <div>
                     {

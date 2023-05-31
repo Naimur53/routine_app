@@ -88,7 +88,7 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
                 if (res) {
                     const mainData = watch()
                     console.log(mainData, 'going')
-                    axios.put('https://routineappserver-production-5617.up.railway.app/user', { email: user.email, ...mainData })
+                    axios.put('http://localhost:5001/user', { email: user.email, ...mainData })
                         .then(res => {
                             if (res.data.modifiedCount) {
                                 setUpdatable({ click: false, disabled: true })

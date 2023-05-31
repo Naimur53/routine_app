@@ -17,6 +17,10 @@ import axios from "axios";
 import CustomTooltip from "../../ShareComponents/CustomTooltip/CustomTooltip";
 
 import { motion } from "framer-motion";
+import { useDeleteRoutineMutation } from "../../../ManageState/features/routine/routineApi";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { allData } from "../../../ManageState/DataSlice/dataSlice";
 function chooseTheme(i) {
   const theme = [
     {
@@ -50,9 +54,12 @@ function chooseTheme(i) {
     return chooseTheme(i - 4);
   }
 }
-const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, getLoeading, setData, deleteAble }) => {
+const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, deleteAble }) => {
   const { img, bgStyle, contentStyle, headingStyle } = chooseTheme(i);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const { user } = useSelector(allData)
+
+  const [deleteRoutine, { isLoading, isError, isSuccess }] = useDeleteRoutineMutation()
 
   const {
     institute,
@@ -74,21 +81,15 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, getLoeading, se
   // console.log({ publishedDate })
   // console.log({ a })
   const handleDelete = () => {
-    if (!deleteLoading) {
+    if (!isLoading) {
       if (window.confirm("are you sure ?")) {
+        // if deleteFromLocal it tur it will remove form local storage
         if (deleteFromLocal) {
           deleteFromLocal(_id)
-          console.log('hi')
           return
         }
-        setDeleteLoading(true)
-        axios.delete(`https://routineappserver-production-5617.up.railway.app/routine/${_id}`)
-          .then(res => {
-            setDeleteLoading(false)
-            setData(pre => {
-              return pre.filter(single => single._id !== _id)
-            })
-          })
+        // delete
+        deleteRoutine({ uid: user?._id, id: _id })
       }
     }
   };
@@ -101,6 +102,13 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, getLoeading, se
       opacity: 0,
     },
   };
+
+  useEffect(() => {
+    if (!isLoading & isError) {
+      toast.error("Failed to delete")
+
+    }
+  }, [isError, isLoading])
   return (
     <motion.div variants={demoCard} className=" w-full ">
       <div className="w-full relative overflow-hidden  rounded-md shadow-md">

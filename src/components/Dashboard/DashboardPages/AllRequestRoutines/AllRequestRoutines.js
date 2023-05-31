@@ -12,7 +12,7 @@ const AllRequestRoutines = ({ short }) => {
     const [getLoading, setGetLoading] = useState(true)
     useEffect(() => {
         setGetLoading(true)
-        axios.get(`https://routineappserver-production-5617.up.railway.app/requestRoutine?status=${status === 'all' ? "" : status}`)
+        axios.get(`http://localhost:5001/requestRoutine?status=${status === 'all' ? "" : status}`)
             .then(res => {
                 setData(res.data)
                 setGetLoading(false);

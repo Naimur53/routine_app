@@ -11,29 +11,12 @@ import RoutineNotFound from "../../ShareComponents/RoutineNotFound/RoutineNotFou
 import ShareIcon from "@mui/icons-material/Share";
 import { toast } from "react-toastify";
 import bg1 from "../../../images/bg5.webp";
+import { useGetRoutineWithIdQuery } from "../../../ManageState/features/routine/routineApi";
 const Checkout = () => {
   const { id } = useParams();
-  const [data, setData] = useState({ classes: [] });
-  const [getLoading, setGetLoading] = useState(true);
+  // const [data, setData] = useState({ classes: [] }); 
   const [save, setSave] = useState(false);
-
-  useEffect(() => {
-    setGetLoading(true);
-    axios
-      .get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}`)
-      .then((res) => {
-        if (res.data?._id) {
-          setGetLoading(false);
-          setData(res.data);
-        } else {
-          toast.error("data not found");
-        }
-      })
-      .catch((err) => {
-        setGetLoading(false);
-      });
-  }, [id]);
-  console.log(data, "from checkout");
+  const { isError, isLoading, data, } = useGetRoutineWithIdQuery(id)
   const handleSave = () => {
     console.log(data);
     setSave(true);
@@ -41,13 +24,14 @@ const Checkout = () => {
     if (status !== 400) {
       toast.success(response);
       axios.put(
-        `https://routineappserver-production-5617.up.railway.app/routine/increaseUsingValue?id=${data._id}`
+        `http://localhost:5001/routine/increaseUsingValue?id=${data._id}`
       );
     } else {
       toast.error("Routine already exist``")
     }
   };
-  if (getLoading) {
+
+  if (isLoading) {
     return (
       <MainLayout>
         <div className="flex justify-center">
@@ -56,7 +40,20 @@ const Checkout = () => {
       </MainLayout>
     );
   }
-  if (!getLoading && !data._id && !data.date) {
+  if (isError && !isLoading) {
+    return <>
+      <MainLayout>
+        <div className="flex justify-center items-center">
+          <div>
+            <RoutineNotFound title='Routine not found!'></RoutineNotFound>
+          </div>
+        </div>
+
+      </MainLayout>
+    </>
+
+  }
+  if (!isLoading && !data._id && !data.date) {
     return (
       <MainLayout>
         <div>

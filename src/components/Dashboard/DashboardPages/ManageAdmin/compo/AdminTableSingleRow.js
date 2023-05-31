@@ -17,7 +17,7 @@ const AdminTableSingleRow = ({ makeAdmin, _id, isAdmin, photoURL, email, display
 
         if (!postLoading) {
             setPostLoading(true)
-            axios.put(`https://routineappserver-production-5617.up.railway.app/admin?email=${email}&adminStatus=${status}`)
+            axios.put(`http://localhost:5001/admin?email=${email}&adminStatus=${status}`)
                 .then(res => {
                     setPostLoading(false)
                     if (status) {

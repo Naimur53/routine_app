@@ -69,7 +69,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   const publishData = () => {
     if (user?._id) {
       setPostLoading(true)
-      axios.post('https://routineappserver-production-5617.up.railway.app/routine', { ...mainData, requestId, creator: user._id })
+      axios.post('http://localhost:5001/routine', { ...mainData, requestId, creator: user._id })
         .then(res => {
           setPostLoading(false);
           console.log(res)

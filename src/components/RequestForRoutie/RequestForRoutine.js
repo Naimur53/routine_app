@@ -10,27 +10,14 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
 import RequestCard from "./comp/RequestCard";
+import { useGetRequestRoutineWithUserIdQuery } from "../../ManageState/features/requestRoutine/requestRoutineApi";
 
 const RequestForRoutine = () => {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [getLoading, setGetLoading] = useState(true);
   const { user } = useSelector(allData);
-  useEffect(() => {
-    if (user._id) {
-      setGetLoading(true)
-      axios.get(`https://routineappserver-production-5617.up.railway.app/requestRoutine?uid=${user?._id}`)
-        .then(res => {
-          setData(res.data)
-          setGetLoading(false)
-        })
-        .catch(err => {
-          setGetLoading(false)
-        })
-    }
-  }, [user])
-
-
+  const { data, isLoading, isError } = useGetRequestRoutineWithUserIdQuery(user._id)
   return (
     <MainLayout>
       <div>
@@ -48,14 +35,21 @@ const RequestForRoutine = () => {
           <Grid item md={7} xs={12}>
             <img src={banner} alt="" />
           </Grid>
+
+          <Grid item xs={12}>
+            {
+              data?.length ? <h2 className="text-center w-full text-xl font-bold">Your Requested Routine</h2> : <></>
+            }
+          </Grid>
+
           {
-            data.map((single, i) => <Grid item key={i} xs={12} md={4}>
-              <RequestCard {...single} setData={setData}></RequestCard>
+            data?.map((single, i) => <Grid item key={i} xs={12} md={4}>
+              <RequestCard {...single}  ></RequestCard>
 
             </Grid>)
           }
         </Grid>
-        <RequestModal open={open} setData={setData} setOpen={setOpen}></RequestModal>
+        <RequestModal open={open} setOpen={setOpen}></RequestModal>
       </div>
     </MainLayout>
 

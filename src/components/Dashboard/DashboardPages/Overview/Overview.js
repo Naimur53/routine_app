@@ -25,10 +25,10 @@ const Overview = () => {
     // my work
     useEffect(() => {
         setGetLoading(true)
-        const getRoutineInfo = axios.get('https://routineappserver-production-5617.up.railway.app/admin/totalRoutineUsing')
-        const getRoutineStatus = axios.get('https://routineappserver-production-5617.up.railway.app/admin/routineStatus?len=10')
-        const getRequestInfo = axios.get('https://routineappserver-production-5617.up.railway.app/admin/requestStatus')
-        const getUserCount = axios.get('https://routineappserver-production-5617.up.railway.app/admin/userCount')
+        const getRoutineInfo = axios.get('http://localhost:5001/admin/totalRoutineUsing')
+        const getRoutineStatus = axios.get('http://localhost:5001/admin/routineStatus?len=10')
+        const getRequestInfo = axios.get('http://localhost:5001/admin/requestStatus')
+        const getUserCount = axios.get('http://localhost:5001/admin/userCount')
         axios.all([getRoutineInfo, getRoutineStatus, getRequestInfo, getUserCount])
             .then(
                 axios.spread((...responses) => {

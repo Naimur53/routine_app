@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client'
 import { addMessage, allData, postMessageToDb } from '../ManageState/DataSlice/dataSlice';
 
-const socket = io.connect('https://routineappserver-production-5617.up.railway.app/')
+const socket = io.connect('http://localhost:5001/')
 
 const useSocket = ({ observer }) => {
     const { allRoutineData, selectIndex } = useSelector(allData)
@@ -22,29 +22,6 @@ const useSocket = ({ observer }) => {
             })
         }
     }, [])
-
-    // useEffect(() => {
-    //     if (socket === null) {
-    //         setSocket(io("https://routineappserver-production-5617.up.railway.app/"))
-    //     }
-    //     if (socket) {
-    //         socket.on('connect', () => {
-    //             console.log("Connected")
-    //         })
-
-
-    //     }
-    // }, [socket, dispatch])
-    // useEffect(() => {
-    //     if (socket) {
-
-    //         socket.on('receive_message', (data) => {
-    //             dispatch(addMessage([data]))
-    //             console.log({ in: data._id })
-    //         })
-    //         console.log({ out: 'ooodfkdfjdk' })
-    //     }
-    // }, [socket])
 
     const sendMessage = (data) => {
         socket?.emit('message', data)

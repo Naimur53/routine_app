@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import SkeletonDemoCard from "../ShareComponents/SkeletonDemoCard/SkeletonDemoCard";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { useGetRoutingByUserIdQuery } from "../../ManageState/features/routine/routineApi";
 const MyRoutine = () => {
   const cardContainer = {
     animate: {
@@ -25,24 +26,10 @@ const MyRoutine = () => {
       transition: { staggerChildren: 0.07, delayChildren: 0.2 },
     },
   };
-  const [allRoutine, setAllRoutine] = useState([]);
-  const [getLoading, setGetLoading] = useState(true);
   const { user } = useSelector(allData);
-  useEffect(() => {
-    if (user?._id) {
-      axios
-        .get(
-          `https://routineappserver-production-5617.up.railway.app/routine?userId=${user?._id}`
-        )
-        .then((res) => {
-          setAllRoutine(res.data);
-          setGetLoading(false);
-        });
-    } else {
-      toast("User not found");
-    }
-  }, [user]);
-  if (!getLoading && !allRoutine?.length) {
+  const { data, isLoading, isError, } = useGetRoutingByUserIdQuery(user._id)
+    ;
+  if (!isLoading && !data?.length) {
     return (
       <MainLayout>
         <div className="custom_height flex justify-center items-center">
@@ -79,7 +66,7 @@ const MyRoutine = () => {
           display: "flex",
         }}
       >
-        {(getLoading ? Array.from(new Array(8)) : allRoutine).map(
+        {(isLoading ? Array.from(new Array(8)) : data).map(
           (single, i) => (
             <Grid item lg={3} md={6} xs={12}>
               {single ? (
@@ -93,7 +80,7 @@ const MyRoutine = () => {
                     <DemoCard
                       item={single}
                       updateAble={true}
-                      setData={setAllRoutine}
+                      // setData={setAllRoutine}
                       i={i}
                     ></DemoCard>
                   </motion.div>

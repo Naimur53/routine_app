@@ -40,7 +40,7 @@ const useFirebase = ({ observer }) => {
         uid,
         method,
     }) => {
-        return axios[method]("https://routineappserver-production-5617.up.railway.app/user", {
+        return axios[method]("http://localhost:5001/user", {
             displayName,
             email,
             photoURL,

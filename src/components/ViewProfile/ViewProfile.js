@@ -13,7 +13,7 @@ const ViewProfile = () => {
   useEffect(() => {
     setGetLoading(true);
     axios
-      .get(`https://routineappserver-production-5617.up.railway.app/user?id=${id}`)
+      .get(`http://localhost:5001/user?id=${id}`)
       .then((res) => {
         console.log(res);
         if (res.data?._id) {

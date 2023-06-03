@@ -13,6 +13,7 @@ import { addMessage, allData, getMessageFromDb } from '../../../../ManageState/D
 import useSocket from '../../../../Hook/useSocket';
 import io from 'socket.io-client'
 import { useEffect } from 'react';
+import GrowEffect from '../../../AnimationCompo/GrowEffect/GrowEffect';
 const ChatRoom = () => {
     const { socket, sendMessage } = useSocket({ observer: false });
     const { register, reset, watch, setValue, handleSubmit, formState: { errors } } = useForm();
@@ -21,7 +22,7 @@ const ChatRoom = () => {
     const { user, allRoutineData, selectIndex, messages, getMessageLoading } = useSelector(allData);
     const routineId = allRoutineData[selectIndex]?._id;
 
-    // const socket = io.connect('http://localhost:5001/');
+    // const socket = io.connect('https://routineappserver-production-5617.up.railway.app/');
     // socket.on('receive_message', data => {
     //     dispatch(addMessage([data]))
     //     console.log('reviece', data.message)
@@ -49,7 +50,7 @@ const ChatRoom = () => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`http://localhost:5001/uploadImage`, data)
+            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)
@@ -63,17 +64,29 @@ const ChatRoom = () => {
         }
     }
     return (
-        <div className='h-full flex flex-col bg-light-purple px-4 rounded-md '>
-            <ChatBox ></ChatBox>
+        <>
 
-            <Box sx={{ flexGrow: '0' }} className='rows-span    bg-primary  w-full   flex '>
+            <div className='h-full flex flex-col bg-light-purple px-4 rounded-md '>
+                <ChatBox ></ChatBox>
 
-                <form className='flex items-center  w-full mb-5' onSubmit={handleSubmit(onSubmit)}>
-                    <div className='relative'>
-                        {/* <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label> */}
-                        <IconButton variant="contained" component="label">
+                <Box sx={{ flexGrow: '0' }} className='rows-span    bg-primary  w-full   flex '>
 
-                            <ImageIcon  ></ImageIcon>
+                    <form className='flex items-center  w-full mb-5' onSubmit={handleSubmit(onSubmit)}>
+                        <div className='relative'>
+                            {/* <label htmlFor="files" className="btn bg-white p-2 rounded-full inline-flex justify-center"><ImageIcon  ></ImageIcon></label> */}
+                            <IconButton variant="contained" component="label">
+
+                                <ImageIcon  ></ImageIcon>
+                                <input
+                                    onChange={handleImgUpload}
+                                    hidden
+                                    accept="image/*"
+                                    // multiple
+
+                                    type="file"
+
+                                />
+                            </IconButton>
                             <input
                                 onChange={handleImgUpload}
                                 hidden
@@ -83,29 +96,21 @@ const ChatRoom = () => {
                                 type="file"
 
                             />
-                        </IconButton>
-                        <input
-                            onChange={handleImgUpload}
-                            hidden
-                            accept="image/*"
-                            // multiple
+                            {
+                                imgLoading ? <span className=' absolute top-0 right-0 font-semibold'><CircularProgress size={15}></CircularProgress></span> : watch('img')?.length ? <span className='text-red-800  absolute top-0 right-0 font-semibold'>1</span> : ''
+                            }
+                        </div>
+                        <input type='text' className='flex-1 bg-white rounded-lg pl-2 py-1 mx-2 md:mx-4' placeholder=" write some thing" {...register("message", { required: watch('img')?.length ? false : true })} />
+                        <div>
+                            {
+                                imgLoading ? <button disabled={imgLoading || getMessageLoading} className='bg-gray-100 text-gray-500 opacity-75  rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button> : <button className='bg-white rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button>
+                            }
+                        </div>
+                    </form>
+                </Box>
+            </div>
 
-                            type="file"
-
-                        />
-                        {
-                            imgLoading ? <span className=' absolute top-0 right-0 font-semibold'><CircularProgress size={15}></CircularProgress></span> : watch('img')?.length ? <span className='text-red-800  absolute top-0 right-0 font-semibold'>1</span> : ''
-                        }
-                    </div>
-                    <input type='text' className='flex-1 bg-white rounded-lg pl-2 py-1 mx-2 md:mx-4' placeholder=" write some thing" {...register("message", { required: watch('img')?.length ? false : true })} />
-                    <div>
-                        {
-                            imgLoading ? <button disabled={imgLoading || getMessageLoading} className='bg-gray-100 text-gray-500 opacity-75  rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button> : <button className='bg-white rounded-full p-2 inline-flex justify-center' type='submit'><SendIcon></SendIcon></button>
-                        }
-                    </div>
-                </form>
-            </Box>
-        </div>
+        </  >
     );
 };
 

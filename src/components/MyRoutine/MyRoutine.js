@@ -31,7 +31,7 @@ const MyRoutine = () => {
     ;
   if (!isLoading && !data?.length) {
     return (
-      <MainLayout>
+      < >
         <div className="custom_height flex justify-center items-center">
           <div className="flex flex-col justify-center items-center">
             <img src="./images/duck-searching.gif" alt="notfound" />
@@ -46,11 +46,11 @@ const MyRoutine = () => {
             </h4>
           </div>
         </div>
-      </MainLayout>
+      </>
     );
   }
   return (
-    <MainLayout>
+    < >
       <div className="text-center">
         <h1 className="text-xl font-bold text-ellipsis text-slate-600">
           My Created Routines
@@ -102,7 +102,7 @@ const MyRoutine = () => {
           )
         )}
       </Grid>
-    </MainLayout>
+    </>
   );
 };
 

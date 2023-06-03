@@ -95,4 +95,8 @@ div:hover::-webkit-scrollbar-thumb {
   .pagination_button {
     @apply p-2 bg-light-purple hover:bg-dark-purple transition-all hover:text-white text-dark-purple disabled:text-gray-400 disabled:bg-gray-200 rounded-full
   }
+  label#demo-simple-select-label {
+    left: 13px!important;
+}
+ 
 }

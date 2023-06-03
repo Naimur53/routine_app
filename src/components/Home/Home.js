@@ -46,7 +46,10 @@ import {
   setSelectIndex,
 } from "../../ManageState/DataSlice/dataSlice";
 import Chat from "./smallCompo/Chat/Chat";
+import { motion } from 'framer-motion'
 import CommentIcon from "@mui/icons-material/Comment";
+import { chatRevelDelay, homeClassDelay, mainCompoDelay, mainDuration, pageTranAni, pageTranInit, topBarGrowDuration } from "../../utilities/framerMotionAnimationsUtilites";
+import GrowEffect from "../AnimationCompo/GrowEffect/GrowEffect";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
@@ -87,93 +90,112 @@ const Home = () => {
   }, [selectIndex, dispatch, allRoutineData]);
   if (loading) {
     return (
-      <MainLayout>
+      < >
         <div className="custom_height flex justify-center items-center">
-          <CircularProgress></CircularProgress>
+          {/* <CircularProgress></CircularProgress> */}
         </div>
-      </MainLayout>
+      </>
     );
   }
   return (
-    <MainLayout>
-      {data?.classes?.length ? (
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={7}>
-            <div>
-              <div className="flex justify-between items-center mb-3">
-                <div className="min-w-[150px] max-w-[300px] md:w-[300px]  ">
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
-                      Select Routine{" "}
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={selectIndex}
-                      defaultValue={selectIndex}
-                      label="Selected Routine "
-                      size="small"
-                      sx={{
-                        fontSize: { md: "16px", xs: "13px" },
-                        marginLeft: "15px",
-                      }}
-                      onChange={handleChange}
-                    >
-                      {allRoutineData.map(
-                        ({ department, semester, section, shift }, i) => (
-                          <MenuItem
-                            sx={{ fontSize: { md: "16px", sm: "13px" } }}
-                            value={i}
-                          >
-                            {shift === "None"
-                              ? `${textConversion(
-                                  department,
-                                  20
-                                )} sem-${semester}  sec-${section} `
-                              : section === "None"
-                              ? `${department}  sem-${semester} shift-${shift}`
-                              : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
-                            {}
-                          </MenuItem>
-                        )
-                      )}
-                    </Select>
-                  </FormControl>
-                </div>
+    < >
+      <GrowEffect
 
-                <div className="flex items-center text-right">
-                  <div className="block md:hidden">
-                    <CustomTooltip
-                      title={`
+        initPath={pageTranInit}
+        aniPath={pageTranAni}
+        duration={mainDuration}
+      >
+        {data?.classes?.length ? (
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={7}>
+              <div>
+                <div className="flex justify-between items-center mb-3">
+                  <div className="min-w-[150px] w-full select-routine ">
+                    {/* <GrowEffect duration={mainDuration}> */}
+                    <div>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Selected Routine
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={selectIndex}
+                          defaultValue={selectIndex}
+                          label="Selected Routine "
+
+
+                          size="small"
+                          sx={{
+                            fontSize: { md: "16px", xs: "13px" },
+                            marginLeft: "13px",
+                            border: '1px solid transparent',
+                            boxShadow: 'none'
+
+                          }}
+                          onChange={handleChange}
+                        >
+                          {allRoutineData.map(
+                            ({ department, semester, section, shift }, i) => (
+                              <MenuItem
+                                sx={{ fontSize: { md: "16px", sm: "13px" } }}
+                                value={i}
+                              >
+                                {shift === "None"
+                                  ? `${textConversion(
+                                    department,
+                                    20
+                                  )} sem-${semester}  sec-${section} `
+                                  : section === "None"
+                                    ? `${department}  sem-${semester} shift-${shift}`
+                                    : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
+                                { }
+                              </MenuItem>
+                            )
+                          )}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    {/* </GrowEffect> */}
+                  </div>
+
+                  <div className="flex items-center text-right">
+                    <div className="block md:hidden">
+                      <CustomTooltip
+                        title={`
                         institute: ${data.institute}, 
                         department: ${data.department},
                        ${data.semester} semester,
                         section ${data.section}, ${data.shift} shift
                       
                       `}
-                    >
-                      <IconButton>
-                        <HelpOutlineIcon />
+                      >
+                        <IconButton>
+                          <HelpOutlineIcon />
+                        </IconButton>
+                      </CustomTooltip>
+                    </div>
+                    <div className="block md:hidden">
+                      <IconButton
+                        color="primary"
+                        onClick={() => setChatOpen(true)}
+                      >
+                        <CommentIcon></CommentIcon>
                       </IconButton>
-                    </CustomTooltip>
-                  </div>
-                  <div className="block md:hidden">
-                    <IconButton
-                      color="primary"
-                      onClick={() => setChatOpen(true)}
-                    >
-                      <CommentIcon></CommentIcon>
-                    </IconButton>
+                    </div>
                   </div>
                 </div>
+                {/* <GrowEffect duration={mainDuration} delay={homeClassDelay} initPath='polygon(100% 0, 0 0, 0 0, 100% 0)' aniPath='polygon(100% 0, 0 0, 0 100%, 100% 100%)'> */}
+
+                <HomeClassShow data={data}></HomeClassShow>
+                {/* </GrowEffect> */}
               </div>
-              <HomeClassShow data={data}></HomeClassShow>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <div className="custom_height hidden md:block">
-              <Chat></Chat>
-              {/* <Grid container>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              {/* <GrowEffect initPath='polygon(100% 0, 0 0, 0 0, 100% 0)' aniPath='polygon(100% 100%, 0% 100%, 0% 0%, 100% 0%)' delay={chatRevelDelay} duration={mainDuration}> */}
+              <div className="custom_height hidden md:block">
+                <Chat></Chat>
+                {/* <Grid container>
               <Grid item md={6}>
                 <h6 className="text-s hidden md:block dashboard_link active_dashboard_link p-2 ">
                   <NoteIcon sx={{ mr: 1, ml: 1 }} /> My Notes
@@ -194,43 +216,45 @@ const Home = () => {
                 <HomeNoteShow list={list} />
               </Grid>
             </Grid> */}
-            </div>
+              </div>
+              {/* </GrowEffect> */}
+            </Grid>
           </Grid>
-        </Grid>
-      ) : (
-        <RoutineNotFound></RoutineNotFound>
-      )}
-      <Drawer
-        anchor={"bottom"}
-        open={chatOpen}
-        onClose={() => setChatOpen(false)}
-      >
-        <div className="flex flex-col  justify-between">
-          <div className="h-[60px] bg-dark-purple text-white flex justify-between items-center px-2 shadow">
-            <div>
-              <h2 className="text-xl font-bold">
-                {textConversion(data.department, 20)}
-              </h2>
+        ) : (
+          <RoutineNotFound></RoutineNotFound>
+        )}
+        <Drawer
+          anchor={"bottom"}
+          open={chatOpen}
+          onClose={() => setChatOpen(false)}
+        >
+          <div className="flex flex-col  justify-between">
+            <div className="h-[60px] bg-dark-purple text-white flex justify-between items-center px-2 shadow">
               <div>
-                <p className="text-sm">
-                  <span className="font-bold">Semester</span>:{data.semester},
-                  <span className="font-bold"> Section</span>: {data.section},
-                  <span className="font-bold"> Shift</span>: {data.shift}
-                </p>
+                <h2 className="text-xl font-bold">
+                  {textConversion(data.department, 20)}
+                </h2>
+                <div>
+                  <p className="text-sm">
+                    <span className="font-bold">Semester</span>:{data.semester},
+                    <span className="font-bold"> Section</span>: {data.section},
+                    <span className="font-bold"> Shift</span>: {data.shift}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <IconButton color="white" onClick={() => setChatOpen(false)}>
+                  <CloseIcon></CloseIcon>
+                </IconButton>
               </div>
             </div>
-            <div>
-              <IconButton color="white" onClick={() => setChatOpen(false)}>
-                <CloseIcon></CloseIcon>
-              </IconButton>
+            <div className="h-[calc(100vh-60px)]">
+              <Chat></Chat>
             </div>
           </div>
-          <div className="h-[calc(100vh-60px)]">
-            <Chat></Chat>
-          </div>
-        </div>
-      </Drawer>
-    </MainLayout>
+        </Drawer>
+      </GrowEffect>
+    </>
   );
 };
 

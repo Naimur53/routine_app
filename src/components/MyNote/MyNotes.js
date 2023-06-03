@@ -93,7 +93,7 @@ const MyNotes = () => {
   };
 
   return (
-    <MainLayout>
+    <>
       <div>
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
@@ -203,7 +203,7 @@ const MyNotes = () => {
           </Grid>
         ))}
       </Grid>
-    </MainLayout>
+    </>
   );
 };
 

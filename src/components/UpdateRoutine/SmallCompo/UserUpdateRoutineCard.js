@@ -35,6 +35,7 @@ const UserUpdateRoutineCard = ({ value, i, day, setData, classes }) => {
                     <RoutineClassCard {...single} i={j}></RoutineClassCard>
                 </UserUpdateRoutineSingleCard>)
             }
+
         </TabPanel>
     );
 };

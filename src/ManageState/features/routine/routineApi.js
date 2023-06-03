@@ -18,10 +18,12 @@ export const assignmentApi = apiSlice.injectEndpoints({
         getRoutingByUserId: builder.query({
             query: (id) => `/routine?userId=${id}`
         }),
-        addAssignment: builder.mutation({
+        addRoutine: builder.mutation({
+
             query: (info) => {
+                console.log({ info });
                 return {
-                    url: '/assignments',
+                    url: '/routine',
                     method: "POST",
                     body: info
                 }
@@ -29,12 +31,21 @@ export const assignmentApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
                 const { data } = result || {};
-
+                console.log(data.creator);
                 // update data 
                 dispatch(apiSlice.util.updateQueryData(
                     "getAssignments",
                     undefined,
                     (draft) => {
+                        draft.push(arg);
+                    }
+                )
+                );
+                dispatch(apiSlice.util.updateQueryData(
+                    "getRoutingByUserId",
+                    data?.creator?._id,
+                    (draft) => {
+                        console.log(data);
                         draft.push(data);
                     }
                 )
@@ -42,41 +53,53 @@ export const assignmentApi = apiSlice.injectEndpoints({
 
             }
         }),
-        editAssignment: builder.mutation({
+        editRoutine: builder.mutation({
             query: (info) => {
 
                 return {
-                    url: `/assignments/${info.id}`,
-                    method: "PATCH",
+                    url: `routine?id=${info._id}`,
+                    method: "PUT",
                     body: info
                 }
             },
-            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+            async onQueryStarted(arg, { queryFulfilled, dispatch, }) {
                 const result = await queryFulfilled;
                 const { data } = result || {};
 
                 // update data 
+                console.log("hi", arg,)
                 dispatch(apiSlice.util.updateQueryData(
-                    "getAssignments",
-                    undefined,
+                    "getRoutingByUserId",
+                    arg.userId,
                     (draft) => {
 
-                        const index = draft.findIndex(single => single.id === data.id)
+                        const index = draft.findIndex(single => single._id === arg._id)
                         draft[index] = {
                             ...draft[index],
-                            ...data
+                            ...arg.mainData
                         }
+                        console.log("h2", index)
                     }
                 ));
 
                 dispatch(apiSlice.util.updateQueryData(
-                    'getAssignmentWithVideoId',
-                    data.video_id,
+                    "getRoutineWithId",
+                    arg._id,
                     (draft) => {
 
-                        draft[0] = data
+                        draft.institute = arg.mainData.institute
+                        draft.department = arg.mainData.department
+                        draft.section = arg.mainData.section
+                        draft.semester = arg.mainData.semester
+                        draft.classes = arg.mainData.classes
+                        draft._id = arg.mainData._id
+                        draft['shift'] = arg.mainData['shift']
+                        console.log("hdfdf2", arg.mainData, JSON.stringify(draft))
                     }
-                ))
+                ));
+
+
+
 
             }
         }),
@@ -127,4 +150,4 @@ export const assignmentApi = apiSlice.injectEndpoints({
         })
     })
 })
-export const { useGetRoutineWithIdQuery, useAddAssignmentMutation, useGetAssignmentsQuery, useEditAssignmentMutation, useDeleteAssignmentMutation, useGetRoutineBySearchingQuery, useGetRoutingByUserIdQuery, useDeleteRoutineMutation } = assignmentApi;
+export const { useGetRoutineWithIdQuery, useAddAssignmentMutation, useGetAssignmentsQuery, useEditAssignmentMutation, useDeleteAssignmentMutation, useGetRoutineBySearchingQuery, useGetRoutingByUserIdQuery, useDeleteRoutineMutation, useEditRoutineMutation, useAddRoutineMutation } = assignmentApi;

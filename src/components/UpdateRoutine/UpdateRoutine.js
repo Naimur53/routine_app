@@ -14,13 +14,27 @@ import FormControl from "@mui/material/FormControl";
 import UserUpdateExitsRoutine from "./SmallCompo/UserUpdateExitsRoutine";
 import AddMoreClass from "./SmallCompo/AddMoreClass";
 import { toast } from "react-toastify";
+import { sections, semesters, shifts } from "../../utilities/formInfo";
+import { useEditRoutineMutation, useGetRoutineWithIdQuery } from "../../ManageState/features/routine/routineApi";
+
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 
 const UpdateRoutine = ({ admin }) => {
   const { id } = useParams();
   const [data, setData] = useState({})
-  const [getLoading, setGetLoading] = useState(true)
-  const [updateLoading, setUpdateLoading] = useState(false)
   const { user } = useSelector(allData)
+  const { isLoading, isError, isSuccess, data: fetchedData } = useGetRoutineWithIdQuery(id)
   const {
     register,
     handleSubmit,
@@ -31,59 +45,43 @@ const UpdateRoutine = ({ admin }) => {
     formState: { errors },
   } = useForm();
 
-
-  // menu
-
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  };
-
-  const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
-  const shifts = ["None", "1st", "2nd"];
-  const sections = ["None", "A", "B", "C", "D"];
+  const [editRoutine, { isLoading: isEditLoading, isError: isEditRoutineError, isSuccess: isEditRoutineSuccess }] = useEditRoutineMutation()
   //working
   useEffect(() => {
-    setGetLoading(true)
     if (admin) {
-      axios.get(`http://localhost:5001/routine?id=${id} `)
-        .then(res => {
-          setData(res.data)
-          setGetLoading(false)
-
-        }).catch(err => {
-          setGetLoading(false)
-
-        })
+      setData(fetchedData)
     }
     else if (user._id) {
-      axios.get(`http://localhost:5001/routine?id=${id}&userId=${user._id}`)
-        .then(res => {
-          setData(res.data)
-          setGetLoading(false)
-        }).catch(err => {
-          setGetLoading(false)
-
-        })
+      // axios.get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}&userId=${user._id}`)
+      //  fetchedData.creator
+      if (user._id === fetchedData?.creator?._id) {
+        setData(fetchedData)
+      }
     }
-  }, [id, user])
+  }, [id, admin, user, fetchedData])
 
-  if (!getLoading && !data._id) {
+  useEffect(() => {
+    if (!isEditLoading && isEditRoutineError) {
+
+      toast.error('Failed to update')
+    }
+    if (!isEditLoading && isEditRoutineSuccess) {
+      toast.success("Successfully update")
+
+    }
+
+  }, [isEditLoading, isEditRoutineError, isEditRoutineSuccess])
+
+  if (!isLoading && (!data._id || isError)) {
     return <>
       <div className="custom_height flex justify-center items-center">
-        <h2 className="text-center text-xl text-red-500">
-          You don't have access to this routine for update
+        <h2 className="text-center text-xl text-red-600">
+          You don't have access to update!
         </h2>
       </div>
     </>
   }
-  if (getLoading) {
+  if (isLoading) {
     return <div className="flex justify-center">
       <CircularProgress></CircularProgress>
     </div>
@@ -91,26 +89,19 @@ const UpdateRoutine = ({ admin }) => {
 
   // handle basic from submit
   const onSubmit = fromData => {
-    setUpdateLoading(true)
-    const mainData = { ...fromData, classes: data.classes }
-    axios.put(`http://localhost:5001/routine?id=${data._id}`, { mainData })
-      .then(res => {
-        setUpdateLoading(false)
-        toast.success('Successfully updated')
-      })
-      .catch(err => {
-        console.error(errors)
-        setUpdateLoading(true)
-        toast.error('Failed to update try again later')
-      })
+    const mainData = { ...fromData, classes: data.classes, }
+    console.log(mainData, data);
+    editRoutine({ mainData, userId: user?._id, _id: data._id })
   }
+
+
   return (
     <>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="pb-2 flex justify-end">
             {
-              updateLoading ? <CircularProgress /> : <Button variant="outlined" type="submit"  >Update</Button>
+              isEditLoading ? <CircularProgress /> : <Button variant="outlined" type="submit"  >Update</Button>
             }
           </div>
           <Grid container spacing={2}>

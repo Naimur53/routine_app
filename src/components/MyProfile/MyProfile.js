@@ -12,9 +12,9 @@ import ProfileRoute from "./ProfileRoute/ProfileRoute";
 const MyProfile = () => {
   const { user } = useSelector(allData);
   return (
-    <MainLayout>
+    < >
       <ProfileRoute data={user}></ProfileRoute>
-    </MainLayout>
+    </>
   );
 };
 

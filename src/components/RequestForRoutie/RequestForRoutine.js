@@ -19,7 +19,7 @@ const RequestForRoutine = () => {
   const { user } = useSelector(allData);
   const { data, isLoading, isError } = useGetRequestRoutineWithUserIdQuery(user._id)
   return (
-    <MainLayout>
+    < >
       <div>
         <Grid container spacing={4}>
           <Grid item md={5} xs={12}>
@@ -51,7 +51,7 @@ const RequestForRoutine = () => {
         </Grid>
         <RequestModal open={open} setOpen={setOpen}></RequestModal>
       </div>
-    </MainLayout>
+    </>
 
   );
 };

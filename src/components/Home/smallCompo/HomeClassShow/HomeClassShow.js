@@ -24,7 +24,7 @@ const HomeClassShow = ({ data }) => {
         const normalWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const newWeek = normalWeek.filter(single => single !== normalWeek[todayNum])
         setWeek(pre => [normalWeek[todayNum], ...newWeek])
-        setValue(0);
+        setValue(1);
     }, [])
     return (
         <div className=''>

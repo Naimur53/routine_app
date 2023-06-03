@@ -39,7 +39,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`http://localhost:5001/uploadImage`, data)
+            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)

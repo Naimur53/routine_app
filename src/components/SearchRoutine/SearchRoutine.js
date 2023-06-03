@@ -19,7 +19,9 @@ import { useGetRoutineBySearchingQuery } from "../../ManageState/features/routin
 import { sections, semesters } from "../../utilities/formInfo";
 import SearchInputs from "./SearchInputs/SearchInputs";
 
-
+import { motion } from 'framer-motion'
+import GrowEffect from "../AnimationCompo/GrowEffect/GrowEffect";
+import { mainDuration, pageTranAni, pageTranInit } from "../../utilities/framerMotionAnimationsUtilites";
 
 const SearchRoutine = () => {
   const [pagination, setPagination] = useState({ len: 8, skip: 0 });
@@ -62,7 +64,7 @@ const SearchRoutine = () => {
   // const textSearchRequest = () => {
   //   axios
   //     .get(
-  //       `http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
+  //       `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
   //     )
   //     .then((res) => {
   //       setAllRoutine(res.data);
@@ -84,7 +86,7 @@ const SearchRoutine = () => {
   //   if (institute?.length === 24) {
   //     axios
   //       .get(
-  //         `http://localhost:5001/routine/findById?id=${institute}`
+  //         `https://routineappserver-production-5617.up.railway.app/routine/findById?id=${institute}`
   //       )
   //       .then((res) => {
   //         setAllRoutine([res.data]);
@@ -131,7 +133,12 @@ const SearchRoutine = () => {
     },
   };
   return (
-    <MainLayout>
+    <GrowEffect
+
+      initPath={pageTranInit}
+      aniPath={pageTranAni}
+      duration={mainDuration}
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="ml-3 flex justify-center"
@@ -168,7 +175,7 @@ const SearchRoutine = () => {
           </button>
         </div> : <></>
       }
-    </MainLayout>
+    </GrowEffect>
   );
 };
 

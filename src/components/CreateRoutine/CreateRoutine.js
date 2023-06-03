@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 
 import Button from "@mui/material/Button";
@@ -23,9 +23,12 @@ import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import axios from "axios";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
 import { toast } from "react-toastify";
+import { useAddRoutineMutation } from "../../ManageState/features/routine/routineApi";
 const CreateRoutine = ({ request, requestId, setRequestData }) => {
+  const [addRoutine, { isLoading, isError, isSuccess, data: res }] = useAddRoutineMutation()
+
   const { user } = useSelector(allData)
-  const [postLoading, setPostLoading] = useState(false)
+  // const [postLoading, setPostLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -68,31 +71,42 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   // published data to db 633e664ed10c105498fab409
   const publishData = () => {
     if (user?._id) {
-      setPostLoading(true)
-      axios.post('http://localhost:5001/routine', { ...mainData, requestId, creator: user._id })
-        .then(res => {
-          setPostLoading(false);
-          console.log(res)
-          if (requestId) {
-            setRequestData(pre => {
-              const newOne = { ...pre, requestId: res?.data?._id }
-              return newOne;
-            })
-          }
-          toast.success('Routine successfully created')
-          setActiveStep(0)
-          reset();
-          setMainData({ classes: [] });
-        })
-        .catch((err) => {
-          console.log(err)
-          toast.error("Data is not created try again")
-          setPostLoading(false);
-        });
+      addRoutine({ ...mainData, requestId, creator: user._id })
+      // setPostLoading(true)
+      // axios.post('https://routineappserver-production-5617.up.railway.app/routine', { ...mainData, requestId, creator: user._id })
+      //   .then(res => {
+      //     // setPostLoading(false);
+      //     console.log(res)
+
+      //   })
+      //   .catch((err) => {
+      //     console.log(err)
+      //     toast.error("Data is not created try again")
+      //     // setPostLoading(false);
+      //   });
     } else {
       toast.error("User not found")
     }
   };
+
+  useEffect(() => {
+    if (!isLoading && isError) {
+      toast.error("Failed to submit try again later!")
+    } else if (!isLoading && isSuccess) {
+      if (requestId) {
+        setRequestData(pre => {
+          const newOne = { ...pre, requestId: res?.data?._id }
+          return newOne;
+        })
+      }
+      toast.success('Routine successfully created')
+      setActiveStep(0)
+      reset();
+      setMainData({ classes: [] });
+    }
+  }, [isLoading, isError, isSuccess, requestId, reset, setRequestData])
+
+
 
   //----------------
   const handleNext = () => {
@@ -197,7 +211,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
               activeStep={activeStep}
               sx={{ mt: 2 }}
               nextButton={
-                postLoading ? (
+                isLoading ? (
                   <Button size="small" variant="contained" type={"button"}>
                     loading
                   </Button>
@@ -225,7 +239,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
               }
             ></MobileStepper>
           </div>
-          {postLoading ? (
+          {isLoading ? (
             <div className="absolute inset-0 flex justify-center  items-center backdrop-blur-[2px] ">
               <CircularProgress></CircularProgress>
             </div>

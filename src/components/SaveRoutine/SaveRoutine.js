@@ -149,14 +149,14 @@ const SaveRoutine = () => {
     setData(data.filter(single => single._id !== _id))
   }
   if (!data?.length) {
-    return <MainLayout>
+    return < >
       <div>
         <RoutineNotFound></RoutineNotFound>
       </div>
-    </MainLayout>
+    </>
   }
   return (
-    <MainLayout>
+    < >
       <div className="text-center">
         <h1 className="text-xl font-bold text-ellipsis text-slate-600">
           Your Saved Routines
@@ -173,7 +173,7 @@ const SaveRoutine = () => {
           </Grid>
         ))}
       </Grid>
-    </MainLayout>
+    </>
   );
 };
 

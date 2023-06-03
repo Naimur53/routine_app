@@ -16,7 +16,7 @@ const MakeAdmin = ({ setAllAdmin }) => {
         }
         setGetLoading(true)
         if (email) {
-            axios.get(`http://localhost:5001/user?email=${email}`)
+            axios.get(`https://routineappserver-production-5617.up.railway.app/user?email=${email}`)
                 .then(res => {
                     setUsers([res.data])
                     setGetLoading(false)

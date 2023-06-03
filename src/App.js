@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import React, { Component } from "react";
 import "./App.css";
 import Home from "./components/Home/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -46,6 +46,8 @@ import ViewProfile from "./components/ViewProfile/ViewProfile";
 import { getMessaging, onMessage } from "firebase/messaging";
 import './messaging_init_in_sw'
 import Notification from "./components/Dashboard/Notification/Notification";
+import { AnimatePresence } from "framer-motion";
+import AppRoutes from "./components/AppRoutes/AppRoutes";
 
 const theme = createTheme({
   palette: {
@@ -66,6 +68,7 @@ const theme = createTheme({
 function App() {
   const dispatch = useDispatch();
   const { } = useSocket({ observer: true });
+  // const location = useLocation();
 
   const { auth } = useFirebase({ observer: true });
   const { user, loading } = useSelector(allData);
@@ -93,152 +96,7 @@ function App() {
           theme="light"
         />
         <TopBar></TopBar>
-        <Routes>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signUp" element={<SignUp />}></Route>
-          <Route path="/editProfile" element={<EditeProfile />}></Route>
-
-          <Route path="/contactUs" element={<ContactUs />}></Route>
-
-          <Route
-            path="/login"
-            element={
-              <OnlineRoute>
-                <Login />
-              </OnlineRoute>
-            }
-          ></Route>
-
-          <Route
-            path="/signUp"
-            element={
-              <OnlineRoute>
-                <SignUp />
-              </OnlineRoute>
-            }
-          ></Route>
-
-          {/* not working on this */}
-
-          <Route
-            path="/editProfile"
-            element={
-              <PrivateRoute>
-                <MainLayout>
-                  <EditeProfile />
-                </MainLayout>
-              </PrivateRoute>
-            }
-          ></Route>
-
-          <Route path="/" element={<Home />}></Route>
-          <Route path="home" element={<Home />}></Route>
-          <Route path="/myNotes" element={<MyNotes />}></Route>
-          <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
-          <Route
-            path="/searchRoutine"
-            element={
-              <OnlineRoute>
-                <SearchRoutine />
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route
-            path="/myRoutine"
-            element={
-              <OnlineRoute>
-                <PrivateRoute>
-                  <MyRoutine />
-                </PrivateRoute>
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route
-            path="/createRoutine"
-            element={
-              <OnlineRoute>
-                <PrivateRoute>
-                  <MainLayout>
-                    <CreateRoutine />
-                  </MainLayout>
-                </PrivateRoute>
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route
-            path="/checkout/:id"
-            element={
-              <OnlineRoute>
-                <Checkout />
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route
-            path="/myProfile"
-            element={
-              <OnlineRoute>
-                <PrivateRoute>
-                  <MyProfile />
-                </PrivateRoute>
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route
-            path="/update/:id"
-            element={
-              <OnlineRoute>
-                <PrivateRoute>
-                  <MainLayout>
-                    <UpdateRoutine />
-                  </MainLayout>
-                </PrivateRoute>
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route
-            path="/requestForRoutine"
-            element={
-              <OnlineRoute>
-                <PrivateRoute>
-                  <RequestForRoutine />
-                </PrivateRoute>
-              </OnlineRoute>
-            }
-          ></Route>
-          <Route path="viewProfile/:id" element={<ViewProfile />}></Route>
-          {/* ---------------------dashboard routes -------------------------- */}
-
-          <Route
-            path="/dashboard"
-            element={
-              <OnlineRoute>
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              </OnlineRoute>
-            }
-          >
-            <Route index element={<Overview />}></Route>
-            <Route
-              path="allRequestRoutines"
-              element={<AllRequestRoutines />}
-            ></Route>
-            <Route path="allUsers" element={<AllUsers />}></Route>
-
-            <Route
-              path="createRequestRoutine/:id"
-              element={<CreateRequestRoutine />}
-            ></Route>
-
-            <Route path="manageRoutine" element={<ManageRoutine />}></Route>
-            <Route
-              path="manageRoutine/update/:id"
-              element={<UpdateRoutine admin={true} />}
-            ></Route>
-            <Route path="manageAdmin" element={<ManageAdmin />}></Route>
-            <Route path="notification" element={<Notification />}></Route>
-          </Route>
-        </Routes>
+        <AppRoutes></AppRoutes>
       </BrowserRouter>
     </ThemeProvider>
   );

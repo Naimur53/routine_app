@@ -10,7 +10,7 @@ const ManageRoutine = () => {
     useEffect(() => {
 
         axios
-            .get(`https://routineappserver-production-5617.up.railway.app/routine`)
+            .get(`http://localhost:5001/routine`)
             .then((res) => {
                 setAllRoutine(res.data);
                 setGetLoading(false);

@@ -6,39 +6,41 @@ import convertToHourMinute, { getAmOrPm } from "../../../utilities/ConvertTime";
 import CustomTooltip from "../CustomTooltip/CustomTooltip";
 
 import { motion } from "framer-motion";
+const theme = [
+    {
+        img: "/images/blue_bol.png",
+        headingStyle: "text-dark-blue",
+        contentStyle: "text-medium-blue",
+        bgStyle: "bg-light-blue",
+    },
+    {
+        img: "/images/purple_bol.png",
+        headingStyle: "text-dark-purple",
+        contentStyle: "text-medium-purple",
+        bgStyle: "bg-light-purple",
+    },
+    {
+        img: "/images/orange_bol.png",
+        headingStyle: "text-dark-orange",
+        contentStyle: "text-medium-orange",
+        bgStyle: "bg-light-orange",
+    },
+    {
+        img: "/images/green_bol.png",
+        headingStyle: "text-dark-green",
+        contentStyle: "text-medium-green",
+        bgStyle: "bg-light-green",
+    },
+];
 function chooseTheme(i) {
-    const theme = [
-        {
-            img: "/images/blue_bol.png",
-            headingStyle: "text-dark-blue",
-            contentStyle: "text-medium-blue",
-            bgStyle: "bg-light-blue",
-        },
-        {
-            img: "/images/purple_bol.png",
-            headingStyle: "text-dark-purple",
-            contentStyle: "text-medium-purple",
-            bgStyle: "bg-light-purple",
-        },
-        {
-            img: "/images/orange_bol.png",
-            headingStyle: "text-dark-orange",
-            contentStyle: "text-medium-orange",
-            bgStyle: "bg-light-orange",
-        },
-        {
-            img: "/images/green_bol.png",
-            headingStyle: "text-dark-green",
-            contentStyle: "text-medium-green",
-            bgStyle: "bg-light-green",
-        },
-    ];
+
     if (i < 4) {
         return theme[i];
     } else {
         return chooseTheme(i - 4);
     }
 }
+
 
 const RoutineClassCard = ({
     startTime,
@@ -62,14 +64,14 @@ const RoutineClassCard = ({
     return (
         <motion.div
             variants={cardItem}
-            className={bgStyle + " p-4 rounded-xl mb-2"}
+            className={bgStyle + " p-2 py-3 xl:p-4 rounded-xl mb-2"}
         >
             <div className="flex justify-between">
-                <div className="flex gap-4">
+                <div className="flex gap-2 md:gap-4 items-center">
                     {img ? (
                         <img
                             src={process.env.PUBLIC_URL + img}
-                            className="w-[50px]"
+                            className="w-[30px]  md:w-[50px]"
                             alt="logo"
                         />
                     ) : (
@@ -77,7 +79,7 @@ const RoutineClassCard = ({
                     )}
                     <div>
                         <CustomTooltip title={subjectName}>
-                            <h1 className={headingStyle + " font-medium  capitalize"}>
+                            <h1 className={headingStyle + " font-medium  text-sm md:text-base capitalize"}>
                                 {textConversion(subjectName, 20)}
                             </h1>
                         </CustomTooltip>
@@ -86,7 +88,7 @@ const RoutineClassCard = ({
                 </div>
                 <div>
                     <CustomTooltip title={teacherName}>
-                        <p className={contentStyle + " font-semibold text-right text-sm"}>
+                        <p className={contentStyle + " font-medium  text-sm md:text-base capitalize"}>
                             {textConversion(teacherName, 15)}
                         </p>
                     </CustomTooltip>

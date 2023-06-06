@@ -35,7 +35,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
 
         if (e.target?.files?.length) {
             setProfileImgLoading(true)
-            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
+            axios.post(`http://localhost:5001/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setProfileImgLoading(false)
@@ -59,7 +59,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
 
         if (e.target?.files?.length) {
             setCoverLoading(true)
-            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
+            axios.post(`http://localhost:5001/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setCoverLoading(false)
@@ -93,7 +93,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
                         thumbnail: watch("thumbnail") || user.thumbnail,
                         email: user.email,
                     }
-                    axios.put('https://routineappserver-production-5617.up.railway.app/user', {
+                    axios.put('http://localhost:5001/user', {
                         ...data
                     })
                         .then(res => {

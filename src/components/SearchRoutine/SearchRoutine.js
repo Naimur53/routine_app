@@ -64,7 +64,7 @@ const SearchRoutine = () => {
   // const textSearchRequest = () => {
   //   axios
   //     .get(
-  //       `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
+  //       `http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
   //     )
   //     .then((res) => {
   //       setAllRoutine(res.data);
@@ -86,7 +86,7 @@ const SearchRoutine = () => {
   //   if (institute?.length === 24) {
   //     axios
   //       .get(
-  //         `https://routineappserver-production-5617.up.railway.app/routine/findById?id=${institute}`
+  //         `http://localhost:5001/routine/findById?id=${institute}`
   //       )
   //       .then((res) => {
   //         setAllRoutine([res.data]);
@@ -121,7 +121,6 @@ const SearchRoutine = () => {
     })
 
   };
-  console.log(pagination, { data: data });
   const democardContainer = {
     animate: {
       opacity: 1,
@@ -150,7 +149,7 @@ const SearchRoutine = () => {
           isLoading ? [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
             <SkeletonDemoCard></SkeletonDemoCard>
 
-          </Grid>) : data.length ? data.map((single, i) => (
+          </Grid>) : data?.length ? data.map((single, i) => (
             <Grid item lg={3} md={6} xs={12}>
               <DemoCard item={single} i={i} updateAble={false}></DemoCard>
             </Grid>

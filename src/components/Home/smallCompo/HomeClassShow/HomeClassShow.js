@@ -26,6 +26,7 @@ const HomeClassShow = ({ data }) => {
         setWeek(pre => [normalWeek[todayNum], ...newWeek])
         setValue(1);
     }, [])
+
     return (
         <div className=''>
             <Grid container spacing={2}
@@ -45,7 +46,6 @@ const HomeClassShow = ({ data }) => {
 
                 <Grid item xs={12} lg={6} >
                     <div className='custom_height_for_classes  overflow-y-auto'>
-
                         {
                             week.map((single, i) => <TabPanel key={i} value={value} index={i}>
                                 <RoutineClassCards day={single} data={data.classes}></RoutineClassCards>

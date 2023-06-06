@@ -227,7 +227,7 @@ const TopBar = () => {
             </div>
           </GrowEffect>
         </AppBar>
-      </div >
+      </div>
     </>
   );
 };

@@ -3,8 +3,8 @@ const convertToHourMinute = (date) => {
     return full.join(":")
 }
 const getAmOrPm = (date) => {
-    const result = new Date(date).toLocaleTimeString().split(' ')[1]
-    return result;
+    const result = new Date(date).getHours()
+    return result >= 12 ? "PM" : "AM";
 
 }
 export { getAmOrPm };

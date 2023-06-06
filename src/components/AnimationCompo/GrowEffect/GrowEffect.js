@@ -4,7 +4,6 @@ const GrowEffect = ({ condition = false, duration = 1.5, delay = 0, children, in
 
     const init = { clipPath: initPath || (firstTime ? 'none' : 'circle(0.6% at 1% 50%)') }
     const ani = { clipPath: aniPath || 'circle(76.0% at 46% 54%)', }
-    console.log(init, ani,);
     return (
         <motion.div
 
@@ -12,7 +11,7 @@ const GrowEffect = ({ condition = false, duration = 1.5, delay = 0, children, in
             animate={condition ? init : ani}
             transition={{ duration, delay, ease: 'easeOut', children: { duration: 9 } }}
             className='h-full'
-            exit={init}
+
         >
             {children}
         </motion.div>

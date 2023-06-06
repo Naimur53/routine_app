@@ -29,5 +29,7 @@ export const menuItem = {
     },
 };
 
+// export const pageTranInit = 'circle(12.8% at 50% 50%)'
+// export const pageTranAni = 'circle(70.7% at 50% 50%)'
 export const pageTranInit = 'polygon(0 0, 0 0, 0 100%, 0 100%)'
 export const pageTranAni = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'

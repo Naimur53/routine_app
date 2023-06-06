@@ -20,11 +20,11 @@ const RoutineClassCards = ({ data, day }) => {
         },
     };
 
-    // am.forEach(element => {
+    am.forEach(element => {
 
-    //     const startTimeHour = parseInt(convertToHourMinute(element.startTime).split(":")[0])
-    //     console.log(startTimeHour)
-    // });
+        const startTimeHour = parseInt(convertToHourMinute(element.startTime).split(":")[0])
+        console.log(startTimeHour)
+    });
     am.sort(function (a, b) {
         return new Date(a.startTime)
             .toLocaleTimeString()
@@ -35,12 +35,12 @@ const RoutineClassCards = ({ data, day }) => {
             .toLocaleTimeString()
             .localeCompare(new Date(b.startTime).toLocaleTimeString());
     });
-    console.log(am, pm);
-
+    const shorted = [...am, ...pm]
     return (
         <motion.div animate="animate" initial="initial" variants={cardContainer}>
+
             {mainData.length ? (
-                [...am, ...pm].map((single, i) => (
+                shorted.map((single, i) => (
                     <RoutineClassCard key={i} {...single} i={i}></RoutineClassCard>
                 ))
             ) : (

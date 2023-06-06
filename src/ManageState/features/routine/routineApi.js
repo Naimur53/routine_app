@@ -1,3 +1,4 @@
+import isID from "../../../utilities/checkId";
 import { apiSlice } from "../apiSlice/apiSlice";
 
 
@@ -12,6 +13,12 @@ export const assignmentApi = apiSlice.injectEndpoints({
         }),
         getRoutineBySearching: builder.query({
             query: ({ institute = "", department = '', section = '', semester = "", len = 0, skip = 0 }) => {
+
+                const isItId = isID(institute)
+                console.log({ isItId });
+                if (isItId) {
+                    return `/routine?customMadeId=${institute}`
+                }
                 return `/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${len}&skip=${skip}`
             }
         }),

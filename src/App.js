@@ -67,7 +67,7 @@ const theme = createTheme({
 });
 function App() {
   const dispatch = useDispatch();
-  const { } = useSocket({ observer: true });
+  // const { } = useSocket({ observer: true });
   // const location = useLocation();
 
   const { auth } = useFirebase({ observer: true });
@@ -76,29 +76,32 @@ function App() {
     console.log(user);
   }, [user]);
 
-  const messaging = getMessaging();
-  onMessage(messaging, (payload) => {
-    console.log('Message received. ', payload);
-    // ...
-  });
+  // const messaging = getMessaging();
+  // onMessage(messaging, (payload) => {
+  //   console.log('Message received. ', payload);
+  //   // ...
+  // });
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={true}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          theme="light"
-        />
-        <TopBar></TopBar>
-        <AppRoutes></AppRoutes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+          />
+
+          <TopBar></TopBar>
+          <AppRoutes></AppRoutes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   );
 }
 

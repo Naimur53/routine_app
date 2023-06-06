@@ -11,9 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import DashboardTab from "../ShareComponents/MainLayoutTab/MainLayoutTab";
-import MainLayout from "../ShareComponents/MainLayout/MainLayout";
-import ModalProvider from "../ShareComponents/Modal/ModalProvider";
 import HomeClassShow from "./smallCompo/HomeClassShow/HomeClassShow";
 import CloseIcon from "@mui/icons-material/Close";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -29,7 +26,6 @@ import {
   getDataFromLocalDb,
   saveSelectIndex,
 } from "../../utilities/localDb";
-import { NavLink } from "react-router-dom";
 import RoutineNotFound from "../ShareComponents/RoutineNotFound/RoutineNotFound";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -37,7 +33,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import textConversion from "../../utilities/textConversion";
-import { toast } from "react-toastify";
 import CustomTooltip from "../ShareComponents/CustomTooltip/CustomTooltip";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -46,10 +41,7 @@ import {
   setSelectIndex,
 } from "../../ManageState/DataSlice/dataSlice";
 import Chat from "./smallCompo/Chat/Chat";
-import { motion } from 'framer-motion'
 import CommentIcon from "@mui/icons-material/Comment";
-import { chatRevelDelay, homeClassDelay, mainCompoDelay, mainDuration, pageTranAni, pageTranInit, topBarGrowDuration } from "../../utilities/framerMotionAnimationsUtilites";
-import GrowEffect from "../AnimationCompo/GrowEffect/GrowEffect";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
@@ -68,15 +60,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(accessAllRoutineInLocal());
   }, []);
-  // useEffect(() => {
-  //   getRoutineDataFromLocalDbWithIndex(selectIndex).then(res => {
-  //     setData(res)
 
-  //   })
-  //     .catch(err => {
-
-  //     })
-  // }, [selectIndex])
   useEffect(() => {
     if (allRoutineData[selectIndex]?.institute) {
       setData(() => allRoutineData[selectIndex]);
@@ -99,17 +83,13 @@ const Home = () => {
   }
   return (
     < >
-      <GrowEffect
-
-        initPath={pageTranInit}
-        aniPath={pageTranAni}
-        duration={mainDuration}
+      <div
       >
         {data?.classes?.length ? (
           <Grid container spacing={1}>
             <Grid item xs={12} md={7}>
               <div>
-                <div className="flex justify-between items-center mb-3">
+                <div className="flex justify-between items-center mt-3 mb-3">
                   <div className="min-w-[150px] w-full select-routine ">
                     {/* <GrowEffect duration={mainDuration}> */}
                     <div>
@@ -185,39 +165,16 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                {/* <GrowEffect duration={mainDuration} delay={homeClassDelay} initPath='polygon(100% 0, 0 0, 0 0, 100% 0)' aniPath='polygon(100% 0, 0 0, 0 100%, 100% 100%)'> */}
+
 
                 <HomeClassShow data={data}></HomeClassShow>
                 {/* </GrowEffect> */}
               </div>
             </Grid>
             <Grid item xs={12} md={5}>
-              {/* <GrowEffect initPath='polygon(100% 0, 0 0, 0 0, 100% 0)' aniPath='polygon(100% 100%, 0% 100%, 0% 0%, 100% 0%)' delay={chatRevelDelay} duration={mainDuration}> */}
               <div className="custom_height hidden md:block">
                 <Chat></Chat>
-                {/* <Grid container>
-              <Grid item md={6}>
-                <h6 className="text-s hidden md:block dashboard_link active_dashboard_link p-2 ">
-                  <NoteIcon sx={{ mr: 1, ml: 1 }} /> My Notes
-                </h6>
-              </Grid>
-              <Grid item md={5}>
-                <div>
-                  <Button onClick={handleOpen}>
-                    Add Note
-                    <NoteAddIcon sx={{ ml: 1 }} />
-                  </Button>
-                  <ModalProvider open={open} setList={setList} onClose={handleClose} />
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item md={12} xs={12}>
-                <HomeNoteShow list={list} />
-              </Grid>
-            </Grid> */}
               </div>
-              {/* </GrowEffect> */}
             </Grid>
           </Grid>
         ) : (
@@ -248,12 +205,12 @@ const Home = () => {
                 </IconButton>
               </div>
             </div>
-            <div className="h-[calc(100vh-60px)]">
+            <div className="mobile_chat_wrap">
               <Chat></Chat>
             </div>
           </div>
         </Drawer>
-      </GrowEffect>
+      </div>
     </>
   );
 };

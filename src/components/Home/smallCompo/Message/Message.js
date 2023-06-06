@@ -7,7 +7,6 @@ import { formatDistance, subDays, format } from "date-fns";
 const Message = ({ incomingData }) => {
     const { user: incomingUser, message, img, routineId, date } = incomingData;
     const { user } = useSelector(allData);
-    console.log(incomingData.user._id);
     return (
         <div
             className={

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client'
 import { addMessage, allData, postMessageToDb } from '../ManageState/DataSlice/dataSlice';
 
-const socket = io.connect('https://routineappserver-production-5617.up.railway.app/')
+const socket = io.connect('http://localhost:5001/')
 
 const useSocket = ({ observer }) => {
     const { allRoutineData, selectIndex } = useSelector(allData)

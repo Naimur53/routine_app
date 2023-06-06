@@ -27,6 +27,7 @@ import Notification from '../Dashboard/Notification/Notification';
 import Login from '../Login/Login';
 import Home from '../Home/Home';
 import Dashboard from '../Dashboard/Dashboard';
+import PageTransitions from '../AnimationCompo/PageTransitions/PageTransitions';
 
 const AppRoutes = () => {
     const location = useLocation()
@@ -72,16 +73,20 @@ const AppRoutes = () => {
 
                 <Route path="/" element={<MainLayout />}>
 
-                    <Route index element={<Home />}></Route>
-                    <Route path="home" element={<Home />}></Route>
-                    <Route path="/myNotes" element={<MyNotes />}></Route>
-                    <Route path="/saveRoutine" element={<SaveRoutine />}></Route>
+                    <Route index element={<PageTransitions path="/" ><Home /></PageTransitions>}></Route>
+
+                    <Route path="home" element={<PageTransitions path="/home"><Home /></PageTransitions>}></Route>
+                    {/* <Route path="/myNotes" element={<MyNotes />}></Route> */}
+                    <Route path="/saveRoutine" element={<PageTransitions path="/saveRoutine" ><SaveRoutine /></PageTransitions>}></Route>
 
                     <Route
                         path="/searchRoutine"
                         element={
                             <OnlineRoute>
-                                <SearchRoutine />
+                                <PageTransitions path="/searchRoutine">
+
+                                    <SearchRoutine />
+                                </PageTransitions>
                             </OnlineRoute>
                         }
                     ></Route>
@@ -90,7 +95,9 @@ const AppRoutes = () => {
                         element={
                             <OnlineRoute>
                                 <PrivateRoute>
-                                    <MyRoutine />
+                                    <PageTransitions path="/myRoutine">
+                                        <MyRoutine />
+                                    </PageTransitions>
                                 </PrivateRoute>
                             </OnlineRoute>
                         }
@@ -101,7 +108,10 @@ const AppRoutes = () => {
                             <OnlineRoute>
                                 <PrivateRoute>
                                     < >
-                                        <CreateRoutine />
+                                        <PageTransitions path="/createRoutine">
+
+                                            <CreateRoutine />
+                                        </PageTransitions>
 
                                     </>
                                 </PrivateRoute>
@@ -112,7 +122,10 @@ const AppRoutes = () => {
                         path="/checkout/:id"
                         element={
                             <OnlineRoute>
-                                <Checkout />
+                                <PageTransitions path="/checkout">
+
+                                    <Checkout />
+                                </PageTransitions>
                             </OnlineRoute>
                         }
                     ></Route>
@@ -121,7 +134,10 @@ const AppRoutes = () => {
                         element={
                             <OnlineRoute>
                                 <PrivateRoute>
-                                    <MyProfile />
+                                    <PageTransitions path="/myProfile">
+
+                                        <MyProfile />
+                                    </PageTransitions>
                                 </PrivateRoute>
                             </OnlineRoute>
                         }
@@ -131,9 +147,10 @@ const AppRoutes = () => {
                         element={
                             <OnlineRoute>
                                 <PrivateRoute>
-                                    < >
+                                    <PageTransitions path="/update/" >
+
                                         <UpdateRoutine />
-                                    </>
+                                    </PageTransitions>
                                 </PrivateRoute>
                             </OnlineRoute>
                         }
@@ -143,7 +160,10 @@ const AppRoutes = () => {
                         element={
                             <OnlineRoute>
                                 <PrivateRoute>
-                                    <RequestForRoutine />
+                                    <PageTransitions path="/requestForRoutine">
+
+                                        <RequestForRoutine />
+                                    </PageTransitions>
                                 </PrivateRoute>
                             </OnlineRoute>
                         }

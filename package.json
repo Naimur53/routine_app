@@ -41,6 +41,16 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "src/service-worker.js"
+        ],
+        "env": {
+          "serviceworker": true
+        }
+      }
+    ],
     "extends": [
       "react-app",
       "react-app/jest"

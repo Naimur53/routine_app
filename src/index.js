@@ -9,8 +9,16 @@ import { Workbox } from 'workbox-window';
 
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('/service-worker.js');
-  wb.register();
+
+  wb.register()
+    .then(registration => {
+      console.log('Service Worker registered: ', registration);
+    })
+    .catch(error => {
+      console.log('Service Worker registration failed: ', error);
+    });
 }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>

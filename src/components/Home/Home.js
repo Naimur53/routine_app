@@ -89,8 +89,8 @@ const Home = () => {
           <Grid container spacing={1}>
             <Grid item xs={12} md={7}>
               <div>
-                <div className="flex justify-between items-center mt-3 mb-3">
-                  <div className="min-w-[150px] w-full select-routine ">
+                <div className="flex justify-between items-center pt-3  md:pt-0 pb-2 md:pb-3 mb-3">
+                  <div className="min-w-[150px] w-full select-routine pt-2 ">
                     {/* <GrowEffect duration={mainDuration}> */}
                     <div>
                       <FormControl fullWidth>

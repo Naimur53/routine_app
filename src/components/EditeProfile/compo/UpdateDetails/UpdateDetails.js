@@ -57,7 +57,7 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
     }, [user, keys, setValue])
 
     const onSubmit = (data) => {
-        console.log(data)
+
     }
     //  handle input change 
     useEffect(() => {
@@ -84,11 +84,11 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
     useEffect(() => {
         if (updatable.click) {
             trigger().then(res => {
-                console.log({ res })
+
                 if (res) {
                     const mainData = watch()
-                    console.log(mainData, 'going')
-                    axios.put('http://localhost:5001/user', { email: user.email, ...mainData })
+
+                    axios.put('https://routineappserver-production-5617.up.railway.app/user', { email: user.email, ...mainData })
                         .then(res => {
                             if (res.data.modifiedCount) {
                                 setUpdatable({ click: false, disabled: true })

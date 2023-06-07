@@ -8,10 +8,14 @@ html{
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  height: -webkit-fill-available; 
+  height: -webkit-fill-available;
+  max-height: 100vh;
+
 
 }
-
+.a >div {
+  background-color: rgba(255, 0, 0, 0.19)!important
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -73,12 +77,15 @@ div:hover::-webkit-scrollbar-thumb {
   .dashboard_link {
     @apply w-full block text-content px-2 py-4 rounded-2xl mb-2  hover:bg-gray-200 hover:text-gray-700 transition-all
   }
+  .dashboard_link.active_dashboard_link {
+    @apply w-full block text-white px-2 py-4 rounded-2xl mb-2  hover:bg-dark-purple hover:text-white transition-all
+  }
   .dashboard_link_horizontal {
     @apply w-full block text-black text-center text-sm rounded-2xl mb-2 py-2 bg-gray-200 hover:bg-gray-400 hover:text-gray-700 transition-all
   }
 
   .custom_height_for_classes {
-    @apply h-[calc(100vh-260px)] md:h-[calc(100vh-150px)];
+    @apply h-[calc(100vh-280px)] md:h-[calc(100vh-150px)];
   }
 
   .custom_height {

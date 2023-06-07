@@ -24,7 +24,7 @@ const HomeClassShow = ({ data }) => {
         const normalWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const newWeek = normalWeek.filter(single => single !== normalWeek[todayNum])
         setWeek(pre => [normalWeek[todayNum], ...newWeek])
-        setValue(1);
+        setValue(0);
     }, [])
 
     return (
@@ -32,7 +32,7 @@ const HomeClassShow = ({ data }) => {
             <Grid container spacing={2}
 
             >
-                <Grid item xs={12} lg={6} >
+                <Grid item xs={12} lg={5} >
                     <Box
                         className='flex lg:flex-col lg:custom_height_for_classes overflow-y-auto pb-0 md:pb-0 px-2'
                     >
@@ -44,8 +44,8 @@ const HomeClassShow = ({ data }) => {
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} lg={6} >
-                    <div className='custom_height_for_classes  overflow-y-auto'>
+                <Grid item xs={12} lg={7} >
+                    <div className='custom_height_for_classes overflow-y-auto'>
                         {
                             week.map((single, i) => <TabPanel key={i} value={value} index={i}>
                                 <RoutineClassCards day={single} data={data.classes}></RoutineClassCards>

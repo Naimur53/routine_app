@@ -11,7 +11,7 @@ function isID(text) {
     // Check if each character in the text is from the allowed characters
     for (let i = 0; i < length; i++) {
         if (!characters.includes(text[i])) {
-            console.log('this text not found', text[i]);
+
             return false;
         }
     }

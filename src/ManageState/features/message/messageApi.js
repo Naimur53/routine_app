@@ -26,7 +26,7 @@ export const messageApi = apiSlice.injectEndpoints({
                     await cacheDataLoaded;
                     socket?.emit('join', arg)
                     socket.on("receive_message", (data) => {
-                        console.log('receive_message from apiii', data);
+
                         updateCachedData((draft) => {
                             draft.data.push(data)
                             draft.totalMessage = draft.totalMessage + 1
@@ -47,7 +47,7 @@ export const messageApi = apiSlice.injectEndpoints({
 
                     const result = await queryFulfilled;
                     const { data } = result || {};
-                    console.log('new data comes', { data })
+
                     dispatch(apiSlice.util.updateQueryData(
                         "getMessagesWithRoutineId",
                         arg.id,
@@ -69,7 +69,7 @@ export const messageApi = apiSlice.injectEndpoints({
         addMessage: builder.mutation({
 
             query: (info) => {
-                console.log({ info });
+
                 return {
                     url: '/message',
                     method: "POST",
@@ -77,9 +77,8 @@ export const messageApi = apiSlice.injectEndpoints({
                 }
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                const result = await queryFulfilled;
-                const { data } = result || {};
-                console.log(data.creator);
+
+
                 // update data 
                 const socket = io("https://routineappserver-production-5617.up.railway.app/", {
                     reconnectionDelay: 1000,
@@ -91,6 +90,14 @@ export const messageApi = apiSlice.injectEndpoints({
                     rejectUnauthorized: false,
                 });
                 socket?.emit('message', arg)
+                try {
+
+                    const result = await queryFulfilled;
+                    const { data } = result || {};
+
+                } catch (err) {
+
+                }
                 // dispatch(apiSlice.util.updateQueryData(
                 //     "getAssignments",
                 //     undefined,
@@ -103,7 +110,7 @@ export const messageApi = apiSlice.injectEndpoints({
                 //     "getRoutingByUserId",
                 //     data?.creator?._id,
                 //     (draft) => {
-                //         console.log(data);
+                //         
                 //         draft.push(data);
                 //     }
                 // )

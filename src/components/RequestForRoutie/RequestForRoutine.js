@@ -24,7 +24,7 @@ const RequestForRoutine = () => {
         <Grid container spacing={4}>
           <Grid item md={5} xs={12}>
             <div>
-              <h1 className="text-3xl font-semibold mt-20">Make request for a routine</h1>
+              <h1 className="text-3xl font-semibold mt-10 md:mt-20">Make request for a routine</h1>
               <p className="mt-5 mb-3">If you don't find routine that match your routine just make a request which will have your class routine as image and we will build it for you </p>
 
               <Button className="mt-5" variant="outlined" type="submit" onClick={() => setOpen(!open)}>

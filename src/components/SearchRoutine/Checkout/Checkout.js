@@ -23,7 +23,7 @@ const Checkout = () => {
   const [pepFile, setPepFile] = useState()
   const { isError, isLoading, data, } = useGetRoutineWithIdQuery(id)
   const handleSave = () => {
-    console.log(data);
+
     setSave(true);
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
@@ -80,7 +80,7 @@ const Checkout = () => {
 
 
   const handleDownload = () => {
-    console.log()
+
     axios(
       {
         url: `https://routineappserver-production-5617.up.railway.app/makePdf?routineId=${id}`,
@@ -101,7 +101,7 @@ const Checkout = () => {
         URL.revokeObjectURL(url);
       })
       .catch(error => {
-        console.log('Error occurred while downloading the PDF.', error);
+
       });
   }
   return (

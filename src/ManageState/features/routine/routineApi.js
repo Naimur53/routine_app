@@ -15,7 +15,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
             query: ({ institute = "", department = '', section = '', semester = "", len = 0, skip = 0 }) => {
 
                 const isItId = isID(institute)
-                console.log({ isItId });
+
                 if (isItId) {
                     return `/routine?customMadeId=${institute}`
                 }
@@ -28,7 +28,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
         addRoutine: builder.mutation({
 
             query: (info) => {
-                console.log({ info });
+
                 return {
                     url: '/routine',
                     method: "POST",
@@ -38,7 +38,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const result = await queryFulfilled;
                 const { data } = result || {};
-                console.log(data.creator);
+
                 // update data 
                 dispatch(apiSlice.util.updateQueryData(
                     "getAssignments",
@@ -52,7 +52,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
                     "getRoutingByUserId",
                     data?.creator?._id,
                     (draft) => {
-                        console.log(data);
+
                         draft.push(data);
                     }
                 )
@@ -74,7 +74,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
                 const { data } = result || {};
 
                 // update data 
-                console.log("hi", arg,)
+
                 dispatch(apiSlice.util.updateQueryData(
                     "getRoutingByUserId",
                     arg.userId,
@@ -85,7 +85,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
                             ...draft[index],
                             ...arg.mainData
                         }
-                        console.log("h2", index)
+
                     }
                 ));
 
@@ -101,7 +101,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
                         draft.classes = arg.mainData.classes
                         draft._id = arg.mainData._id
                         draft['shift'] = arg.mainData['shift']
-                        console.log("hdfdf2", arg.mainData, JSON.stringify(draft))
+
                     }
                 ));
 

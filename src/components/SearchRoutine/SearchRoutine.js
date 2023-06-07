@@ -80,7 +80,7 @@ const SearchRoutine = () => {
 
   // const fetchData = useCallback(() => {
   //   setGetLoading(true);
-  //   console.log(institute, institute.match(/^[0-9a-fA-F]{24}$/), "output");
+  //   
 
   //   // institute will work for both id and text name of institute
   //   if (institute?.length === 24) {
@@ -140,7 +140,7 @@ const SearchRoutine = () => {
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="ml-3 flex justify-center"
+        className="ml-3 mt-10 md:mt-0 flex justify-center"
       >
         <SearchInputs register={register} reset={reset} watch={watch} errors={errors} ></SearchInputs>
       </form>

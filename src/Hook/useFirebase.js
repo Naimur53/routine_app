@@ -103,10 +103,7 @@ const useFirebase = ({ observer }) => {
             .then(({ user }) => {
                 setAuthError("");
 
-                console.log(
-                    "from CreateUserWithEmailAndPassword ",
-                    user
-                );
+
 
 
                 const userInfo = {
@@ -185,7 +182,8 @@ const useFirebase = ({ observer }) => {
                 console.log(res);
             })
             .catch(err => {
-                toast.error("Something went wrong!")
+                toast.error("Something went wrong to signin try again latter!")
+                dispatch(setLoading(false))
 
             })
     }
@@ -226,17 +224,13 @@ const useFirebase = ({ observer }) => {
                             logOut()
                             dispatch(setLoading(false));
                             toast.error('Something went wrong try again! ')
+                            console.log(error)
                         });
                     // IdP data available using getAdditionalUserInfo(result)
                     // ...
                 }).catch((error) => {
-                    // Handle Errors here.
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    // The email of the user's account used.
-                    const email = error?.customData?.email;
-                    // The AuthCredential type that was used.
-                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    console.log(error)
+                    // Handle Errors here. 
                     // ...
                 });
         }

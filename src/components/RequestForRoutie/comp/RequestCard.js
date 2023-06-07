@@ -14,7 +14,7 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData, r
     const handleDelete = () => {
         if (window.confirm('Are you sure? you want to delete this')) {
             deleteRequest({ id: _id, userId: user._id }).then(res => {
-                console.log("my respmonse", res);
+
             })
         }
     }
@@ -23,7 +23,7 @@ const RequestCard = ({ img, message, date, status, adminMessage, _id, setData, r
             toast.error("Failed to delete")
         }
     }, [isLoading, isError])
-    console.log(isLoading, isError, error);
+
     return (
         <div className='shadow p-4 rounded-xl'>
             <div className='flex justify-center'>

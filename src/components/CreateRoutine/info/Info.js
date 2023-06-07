@@ -49,7 +49,7 @@ const Info = ({ setValue, errors, register, watch, disabled, mainData }) => {
     })
   }, [])
   useEffect(() => {
-    console.log('hi icalll djfkdjfkdlfjdklfjdklfjdklfjdklf')
+
   }, [])
   return (
     <div>

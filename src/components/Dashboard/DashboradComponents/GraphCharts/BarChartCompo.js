@@ -73,7 +73,7 @@ const BarChartCompo = ({ data: preData }) => {
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             const { department, institute, section, shift, totalUserUsing } = payload[0].payload
-            console.log({ active, payload, })
+
             return (
                 <div className=" backdrop-blur-md bg-white/[.6] p-4">
                     <p className="desc">{institute}</p>

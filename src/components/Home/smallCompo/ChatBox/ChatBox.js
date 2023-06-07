@@ -34,14 +34,13 @@ const ChatBox = ({ routineId, messages, isLoading, totalMessage, skip }) => {
 
     //         setScrollTo(pre => {
 
-    //             console.log({ pre });
+    //             
     //             return { pre: pre.now, now: scrollRef?.current?.scrollHeight }
     //         })
     //     }
 
     // }, [scrollRef, scrollRef.current, messages])
 
-    console.log(scrollTo);
 
     useEffect(() => {
         if (skipMessage.shouldLoadMore) {
@@ -54,17 +53,21 @@ const ChatBox = ({ routineId, messages, isLoading, totalMessage, skip }) => {
     useEffect(() => {
         if (scrollRef?.current && scrollTo.pre) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight - scrollTo.pre
-            console.log('end of first ', scrollTo.pre)
+
         }
     }, [newChat, scrollRef?.current, scrollTo.pre,])
 
-    // scrollTo bottom
+    // scrollTo bottom 
+
+    // scrollTo bottom self message then
     useEffect(() => {
         if (scrollRef?.current && !isLoading) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-            console.log('i am going to bottom')
+
+            if (scrollRef.current.scrollHeight - scrollRef.current.scrollTop < 2000)
+                scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+
         }
-    }, [scrollRef, , routineId, isLoading])
+    }, [scrollRef, routineId, isLoading, messages])
 
     useEffect(() => {
         if (isGettingNewChatLoading) {
@@ -73,9 +76,9 @@ const ChatBox = ({ routineId, messages, isLoading, totalMessage, skip }) => {
             })
         }
     }, [isGettingNewChatLoading])
+
     const loadMore = e => {
         let scrolling = e.target.scrollTop
-        console.log({ scrolling });
         if (scrolling === 0) {
 
             setSkipMessage((prevSkipMessage) => {
@@ -93,12 +96,13 @@ const ChatBox = ({ routineId, messages, isLoading, totalMessage, skip }) => {
             });
         }
     }
+    console.error({ isLoading });
     return (
         <Box className=' pb-2  w-full' sx={{ height: '85%', flexGrow: '1' }}>
             {/* <RightBar info={{ name: client?.displayName, photo: client?.photoURL }}></RightBar> */}
             <div style={{ height: '100%' }} className=' overflow-hidden'>
 
-                {!messages?.length && isLoading ? <div className='h-full flex justify-center items-center'>
+                {isLoading ? <div className='h-full flex justify-center items-center'>
                     <CircularProgress></CircularProgress>
                 </div>
                     :

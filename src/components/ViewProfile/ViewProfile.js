@@ -15,7 +15,7 @@ const ViewProfile = () => {
     axios
       .get(`https://routineappserver-production-5617.up.railway.app/user?id=${id}`)
       .then((res) => {
-        console.log(res);
+
         if (res.data?._id) {
           setGetLoading(false);
           setViewUser(res.data);
@@ -27,7 +27,7 @@ const ViewProfile = () => {
         setGetLoading(false);
       });
   }, [id]);
-  console.log(viewUser.displayName);
+
   return (
     <>
       <ProfileRoute data={viewUser}></ProfileRoute>

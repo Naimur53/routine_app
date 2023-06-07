@@ -79,7 +79,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
         }),
         deleteRequestOfRoutineWithId: builder.mutation({
             query: ({ id, userId }) => {
-                console.log(id);
+
                 return {
                     url: `/requestRoutine?id=${id}`,
                     method: "DELETE",
@@ -87,7 +87,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 // const result = await queryFulfilled;
-                console.log('hi', arg);
+
 
                 const pathResult1 = dispatch(
                     apiSlice.util.updateQueryData(
@@ -95,7 +95,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
                         arg.userId,
                         (draft) => {
                             const index = draft?.findIndex(single => single._id === arg.id)
-                            console.log({ index });
+
 
                             if (index !== -1) draft.splice(index, 1)
                         }
@@ -105,7 +105,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
                 try {
                     const result = await queryFulfilled;
                 } catch (err) {
-                    console.log({ err, b: 'dfdfd' });
+
                     pathResult1.undo()
                 }
 

@@ -19,7 +19,7 @@ const CreateRequestRoutine = () => {
         Promise.all(url)
             .then(res => {
                 setGetLoading(false)
-                console.log(res)
+
                 setData({ ...res[0].data, requestId: res[1].data._id })
 
             })

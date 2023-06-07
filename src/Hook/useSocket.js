@@ -14,11 +14,11 @@ const useSocket = ({ observer }) => {
     useEffect(() => {
         if (observer) {
             socket.on('connect', () => {
-                console.log("Connected")
+
             })
             socket.on('receive_message', (data) => {
                 dispatch(addMessage([data]))
-                console.log({ in: data._id })
+
             })
         }
     }, [])

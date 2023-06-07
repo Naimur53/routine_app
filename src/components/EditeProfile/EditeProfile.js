@@ -1,5 +1,4 @@
 
-
 import {
   Button,
   CircularProgress,
@@ -12,21 +11,12 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import SchoolIcon from "@mui/icons-material/School";
-
-import EventSeatIcon from "@mui/icons-material/EventSeat";
-import RememberMeIcon from "@mui/icons-material/RememberMe";
-import SubjectIcon from "@mui/icons-material/Subject";
-import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
-import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
-import PhoneIcon from "@mui/icons-material/Phone";
-import MainLayout from "../ShareComponents/MainLayout/MainLayout";
 import { useSelector } from "react-redux";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
-import textConversion from "../../utilities/textConversion";
 import EditProfileLayout from "./compo/EditProfileLayout/EditProfileLayout";
 import UpdateProfileAndCover from "./compo/UpdateProfileAndCover/UpdateProfileAndCover";
-import UpdateDetails from "./compo/UpdateDetails/UpdateDetails";
+import UpdateDetails from './compo/UpdateDetails/UpdateDetails'
+// import UpdateDetails from "./compo/UpdateDetails/updateDetails";
 
 const EditeProfile = () => {
   const [bio, setBio] = useState(false);
@@ -43,35 +33,16 @@ const EditeProfile = () => {
       },
     },
   };
-  const institute = "Brahmnbaria Polytechnic Institute";
-  const department = "Computer Secience And Enginnering";
-  const handleBio = () => {
-    {
-      bio ? setBio(false) : setBio(true);
-    }
-  };
-  const handleDetails = () => {
-    {
-      details ? setDetails(false) : setDetails(true);
-    }
-  };
-  const { register, handleSubmit, watch, reset } = useForm();
-  const onSubmit = (data) => {
-
-  };
-  const semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
-  const shifts = ["None", "1st", "2nd"];
-  const sections = ["None", "A", "B", "C", "D"];
   if (loading) {
-    return <MainLayout>
+    return <>
       <div className="flex justify-center">
         <CircularProgress></CircularProgress>
       </div>
 
-    </MainLayout>
+    </>
   }
   return (
-    <MainLayout>
+    <>
       <div className="container     bg-white  shadow-lg    transform   duration-200 easy-in-out p-3">
         {/*--------------------- using react hook from ------------------------ */}
         <div className=" ">
@@ -97,7 +68,7 @@ const EditeProfile = () => {
 
         <hr className="mt-6" />
       </div>
-    </MainLayout>
+    </>
   );
 };
 

@@ -41,7 +41,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
             setImgLoading(true)
             axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
-                    console.log({ res })
+
                     setImgLoading(false)
                     setValue('img', res.data.url)
                 })
@@ -53,7 +53,7 @@ const RequestModal = ({ open, setOpen, setData }) => {
         }
     }
     const onSubmit = (data) => {
-        console.log(data)
+
         if (!data?.img?.length) {
             toast.error('Please add image of your routine')
             return

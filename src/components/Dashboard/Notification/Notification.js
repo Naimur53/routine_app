@@ -9,7 +9,7 @@ const Notification = () => {
     axios
       .get(`https://routineappserver-production-5617.up.railway.app/notificationToken`)
       .then((res) => {
-        console.log(res);
+
         let mainData = [];
 
         res.data.forEach((element) => {

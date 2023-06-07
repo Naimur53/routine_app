@@ -27,13 +27,13 @@ const RequestRoutineActions = ({ id, setData, data }) => {
 
         if (!postLoading) {
             setPostLoading(true)
-            console.log(adminMessage.current)
+
             axios.put(`https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${id}`, {
                 status, adminMessage: adminMessage.current.value, routineId: data.requestId
             })
                 .then(res => {
                     // setData(res.data)
-                    console.log(res.data)
+
                     setPostLoading(false)
                 })
                 .catch(err => {

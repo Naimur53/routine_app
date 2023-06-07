@@ -1,4 +1,4 @@
-import { Button, CircularProgress, TableCell, TableRow, Tooltip } from '@mui/material';
+import { Avatar, Button, CircularProgress, TableCell, TableRow, Tooltip } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -39,7 +39,8 @@ const AdminTableSingleRow = ({ makeAdmin, _id, isAdmin, photoURL, email, display
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell component="th" scope="row">
-                <img src={photoURL} className='w-[40px] shadow-xl rounded-full' alt="s" />
+
+                <Avatar src={photoURL} sx={{ width: 40, height: 40 }} alt={displayName} ></Avatar>
             </TableCell>
             <TableCell align="left">
                 <div>

@@ -89,10 +89,10 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       : window.innerWidth > 900
         ? [...horizontalNav, ...commonNav]
         : commonNav;
-  console.log('render --------------');
+
   return (
     <>
-      <motion.div initial={{ opacity: !loading ? 1 : 0 }} animate={{ opacity: loading ? 0 : 1 }} transition={{ delay: topBarGrowDuration }} viewport={{ once: true }}>
+      <div  >
         <div className="h-full md:h-full border-r border-gray-100 ">
           <div className="w-[85vw]  md:w-full h-full md:h-auto">
             <div className="">
@@ -266,7 +266,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };

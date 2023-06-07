@@ -14,7 +14,7 @@ const OnlineRoute = ({ children, withoutLayout }) => {
       // window.removeEventListener('online')
     };
   }, []);
-  console.log({ withoutLayout, status });
+
   if (withoutLayout && !status) {
     return (
       <>
@@ -32,7 +32,7 @@ const OnlineRoute = ({ children, withoutLayout }) => {
   }
   if (!status) {
     return (
-      <MainLayout>
+      <>
         <div className="flex justify-center custom_height items-center">
           <div className="">
             <img
@@ -42,7 +42,7 @@ const OnlineRoute = ({ children, withoutLayout }) => {
             <h2 className="text-xl text-bold">Please Connect to Internet...</h2>
           </div>
         </div>
-      </MainLayout>
+      </>
     );
   }
   return <>{children}</>;

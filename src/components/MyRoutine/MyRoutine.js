@@ -35,7 +35,7 @@ const MyRoutine = () => {
         <div className="custom_height flex justify-center items-center">
           <div className="flex flex-col justify-center items-center">
             <img src="./images/duck-searching.gif" alt="notfound" />
-            <h4 className="text-lg font-medium mt-5">
+            <h4 className="text-lg font-medium mt-10 md:mt-5">
               You don't have any routine{" "}
               <NavLink
                 className="underline underline-dark-purple  text-dark-purple"
@@ -52,7 +52,7 @@ const MyRoutine = () => {
   return (
     < >
       <div className="text-center">
-        <h1 className="text-xl font-bold text-ellipsis text-slate-600">
+        <h1 className="text-xl mt-10 md:mt-10 font-bold text-ellipsis text-slate-600">
           My Created Routines
         </h1>
       </div>

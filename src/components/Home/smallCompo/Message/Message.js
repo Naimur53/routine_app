@@ -10,19 +10,19 @@ const Message = ({ incomingData }) => {
     return (
         <div
             className={
-                user.email === incomingUser.email ? "text-right " : "text-left"
+                user?.email === incomingUser?.email ? "text-right " : "text-left"
             }
         >
             <div className="">
-                <p className={user.email === incomingUser.email ? "mr-8" : "ml-8"}>
+                <p className={user?.email === incomingUser?.email ? "mr-8" : "ml-8"}>
                     {" "}
                     <span className="text-gray-400 text-xs">
                         {" "}
-                        {incomingData.user.displayName}
+                        {incomingData?.user?.displayName || "User un available"}
                     </span>
                 </p>
                 <div
-                    className={`shadow rounded-2xl bg-white inline-block  mb-2  ${user.email === incomingUser.email ? "mr-2 md:mr-5" : "ml- md:ml-5"
+                    className={`shadow rounded-2xl bg-white inline-block  mb-2  ${user?.email === incomingUser?.email ? "mr-2 md:mr-5" : "ml- md:ml-5"
                         }`}
                 >
                     <div className="flex flex-col">
@@ -46,17 +46,17 @@ const Message = ({ incomingData }) => {
                 <div
                     dir="ltr"
                     className={
-                        user.email === incomingUser.email ? "flex justify-end" : "block"
+                        user?.email === incomingUser?.email ? "flex justify-end" : "block"
                     }
                 >
                     {" "}
                     <div className="flex   items-center">
                         <Avatar
                             component={NavLink}
-                            to={`viewProfile/${incomingData.user._id}`}
+                            to={`viewProfile/${incomingData?.user?._id}`}
                             sx={{ height: 30, width: 30, marginBottom: "5px" }}
-                            alt={incomingUser.displayName}
-                            src={incomingUser.photoURL}
+                            alt={incomingUser?.displayName || "User Un Available"}
+                            src={incomingUser?.photoURL}
                         />
                     </div>
                 </div>

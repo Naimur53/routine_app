@@ -37,7 +37,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
             setProfileImgLoading(true)
             axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
-                    console.log({ res })
+
                     setProfileImgLoading(false)
                     setValue('photoURL', res.data.url)
                     if (watch('displayName')) {
@@ -61,7 +61,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
             setCoverLoading(true)
             axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
-                    console.log({ res })
+
                     setCoverLoading(false)
                     setValue('thumbnail', res.data.url)
                     if (watch('displayName')) {
@@ -85,7 +85,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
         if (updatable.click) {
             trigger().then(res => {
                 if (res) {
-                    console.log(res)
+
                     const data = {
                         displayName: watch("displayName"),
                         bio: watch("bio"),

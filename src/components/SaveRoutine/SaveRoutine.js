@@ -158,14 +158,14 @@ const SaveRoutine = () => {
   return (
     < >
       <div className="text-center">
-        <h1 className="text-xl font-bold text-ellipsis text-slate-600">
+        <h1 className="text-2xl mt-10 md:mt-0 mb-[20px] font-bold text-ellipsis text-slate-600 ">
           Your Saved Routines
         </h1>
       </div>
       <Grid
         container
         spacing={4}
-        sx={{ marginTop: "20px", justifyContent: "center", display: "flex" }}
+        sx={{ justifyContent: "center", display: "flex" }}
       >
         {data.map((single, i) => (
           <Grid key={i} item lg={3} md={6} xs={12}>

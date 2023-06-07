@@ -15,7 +15,7 @@ const SingleTab = ({ day, classes, i, value, handleChange, a11yProps }) => {
         //     const end = new Date(element.endTime);
         //     const startTime = start.getTime();
         //     const endTime = end.getTime();
-        //     console.log(element.subjectName)
+        //     
         //     shortClassName = [...shortClassName, element.subjectName?.slice(0, 3)]
         //     if (endTime > startTime) {
         //         totalHour += new Date(start - end).getHours()
@@ -53,12 +53,12 @@ const SingleTab = ({ day, classes, i, value, handleChange, a11yProps }) => {
             totalHour += getHoursDiff(new Date(single.startTime), new Date(single.endTime))
             // if am,am or pm pm
             // if (parseTime(getDayOrNight, startTime) === parseTime(getDayOrNight, endTime)) {
-            //     // console.log('hi')
+            //     // 
             //     const calHours = parseTime(getHour, endTime) - parseTime(getHour, startTime)
             //     const calTime = parseTime(getMinutes, endTime) + ((parseTime(getMinutes, startTime) || 60))
 
 
-            //     console.log({ startTime, endTime, calHours, calTime, a: })
+            //     
             // }
 
         })

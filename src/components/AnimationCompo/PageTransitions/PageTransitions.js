@@ -6,7 +6,8 @@ import { pageTranAni, pageTranInit } from '../../../utilities/framerMotionAnimat
 const PageTransitions = ({ children, path }) => {
     const location = useLocation()
     const isVisible = location?.pathname.includes(path)
-    console.log({ isVisible, path, location });
+
+
     const init = { clipPath: pageTranInit, opacity: 0, x: 0 }
 
     const animate = { clipPath: pageTranAni, opacity: 1, x: 0 }

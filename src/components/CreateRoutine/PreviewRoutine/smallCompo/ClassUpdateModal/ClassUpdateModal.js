@@ -83,7 +83,7 @@ const ClassUpdateModal = ({ children, classes, errors, watch, setValue, setMainD
             "roomNumber",]
         if (open) {
             key.forEach(single => {
-                console.log(single, classes[index][single])
+
                 setValue(single, classes[index][single])
             })
         }

@@ -15,10 +15,10 @@ import firebaseConfig from "./Firebase/Firebase.config";
 // Initialize Firebase Cloud Messaging and get a reference to the service
 
 function requestPermission() {
-    console.log('Requesting permission...');
+
     Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-            console.log('Notification permission granted.');
+
             const app = initializeApp(firebaseConfig);
             const messaging = getMessaging(app);
 
@@ -27,18 +27,18 @@ function requestPermission() {
                     // Send the token to your server and update the UI if necessary
                     axios.post('https://routineappserver-production-5617.up.railway.app/notificationToken', { token: currentToken })
                     // ...
-                    console.log({ token: currentToken }, "dfkfdf")
+
                 } else {
                     // Show permission request UI
-                    console.log('No registration token available. Request permission to generate one.');
+
                     // ...
                 }
             }).catch((err) => {
-                console.log('An error occurred while retrieving token. ', err);
+
                 // ...
             });
         } else {
-            console.log('Do not have permission for notification ')
+
         }
     });
 }

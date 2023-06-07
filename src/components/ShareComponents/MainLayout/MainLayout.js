@@ -14,7 +14,7 @@ const MainLayout = ({ children }) => {
   const animate = { opacity: 1 }
   // const { loading } = useSelector(allData)
   return (
-    <motion.div className=""
+    <motion.div className="pt-[40px] md:pt-[57pt]"
       initial={init}
       animate={animate}
       exit={init}
@@ -22,11 +22,11 @@ const MainLayout = ({ children }) => {
       <Container maxWidth="xxl">
         <div className="block md:flex">
           <div className="mainLayoutTabWidth hidden md:block relative z-40">
-            <div className="fixed custom_height overflow-y-auto left-0 mainLayoutTabWidth">
+            <div className="fixed   custom_height overflow-y-auto left-0 mainLayoutTabWidth">
               <MainLayoutTab></MainLayoutTab>
             </div>
           </div>
-          <div className="w-full md:w-[calc(100vw-260px)]">
+          <div className="w-full md:w-[calc(100vw-260px)] mt-3 md:mt-0">
             <AnimatePresence>
 
               <Outlet></Outlet>

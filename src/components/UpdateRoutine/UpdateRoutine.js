@@ -90,7 +90,7 @@ const UpdateRoutine = ({ admin }) => {
   // handle basic from submit
   const onSubmit = fromData => {
     const mainData = { ...fromData, classes: data.classes, }
-    console.log(mainData, data);
+
     editRoutine({ mainData, userId: user?._id, _id: data._id })
   }
 

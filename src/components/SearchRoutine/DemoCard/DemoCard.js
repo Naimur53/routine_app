@@ -78,8 +78,8 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, delete
     ? format(new Date(publishedDate), "PP")
     : "Date is not valid";
   // const date = 'publishedDate'
-  // console.log({ publishedDate })
-  // console.log({ a })
+  // 
+  // 
   const handleDelete = () => {
     if (!isLoading) {
       if (window.confirm("are you sure ?")) {

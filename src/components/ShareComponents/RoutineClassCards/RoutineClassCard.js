@@ -86,9 +86,9 @@ const RoutineClassCard = ({
                         <p className={contentStyle + " text-sm"}> {subjectCode}</p>
                     </div>
                 </div>
-                <div>
+                <div className="md:mt-1">
                     <CustomTooltip title={teacherName}>
-                        <p className={contentStyle + " font-medium  text-sm md:text-base capitalize"}>
+                        <p className={contentStyle + " font-medium  text-sm md:text-normal capitalize"}>
                             {textConversion(teacherName, 15)}
                         </p>
                     </CustomTooltip>

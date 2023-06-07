@@ -76,11 +76,11 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
       // axios.post('https://routineappserver-production-5617.up.railway.app/routine', { ...mainData, requestId, creator: user._id })
       //   .then(res => {
       //     // setPostLoading(false);
-      //     console.log(res)
+      //     
 
       //   })
       //   .catch((err) => {
-      //     console.log(err)
+      //     
       //     toast.error("Data is not created try again")
       //     // setPostLoading(false);
       //   });
@@ -190,8 +190,8 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box className="md:custom_height overflow-y-scroll flex flex-col justify-between relative">
+      <form onSubmit={handleSubmit(onSubmit)} >
+        <Box className="h-[calc(100vh-55px)] md:custom_height overflow-y-scroll pt-[30px] md:pt-0  flex flex-col justify-between relative">
           <Box className="pt-0 pb-16 ">
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((ele, i) => (
@@ -203,7 +203,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
             <Box className="pt-8">{steps[activeStep].element}</Box>
           </Box>
 
-          <div className={request ? "" : "fixed bottom-0 w-full md:w-[calc(100vw-280px)] pr-8  "}>
+          <div className={request ? "" : "fixed bottom-0 w-full md:w-[calc(100vw-280px)] pr-10 md:pr-8  z-20"}>
             <MobileStepper
               variant="text"
               steps={maxSteps}

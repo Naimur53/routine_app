@@ -31,7 +31,7 @@ const TopBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const { user, loading } = useSelector(allData);
-  // console.log(user, "fire base user ");
+  // 
   const { logOut, loginUserWithGoogleRedirect } = useFirebase({ observer: false });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);
@@ -55,7 +55,7 @@ const TopBar = () => {
   return (
     <>
       <div
-        className="mb-16 md:mb-20 relative  ">
+        className=" relative  ">
 
         <AppBar
           position="fixed"
@@ -66,7 +66,7 @@ const TopBar = () => {
             background: "white",
           }}
         >
-          <GrowEffect duration={topBarGrowDuration} firstTime condition={loading}>
+          <GrowEffect duration={topBarGrowDuration} firstTime >
 
             <div className={loading ? '' : 'shadow'}>
               <Container maxWidth="xl">
@@ -125,14 +125,16 @@ const TopBar = () => {
                               <span className="break-words">{user.email}</span>
                               <div className="mt-5 w-full flex justify-between">
                                 <NavLink to="/myProfile">
-                                  <button
+                                  <Button
+                                    variant="contained"
                                     className="bg-dark-purple text-white py-2 px-3 rounded-full"
                                     onClick={handleCloseUserMenu}
                                   >
                                     View Profile
-                                  </button>
+                                  </Button>
                                 </NavLink>
-                                <button
+                                <Button
+                                  variant="outlined"
                                   onClick={() => {
                                     setAnchorElNav((pre) => null);
                                     logOut();
@@ -140,14 +142,14 @@ const TopBar = () => {
                                   className="bg-dark-purple text-white py-2 px-3 rounded-full"
                                 >
                                   Logout
-                                </button>
+                                </Button>
                               </div>
                             </div>
                           </Menu>
                         </div>
                       ) : (
                         <div className="flex gap-2">
-                          <ScaleEffect delay={avatarDelay}>
+                          {/* <ScaleEffect  >
 
                             <Button
                               onClick={handleCloseNavMenu}
@@ -157,17 +159,17 @@ const TopBar = () => {
                             >
                               sign Up
                             </Button>
-                          </ScaleEffect>
-                          <ScaleEffect delay={avatarDelay + 0.3}>
+                          </ScaleEffect> */}
+                          <ScaleEffect  >
 
                             <Button
                               onClick={() => {
                                 handleCloseNavMenu()
-                                loginUserWithGoogleRedirect()
+                                // loginUserWithGoogleRedirect()
                               }}
-                              // component={NavLink}
+                              component={NavLink}
                               variant="contained"
-                              // to={"/login"}
+                              to={"/login"}
                               sx={{ my: 2, display: "block" }}
                             >
                               login

@@ -121,7 +121,7 @@ const SearchInputs = ({ register, errors, watch, reset }) => {
                         </span>
                     </div>
                 </Grid>
-                <Grid item xs={12} md={6} lg={3}>
+                <Grid item xs={12} md={12} lg={3} >
                     <Button
                         sx={{ width: "100%", mt: "10px" }}
                         variant="contained"

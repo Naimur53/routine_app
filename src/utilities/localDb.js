@@ -1,6 +1,6 @@
 //default function
 const parseData = (data) => {
-    console.log(typeof data);
+
     let mainData;
     try {
         mainData = JSON.parse(data);

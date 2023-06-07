@@ -7,7 +7,7 @@ const RoutineClassCards = ({ data, day }) => {
     const mainData = data.filter((single) => single.day === day);
     const am = mainData.filter((single) => getAmOrPm(single.startTime) === "AM");
     const pm = mainData.filter((single) => getAmOrPm(single.startTime) === "PM");
-    // console.log({ am, pm });
+    // 
     const shortAm = [];
     const cardContainer = {
         animate: {
@@ -23,7 +23,7 @@ const RoutineClassCards = ({ data, day }) => {
     am.forEach(element => {
 
         const startTimeHour = parseInt(convertToHourMinute(element.startTime).split(":")[0])
-        console.log(startTimeHour)
+
     });
     am.sort(function (a, b) {
         return new Date(a.startTime)

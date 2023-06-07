@@ -35,10 +35,8 @@ const AppRoutes = () => {
         <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.pathname}>
                 <Route path="/login" element={<Login />}></Route>
-                <Route path="/signUp" element={<SignUp />}></Route>
-                <Route path="/editProfile" element={<EditeProfile />}></Route>
+                {/* <Route path="/signUp" element={<SignUp />}></Route> */}
 
-                <Route path="/contactUs" element={<ContactUs />}></Route>
 
                 <Route
                     path="/login"
@@ -60,16 +58,6 @@ const AppRoutes = () => {
 
                 {/* not working on this */}
 
-                <Route
-                    path="/editProfile"
-                    element={
-                        <PrivateRoute>
-                            <MainLayout>
-                                <EditeProfile />
-                            </MainLayout>
-                        </PrivateRoute>
-                    }
-                ></Route>
 
                 <Route path="/" element={<MainLayout />}>
 
@@ -78,6 +66,20 @@ const AppRoutes = () => {
                     <Route path="home" element={<PageTransitions path="/home"><Home /></PageTransitions>}></Route>
                     {/* <Route path="/myNotes" element={<MyNotes />}></Route> */}
                     <Route path="/saveRoutine" element={<PageTransitions path="/saveRoutine" ><SaveRoutine /></PageTransitions>}></Route>
+
+                    <Route path="/contactUs" element={<ContactUs />}></Route>
+
+
+                    <Route
+                        path="/editProfile"
+                        element={
+                            <PrivateRoute>
+                                < >
+                                    <EditeProfile />
+                                </>
+                            </PrivateRoute>
+                        }
+                    ></Route>
 
                     <Route
                         path="/searchRoutine"

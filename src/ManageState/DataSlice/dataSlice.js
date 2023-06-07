@@ -45,7 +45,10 @@ export const dataSlice = createSlice({
         delete data.set;
         state.user = action.payload;
       } else {
-        state.user = { ...state.user, ...action.payload };
+        if (action.payload._id) {
+
+          state.user = { ...state.user, ...action.payload };
+        }
       }
     },
     addMessage: (state, action) => {

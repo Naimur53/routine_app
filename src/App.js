@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "./App.css";
 import Home from "./components/Home/Home";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -46,8 +46,9 @@ import ViewProfile from "./components/ViewProfile/ViewProfile";
 import { getMessaging, onMessage } from "firebase/messaging";
 import './messaging_init_in_sw'
 import Notification from "./components/Dashboard/Notification/Notification";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
+import Logo from "./components/ShareComponents/Logo/Logo";
 
 const theme = createTheme({
   palette: {
@@ -72,34 +73,61 @@ function App() {
 
   const { auth } = useFirebase({ observer: true });
   const { user, loading } = useSelector(allData);
+  const [iniLoading, setInitLoading] = useState(true);
   useEffect(() => {
-    console.log(user);
+
   }, [user]);
+
+  useEffect(() => {
+    const a = setTimeout(() => {
+      setInitLoading(false)
+    }, 800)
+    return () => {
+      clearInterval(a)
+    }
+  }, [loading])
 
   // const messaging = getMessaging();
   // onMessage(messaging, (payload) => {
-  //   console.log('Message received. ', payload);
+  //   
   //   // ...
   // });
   return (
     <>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop={true}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            theme="light"
-          />
+        {
+          loading ?
+            <BrowserRouter>
 
-          <TopBar></TopBar>
-          <AppRoutes></AppRoutes>
-        </BrowserRouter>
+              <Logo></Logo>
+            </BrowserRouter>
+
+
+            : <BrowserRouter>
+              <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                theme="light"
+              />
+
+              <TopBar></TopBar>
+              {
+                iniLoading ? <></> :
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+
+                    <AppRoutes></AppRoutes>
+                  </motion.div>
+              }
+            </BrowserRouter>
+        }
+
+
       </ThemeProvider>
     </>
   );

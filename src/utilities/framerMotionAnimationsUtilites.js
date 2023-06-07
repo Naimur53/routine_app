@@ -10,7 +10,7 @@ export const mainCompoDelay = menusDelay + 1.4
 export const menuContainer = {
     animate: {
         opacity: 1,
-        transition: { staggerChildren: 0.15, delayChildren: 0.2, delay: 0 },
+        transition: { staggerChildren: 0.075, delayChildren: 0.2, delay: 0 },
     },
     initial: {
         opacity: 0,
@@ -19,13 +19,13 @@ export const menuContainer = {
 };
 export const menuItem = {
     animate: {
-        x: 0,
+        // x: 0,
         opacity: 1,
         transition: { type: 'easeOut' }
     },
     initial: {
         opacity: 0,
-        x: -250,
+        // x: -250,
     },
 };
 

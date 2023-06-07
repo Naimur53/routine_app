@@ -93,7 +93,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
   return (
     <>
       <div  >
-        <div className="h-full md:h-full border-r border-gray-100 ">
+        <div className="h-full md:h-full   ">
           <div className="w-[85vw]  md:w-full h-full md:h-auto">
             <div className="">
               {user?.email ? (

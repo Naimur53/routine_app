@@ -68,8 +68,8 @@ export const dataSlice = createSlice({
       .addCase(getUserFromDB.fulfilled, (state, action) => {
         if (action.payload?._id) {
           state.user = action.payload;
+          state.loading = false;
         }
-        state.loading = false;
       })
       .addCase(getUserFromDB.rejected, (state, action) => {
         state.loading = false;

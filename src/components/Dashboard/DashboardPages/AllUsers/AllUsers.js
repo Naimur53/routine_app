@@ -15,7 +15,7 @@ import SingleRow from "./SingleRow/SingleRow";
 const AllUsers = () => {
   const fetchData = () => {
     return axios
-      .get("http://localhost:5001/user")
+      .get("https://routineappserver-production-5617.up.railway.app/user")
       .then((response) => setAllUser(response.data));
   };
 

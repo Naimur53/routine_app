@@ -12,7 +12,7 @@ export const messageApi = apiSlice.injectEndpoints({
                 { updateCachedData, cacheDataLoaded, cacheEntryRemoved, dispatch }
             ) {
                 // create socket
-                const socket = io("http://localhost:5001/", {
+                const socket = io("https://routineappserver-production-5617.up.railway.app/", {
                     reconnectionDelay: 1000,
                     reconnection: true,
                     reconnectionAttemps: 10,
@@ -81,7 +81,7 @@ export const messageApi = apiSlice.injectEndpoints({
                 const { data } = result || {};
                 console.log(data.creator);
                 // update data 
-                const socket = io("http://localhost:5001/", {
+                const socket = io("https://routineappserver-production-5617.up.railway.app/", {
                     reconnectionDelay: 1000,
                     reconnection: true,
                     reconnectionAttemps: 10,

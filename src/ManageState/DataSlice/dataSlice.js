@@ -13,21 +13,21 @@ const initialState = {
 export const getUserFromDB = createAsyncThunk(
   "data/getFromDB",
   async (info) => {
-    const response = await axios.get(`http://localhost:5001/user?email=${info.email}`)
+    const response = await axios.get(`https://routineappserver-production-5617.up.railway.app/user?email=${info.email}`)
     return response.data
   }
 );
 export const getMessageFromDb = createAsyncThunk(
   "data/getMessage",
   async (info) => {
-    const response = await axios.get(`http://localhost:5001/message?routineId=${info}`)
+    const response = await axios.get(`https://routineappserver-production-5617.up.railway.app/message?routineId=${info}`)
     return response.data
   }
 );
 export const postMessageToDb = createAsyncThunk(
   "data/postToDb",
   async (info) => {
-    const response = await axios.post(`http://localhost:5001/message`, info)
+    const response = await axios.post(`https://routineappserver-production-5617.up.railway.app/message`, info)
     return response.data
   }
 );

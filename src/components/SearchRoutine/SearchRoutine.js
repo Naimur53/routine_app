@@ -64,7 +64,7 @@ const SearchRoutine = () => {
   // const textSearchRequest = () => {
   //   axios
   //     .get(
-  //       `http://localhost:5001/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
+  //       `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
   //     )
   //     .then((res) => {
   //       setAllRoutine(res.data);
@@ -86,7 +86,7 @@ const SearchRoutine = () => {
   //   if (institute?.length === 24) {
   //     axios
   //       .get(
-  //         `http://localhost:5001/routine/findById?id=${institute}`
+  //         `https://routineappserver-production-5617.up.railway.app/routine/findById?id=${institute}`
   //       )
   //       .then((res) => {
   //         setAllRoutine([res.data]);

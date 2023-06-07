@@ -40,7 +40,7 @@ const ChatRoom = () => {
         return []
     }, [messages])
     console.log({ messages, data });
-    // const socket = io.connect('http://localhost:5001/');
+    // const socket = io.connect('https://routineappserver-production-5617.up.railway.app/');
     // socket.on('receive_message', data => {
     //     dispatch(addMessage([data]))
     //     console.log('reviece', data.message)
@@ -68,7 +68,7 @@ const ChatRoom = () => {
 
         if (e.target?.files?.length) {
             setImgLoading(true)
-            axios.post(`http://localhost:5001/uploadImage`, data)
+            axios.post(`https://routineappserver-production-5617.up.railway.app/uploadImage`, data)
                 .then(res => {
                     console.log({ res })
                     setImgLoading(false)

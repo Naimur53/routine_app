@@ -8,7 +8,7 @@ const ManageAdmin = () => {
     const [allAdmin, setAllAdmin] = useState([])
     const [getLoading, setGetLoading] = useState(true)
     useEffect(() => {
-        axios.get('http://localhost:5001/admin')
+        axios.get('https://routineappserver-production-5617.up.railway.app/admin')
             .then(res => {
                 setAllAdmin(res.data)
             })

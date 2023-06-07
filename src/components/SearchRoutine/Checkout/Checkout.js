@@ -29,7 +29,7 @@ const Checkout = () => {
     if (status !== 400) {
       toast.success(response);
       axios.put(
-        `http://localhost:5001/routine/increaseUsingValue?id=${data._id}`
+        `https://routineappserver-production-5617.up.railway.app/routine/increaseUsingValue?id=${data._id}`
       );
     } else {
       toast.error("Routine already exist``")
@@ -83,7 +83,7 @@ const Checkout = () => {
     console.log()
     axios(
       {
-        url: `http://localhost:5001/makePdf?routineId=${id}`,
+        url: `https://routineappserver-production-5617.up.railway.app/makePdf?routineId=${id}`,
         method: 'GET',
         responseType: 'blob'
       }

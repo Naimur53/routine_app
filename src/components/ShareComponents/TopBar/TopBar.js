@@ -32,7 +32,7 @@ const TopBar = () => {
 
   const { user, loading } = useSelector(allData);
   // console.log(user, "fire base user ");
-  const { logOut } = useFirebase({ observer: false });
+  const { logOut, loginUserWithGoogleRedirect } = useFirebase({ observer: false });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);
   };
@@ -161,10 +161,13 @@ const TopBar = () => {
                           <ScaleEffect delay={avatarDelay + 0.3}>
 
                             <Button
-                              onClick={handleCloseNavMenu}
-                              component={NavLink}
+                              onClick={() => {
+                                handleCloseNavMenu()
+                                loginUserWithGoogleRedirect()
+                              }}
+                              // component={NavLink}
                               variant="contained"
-                              to={"/login"}
+                              // to={"/login"}
                               sx={{ my: 2, display: "block" }}
                             >
                               login

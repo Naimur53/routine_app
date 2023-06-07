@@ -19,6 +19,12 @@ const PrivateRoute = ({ children }) => {
         return <Navigate to='/login' state={{ from: location }} ></Navigate>
     }
 
+    // if (!user.isEmailVerified) {
+    //     return <div className='text-center mt-10 text-2xl'>
+    //         your Email is not verifed
+
+    //     </div>
+    // }
 
     return (
         <>

@@ -13,8 +13,8 @@ const CreateRequestRoutine = () => {
     useEffect(() => {
         setGetLoading(true)
         const url = [
-            axios.get(`http://localhost:5001/requestRoutine?id=${id}`),
-            axios.get(`http://localhost:5001/routine?requestId=${id}`)
+            axios.get(`https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${id}`),
+            axios.get(`https://routineappserver-production-5617.up.railway.app/routine?requestId=${id}`)
         ]
         Promise.all(url)
             .then(res => {

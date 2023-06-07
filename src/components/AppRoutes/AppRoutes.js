@@ -34,7 +34,12 @@ const AppRoutes = () => {
     return (
         <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.pathname}>
-                <Route path="/login" element={<Login />}></Route>
+                <Route path="/login" element={
+
+                    <OnlineRoute>
+                        <Login />
+                    </OnlineRoute>
+                }></Route>
                 {/* <Route path="/signUp" element={<SignUp />}></Route> */}
 
 

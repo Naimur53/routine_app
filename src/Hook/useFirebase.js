@@ -177,95 +177,138 @@ const useFirebase = ({ observer }) => {
     // google authentication 
     const loginUserWithGoogleRedirect = () => {
         dispatch(setLoading(true))
-        signInWithRedirect(auth, googleProvider)
-            .then(res => {
-                console.log(res);
+        // signInWithRedirect(auth, googleProvider)
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access Google APIs.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+
+                // The signed-in user info.
+                const user = result.user;
+
+                const userInfo = {
+                    displayName: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL || "https://i.ibb.co/1drKb3X/user.png",
+                    createdAt: user.metadata.createdAt,
+                    lastLoginAt: user.metadata.lastLoginAt,
+                    lastSignInTime: user.metadata.lastSignInTime,
+                    uid: user.uid,
+                    isEmailVerified: user.emailVerified
+
+                };
+                saveUser({ ...userInfo, method: "put" })
+                    .then((res) => {
+                        // dispatch(setUser(res.data));
+                        dispatch(setUser({ ...userInfo, _id: res.data._id }));
+
+                        // // change route
+                        // const url = location?.state?.from || "/";
+                        // navigate(url);
+                        dispatch(setLoading(false));
+                    })
+                    .catch((error) => {
+                        logOut()
+                        dispatch(setLoading(false));
+                        toast.error('Something went wrong try again! ')
+                        console.log(error)
+                    });
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
             })
             .catch(err => {
-                toast.error("Something went wrong to signin try again latter!")
+                toast.error("Something went wrong try again latter!")
                 dispatch(setLoading(false))
 
             })
     }
 
-    useEffect(() => {
-        if (observer) {
-            getRedirectResult(auth)
-                .then((result) => {
-                    // This gives you a Google Access Token. You can use it to access Google APIs.
-                    const credential = GoogleAuthProvider.credentialFromResult(result);
-                    const token = credential.accessToken;
+    // useEffect(() => {
+    //     if (observer) {
+    //         getRedirectResult(auth)
+    //             .then((result) => {
+    //                 // This gives you a Google Access Token. You can use it to access Google APIs.
+    //                 const credential = GoogleAuthProvider.credentialFromResult(result);
+    //                 const token = credential.accessToken;
 
-                    // The signed-in user info.
-                    const user = result.user;
+    //                 // The signed-in user info.
+    //                 const user = result.user;
 
-                    const userInfo = {
-                        displayName: user.displayName,
-                        email: user.email,
-                        photoURL: user.photoURL || "https://i.ibb.co/1drKb3X/user.png",
-                        createdAt: user.metadata.createdAt,
-                        lastLoginAt: user.metadata.lastLoginAt,
-                        lastSignInTime: user.metadata.lastSignInTime,
-                        uid: user.uid,
-                        isEmailVerified: user.emailVerified
+    //                 const userInfo = {
+    //                     displayName: user.displayName,
+    //                     email: user.email,
+    //                     photoURL: user.photoURL || "https://i.ibb.co/1drKb3X/user.png",
+    //                     createdAt: user.metadata.createdAt,
+    //                     lastLoginAt: user.metadata.lastLoginAt,
+    //                     lastSignInTime: user.metadata.lastSignInTime,
+    //                     uid: user.uid,
+    //                     isEmailVerified: user.emailVerified
 
-                    };
-                    saveUser({ ...userInfo, method: "put" })
-                        .then((res) => {
-                            // dispatch(setUser(res.data));
-                            dispatch(setUser({ ...userInfo, _id: res.data._id }));
+    //                 };
+    //                 saveUser({ ...userInfo, method: "put" })
+    //                     .then((res) => {
+    //                         // dispatch(setUser(res.data));
+    //                         dispatch(setUser({ ...userInfo, _id: res.data._id }));
 
-                            // // change route
-                            // const url = location?.state?.from || "/";
-                            // navigate(url);
-                            dispatch(setLoading(false));
-                        })
-                        .catch((error) => {
-                            logOut()
-                            dispatch(setLoading(false));
-                            toast.error('Something went wrong try again! ')
-                            console.log(error)
-                        });
-                    // IdP data available using getAdditionalUserInfo(result)
-                    // ...
-                }).catch((error) => {
-                    console.log(error)
-                    // Handle Errors here. 
-                    // ...
-                });
-        }
-    }, [auth, observer])
+    //                         // // change route
+    //                         // const url = location?.state?.from || "/";
+    //                         // navigate(url);
+    //                         dispatch(setLoading(false));
+    //                     })
+    //                     .catch((error) => {
+    //                         logOut()
+    //                         dispatch(setLoading(false));
+    //                         toast.error('Something went wrong try again! ')
+    //                         console.log(error)
+    //                     });
+    //                 // IdP data available using getAdditionalUserInfo(result)
+    //                 // ...
+    //             }).catch((error) => {
+    //                 console.log(error)
+    //                 // Handle Errors here
+    //                 // toast.error('Something went wrong try again! ')
+    //                 // ...
+    //             });
+    //     }
+    // }, [auth, observer])
     // observer
     useEffect(() => {
         if (observer) {
-            dispatch(setLoading(true));
-            const unsubscribed = onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const { displayName, email, photoURL, createdAt, uid, emailVerified } = user;
-                    console.error({ user });
-                    //   console.log("from onAuthStateChange ", user);
-                    console.log('i ama on observer and making get request to server !');
-                    dispatch(
-                        getUserFromDB({
-                            displayName,
-                            email,
-                            photoURL,
-                            createdAt,
-                            uid,
-                            isEmailVerified: emailVerified,
-                        })
-                    );
+            if (window.navigator.onLine) {
+                dispatch(setLoading(true));
 
-                    // getIdToken(user)
-                    //   .then(idToken =>)
-                } else {
-                    dispatch(setLoading(false));
-                    // set data {} as i have give nothing
-                    dispatch(setUser({ set: true }));
+                const unsubscribed = onAuthStateChanged(auth, (user) => {
+                    console.log('hi',);
+                    if (user) {
+                        const { displayName, email, photoURL, createdAt, uid, emailVerified } = user;
+                        console.error({ user });
+                        //   console.log("from onAuthStateChange ", user);
+                        console.log('i ama on observer and making get request to server !');
+                        dispatch(
+                            getUserFromDB({
+                                displayName,
+                                email,
+                                photoURL,
+                                createdAt,
+                                uid,
+                                isEmailVerified: emailVerified,
+                            })
+                        );
+
+                        // getIdToken(user)
+                        //   .then(idToken =>)
+                    } else {
+                        dispatch(setLoading(false));
+                        // set data {} as i have give nothing
+                        dispatch(setUser({ set: true }));
+                    }
+                })
+                return () => {
+                    unsubscribed()
                 }
-            });
-            return () => {
-                unsubscribed()
+            } else {
+                dispatch(setLoading(false))
             }
         }
     }, [auth, dispatch, observer]);

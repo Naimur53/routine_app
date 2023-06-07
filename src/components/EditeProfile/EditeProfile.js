@@ -15,7 +15,8 @@ import { useSelector } from "react-redux";
 import { allData } from "../../ManageState/DataSlice/dataSlice";
 import EditProfileLayout from "./compo/EditProfileLayout/EditProfileLayout";
 import UpdateProfileAndCover from "./compo/UpdateProfileAndCover/UpdateProfileAndCover";
-import UpdateDetails from './compo/UpdateDetails/UpdateDetails'
+import UpdateDetailsSection from "./compo/UpdateDetailsSection/UpdateDetailsSection";
+
 // import UpdateDetails from "./compo/UpdateDetails/updateDetails";
 
 const EditeProfile = () => {
@@ -58,7 +59,7 @@ const EditeProfile = () => {
           <div  >
             {/*------------------------ edit details information-----------------------  */}
             <EditProfileLayout title="Details"
-              Element={UpdateDetails}
+              Element={UpdateDetailsSection}
             >
 
             </EditProfileLayout>

@@ -19,7 +19,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import DetailsInfo from "../DetailsInfo/DetailsInfo";
 
-const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
+const UpdateDetailsSection = ({ edit, setEdit, updatable, setUpdatable }) => {
     const { user } = useSelector(allData)
     const dispatch = useDispatch()
     const {
@@ -123,4 +123,4 @@ const UpdateDetails = ({ edit, setEdit, updatable, setUpdatable }) => {
     );
 };
 
-export default UpdateDetails;
+export default UpdateDetailsSection;

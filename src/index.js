@@ -8,8 +8,9 @@ import { store } from './ManageState/Store/store';
 import { Workbox } from 'workbox-window';
 
 if ('serviceWorker' in navigator) {
-  const wb = new Workbox('/service-worker.js');
-  wb.register();
+  // const wb = new Workbox('/service-worker.js');
+  navigator.serviceWorker.register('/service-worker.js')
+  // wb.register();
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

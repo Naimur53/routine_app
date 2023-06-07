@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import OnlineRoute from '../ShareComponents/OnlineRoute/OnlineRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Overview from '../Dashboard/DashboardPages/Overview/Overview';
@@ -31,6 +31,12 @@ import PageTransitions from '../AnimationCompo/PageTransitions/PageTransitions';
 
 const AppRoutes = () => {
     const location = useLocation()
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (location.pathname === '/') {
+            navigate('/')
+        }
+    }, [])
     return (
         <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.pathname}>

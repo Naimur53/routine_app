@@ -7,7 +7,6 @@ import { Provider } from 'react-redux'
 import { store } from './ManageState/Store/store';
 import { Workbox } from 'workbox-window';
 
-
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('/service-worker.js');
   wb.register();
@@ -25,4 +24,4 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(); 

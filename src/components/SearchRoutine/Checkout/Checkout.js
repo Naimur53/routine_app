@@ -106,7 +106,7 @@ const Checkout = () => {
   }
   return (
     < >
-      <div className="  p-2">
+      <div className=" pt-10 md:p-2">
         <div className="flex justify-end pb-5">
           {data?._id && (
             <div className="flex flex-wrap gap-4">

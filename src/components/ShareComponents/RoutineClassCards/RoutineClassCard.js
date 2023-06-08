@@ -8,25 +8,25 @@ import CustomTooltip from "../CustomTooltip/CustomTooltip";
 import { motion } from "framer-motion";
 const theme = [
     {
-        img: "../../../images/blue_bol.png",
+        img: "images/blue_bol.png",
         headingStyle: "text-dark-blue",
         contentStyle: "text-medium-blue",
         bgStyle: "bg-light-blue",
     },
     {
-        img: "../../../images/purple_bol.png",
+        img: "/images/purple_bol.png",
         headingStyle: "text-dark-purple",
         contentStyle: "text-medium-purple",
         bgStyle: "bg-light-purple",
     },
     {
-        img: "../../../images/orange_bol.png",
+        img: "/images/orange_bol.png",
         headingStyle: "text-dark-orange",
         contentStyle: "text-medium-orange",
         bgStyle: "bg-light-orange",
     },
     {
-        img: "../../../images/green_bol.png",
+        img: "/images/green_bol.png",
         headingStyle: "text-dark-green",
         contentStyle: "text-medium-green",
         bgStyle: "bg-light-green",
@@ -70,7 +70,7 @@ const RoutineClassCard = ({
                 <div className="flex gap-2 md:gap-4 items-center">
                     {img ? (
                         <img
-                            src={img}
+                            src={process.env.PUBLIC_URL + img}
                             className="w-[30px]  md:w-[50px]"
                             alt="logo"
                         />

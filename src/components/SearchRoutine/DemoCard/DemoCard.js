@@ -24,25 +24,25 @@ import { allData } from "../../../ManageState/DataSlice/dataSlice";
 function chooseTheme(i) {
   const theme = [
     {
-      img: "../../../images/blue_bol.png",
+      img: "/images/blue_bol.png",
       headingStyle: "bg-dark-blue",
       contentStyle: "text-medium-blue",
       bgStyle: "bg-light-blue",
     },
     {
-      img: "../../../images/purple_bol.png",
+      img: "/images/purple_bol.png",
       headingStyle: "bg-dark-purple",
       contentStyle: "text-medium-purple",
       bgStyle: "bg-light-purple",
     },
     {
-      img: "../../../images/orange_bol.png",
+      img: "/images/orange_bol.png",
       headingStyle: "bg-dark-orange",
       contentStyle: "text-medium-orange",
       bgStyle: "bg-light-orange",
     },
     {
-      img: "../../../images/green_bol.png",
+      img: "/images/green_bol.png",
       headingStyle: "bg-dark-green",
       contentStyle: "text-medium-green",
       bgStyle: "bg-light-green",
@@ -88,7 +88,6 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, delete
           deleteFromLocal(_id)
           return
         }
-        console.log('hi');
         // delete
         deleteRoutine({ uid: user?._id, id: _id })
       }
@@ -126,7 +125,7 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, delete
                 {img && (
                   <img
                     className="w-[50px]"
-                    src={img}
+                    src={process.env.PUBLIC_URL + img}
                     alt="logo"
                   />
                 )}

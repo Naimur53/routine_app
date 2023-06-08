@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import Logo from "../Logo/Logo";
 import MainLayoutTab from "../MainLayoutTab/MainLayoutTab";
@@ -32,6 +32,7 @@ const TopBar = () => {
 
   const { user, loading } = useSelector(allData);
   // 
+  const location = useLocation()
   const { logOut, loginUserWithGoogleRedirect } = useFirebase({ observer: false });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);
@@ -80,6 +81,9 @@ const TopBar = () => {
                 >
                   <div className="hidden md:block">
                     <Logo></Logo>
+                  </div>
+                  <div>
+                    {location.pathname}
                   </div>
                   <Box
                     className="justify-end "

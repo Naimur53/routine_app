@@ -26,20 +26,16 @@ self.addEventListener('fetch', (event) => {
     if (request.mode === 'navigate') {
         event.respondWith(
             fetch(request)
-                .catch(() => caches.match('/'))
+                .catch(() => {
+                    // Return the cached response for the root route ("/")
+                    return caches.match('/');
+                })
                 .then((response) => {
                     if (response) return response;
                     // If the response is null, it means the requested resource is not in cache.
-                    // Return the index.html to handle the route on the client-side.
+                    // Return the cached response for the root route ("/")
                     return caches.match('/');
                 })
         );
     }
 });
-// Make sure to replace your existing service worker code with the updated version above. After updating the service worker code, rebuild your app and deploy it as a PWA. The service worker should now handle navigation requests correctly, redirecting to the home page ("/") when the app is launched as a PWA with React Router DOM 6.
-
-
-
-
-
-

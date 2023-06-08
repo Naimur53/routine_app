@@ -88,6 +88,7 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, delete
           deleteFromLocal(_id)
           return
         }
+        console.log('hi');
         // delete
         deleteRoutine({ uid: user?._id, id: _id })
       }

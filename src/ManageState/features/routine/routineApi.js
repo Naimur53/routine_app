@@ -133,24 +133,11 @@ export const assignmentApi = apiSlice.injectEndpoints({
                         }
                     )
                 );
-                const pathResult2 = dispatch(
-                    apiSlice.util.updateQueryData(
-                        "getAssignmentWithVideoId",
-                        arg.video_id,
-                        (draft) => {
-                            const index = draft?.findIndex(single => single.video_id === arg.video_id)
-
-
-                            if (index !== -1) draft.splice(index, 1)
-                        }
-                    )
-                );
                 // optimistic cache update end
                 try {
                     const result = await queryFulfilled;
                 } catch (err) {
                     pathResult1.undo()
-                    pathResult2.undo()
                 }
 
             }

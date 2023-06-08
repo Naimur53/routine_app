@@ -24,6 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { motion } from "framer-motion";
 import GrowEffect from "../../AnimationCompo/GrowEffect/GrowEffect";
 import { menuContainer, menuItem, topBarGrowDuration } from "../../../utilities/framerMotionAnimationsUtilites";
+import navBackground from '../../../images/nav-background.jpg'
 const MainLayoutTab = ({ handleCloseNavMenu }) => {
   const { user, loading } = useSelector(allData);
   const { logOut } = useFirebase({ observer: false });
@@ -89,7 +90,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       : window.innerWidth > 900
         ? [...horizontalNav, ...commonNav]
         : commonNav;
-
+  console.log('i render');
   return (
     <>
       <div  >
@@ -100,7 +101,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                 <div
                   style={{
                     backgroundImage:
-                      "url(https://img.pikbest.com/backgrounds/20200615/ui-dot-line-purple-vector-background_2847590.jpg!c1024wm0)",
+                      `url(${navBackground})`,
                   }}
                   className=" pb-4 bg-cover bg-center gap-2 fle x-col text- white pt-10 text-white shadow md:hidden px-3 items-center  "
                 >
@@ -154,7 +155,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                 <div
                   style={{
                     backgroundImage:
-                      "url(https://img.pikbest.com/backgrounds/20200615/ui-dot-line-purple-vector-background_2847590.jpg!c1024wm0)",
+                      `url(${navBackground})`,
                   }}
                   className=" md:w-full pr-2 pl-5 bg-center bg-cover py-3 flex items-center  md:hidden  flex-col gap-2"
                 >
@@ -166,17 +167,17 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                   </div>
                   <div className="flex  justify-between gap-2 items-start">
                     <Button
-                      sx={{ backdropFilter: "blur(5px)" }}
+                      sx={{ backdropFilter: "blur(5px)", }}
                       color="white"
                       onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
                       component={NavLink}
                       to="/login"
                       variant="outlined"
-                      className="bg-dark-purple text-white py-2 px-3 rounded-full "
+                      className=" w-[200px] text-white py-2 px-3 rounded-full "
                     >
                       Login
                     </Button>
-                    <NavLink
+                    {/* <NavLink
                       onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
                       to="/signUp"
                     >
@@ -187,7 +188,7 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
                       >
                         Register
                       </Button>
-                    </NavLink>
+                    </NavLink> */}
                   </div>
                 </div>
               )}

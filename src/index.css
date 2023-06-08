@@ -73,6 +73,22 @@ div:hover::-webkit-scrollbar-thumb {
   }
 }
 
+@media all and (display-mode: standalone) {
+  /* Styles for PWA in standalone mode (installed on phone) */
+  /* Add your CSS rules specific to the standalone mode here */
+  .mobile_chat_wrap{ 
+    @apply h-[100vh] md:h-[calc(100vh-60px)];
+  }
+}
+
+@media all and (display-mode: browser) {
+  /* Styles for PWA in browser mode */
+  .mobile_chat_wrap{ 
+    @apply h-[85vh] md:h-[calc(100vh-60px)];
+  }
+  /* Add your CSS rules specific to the browser mode here */
+}
+
 @layer base {
   .dashboard_link {
     @apply w-full block text-content px-2 py-4 rounded-2xl mb-2  hover:bg-gray-200 hover:text-gray-700 transition-all
@@ -91,9 +107,8 @@ div:hover::-webkit-scrollbar-thumb {
   .custom_height {
     @apply  h-[calc(100vh-80px)]; 
   }
-  .mobile_chat_wrap{ 
-    @apply h-[85vh] md:h-[calc(100vh-60px)];
-  }
+ 
+  
 
   .details_card_wrap {
     @apply h-full

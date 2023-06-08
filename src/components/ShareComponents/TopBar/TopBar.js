@@ -31,8 +31,6 @@ const TopBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const { user, loading } = useSelector(allData);
-  // 
-  const location = useLocation()
   const { logOut, loginUserWithGoogleRedirect } = useFirebase({ observer: false });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(true);
@@ -197,9 +195,6 @@ const TopBar = () => {
                   </div>
                 </NavLink>
               </div> */}
-                    <div>
-                      {location.pathname}
-                    </div>
                     <IconButton
                       size="large"
                       aria-label="account of current user"

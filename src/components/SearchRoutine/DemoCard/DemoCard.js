@@ -24,25 +24,25 @@ import { allData } from "../../../ManageState/DataSlice/dataSlice";
 function chooseTheme(i) {
   const theme = [
     {
-      img: "/images/blue_bol.png",
+      img: "../../../images/blue_bol.png",
       headingStyle: "bg-dark-blue",
       contentStyle: "text-medium-blue",
       bgStyle: "bg-light-blue",
     },
     {
-      img: "/images/purple_bol.png",
+      img: "../../../images/purple_bol.png",
       headingStyle: "bg-dark-purple",
       contentStyle: "text-medium-purple",
       bgStyle: "bg-light-purple",
     },
     {
-      img: "/images/orange_bol.png",
+      img: "../../../images/orange_bol.png",
       headingStyle: "bg-dark-orange",
       contentStyle: "text-medium-orange",
       bgStyle: "bg-light-orange",
     },
     {
-      img: "/images/green_bol.png",
+      img: "../../../images/green_bol.png",
       headingStyle: "bg-dark-green",
       contentStyle: "text-medium-green",
       bgStyle: "bg-light-green",
@@ -111,7 +111,7 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, delete
   }, [isError, isLoading])
   return (
     <motion.div variants={demoCard} className=" w-full ">
-      <div className="w-full relative overflow-hidden  rounded-md shadow-md">
+      <div className="w-full relative overflow-hidden  rounded-xl shadow">
         {deleteLoading && (
           <div className="absolute inset-0 backdrop-blur-sm bg-white/[.3] z-10  "></div>
         )}
@@ -125,7 +125,7 @@ const DemoCard = ({ item, deleteFromLocal, updateAble, i, admin, setData, delete
                 {img && (
                   <img
                     className="w-[50px]"
-                    src={process.env.PUBLIC_URL + img}
+                    src={img}
                     alt="logo"
                   />
                 )}

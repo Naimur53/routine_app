@@ -22,12 +22,12 @@ const SearchInputs = ({ register, errors, watch, reset }) => {
                 <Grid item xs={12} lg={12} md={6}>
 
                     <div className="flex w-full justify-center">
-                        <div className="flex border  border-gray-300 justify-between pr-4 rounded-lg shadow shadow-light-pink items-center w-full ">
+                        <div className="flex border  border-gray-300 justify-between pr-4 rounded  items-center w-full ">
                             <input
                                 type="text"
                                 id="defasult-search"
                                 className="block pl-4  rounded-tl-full rounded-bl-full focus:border-0 focus:outline-none bg-transparent   w-full py-3 placeholder:text-medium-purple  text- sm text-black         "
-                                placeholder="Institute Name or id"
+                                placeholder="Enter Your Institute Name or Routine ID"
                                 {...register("institute", { required: true })}
                             />
 

@@ -82,9 +82,7 @@ const TopBar = () => {
                   <div className="hidden md:block">
                     <Logo></Logo>
                   </div>
-                  <div>
-                    {location.pathname}
-                  </div>
+
                   <Box
                     className="justify-end "
                     sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}
@@ -199,7 +197,9 @@ const TopBar = () => {
                   </div>
                 </NavLink>
               </div> */}
-
+                    <div>
+                      {location.pathname}
+                    </div>
                     <IconButton
                       size="large"
                       aria-label="account of current user"
@@ -227,9 +227,11 @@ const TopBar = () => {
                     <div className="hidden md:flex justify-center mt-5 mb-3 ">
                       <Logo></Logo>
                     </div>
-                    <MainLayoutTab
-                      handleCloseNavMenu={handleCloseNavMenu}
-                    ></MainLayoutTab>
+                    <GrowEffect duration={.4}>
+                      <MainLayoutTab
+                        handleCloseNavMenu={handleCloseNavMenu}
+                      ></MainLayoutTab>
+                    </GrowEffect>
                   </Drawer>
                 </Toolbar>
               </Container>

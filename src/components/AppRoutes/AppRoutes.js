@@ -33,10 +33,12 @@ const AppRoutes = () => {
     const location = useLocation()
     const navigate = useNavigate()
     useEffect(() => {
-        if (location.pathname === '/') {
+        if (location.pathname === '/index.html') {
             navigate('/')
         }
-    }, [])
+    }, [location])
+
+
     return (
         <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.pathname}>
@@ -57,6 +59,14 @@ const AppRoutes = () => {
                         </OnlineRoute>
                     }
                 ></Route>
+                <Route
+                    path="*"
+                    element={
+                        <div className='mt-20 text-center text-xl'>
+                            404 Page Not Found!
+                        </div>
+                    }
+                ></Route>
 
                 <Route
                     path="/signUp"
@@ -73,6 +83,7 @@ const AppRoutes = () => {
                 <Route path="/" element={<MainLayout />}>
 
                     <Route index element={<PageTransitions path="/" ><Home /></PageTransitions>}></Route>
+                    <Route index element={<PageTransitions path="/index.html" ><Home /></PageTransitions>}></Route>
 
                     <Route path="home" element={<PageTransitions path="/home"><Home /></PageTransitions>}></Route>
                     {/* <Route path="/myNotes" element={<MyNotes />}></Route> */}

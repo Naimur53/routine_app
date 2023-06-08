@@ -217,7 +217,7 @@ const TopBar = () => {
                     anchor="left"
                     open={anchorElNav}
                     onClose={handleCloseNavMenu}
-                    sx={{ width: "85vw", pt: 0 }}
+                    sx={{ width: "85vw", pt: 0, background: "transparent" }}
                   >
                     <div className="hidden md:flex justify-center mt-5 mb-3 ">
                       <Logo></Logo>

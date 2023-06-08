@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { Avatar, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -31,7 +31,7 @@ const CreateRequestRoutine = () => {
     }
     return (
         <div className=''>
-            <button onClick={() => setImgSize(!imgSize)} className='text-dark-purple mb-4 px-5 py-2 border rounded border-dark-purple'>Image size {imgSize ? "Large" : 'Normal'}</button>
+            <button onClick={() => setImgSize(!imgSize)} className='text-dark-purple mb-4 px-5 py-2 border rounded border-dark-purple'>Routine size {imgSize ? "Large" : 'Normal'}</button>
             <div className='relative'>
 
                 <img className={!imgSize ? "w-auto  " : 'w-full'} src={data.img} alt="routine" />
@@ -45,11 +45,10 @@ const CreateRequestRoutine = () => {
 
                 <div>
                     <div className="mt-3 flex flex-col justify-center ">
-                        <img
-                            className="rounded-full [w-200px] mr-2 "
+                        <Avatar
+                            sx={{ width: 200, height: 200 }}
                             src={data.creator?.photoURL}
-                            alt="creator"
-                        />
+                            alt="creator"></Avatar>
 
                         <div className="text-lg text-center">
                             <p >{data.creator.email}</p>

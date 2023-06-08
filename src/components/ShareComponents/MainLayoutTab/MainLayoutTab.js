@@ -66,11 +66,11 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       path: "/dashboard/manageAdmin",
       Icon: AdminPanelSettingsIcon,
     },
-    {
-      name: "Notification Token",
-      path: "/dashboard/notification",
-      Icon: AdminPanelSettingsIcon,
-    },
+    // {
+    //   name: "Notification Token",
+    //   path: "/dashboard/notification",
+    //   Icon: AdminPanelSettingsIcon,
+    // },
   ];
   const pages = location?.pathname?.includes("/dashboard")
     ? window.innerWidth > 900

@@ -51,9 +51,9 @@ const RequestRoutineActions = ({ id, setData, data }) => {
             <div className='mb-10 flex flex-col md:flex-row gap-4  justify-between md:items-center'>
                 <div className="w-[220px]">
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                        <InputLabel id="demo-simple-select-label2">Status</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
+                            labelId="demo-simple-select-label2"
                             id="demo-simple-select"
                             value={status}
                             label="Age"

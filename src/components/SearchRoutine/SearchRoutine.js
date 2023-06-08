@@ -150,7 +150,7 @@ const SearchRoutine = () => {
             <SkeletonDemoCard></SkeletonDemoCard>
 
           </Grid>) : data?.length ? data.map((single, i) => (
-            <Grid item lg={3} md={6} xs={12}>
+            <Grid item lg={3} md={6} xs={12} key={i}>
               <DemoCard item={single} i={i} updateAble={false}></DemoCard>
             </Grid>
           )) : <Grid item xs={12}>

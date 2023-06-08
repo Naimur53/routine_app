@@ -120,7 +120,6 @@ const useFirebase = ({ observer }) => {
                 // set data to redux
                 sendEmailVerification(auth.currentUser)
                     .then((res) => {
-                        console.log("Email verification sent", { res });
 
                         saveUser({ ...userInfo, method: "put" })
                             .then((res) => {
@@ -279,12 +278,8 @@ const useFirebase = ({ observer }) => {
                 dispatch(setLoading(true));
 
                 const unsubscribed = onAuthStateChanged(auth, (user) => {
-                    console.log('hi',);
                     if (user) {
                         const { displayName, email, photoURL, createdAt, uid, emailVerified } = user;
-                        console.error({ user });
-                        //   console.log("from onAuthStateChange ", user);
-                        console.log('i ama on observer and making get request to server !');
                         dispatch(
                             getUserFromDB({
                                 displayName,

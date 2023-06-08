@@ -90,7 +90,6 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       : window.innerWidth > 900
         ? [...horizontalNav, ...commonNav]
         : commonNav;
-  console.log('i render');
   return (
     <>
       <div  >
@@ -202,9 +201,9 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
               className="pt-5 flex md:hidden justify-between gap-2 pr-5 pl-3 pb-0"
             >
               {horizontalNav.slice(0, 3).map(({ name, path, Icon }, i) => (
-                <motion.div variants={menuItem} className="w-full">
+                <motion.div variants={menuItem} key={i} className="w-full">
                   <NavLink
-                    key={i}
+
                     onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
                     to={path}
                     className={({ isActive }) =>
@@ -232,9 +231,9 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
               className="flex md:mt-5 flex-col   md:w-full pr-5 pl-3  pb-3 w-full"
             >
               {pages.map(({ name, path, Icon }, i) => (
-                <motion.div variants={menuItem} className="">
+                <motion.div variants={menuItem} className="" key={i}>
                   <NavLink
-                    key={i}
+
                     onClick={handleCloseNavMenu ? handleCloseNavMenu : () => { }}
                     to={path}
                     className={({ isActive }) =>

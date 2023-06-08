@@ -135,41 +135,4 @@ function App() {
   );
 }
 
-export default App;
-
-
-// <ThemeProvider theme={theme}>
-//         {
-//           loading ?
-//             <BrowserRouter>
-
-//               <Logo></Logo>
-//             </BrowserRouter>
-
-
-//             : <BrowserRouter>
-//               <ToastContainer
-//                 position="bottom-right"
-//                 autoClose={5000}
-//                 hideProgressBar={true}
-//                 newestOnTop={true}
-//                 closeOnClick
-//                 rtl={false}
-//                 pauseOnFocusLoss
-//                 draggable
-//                 theme="light"
-//               />
-
-//               <TopBar></TopBar>
-//               {
-//                 iniLoading ? <></> :
-//                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-
-//                     <AppRoutes></AppRoutes>
-//                   </motion.div>
-//               }
-//             </BrowserRouter>
-//         }
-
-
-//       </ThemeProvider>
+export default App; 

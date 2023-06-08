@@ -120,6 +120,7 @@ const Home = () => {
                               <MenuItem
                                 sx={{ fontSize: { md: "16px", sm: "13px" } }}
                                 value={i}
+                                key={i}
                               >
                                 {shift === "None"
                                   ? `${textConversion(

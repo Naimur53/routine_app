@@ -82,9 +82,6 @@ const TopBar = () => {
                   <div className="hidden md:block">
                     <Logo></Logo>
                   </div>
-                  <div>
-                    {location.pathname}
-                  </div>
                   <Box
                     className="justify-end "
                     sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}

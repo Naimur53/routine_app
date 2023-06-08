@@ -97,28 +97,37 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop={true}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            theme="light"
-          />
+        {
+          loading ?
+            <BrowserRouter>
 
-          <TopBar></TopBar>
+              <Logo></Logo>
+            </BrowserRouter>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 
-            <AppRoutes></AppRoutes>
-          </motion.div>
+            : <BrowserRouter>
+              <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                theme="light"
+              />
 
-        </BrowserRouter>
+              <TopBar></TopBar>
+              {
+                iniLoading ? <></> :
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 
+                    <AppRoutes></AppRoutes>
+                  </motion.div>
+              }
+            </BrowserRouter>
+        }
 
 
       </ThemeProvider>

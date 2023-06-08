@@ -26,12 +26,12 @@ self.addEventListener('fetch', (event) => {
     if (request.mode === 'navigate') {
         event.respondWith(
             fetch(request)
-                .catch(() => caches.match('/index.html'))
+                .catch(() => caches.match('/'))
                 .then((response) => {
                     if (response) return response;
                     // If the response is null, it means the requested resource is not in cache.
                     // Return the index.html to handle the route on the client-side.
-                    return caches.match('/index.html');
+                    return caches.match('/');
                 })
         );
     }

@@ -96,7 +96,6 @@ const ChatBox = ({ routineId, messages, isLoading, totalMessage, skip }) => {
             });
         }
     }
-    console.error({ isLoading });
     return (
         <Box className=' pb-2  w-full' sx={{ height: '85%', flexGrow: '1' }}>
             {/* <RightBar info={{ name: client?.displayName, photo: client?.photoURL }}></RightBar> */}

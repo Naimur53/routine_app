@@ -95,7 +95,7 @@ function App() {
   //   // ...
   // });
   return (
-    <>
+    <div className="App">
       <ThemeProvider theme={theme}>
         {
           loading ?
@@ -131,7 +131,7 @@ function App() {
 
 
       </ThemeProvider>
-    </>
+    </div>
   );
 }
 

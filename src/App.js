@@ -97,37 +97,28 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        {
-          loading ?
-            <BrowserRouter>
+        <BrowserRouter>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+          />
 
-              <Logo></Logo>
-            </BrowserRouter>
+          <TopBar></TopBar>
 
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 
-            : <BrowserRouter>
-              <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={true}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                theme="light"
-              />
+            <AppRoutes></AppRoutes>
+          </motion.div>
 
-              <TopBar></TopBar>
-              {
-                iniLoading ? <></> :
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        </BrowserRouter>
 
-                    <AppRoutes></AppRoutes>
-                  </motion.div>
-              }
-            </BrowserRouter>
-        }
 
 
       </ThemeProvider>
@@ -136,3 +127,40 @@ function App() {
 }
 
 export default App;
+
+
+// <ThemeProvider theme={theme}>
+//         {
+//           loading ?
+//             <BrowserRouter>
+
+//               <Logo></Logo>
+//             </BrowserRouter>
+
+
+//             : <BrowserRouter>
+//               <ToastContainer
+//                 position="bottom-right"
+//                 autoClose={5000}
+//                 hideProgressBar={true}
+//                 newestOnTop={true}
+//                 closeOnClick
+//                 rtl={false}
+//                 pauseOnFocusLoss
+//                 draggable
+//                 theme="light"
+//               />
+
+//               <TopBar></TopBar>
+//               {
+//                 iniLoading ? <></> :
+//                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+
+//                     <AppRoutes></AppRoutes>
+//                   </motion.div>
+//               }
+//             </BrowserRouter>
+//         }
+
+
+//       </ThemeProvider>

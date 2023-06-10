@@ -88,18 +88,19 @@ export const assignmentApi = apiSlice.injectEndpoints({
 
                     }
                 ));
-
+                console.log({ arg });
                 dispatch(apiSlice.util.updateQueryData(
                     "getRoutineWithId",
                     arg._id,
                     (draft) => {
+
 
                         draft.institute = arg.mainData.institute
                         draft.department = arg.mainData.department
                         draft.section = arg.mainData.section
                         draft.semester = arg.mainData.semester
                         draft.classes = arg.mainData.classes
-                        draft._id = arg.mainData._id
+                        draft._id = arg._id
                         draft['shift'] = arg.mainData['shift']
 
                     }

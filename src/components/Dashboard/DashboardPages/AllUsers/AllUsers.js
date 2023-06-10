@@ -16,7 +16,7 @@ const AllUsers = () => {
   const fetchData = () => {
     return axios
       .get("https://routineappserver-production-5617.up.railway.app/user")
-      .then((response) => setAllUser(response.data));
+      .then((response) => setAllUser(response.data?.reverse()));
   };
 
   useEffect(() => {

@@ -226,6 +226,7 @@ const AppRoutes = () => {
                     ></Route>
                     <Route path="manageAdmin" element={<ManageAdmin />}></Route>
                     <Route path="notification" element={<Notification />}></Route>
+                    <Route path="user" element={<Notification />}></Route>
                 </Route>
             </Routes>
         </AnimatePresence>

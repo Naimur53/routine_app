@@ -51,7 +51,7 @@ const UpdateRoutine = ({ admin }) => {
     if (admin) {
       setData(fetchedData)
     }
-    else if (user._id) {
+    else if (user?._id) {
       // axios.get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}&userId=${user._id}`)
       //  fetchedData.creator
       if (user._id === fetchedData?.creator?._id) {
@@ -72,7 +72,7 @@ const UpdateRoutine = ({ admin }) => {
 
   }, [isEditLoading, isEditRoutineError, isEditRoutineSuccess])
 
-  if (!isLoading && (!data._id || isError)) {
+  if (!isLoading && (!data?._id || isError)) {
     return <>
       <div className="custom_height flex justify-center items-center">
         <h2 className="text-center text-xl text-red-600">

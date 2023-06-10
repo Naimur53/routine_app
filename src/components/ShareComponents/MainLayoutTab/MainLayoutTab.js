@@ -66,6 +66,11 @@ const MainLayoutTab = ({ handleCloseNavMenu }) => {
       path: "/dashboard/manageAdmin",
       Icon: AdminPanelSettingsIcon,
     },
+    {
+      name: "Manage User",
+      path: "/dashboard/allUsers",
+      Icon: AdminPanelSettingsIcon,
+    },
     // {
     //   name: "Notification Token",
     //   path: "/dashboard/notification",

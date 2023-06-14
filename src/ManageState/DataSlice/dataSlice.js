@@ -8,6 +8,7 @@ const initialState = {
   user: {},
   messages: [],
   allRoutineData: [],
+  allRoutineLoading: true,
   selectIndex: findSelectIndex(),
 };
 export const getUserFromDB = createAsyncThunk(
@@ -83,8 +84,15 @@ export const dataSlice = createSlice({
       .addCase(getUserFromDB.rejected, (state, action) => {
         state.loading = false;
       })
+      .addCase(accessAllRoutineInLocal.pending, (state, action) => {
+        state.allRoutineLoading = true;
+      })
       .addCase(accessAllRoutineInLocal.fulfilled, (state, action) => {
         state.allRoutineData = action.payload;
+        state.allRoutineLoading = false;
+      })
+      .addCase(accessAllRoutineInLocal.rejected, (state, action) => {
+        state.allRoutineLoading = false;
       })
       .addCase(getMessageFromDb.pending, (state, action) => {
         state.getMessageLoading = true;

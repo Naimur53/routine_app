@@ -1,10 +1,11 @@
-import { Button, CircularProgress, Skeleton, Box } from "@mui/material";
+import { Button, CircularProgress, Skeleton, Box, Modal } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { saveRoutine } from "../../../utilities/localDb";
 import HomeClassShow from "../../Home/smallCompo/HomeClassShow/HomeClassShow";
 import MainLayout from "../../ShareComponents/MainLayout/MainLayout";
+import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { format } from "date-fns";
 import RoutineNotFound from "../../ShareComponents/RoutineNotFound/RoutineNotFound";
@@ -14,19 +15,29 @@ import bg1 from "../../../images/bg5.webp";
 import DownloadIcon from "@mui/icons-material/Download";
 import { useGetRoutineWithIdQuery } from "../../../ManageState/features/routine/routineApi";
 import { useRef } from "react";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import IconButton from "@mui/material/IconButton";
+import OfflineShareIcon from "@mui/icons-material/OfflineShare";
 const Checkout = () => {
   const { id } = useParams();
   // const [data, setData] = useState({ classes: [] });
   const downloadLinkRef = useRef(null);
-
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const [save, setSave] = useState(false);
   const [pepFile, setPepFile] = useState();
   const { isError, isLoading, data } = useGetRoutineWithIdQuery(id);
+  const location = useLocation();
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleSave = () => {
     setSave(true);
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
       toast.success(response);
+      navigate("/");
+
       axios.put(
         `https://routineappserver-production-5617.up.railway.app/routine/increaseUsingValue?id=${data._id}`
       );
@@ -66,14 +77,29 @@ const Checkout = () => {
       </MainLayout>
     );
   }
-  const handleShare = () => {
+  const handleCopyId = () => {
     navigator.clipboard
       .writeText(data.id)
       .then((res) => {
-        toast.success(`The Id ${data.id}  has a copy to the clipboard`);
+        toast.success(`The Id ${data.id}  has a copy in your clipboard`);
+        handleClose();
+      })
+
+      .catch((err) => {
+        toast.error("The ID couldn't be copied, so please try again.");
+      });
+  };
+  const handleCopyLink = () => {
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then((res) => {
+        toast.success(
+          `The Link  "${window.location.href}"  has a copy in your clipboard`
+        );
+        handleClose();
       })
       .catch((err) => {
-        toast.error("Id can't be copy try again");
+        toast.error("Sorry try again!");
       });
   };
 
@@ -117,7 +143,7 @@ const Checkout = () => {
                 variant="outlined"
                 size="small"
                 className="text-lg border grow  mb-b5 p-2 rounded bg-dark-purple text-light-purple disabled:bg-gray-300"
-                onClick={() => handleShare()}
+                onClick={() => setOpen((pre) => !pre)}
               >
                 {/* <AddIcon></AddIcon>  */}
                 <ShareIcon></ShareIcon>
@@ -188,6 +214,39 @@ const Checkout = () => {
 
         <HomeClassShow data={data}></HomeClassShow>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <div className="absolute pl-5 pb-5 top-1/2 left-1/2 bg-white -translate-y-1/2 -translate-x-1/2 min-w-[280px] rounded">
+          <div className="flex justify-end pt-2 pr-2">
+            <IconButton onClick={handleClose} color="primary">
+              <CloseIcon></CloseIcon>
+            </IconButton>
+          </div>
+          <h2 className="pr-5 text-center mt-2">
+            Choose what you want to share.
+          </h2>
+          <div className="flex gap-5 mt-5 justify-center pr-5">
+            <button
+              onClick={handleCopyLink}
+              className="flex w-full justify-center flex-col items-center py-3 bg-light-purple px-3 gap-2 rounded-md shadow shadow-light-purple"
+            >
+              <OfflineShareIcon></OfflineShareIcon>
+              <h2>Copy Link</h2>
+            </button>
+            <button
+              onClick={handleCopyId}
+              className="flex w-full justify-center flex-col items-center py-3 bg-light-purple px-3 gap-2 rounded-md shadow shadow-light-purple"
+            >
+              <ContentCopyIcon></ContentCopyIcon>
+              <h2>Copy Id</h2>
+            </button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

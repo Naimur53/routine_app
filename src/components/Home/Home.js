@@ -42,24 +42,42 @@ import {
 } from "../../ManageState/DataSlice/dataSlice";
 import Chat from "./smallCompo/Chat/Chat";
 import CommentIcon from "@mui/icons-material/Comment";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Home = () => {
-  const [list, setList] = useState(getDataFromLocalDb("lists"));
-  const [open, setOpen] = React.useState(false);
   const [chatOpen, setChatOpen] = React.useState(false);
   const [data, setData] = useState({ classes: [] });
   // const [allRoutineData, setAllRoutineData] = useState([]);
   const dispatch = useDispatch();
-  const { allRoutineData, selectIndex, loading } = useSelector(allData);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { selectIndex, loading } = useSelector(allData);
+  const [allRoutineData, setAllRoutineData] = useState([]);
+  const [allRoutineLoading, setAllRoutineLoading] = useState(true);
   // const [selectIndex, setSelectIndex] = React.useState(findSelectIndex());
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     dispatch(setSelectIndex(event.target.value));
   };
+
   useEffect(() => {
-    dispatch(accessAllRoutineInLocal());
+    const fetchData = async () => {
+      setAllRoutineLoading(true);
+      try {
+        const routineData = await getAllRoutinesFromLocalDb();
+        setAllRoutineData(routineData);
+        if (routineData.length === 0) {
+          toast.info(`You don't have any routine saved!`);
+          navigate("/searchRoutine");
+        }
+
+        setAllRoutineLoading(false);
+        // Additional actions with the routine data
+      } catch (error) {
+        setAllRoutineLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -73,7 +91,8 @@ const Home = () => {
       }
     }
   }, [selectIndex, dispatch, allRoutineData]);
-  if (loading) {
+
+  if (loading || allRoutineLoading) {
     return (
       <>
         <div className="custom_height flex justify-center items-center">
@@ -82,9 +101,7 @@ const Home = () => {
       </>
     );
   }
-  if (allRoutineData.length === 0) {
-    return <Navigate to="/searchRoutine"></Navigate>;
-  }
+
   return (
     <>
       <div>

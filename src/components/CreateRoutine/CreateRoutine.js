@@ -25,9 +25,10 @@ import { allData } from "../../ManageState/DataSlice/dataSlice";
 import { toast } from "react-toastify";
 import { useAddRoutineMutation } from "../../ManageState/features/routine/routineApi";
 const CreateRoutine = ({ request, requestId, setRequestData }) => {
-  const [addRoutine, { isLoading, isError, isSuccess, data: res }] = useAddRoutineMutation()
+  const [addRoutine, { isLoading, isError, isSuccess, data: res }] =
+    useAddRoutineMutation();
 
-  const { user } = useSelector(allData)
+  const { user } = useSelector(allData);
   // const [postLoading, setPostLoading] = useState(false)
   const {
     register,
@@ -71,42 +72,40 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   // published data to db 633e664ed10c105498fab409
   const publishData = () => {
     if (user?._id) {
-      addRoutine({ ...mainData, requestId, creator: user._id })
+      addRoutine({ ...mainData, requestId, creator: user._id });
       // setPostLoading(true)
       // axios.post('https://routineappserver-production-5617.up.railway.app/routine', { ...mainData, requestId, creator: user._id })
       //   .then(res => {
       //     // setPostLoading(false);
-      //     
+      //
 
       //   })
       //   .catch((err) => {
-      //     
+      //
       //     toast.error("Data is not created try again")
       //     // setPostLoading(false);
       //   });
     } else {
-      toast.error("User not found")
+      toast.error("User not found");
     }
   };
 
   useEffect(() => {
     if (!isLoading && isError) {
-      toast.error("Failed to submit try again later!")
+      toast.error("Failed to submit try again later!");
     } else if (!isLoading && isSuccess) {
       if (requestId) {
-        setRequestData(pre => {
-          const newOne = { ...pre, requestId: res?.data?._id }
+        setRequestData((pre) => {
+          const newOne = { ...pre, requestId: res?.data?._id };
           return newOne;
-        })
+        });
       }
-      toast.success('Routine successfully created')
-      setActiveStep(0)
+      toast.success("Routine successfully created");
+      setActiveStep(0);
       reset();
       setMainData({ classes: [] });
     }
-  }, [isLoading, isError, isSuccess, requestId, reset, setRequestData])
-
-
+  }, [isLoading, isError, isSuccess, requestId, reset, setRequestData]);
 
   //----------------
   const handleNext = () => {
@@ -135,7 +134,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
       return;
     }
     if (activeStep === 1 && !mainData.classes.length) {
-      toast.error("Please add class to go another step")
+      toast.error("Please add class to go another step");
       return;
     }
     if (activeStep === 2) {
@@ -147,7 +146,15 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
   const steps = [
     {
       label: "Add basic information",
-      element: <Info setValue={setValue} mainData={mainData} errors={errors} watch={watch} register={register}></Info>,
+      element: (
+        <Info
+          setValue={setValue}
+          mainData={mainData}
+          errors={errors}
+          watch={watch}
+          register={register}
+        ></Info>
+      ),
     },
     {
       label: "Add classes",
@@ -190,7 +197,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Box className="h-[calc(100vh-55px)] md:custom_height overflow-y-scroll pt-[30px] md:pt-0  flex flex-col justify-between relative">
           <Box className="pt-0 pb-16 ">
             <Stepper activeStep={activeStep} alternativeLabel>
@@ -203,7 +210,13 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
             <Box className="pt-8">{steps[activeStep].element}</Box>
           </Box>
 
-          <div className={request ? "" : "fixed bottom-0 w-full md:w-[calc(100vw-280px)] pr-10 md:pr-8  z-20"}>
+          <div
+            className={
+              request
+                ? ""
+                : "fixed bottom-0 w-full md:w-[calc(100vw-280px)] pr-10 md:pr-8  z-20"
+            }
+          >
             <MobileStepper
               variant="text"
               steps={maxSteps}

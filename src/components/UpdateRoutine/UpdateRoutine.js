@@ -15,8 +15,10 @@ import UserUpdateExitsRoutine from "./SmallCompo/UserUpdateExitsRoutine";
 import AddMoreClass from "./SmallCompo/AddMoreClass";
 import { toast } from "react-toastify";
 import { sections, semesters, shifts } from "../../utilities/formInfo";
-import { useEditRoutineMutation, useGetRoutineWithIdQuery } from "../../ManageState/features/routine/routineApi";
-
+import {
+  useEditRoutineMutation,
+  useGetRoutineWithIdQuery,
+} from "../../ManageState/features/routine/routineApi";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -29,12 +31,16 @@ const MenuProps = {
   },
 };
 
-
 const UpdateRoutine = ({ admin }) => {
   const { id } = useParams();
-  const [data, setData] = useState({})
-  const { user } = useSelector(allData)
-  const { isLoading, isError, isSuccess, data: fetchedData } = useGetRoutineWithIdQuery(id)
+  const [data, setData] = useState({});
+  const { user } = useSelector(allData);
+  const {
+    isLoading,
+    isError,
+    isSuccess,
+    data: fetchedData,
+  } = useGetRoutineWithIdQuery(id);
   const {
     register,
     handleSubmit,
@@ -45,64 +51,74 @@ const UpdateRoutine = ({ admin }) => {
     formState: { errors },
   } = useForm();
 
-  const [editRoutine, { isLoading: isEditLoading, isError: isEditRoutineError, isSuccess: isEditRoutineSuccess }] = useEditRoutineMutation()
+  const [
+    editRoutine,
+    {
+      isLoading: isEditLoading,
+      isError: isEditRoutineError,
+      isSuccess: isEditRoutineSuccess,
+    },
+  ] = useEditRoutineMutation();
   //working
   useEffect(() => {
     if (admin) {
-      setData(fetchedData)
-    }
-    else if (user?._id) {
+      setData(fetchedData);
+    } else if (user?._id) {
       // axios.get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}&userId=${user._id}`)
       //  fetchedData.creator
       if (user._id === fetchedData?.creator?._id) {
-        setData(fetchedData)
+        setData(fetchedData);
       }
     }
-  }, [id, admin, user, fetchedData])
+  }, [id, admin, user, fetchedData]);
 
   useEffect(() => {
     if (!isEditLoading && isEditRoutineError) {
-
-      toast.error('Failed to update')
+      toast.error("Failed to update");
     }
     if (!isEditLoading && isEditRoutineSuccess) {
-      toast.success("Successfully update")
-
+      toast.success("Successfully update");
     }
-
-  }, [isEditLoading, isEditRoutineError, isEditRoutineSuccess])
+  }, [isEditLoading, isEditRoutineError, isEditRoutineSuccess]);
 
   if (!isLoading && (!data?._id || isError)) {
-    return <>
-      <div className="custom_height flex justify-center items-center">
-        <h2 className="text-center text-xl text-red-600">
-          You don't have access to update!
-        </h2>
-      </div>
-    </>
+    return (
+      <>
+        <div className="custom_height flex justify-center items-center">
+          <h2 className="text-center text-xl text-red-600">
+            You don't have access to update!
+          </h2>
+        </div>
+      </>
+    );
   }
   if (isLoading) {
-    return <div className="flex justify-center">
-      <CircularProgress></CircularProgress>
-    </div>
+    return (
+      <div className="flex justify-center">
+        <CircularProgress></CircularProgress>
+      </div>
+    );
   }
 
   // handle basic from submit
-  const onSubmit = fromData => {
-    const mainData = { ...fromData, classes: data.classes, }
+  const onSubmit = (fromData) => {
+    const mainData = { ...fromData, classes: data.classes };
 
-    editRoutine({ mainData, userId: user?._id, _id: data._id })
-  }
-
+    editRoutine({ mainData, userId: user?._id, _id: data._id });
+  };
 
   return (
     <>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="pb-2 flex justify-end">
-            {
-              isEditLoading ? <CircularProgress /> : <Button variant="outlined" type="submit"  >Update</Button>
-            }
+            {isEditLoading ? (
+              <CircularProgress />
+            ) : (
+              <Button variant="outlined" type="submit">
+                Update
+              </Button>
+            )}
           </div>
           <Grid container spacing={2}>
             <Grid item md={6} xs={12}>
@@ -150,7 +166,7 @@ const UpdateRoutine = ({ admin }) => {
                 <Select
                   labelId="demo-multiple-name-label"
                   id="demo-multiple-name"
-                  value={watch("semester") || data.semester || ''}
+                  value={watch("semester") || data.semester || ""}
                   defaultValue={data.semester}
                   {...register("semester", { required: true })}
                   MenuProps={MenuProps}
@@ -173,10 +189,9 @@ const UpdateRoutine = ({ admin }) => {
               <FormControl variant="standard" sx={{ width: "100%" }}>
                 <InputLabel id="demo-multiple-name-label">Shift</InputLabel>
                 <Select
-
                   labelId="demo-multiple-name-label"
                   id="demo-multiple-name"
-                  value={watch("shift") || data.shift || ''}
+                  value={watch("shift") || data.shift || ""}
                   defaultValue={data.shift}
                   {...register("shift", { required: true })}
                   MenuProps={MenuProps}
@@ -201,7 +216,7 @@ const UpdateRoutine = ({ admin }) => {
                 <Select
                   labelId="demo-multiple-name-label"
                   id="demo-multiple-name"
-                  value={watch("section") || data.section || ''}
+                  value={watch("section") || data.section || ""}
                   defaultValue={data.section}
                   {...register("section", { required: true })}
                   MenuProps={MenuProps}
@@ -224,7 +239,10 @@ const UpdateRoutine = ({ admin }) => {
         </form>
         <AddMoreClass setData={setData} classes={data.classes}></AddMoreClass>
         <div>
-          <UserUpdateExitsRoutine data={data} setData={setData}></UserUpdateExitsRoutine>
+          <UserUpdateExitsRoutine
+            data={data}
+            setData={setData}
+          ></UserUpdateExitsRoutine>
         </div>
       </div>
     </>

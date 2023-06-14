@@ -42,6 +42,7 @@ import {
 } from "../../ManageState/DataSlice/dataSlice";
 import Chat from "./smallCompo/Chat/Chat";
 import CommentIcon from "@mui/icons-material/Comment";
+import { Navigate } from "react-router-dom";
 const Home = () => {
   const [list, setList] = useState(getDataFromLocalDb("lists"));
   const [open, setOpen] = React.useState(false);
@@ -74,17 +75,19 @@ const Home = () => {
   }, [selectIndex, dispatch, allRoutineData]);
   if (loading) {
     return (
-      < >
+      <>
         <div className="custom_height flex justify-center items-center">
           {/* <CircularProgress></CircularProgress> */}
         </div>
       </>
     );
   }
+  if (allRoutineData.length === 0) {
+    return <Navigate to="/searchRoutine"></Navigate>;
+  }
   return (
-    < >
-      <div
-      >
+    <>
+      <div>
         {data?.classes?.length ? (
           <Grid container spacing={1}>
             <Grid item xs={12} md={7}>
@@ -103,15 +106,12 @@ const Home = () => {
                           value={selectIndex}
                           defaultValue={selectIndex}
                           label="Selected Routine "
-
-
                           size="small"
                           sx={{
                             fontSize: { md: "16px", xs: "13px" },
                             marginLeft: "13px",
-                            border: '1px solid transparent',
-                            boxShadow: 'none'
-
+                            border: "1px solid transparent",
+                            boxShadow: "none",
                           }}
                           onChange={handleChange}
                         >
@@ -124,13 +124,13 @@ const Home = () => {
                               >
                                 {shift === "None"
                                   ? `${textConversion(
-                                    department,
-                                    20
-                                  )} sem-${semester}  sec-${section} `
+                                      department,
+                                      20
+                                    )} sem-${semester}  sec-${section} `
                                   : section === "None"
-                                    ? `${department}  sem-${semester} shift-${shift}`
-                                    : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
-                                { }
+                                  ? `${department}  sem-${semester} shift-${shift}`
+                                  : `${department}  sem-${semester}  sec-${section} shift-${shift}`}
+                                {}
                               </MenuItem>
                             )
                           )}
@@ -166,7 +166,6 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-
 
                 <HomeClassShow data={data}></HomeClassShow>
                 {/* </GrowEffect> */}

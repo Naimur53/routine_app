@@ -7,9 +7,10 @@ const Notification = () => {
   const [tokens, setTokens] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://routineappserver-production-5617.up.railway.app/notificationToken`)
+      .get(
+        `https://routineappserver-production-5617.up.railway.app/notificationToken`
+      )
       .then((res) => {
-
         let mainData = [];
 
         res.data.forEach((element) => {
@@ -22,7 +23,7 @@ const Notification = () => {
         });
         setTokens(mainData);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   }, []);
   return (
     <>

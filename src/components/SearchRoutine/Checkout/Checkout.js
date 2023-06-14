@@ -11,19 +11,18 @@ import RoutineNotFound from "../../ShareComponents/RoutineNotFound/RoutineNotFou
 import ShareIcon from "@mui/icons-material/Share";
 import { toast } from "react-toastify";
 import bg1 from "../../../images/bg5.webp";
-import DownloadIcon from '@mui/icons-material/Download';
+import DownloadIcon from "@mui/icons-material/Download";
 import { useGetRoutineWithIdQuery } from "../../../ManageState/features/routine/routineApi";
 import { useRef } from "react";
 const Checkout = () => {
   const { id } = useParams();
-  // const [data, setData] = useState({ classes: [] }); 
+  // const [data, setData] = useState({ classes: [] });
   const downloadLinkRef = useRef(null);
 
   const [save, setSave] = useState(false);
-  const [pepFile, setPepFile] = useState()
-  const { isError, isLoading, data, } = useGetRoutineWithIdQuery(id)
+  const [pepFile, setPepFile] = useState();
+  const { isError, isLoading, data } = useGetRoutineWithIdQuery(id);
   const handleSave = () => {
-
     setSave(true);
     const { response, status } = saveRoutine(data);
     if (status !== 400) {
@@ -32,7 +31,7 @@ const Checkout = () => {
         `https://routineappserver-production-5617.up.railway.app/routine/increaseUsingValue?id=${data._id}`
       );
     } else {
-      toast.error("Routine already exist``")
+      toast.error("Routine already exist``");
     }
   };
 
@@ -46,17 +45,17 @@ const Checkout = () => {
     );
   }
   if (isError && !isLoading) {
-    return <>
-      <MainLayout>
-        <div className="flex justify-center items-center">
-          <div>
-            <RoutineNotFound title='Routine not found!'></RoutineNotFound>
+    return (
+      <>
+        <MainLayout>
+          <div className="flex justify-center items-center">
+            <div>
+              <RoutineNotFound title="Routine not found!"></RoutineNotFound>
+            </div>
           </div>
-        </div>
-
-      </MainLayout>
-    </>
-
+        </MainLayout>
+      </>
+    );
   }
   if (!isLoading && !data._id && !data.date) {
     return (
@@ -78,34 +77,28 @@ const Checkout = () => {
       });
   };
 
-
   const handleDownload = () => {
-
-    axios(
-      {
-        url: `https://routineappserver-production-5617.up.railway.app/makePdf?routineId=${id}`,
-        method: 'GET',
-        responseType: 'blob'
-      }
-    )
-      .then(response => {
+    axios({
+      url: `https://routineappserver-production-5617.up.railway.app/makePdf?routineId=${id}`,
+      method: "GET",
+      responseType: "blob",
+    })
+      .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
 
         // Set the href and download attributes of the download link
         downloadLinkRef.current.href = url;
-        downloadLinkRef.current.download = 'routine.pdf';
+        downloadLinkRef.current.download = "routine.pdf";
 
         // Programmatically trigger the click event of the download link
         downloadLinkRef.current.click();
 
         URL.revokeObjectURL(url);
       })
-      .catch(error => {
-
-      });
-  }
+      .catch((error) => {});
+  };
   return (
-    < >
+    <>
       <div className=" pt-10 md:p-2">
         <div className="flex justify-end pb-5">
           {data?._id && (
@@ -131,7 +124,7 @@ const Checkout = () => {
                 <span className="ml-1">Share</span>
               </Button>
               {/* Hidden download link */}
-              <a ref={downloadLinkRef} style={{ display: 'none' }}></a>
+              <a ref={downloadLinkRef} style={{ display: "none" }}></a>
               <Button
                 variant="outlined"
                 size="small"

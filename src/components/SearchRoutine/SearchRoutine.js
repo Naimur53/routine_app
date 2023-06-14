@@ -19,13 +19,20 @@ import { useGetRoutineBySearchingQuery } from "../../ManageState/features/routin
 import { sections, semesters } from "../../utilities/formInfo";
 import SearchInputs from "./SearchInputs/SearchInputs";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import GrowEffect from "../AnimationCompo/GrowEffect/GrowEffect";
-import { mainDuration, pageTranAni, pageTranInit } from "../../utilities/framerMotionAnimationsUtilites";
+import {
+  mainDuration,
+  pageTranAni,
+  pageTranInit,
+} from "../../utilities/framerMotionAnimationsUtilites";
 
 const SearchRoutine = () => {
   const [pagination, setPagination] = useState({ len: 8, skip: 0 });
-  const [debounceTexts, setDebounceTexts] = useState({ institute: '', department: '' })
+  const [debounceTexts, setDebounceTexts] = useState({
+    institute: "",
+    department: "",
+  });
   const {
     register,
     handleSubmit,
@@ -34,8 +41,7 @@ const SearchRoutine = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const handleSearch = () => {
-  };
+  const handleSearch = () => {};
 
   //use debounce
   let instituteInputText = watch("institute") || "";
@@ -44,11 +50,19 @@ const SearchRoutine = () => {
   let semester = watch("semester") || "";
   let section = watch("section") || "";
 
-  const { isLoading, isError, isSuccess, data, } = useGetRoutineBySearchingQuery({ institute: debounceTexts.institute, department: debounceTexts.department, section, semester, len: pagination.len, skip: pagination.skip }, {})
+  const { isLoading, isError, isSuccess, data } = useGetRoutineBySearchingQuery(
+    {
+      institute: debounceTexts.institute,
+      department: debounceTexts.department,
+      section,
+      semester,
+      len: pagination.len,
+      skip: pagination.skip,
+    },
+    {}
+  );
 
-
-
-  const onSubmit = (data) => { };
+  const onSubmit = (data) => {};
 
   const debounce = (cb, delay) => {
     const timeCall = setTimeout(cb, delay);
@@ -57,9 +71,6 @@ const SearchRoutine = () => {
     };
     return { clear };
   };
-
-
-
 
   // const textSearchRequest = () => {
   //   axios
@@ -80,7 +91,7 @@ const SearchRoutine = () => {
 
   // const fetchData = useCallback(() => {
   //   setGetLoading(true);
-  //   
+  //
 
   //   // institute will work for both id and text name of institute
   //   if (institute?.length === 24) {
@@ -102,7 +113,14 @@ const SearchRoutine = () => {
   // }, [institute, department, section, semester]);
 
   useEffect(() => {
-    const { clear } = debounce(() => setDebounceTexts({ institute: instituteInputText, department: inputDepartmentText }), 300);
+    const { clear } = debounce(
+      () =>
+        setDebounceTexts({
+          institute: instituteInputText,
+          department: inputDepartmentText,
+        }),
+      300
+    );
     return () => {
       clear();
     };
@@ -111,15 +129,12 @@ const SearchRoutine = () => {
   //handle pagination
   const handlePre = () => {
     setPagination({ len: 8, skip: data[0]?.skip || 0 });
-
   };
   const handleNext = () => {
-
     setPagination({
       len: data?.length,
       skip: pagination.skip + pagination.len,
-    })
-
+    });
   };
   const democardContainer = {
     animate: {
@@ -133,7 +148,6 @@ const SearchRoutine = () => {
   };
   return (
     <GrowEffect
-
       initPath={pageTranInit}
       aniPath={pageTranAni}
       duration={mainDuration}
@@ -142,28 +156,42 @@ const SearchRoutine = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="ml-3 mt-10 md:mt-0 flex justify-center"
       >
-        <SearchInputs register={register} reset={reset} watch={watch} errors={errors} ></SearchInputs>
+        <SearchInputs
+          register={register}
+          reset={reset}
+          watch={watch}
+          errors={errors}
+        ></SearchInputs>
       </form>
       <Grid container spacing={4} sx={{ marginTop: "20px" }}>
-        {
-          isLoading ? [...new Array(8)].map((single, i) => <Grid key={i} item lg={3} md={6} xs={12}>
-            <SkeletonDemoCard></SkeletonDemoCard>
-
-          </Grid>) : data?.length ? data.map((single, i) => (
+        {isLoading ? (
+          [...new Array(8)].map((single, i) => (
+            <Grid key={i} item lg={3} md={6} xs={12}>
+              <SkeletonDemoCard></SkeletonDemoCard>
+            </Grid>
+          ))
+        ) : data?.length ? (
+          data.map((single, i) => (
             <Grid item lg={3} md={6} xs={12} key={i}>
               <DemoCard item={single} i={i} updateAble={false}></DemoCard>
             </Grid>
-          )) : <Grid item xs={12}>
+          ))
+        ) : (
+          <Grid item xs={12}>
             <div className="my-10 flex justify-center w-full ">
               <SearchRoutineNotFound></SearchRoutineNotFound>
             </div>
           </Grid>
-        }
+        )}
       </Grid>
-      {
-        data?.length ? <div className="flex py-5 gap-5">
-          <button onClick={handlePre} disabled={isLoading || !pagination.skip} className="pagination_button">
-            <WestIcon ></WestIcon>
+      {data?.length ? (
+        <div className="flex py-5 gap-5">
+          <button
+            onClick={handlePre}
+            disabled={isLoading || !pagination.skip}
+            className="pagination_button"
+          >
+            <WestIcon></WestIcon>
           </button>
           <button
             onClick={handleNext}
@@ -172,8 +200,10 @@ const SearchRoutine = () => {
           >
             <EastIcon></EastIcon>
           </button>
-        </div> : <></>
-      }
+        </div>
+      ) : (
+        <></>
+      )}
     </GrowEffect>
   );
 };

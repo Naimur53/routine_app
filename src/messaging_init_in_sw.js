@@ -11,35 +11,37 @@ import firebaseConfig from "./Firebase/Firebase.config";
 
 // Initialize Firebase
 
-
 // Initialize Firebase Cloud Messaging and get a reference to the service
 
 function requestPermission() {
+  Notification.requestPermission().then((permission) => {
+    if (permission === "granted") {
+      const app = initializeApp(firebaseConfig);
+      const messaging = getMessaging(app);
 
-    Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
-
-            const app = initializeApp(firebaseConfig);
-            const messaging = getMessaging(app);
-
-            getToken(messaging, { vapidKey: process.env.REACT_APP_PUBLIC_FIREBASE_MESSAGE }).then((currentToken) => {
-                if (currentToken) {
-                    // Send the token to your server and update the UI if necessary
-                    axios.post('https://routineappserver-production-5617.up.railway.app/notificationToken', { token: currentToken })
-                    // ...
-
-                } else {
-                    // Show permission request UI
-
-                    // ...
-                }
-            }).catch((err) => {
-
-                // ...
-            });
-        } else {
-
-        }
-    });
+      getToken(messaging, {
+        vapidKey: process.env.REACT_APP_PUBLIC_FIREBASE_MESSAGE,
+      })
+        .then((currentToken) => {
+          if (currentToken) {
+            // Send the token to your server and update the UI if necessary
+            axios.post(
+              "https://routineappserver-production-5617.up.railway.app/notificationToken",
+              {
+                token: currentToken,
+              }
+            );
+            // ...
+          } else {
+            // Show permission request UI
+            // ...
+          }
+        })
+        .catch((err) => {
+          // ...
+        });
+    } else {
+    }
+  });
 }
-requestPermission()
+requestPermission();

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SchoolIcon from "@mui/icons-material/School";
@@ -20,107 +19,131 @@ import { toast } from "react-toastify";
 import DetailsInfo from "../DetailsInfo/DetailsInfo";
 
 const UpdateDetailsSection = ({ edit, setEdit, updatable, setUpdatable }) => {
-    const { user } = useSelector(allData)
-    const dispatch = useDispatch()
-    const {
-        register,
-        handleSubmit,
-        watch,
-        setValue,
-        reset,
-        trigger,
-        formState: { errors },
-    } = useForm();
+  const { user } = useSelector(allData);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    trigger,
+    formState: { errors },
+  } = useForm();
 
-    const keys = useMemo(() => {
+  const keys = useMemo(() => {
+    const inputKeys = [
+      "institute",
+      "department",
+      "semester",
+      "shift",
+      "section",
+    ];
+    return inputKeys;
+  }, []);
 
-        const inputKeys = [
-            "institute",
-            "department",
-            "semester",
-            "shift",
-            "section"
-        ]
-        return inputKeys
-    }, [])
+  const institute = watch("institute");
+  const department = watch("department");
+  const semester = watch("semester");
+  const shift = watch("shift");
+  const section = watch("section");
 
-    const institute = watch('institute')
-    const department = watch('department')
-    const semester = watch('semester')
-    const shift = watch('shift')
-    const section = watch('section')
+  useEffect(() => {
+    keys.forEach((single) => {
+      setValue(single, user[single] ?? "");
+    });
+  }, [user, keys, setValue]);
 
-    useEffect(() => {
-        keys.forEach(single => {
-            setValue(single, user[single] ?? "")
-        })
-    }, [user, keys, setValue])
+  const onSubmit = (data) => {};
+  //  handle input change
+  useEffect(() => {
+    const result = keys
+      .map((single) => watch(single) !== (user[single] || ""))
+      .includes(true);
 
-    const onSubmit = (data) => {
-
+    if (result) {
+      setUpdatable((pre) => {
+        return {
+          ...pre,
+          disabled: false,
+        };
+      });
+    } else {
+      setUpdatable((pre) => {
+        return {
+          ...pre,
+          disabled: true,
+        };
+      });
     }
-    //  handle input change 
-    useEffect(() => {
-        const result = keys.map(single => watch(single) !== (user[single] || "")).includes(true)
+  }, [
+    institute,
+    department,
+    semester,
+    shift,
+    section,
+    keys,
+    user,
+    watch,
+    setUpdatable,
+  ]);
 
-        if (result) {
-            setUpdatable(pre => {
-                return {
-                    ...pre, disabled: false,
-                }
-            })
+  // handle update button click
+
+  useEffect(() => {
+    if (updatable.click) {
+      trigger().then((res) => {
+        if (res) {
+          const mainData = watch();
+
+          axios
+            .put(
+              "https://routineappserver-production-5617.up.railway.app/user",
+              {
+                email: user.email,
+                ...mainData,
+              }
+            )
+            .then((res) => {
+              if (res.data.modifiedCount) {
+                setUpdatable({ click: false, disabled: true });
+                setEdit({ loading: false, status: false });
+                dispatch(setUser(mainData));
+              } else {
+                toast.error("sorry info cannot be modified try again later");
+                setEdit({ loading: false, status: true });
+                setUpdatable({ click: false, disabled: false });
+              }
+            });
+        } else {
+          setEdit((pre) => {
+            return { ...pre, loading: false };
+          });
         }
-        else {
-            setUpdatable(pre => {
-                return {
-                    ...pre, disabled: true,
-                }
-            })
-        }
-    }, [institute, department, semester, shift, section, keys, user, watch, setUpdatable])
+      });
+    }
+  }, [updatable]);
 
-    // handle update button click
-
-    useEffect(() => {
-        if (updatable.click) {
-            trigger().then(res => {
-
-                if (res) {
-                    const mainData = watch()
-
-                    axios.put('https://routineappserver-production-5617.up.railway.app/user', { email: user.email, ...mainData })
-                        .then(res => {
-                            if (res.data.modifiedCount) {
-                                setUpdatable({ click: false, disabled: true })
-                                setEdit({ loading: false, status: false })
-                                dispatch(setUser(mainData))
-                            } else {
-                                toast.error('sorry info cannot be modified try again later')
-                                setEdit({ loading: false, status: true })
-                                setUpdatable({ click: false, disabled: false })
-                            }
-                        })
-
-                } else {
-                    setEdit(pre => {
-                        return { ...pre, loading: false }
-                    })
-                }
-            })
-        }
-    }, [updatable])
-
-    return (
-        <div className="p-4">
-            {
-                edit.status ? <form onSubmit={handleSubmit(onSubmit)}>
-                    <Info setValue={setValue} disabled={edit.loading} mainData={watch() || {}} watch={watch} register={register} errors={errors}></Info>
-                </form> : <div>
-                    <DetailsInfo data={user}></DetailsInfo>
-                </div>
-            }
+  return (
+    <div className="p-4">
+      {edit.status ? (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Info
+            setValue={setValue}
+            disabled={edit.loading}
+            mainData={watch() || {}}
+            watch={watch}
+            register={register}
+            errors={errors}
+          ></Info>
+        </form>
+      ) : (
+        <div>
+          <DetailsInfo data={user}></DetailsInfo>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default UpdateDetailsSection;

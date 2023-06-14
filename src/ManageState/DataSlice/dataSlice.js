@@ -13,28 +13,38 @@ const initialState = {
 export const getUserFromDB = createAsyncThunk(
   "data/getFromDB",
   async (info) => {
-    const response = await axios.get(`https://routineappserver-production-5617.up.railway.app/user?email=${info.email}`)
-    return response.data
+    const response = await axios.get(
+      `https://routineappserver-production-5617.up.railway.app/user?email=${info.email}`
+    );
+    return response.data;
   }
 );
 export const getMessageFromDb = createAsyncThunk(
   "data/getMessage",
   async (info) => {
-    const response = await axios.get(`https://routineappserver-production-5617.up.railway.app/message?routineId=${info}`)
-    return response.data
+    const response = await axios.get(
+      `https://routineappserver-production-5617.up.railway.app/message?routineId=${info}`
+    );
+    return response.data;
   }
 );
 export const postMessageToDb = createAsyncThunk(
   "data/postToDb",
   async (info) => {
-    const response = await axios.post(`https://routineappserver-production-5617.up.railway.app/message`, info)
-    return response.data
+    const response = await axios.post(
+      `https://routineappserver-production-5617.up.railway.app/message`,
+      info
+    );
+    return response.data;
   }
 );
-export const accessAllRoutineInLocal = createAsyncThunk("data/accessFromLocal", async (info) => {
-  const response = await getAllRoutinesFromLocalDb()
-  return response
-})
+export const accessAllRoutineInLocal = createAsyncThunk(
+  "data/accessFromLocal",
+  async (info) => {
+    const response = await getAllRoutinesFromLocalDb();
+    return response;
+  }
+);
 export const dataSlice = createSlice({
   name: "data",
   initialState,
@@ -46,19 +56,18 @@ export const dataSlice = createSlice({
         state.user = action.payload;
       } else {
         if (action.payload._id) {
-
           state.user = { ...state.user, ...action.payload };
         }
       }
     },
     addMessage: (state, action) => {
-      state.messages = [...state.messages, ...action.payload]
+      state.messages = [...state.messages, ...action.payload];
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
     setSelectIndex: (state, action) => {
-      saveSelectIndex(action.payload)
+      saveSelectIndex(action.payload);
 
       state.selectIndex = action.payload;
     },
@@ -75,7 +84,7 @@ export const dataSlice = createSlice({
         state.loading = false;
       })
       .addCase(accessAllRoutineInLocal.fulfilled, (state, action) => {
-        state.allRoutineData = action.payload
+        state.allRoutineData = action.payload;
       })
       .addCase(getMessageFromDb.pending, (state, action) => {
         state.getMessageLoading = true;
@@ -84,13 +93,14 @@ export const dataSlice = createSlice({
         state.getMessageLoading = false;
       })
       .addCase(getMessageFromDb.fulfilled, (state, action) => {
-        state.messages = [...state.messages, ...action.payload]
+        state.messages = [...state.messages, ...action.payload];
         state.getMessageLoading = false;
-      })
+      });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, setLoading, addMessage, setSelectIndex } = dataSlice.actions;
+export const { setUser, setLoading, addMessage, setSelectIndex } =
+  dataSlice.actions;
 export const allData = (state) => state.data;
 export default dataSlice.reducer;

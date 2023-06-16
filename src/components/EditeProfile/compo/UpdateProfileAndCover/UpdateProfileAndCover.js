@@ -14,6 +14,7 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
   const [profileImgLoading, setProfileImgLoading] = useState(false);
   const [coverLoading, setCoverLoading] = useState(false);
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -99,21 +100,22 @@ const UpdateProfileAndCover = ({ edit, setEdit, updatable, setUpdatable }) => {
           };
           axios
             .put(
-              "https://routineappserver-production-5617.up.railway.app/user",
+              "https://routineappserver-production-5617.up.railway.app/user?shouldUpdateProfileInfo=true",
               {
                 ...data,
               }
             )
             .then((res) => {
-              if (res.data.modifiedCount) {
-                setUpdatable({ click: false, disabled: true });
-                setEdit({ loading: false, status: false });
-                dispatch(setUser(data));
-              } else {
-                toast.error("sorry info cannot be modified try again later");
-                setEdit({ loading: false, status: true });
-                setUpdatable({ click: false, disabled: false });
-              }
+              console.log(res);
+
+              setUpdatable({ click: false, disabled: true });
+              setEdit({ loading: false, status: false });
+              dispatch(setUser({ ...user, ...data }));
+            })
+            .catch((err) => {
+              toast.error("sorry info cannot be modified try again later");
+              setEdit({ loading: false, status: true });
+              setUpdatable({ click: false, disabled: false });
             });
         } else {
           setEdit((pre) => {

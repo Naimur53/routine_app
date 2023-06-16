@@ -193,7 +193,7 @@ const useFirebase = ({ observer }) => {
         saveUser({ ...userInfo, method: "put" })
           .then((res) => {
             // dispatch(setUser(res.data));
-            dispatch(setUser({ ...userInfo, _id: res.data._id }));
+            dispatch(setUser(res.data));
             console.log({ ...userInfo, _id: res.data._id }, res);
 
             // // change route

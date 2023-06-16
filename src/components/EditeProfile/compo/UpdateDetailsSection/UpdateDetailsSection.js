@@ -98,22 +98,20 @@ const UpdateDetailsSection = ({ edit, setEdit, updatable, setUpdatable }) => {
 
           axios
             .put(
-              "https://routineappserver-production-5617.up.railway.app/user",
+              "https://routineappserver-production-5617.up.railway.app/user?shouldUpdateProfileInfo=true",
               {
                 email: user.email,
                 ...mainData,
               }
             )
             .then((res) => {
-              if (res.data.modifiedCount) {
-                setUpdatable({ click: false, disabled: true });
-                setEdit({ loading: false, status: false });
-                dispatch(setUser(mainData));
-              } else {
-                toast.error("sorry info cannot be modified try again later");
-                setEdit({ loading: false, status: true });
-                setUpdatable({ click: false, disabled: false });
-              }
+              setUpdatable({ click: false, disabled: true });
+              setEdit({ loading: false, status: false });
+              dispatch(setUser({ ...user, ...mainData }));
+            })
+            .catch((err) => {
+              toast.error("sorry info cannot be modified try again later");
+              setEdit({ loading: false, status: true });
             });
         } else {
           setEdit((pre) => {

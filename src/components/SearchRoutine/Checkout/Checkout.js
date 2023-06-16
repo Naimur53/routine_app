@@ -18,6 +18,8 @@ import { useRef } from "react";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import IconButton from "@mui/material/IconButton";
 import OfflineShareIcon from "@mui/icons-material/OfflineShare";
+import QRCode from "qrcode.react";
+
 const Checkout = () => {
   const { id } = useParams();
   // const [data, setData] = useState({ classes: [] });
@@ -226,9 +228,10 @@ const Checkout = () => {
               <CloseIcon></CloseIcon>
             </IconButton>
           </div>
-          <h2 className="pr-5 text-center mt-2">
-            Choose what you want to share.
-          </h2>
+          <div className="pr-5 flex   justify-center items-center flex-col">
+            <QRCode value={window.location.href} />
+            <h2 className=" text-center mt-2">Scan or Copy</h2>
+          </div>
           <div className="flex gap-5 mt-5 justify-center pr-5">
             <button
               onClick={handleCopyLink}

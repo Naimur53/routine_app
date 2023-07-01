@@ -30,11 +30,10 @@ import {
   useGetMessagesWithRoutineIdQuery,
 } from "../../../../ManageState/features/message/messageApi";
 import { useCallback } from "react";
-const ChatRoom = () => {
-  const { user, allRoutineData, selectIndex } = useSelector(allData);
+const ChatRoom = ({ allRoutineData }) => {
+  const { user, selectIndex } = useSelector(allData);
 
   const routineId = allRoutineData[selectIndex]?._id;
-
   const { data, isLoading, isError, isSuccess } =
     useGetMessagesWithRoutineIdQuery(routineId);
   const [addMessage, { isLoading: isAddMessageLoading }] =

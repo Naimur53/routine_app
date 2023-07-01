@@ -190,7 +190,7 @@ const Home = () => {
             </Grid>
             <Grid item xs={12} md={5}>
               <div className="custom_height hidden md:block">
-                <Chat></Chat>
+                <Chat allRoutineData={allRoutineData}></Chat>
               </div>
             </Grid>
           </Grid>
@@ -223,7 +223,7 @@ const Home = () => {
               </div>
             </div>
             <div className="mobile_chat_wrap">
-              <Chat></Chat>
+              <Chat allRoutineData={allRoutineData}></Chat>
             </div>
           </div>
         </Drawer>

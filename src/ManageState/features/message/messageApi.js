@@ -10,18 +10,15 @@ export const messageApi = apiSlice.injectEndpoints({
         { updateCachedData, cacheDataLoaded, cacheEntryRemoved, dispatch }
       ) {
         // create socket
-        const socket = io(
-          "https://routineappserver-production-5617.up.railway.app/",
-          {
-            reconnectionDelay: 1000,
-            reconnection: true,
-            reconnectionAttemps: 10,
-            transports: ["websocket"],
-            agent: false,
-            upgrade: false,
-            rejectUnauthorized: false,
-          }
-        );
+        const socket = io("https://routine-app-server-main.onrender.com/", {
+          reconnectionDelay: 1000,
+          reconnection: true,
+          reconnectionAttemps: 10,
+          transports: ["websocket"],
+          agent: false,
+          upgrade: false,
+          rejectUnauthorized: false,
+        });
 
         try {
           await cacheDataLoaded;
@@ -72,18 +69,15 @@ export const messageApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         // update data
-        const socket = io(
-          "https://routineappserver-production-5617.up.railway.app/",
-          {
-            reconnectionDelay: 1000,
-            reconnection: true,
-            reconnectionAttemps: 10,
-            transports: ["websocket"],
-            agent: false,
-            upgrade: false,
-            rejectUnauthorized: false,
-          }
-        );
+        const socket = io("https://routine-app-server-main.onrender.com/", {
+          reconnectionDelay: 1000,
+          reconnection: true,
+          reconnectionAttemps: 10,
+          transports: ["websocket"],
+          agent: false,
+          upgrade: false,
+          rejectUnauthorized: false,
+        });
         socket?.emit("message", arg);
         try {
           const result = await queryFulfilled;

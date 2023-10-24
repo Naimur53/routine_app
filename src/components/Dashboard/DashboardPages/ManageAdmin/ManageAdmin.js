@@ -17,7 +17,7 @@ const ManageAdmin = () => {
   const [getLoading, setGetLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("https://routineappserver-production-5617.up.railway.app/admin")
+      .get("https://routine-app-server-main.onrender.com/admin")
       .then((res) => {
         setAllAdmin(res.data);
       });

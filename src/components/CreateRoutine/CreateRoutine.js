@@ -74,7 +74,7 @@ const CreateRoutine = ({ request, requestId, setRequestData }) => {
     if (user?._id) {
       addRoutine({ ...mainData, requestId, creator: user._id });
       // setPostLoading(true)
-      // axios.post('https://routineappserver-production-5617.up.railway.app/routine', { ...mainData, requestId, creator: user._id })
+      // axios.post('https://routine-app-server-main.onrender.com/routine', { ...mainData, requestId, creator: user._id })
       //   .then(res => {
       //     // setPostLoading(false);
       //

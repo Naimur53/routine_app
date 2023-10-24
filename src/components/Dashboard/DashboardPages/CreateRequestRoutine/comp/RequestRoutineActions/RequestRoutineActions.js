@@ -31,7 +31,7 @@ const RequestRoutineActions = ({ id, setData, data }) => {
 
       axios
         .put(
-          `https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${id}`,
+          `https://routine-app-server-main.onrender.com/requestRoutine?id=${id}`,
           {
             status,
             adminMessage: adminMessage.current.value,

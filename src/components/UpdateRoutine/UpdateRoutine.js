@@ -64,7 +64,7 @@ const UpdateRoutine = ({ admin }) => {
     if (admin) {
       setData(fetchedData);
     } else if (user?._id) {
-      // axios.get(`https://routineappserver-production-5617.up.railway.app/routine?id=${id}&userId=${user._id}`)
+      // axios.get(`https://routine-app-server-main.onrender.com/routine?id=${id}&userId=${user._id}`)
       //  fetchedData.creator
       if (user._id === fetchedData?.creator?._id) {
         setData(fetchedData);

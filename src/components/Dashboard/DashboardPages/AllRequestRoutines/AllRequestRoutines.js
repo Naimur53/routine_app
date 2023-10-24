@@ -14,7 +14,7 @@ const AllRequestRoutines = ({ short }) => {
     setGetLoading(true);
     axios
       .get(
-        `https://routineappserver-production-5617.up.railway.app/requestRoutine?status=${
+        `https://routine-app-server-main.onrender.com/requestRoutine?status=${
           status === "all" ? "" : status
         }`
       )

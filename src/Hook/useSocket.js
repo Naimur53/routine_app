@@ -8,9 +8,7 @@ import {
   postMessageToDb,
 } from "../ManageState/DataSlice/dataSlice";
 
-const socket = io.connect(
-  "https://routineappserver-production-5617.up.railway.app/"
-);
+const socket = io.connect("https://routine-app-server-main.onrender.com/");
 
 const useSocket = ({ observer }) => {
   const { allRoutineData, selectIndex } = useSelector(allData);

@@ -7,9 +7,7 @@ const Notification = () => {
   const [tokens, setTokens] = useState([]);
   useEffect(() => {
     axios
-      .get(
-        `https://routineappserver-production-5617.up.railway.app/notificationToken`
-      )
+      .get(`https://routine-app-server-main.onrender.com/notificationToken`)
       .then((res) => {
         let mainData = [];
 

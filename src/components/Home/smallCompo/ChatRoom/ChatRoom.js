@@ -66,7 +66,7 @@ const ChatRoom = ({ allRoutineData }) => {
     return [];
   }, [messages]);
 
-  // const socket = io.connect('https://routineappserver-production-5617.up.railway.app/');
+  // const socket = io.connect('https://routine-app-server-main.onrender.com/');
   // socket.on('receive_message', data => {
   //     dispatch(addMessage([data]))
   //
@@ -101,10 +101,7 @@ const ChatRoom = ({ allRoutineData }) => {
     if (e.target?.files?.length) {
       setImgLoading(true);
       axios
-        .post(
-          `https://routineappserver-production-5617.up.railway.app/uploadImage`,
-          data
-        )
+        .post(`https://routine-app-server-main.onrender.com/uploadImage`, data)
         .then((res) => {
           setImgLoading(false);
           setValue("img", res.data.url);

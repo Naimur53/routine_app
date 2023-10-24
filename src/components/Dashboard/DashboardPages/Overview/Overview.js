@@ -63,16 +63,16 @@ const Overview = () => {
   useEffect(() => {
     setGetLoading(true);
     const getRoutineInfo = axios.get(
-      "https://routineappserver-production-5617.up.railway.app/admin/totalRoutineUsing"
+      "https://routine-app-server-main.onrender.com/admin/totalRoutineUsing"
     );
     const getRoutineStatus = axios.get(
-      "https://routineappserver-production-5617.up.railway.app/admin/routineStatus?len=10"
+      "https://routine-app-server-main.onrender.com/admin/routineStatus?len=10"
     );
     const getRequestInfo = axios.get(
-      "https://routineappserver-production-5617.up.railway.app/admin/requestStatus"
+      "https://routine-app-server-main.onrender.com/admin/requestStatus"
     );
     const getUserCount = axios.get(
-      "https://routineappserver-production-5617.up.railway.app/admin/userCount"
+      "https://routine-app-server-main.onrender.com/admin/userCount"
     );
     axios
       .all([getRoutineInfo, getRoutineStatus, getRequestInfo, getUserCount])

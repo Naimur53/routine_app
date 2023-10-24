@@ -36,7 +36,7 @@ const AdminTableSingleRow = ({
       setPostLoading(true);
       axios
         .put(
-          `https://routineappserver-production-5617.up.railway.app/admin?email=${email}&adminStatus=${status}`
+          `https://routine-app-server-main.onrender.com/admin?email=${email}&adminStatus=${status}`
         )
         .then((res) => {
           setPostLoading(false);

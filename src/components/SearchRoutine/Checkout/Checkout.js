@@ -41,7 +41,7 @@ const Checkout = () => {
       navigate("/");
 
       axios.put(
-        `https://routineappserver-production-5617.up.railway.app/routine/increaseUsingValue?id=${data._id}`
+        `https://routine-app-server-main.onrender.com/routine/increaseUsingValue?id=${data._id}`
       );
     } else {
       toast.error("Routine already exist``");
@@ -107,7 +107,7 @@ const Checkout = () => {
 
   const handleDownload = () => {
     axios({
-      url: `https://routineappserver-production-5617.up.railway.app/makePdf?routineId=${id}`,
+      url: `https://routine-app-server-main.onrender.com/makePdf?routineId=${id}`,
       method: "GET",
       responseType: "blob",
     })

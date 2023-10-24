@@ -14,10 +14,10 @@ const CreateRequestRoutine = () => {
     setGetLoading(true);
     const url = [
       axios.get(
-        `https://routineappserver-production-5617.up.railway.app/requestRoutine?id=${id}`
+        `https://routine-app-server-main.onrender.com/requestRoutine?id=${id}`
       ),
       axios.get(
-        `https://routineappserver-production-5617.up.railway.app/routine?requestId=${id}`
+        `https://routine-app-server-main.onrender.com/routine?requestId=${id}`
       ),
     ];
     Promise.all(url).then((res) => {

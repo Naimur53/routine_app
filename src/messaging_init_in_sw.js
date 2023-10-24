@@ -26,7 +26,7 @@ function requestPermission() {
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             axios.post(
-              "https://routineappserver-production-5617.up.railway.app/notificationToken",
+              "https://routine-app-server-main.onrender.com/notificationToken",
               {
                 token: currentToken,
               }

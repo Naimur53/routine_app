@@ -98,7 +98,7 @@ const UpdateDetailsSection = ({ edit, setEdit, updatable, setUpdatable }) => {
 
           axios
             .put(
-              "https://routineappserver-production-5617.up.railway.app/user?shouldUpdateProfileInfo=true",
+              "https://routine-app-server-main.onrender.com/user?shouldUpdateProfileInfo=true",
               {
                 email: user.email,
                 ...mainData,

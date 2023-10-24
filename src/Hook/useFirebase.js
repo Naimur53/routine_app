@@ -47,19 +47,16 @@ const useFirebase = ({ observer }) => {
     uid,
     method,
   }) => {
-    return axios[method](
-      "https://routineappserver-production-5617.up.railway.app/user",
-      {
-        displayName,
-        email,
-        photoURL,
-        createdAt,
-        lastLoginAt,
-        lastSignInTime,
-        isEmailVerified,
-        uid,
-      }
-    );
+    return axios[method]("https://routine-app-server-main.onrender.com/user", {
+      displayName,
+      email,
+      photoURL,
+      createdAt,
+      lastLoginAt,
+      lastSignInTime,
+      isEmailVerified,
+      uid,
+    });
   };
 
   // handle error if user filed to save data

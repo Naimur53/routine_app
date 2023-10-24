@@ -9,7 +9,7 @@ const ManageRoutine = () => {
   const [getLoading, setGetLoading] = useState(true);
   useEffect(() => {
     axios
-      .get(`https://routineappserver-production-5617.up.railway.app/routine`)
+      .get(`https://routine-app-server-main.onrender.com/routine`)
       .then((res) => {
         setAllRoutine(res.data);
         setGetLoading(false);

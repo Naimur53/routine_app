@@ -75,7 +75,7 @@ const SearchRoutine = () => {
   // const textSearchRequest = () => {
   //   axios
   //     .get(
-  //       `https://routineappserver-production-5617.up.railway.app/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
+  //       `https://routine-app-server-main.onrender.com/routine?institute=${institute}&department=${department}&section=${section}&semester=${semester}&len=${8}&skip=${0} `
   //     )
   //     .then((res) => {
   //       setAllRoutine(res.data);
@@ -97,7 +97,7 @@ const SearchRoutine = () => {
   //   if (institute?.length === 24) {
   //     axios
   //       .get(
-  //         `https://routineappserver-production-5617.up.railway.app/routine/findById?id=${institute}`
+  //         `https://routine-app-server-main.onrender.com/routine/findById?id=${institute}`
   //       )
   //       .then((res) => {
   //         setAllRoutine([res.data]);

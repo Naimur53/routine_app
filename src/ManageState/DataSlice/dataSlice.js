@@ -15,7 +15,7 @@ export const getUserFromDB = createAsyncThunk(
   "data/getFromDB",
   async (info) => {
     const response = await axios.get(
-      `https://routineappserver-production-5617.up.railway.app/user?email=${info.email}`
+      `https://routine-app-server-main.onrender.com/user?email=${info.email}`
     );
     return response.data;
   }
@@ -24,7 +24,7 @@ export const getMessageFromDb = createAsyncThunk(
   "data/getMessage",
   async (info) => {
     const response = await axios.get(
-      `https://routineappserver-production-5617.up.railway.app/message?routineId=${info}`
+      `https://routine-app-server-main.onrender.com/message?routineId=${info}`
     );
     return response.data;
   }
@@ -33,7 +33,7 @@ export const postMessageToDb = createAsyncThunk(
   "data/postToDb",
   async (info) => {
     const response = await axios.post(
-      `https://routineappserver-production-5617.up.railway.app/message`,
+      `https://routine-app-server-main.onrender.com/message`,
       info
     );
     return response.data;
